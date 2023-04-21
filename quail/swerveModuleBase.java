@@ -4,8 +4,8 @@ import java.lang.Math;
 
 public class swerveModuleBase {
     public Vec2d position;
-    private final double steeringRatio;
-    private final double driveRatio;
+    protected final double steeringRatio;
+    protected final double driveRatio;
     public boolean optimized;
     public Vec2d steeringVector;
     private double currentAngle; // in radians
