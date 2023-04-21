@@ -11,23 +11,21 @@ public class PIDController {
      * @param Kp Proportional coefficient
      * @param Ki Integral coefficient
      * @param Kd Derivative coefficient
-     * @param elapsedTime Total elapsed time
      */
     public PIDController(double Kp, double Ki, double Kd, double elapsedTime) {
         this.Kp = Kp;
         this.Ki = Ki;
         this.Kd = Kd;
-
-        this.elapsedTime = elapsedTime;
     }
 
     /**
      * Update the PID Controller Output
      * @param target where you want to be - the reference
      * @param state where you are - current position (encoder)
+     * @param elapsedTime time since last `update()` call
      * @return the command to the motor - motor power
      */
-    public double update(double target, double state) {
+    public double update(double target, double state, double elapsedTime) {
 
         state = -state;
 
