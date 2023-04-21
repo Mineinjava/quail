@@ -8,9 +8,16 @@ public class swerveModuleBase {
     protected final double driveRatio;
     public boolean optimized;
     public Vec2d steeringVector;
-    private double currentAngle; // in radians
-    private int motorFlipper = 1; // optimization for motor rotation
+    protected double currentAngle; // in radians
+    protected int motorFlipper = 1; // optimization for motor rotation
 
+    /**
+     * Represents a swerve module
+     * Designed to be inherited. Please override the setAngle() and setRawSpeed() methods.
+     * @param position the position of the module relative to the center of rotation
+     * @param steeringRatio gear ratio of the steering motor
+     * @param driveRatio gear ratio of the drive motor
+     */
     public swerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
         // default optimized value is true
         this(position, steeringRatio, driveRatio, true);
