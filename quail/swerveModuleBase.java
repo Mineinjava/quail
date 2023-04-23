@@ -28,7 +28,7 @@ public class swerveModuleBase {
         this.steeringRatio = steeringRatio;
         this.driveRatio = driveRatio;
         this.optimized = optimized;
-        steeringVector = new Vec2d(this.position.getAngle(), this.position.getLength(), false);
+        steeringVector = new Vec2d(this.position.getAngle()-(Math.PI/2), this.position.getLength(), false);
     }
 
     public double calculateNewAngleSetpoint(double angle) {
