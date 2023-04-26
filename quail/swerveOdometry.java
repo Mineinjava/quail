@@ -66,6 +66,8 @@ public class swerveOdometry {
      * Translation units are somewhat arbitrary (depends on the units of the module positions and vectors passed in)
      * Rotation units are radians
      *
+     * Also note that this method is not field-centric. You will have to rotate the returned vector.
+     *
      * @param modules the positions of the modules
      * @return the robot's movement
      */
@@ -120,6 +122,8 @@ public class swerveOdometry {
      * Again, due to drift, it is recommended not to use the robot's rotation value given from this method.
      * Translation values are again arbitrary, but are the same as the ones given by the other method.
      * Rotation values are radians.
+     *
+     * Also note that this method is not field-centric. You will have to rotate the returned vector.
      *
      * @param modules the positions of the modules (Vec2d)
      * @return the robot's movement.
