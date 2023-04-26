@@ -1,9 +1,9 @@
-package quail.odometry;
+package lib.src.main.java.quail.odometry;
 
-import quail.robotMovement;
-import quail.util.PIDController;
-import quail.util.util;
-import quail.util.Vec2d;
+import lib.src.main.java.quail.robotMovement;
+import lib.src.main.java.quail.util.PIDController;
+import lib.src.main.java.quail.util.util;
+import lib.src.main.java.quail.util.Vec2d;
 
 /** class that helps you follow paths
  *

@@ -1,4 +1,4 @@
-package quail.util;
+package lib.src.main.java.quail.util;
 
 /** Contains constants used throughout the program.
  * Or, currently, constants **not** used throughout the program.

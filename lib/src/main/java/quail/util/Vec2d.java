@@ -1,4 +1,4 @@
-package quail.util;
+package lib.src.main.java.quail.util;
 
 /**
  * Represents a two-dimensional vector.

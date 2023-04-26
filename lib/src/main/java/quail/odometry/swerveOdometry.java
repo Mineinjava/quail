@@ -1,15 +1,15 @@
-package quail.odometry;
+package lib.src.main.java.quail.odometry;
 
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import quail.util.util;
-import quail.robotMovement;
-import quail.swerveDrive;
-import quail.swerveModuleBase;
-import quail.util.Vec2d;
+import lib.src.main.java.quail.util.util;
+import lib.src.main.java.quail.robotMovement;
+import lib.src.main.java.quail.swerveDrive;
+import lib.src.main.java.quail.swerveModuleBase;
+import lib.src.main.java.quail.util.Vec2d;
 
 /** Represents a swerve drive position on the field
  * and provides methods for calculating the robot's position.
