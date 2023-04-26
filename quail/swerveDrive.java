@@ -2,8 +2,8 @@ package quail;
 import java.util.List;
 
 
-public class swerveDrive {
-    public final List<swerveModuleBase> swerveModules;
+public class swerveDrive<T extends swerveModuleBase> {
+    public final List<T> swerveModules;
     /** Represents a swerve drive
      * Designed to be inherited from. While it will work without being inherited from, you may want to add some features such as:
      * - reset gyro, both from controller and from vision odometry
@@ -20,7 +20,7 @@ public class swerveDrive {
      *
      * @param swerveModules a list of swerve modules
      */
-    public swerveDrive(List<swerveModuleBase> swerveModules) {
+    public swerveDrive(List<T> swerveModules) {
         this.swerveModules = swerveModules;
     }
     /**

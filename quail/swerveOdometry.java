@@ -17,7 +17,7 @@ import java.util.List;
  *     - set the robot's heading to the gyro heading.
  *
  */
-public class swerveOdometry {
+public class swerveOdometry<T extends swerveModuleBase> {
     public ArrayList<Vec2d> moduleVectors;
     public double x=0;
     public double y=0;
@@ -37,19 +37,20 @@ public class swerveOdometry {
         this.moduleVectors = moduleVectors;
         assert moduleVectors.size() >= 2;
     }
-    public swerveOdometry(swerveDrive drvetrain) {
-        this(extractModuleVectors(drvetrain));
+    public swerveOdometry(swerveDrive drivetrain) {
+        this(extractModuleVectors(drivetrain));
     }
 
     /** Extracts the module vectors from a drivetrain.
      *
-     * @param drvetrain The drivetrain to extract the module vectors from.
+     * @param drivetrain The drivetrain to extract the module vectors from.
      * @return An array of module vectors.
      */
-    private static Vec2d[] extractModuleVectors(swerveDrive drvetrain){
+    private static Vec2d[] extractModuleVectors(swerveDrive drivetrain){
         ArrayList<Vec2d> moduleVectors = new ArrayList<>();
-        for (swerveModuleBase module : drvetrain.swerveModules) {
-            moduleVectors.add(module.position);
+        for (Object module : drivetrain.swerveModules) {
+            swerveModuleBase newmodule = (swerveModuleBase) module;
+            moduleVectors.add(newmodule.position);
         }
         return moduleVectors.toArray(new Vec2d[0]);
     }

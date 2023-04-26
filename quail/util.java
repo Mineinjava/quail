@@ -1,6 +1,7 @@
 package quail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class util {
@@ -50,5 +51,10 @@ public class util {
             }
         }
         return pairs;
+    }
+    public static void test() {
+        differentialSwerveModuleBase[] modules = new differentialSwerveModuleBase[4];
+        List<differentialSwerveModuleBase> newmodules = Arrays.asList(modules);
+        swerveDrive drivetrain = new swerveDrive(newmodules);
     }
 }
