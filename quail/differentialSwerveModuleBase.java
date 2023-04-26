@@ -1,5 +1,10 @@
 package quail;
 
+import quail.util.Vec2d;
+
+/** A base class for differential swerve modules
+ *
+ */
 public class differentialSwerveModuleBase extends swerveModuleBase {
 
     public differentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {

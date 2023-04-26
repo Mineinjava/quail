@@ -1,4 +1,4 @@
-package quail;
+package quail.util;
 
 /**
  * Represents a two-dimensional vector.
@@ -76,6 +76,16 @@ public class Vec2d
 		
 		this.x = Math.cos(rotation) * length;
 		this.y = Math.sin(rotation) * length;
+	}
+
+	/**
+	 * Creates a vector from an array of coordinates.
+	 *
+	 * @param coords - the array of coordinates
+	 */
+	public Vec2d(double[] coords)
+	{
+		this(coords[0], coords[1]);
 	}
 	
 	/**
@@ -253,9 +263,9 @@ public class Vec2d
 	 * @param posY - the vector's y coordinate
 	 * @return The cross product.
 	 */
-	public double cross(double vecX, double vecY)
+	public double cross(double posX, double posY)
 	{
-		return this.x * vecY - this.y * vecX;
+		return this.x * posY - this.y * posX;
 	}
 	
 	@Override
