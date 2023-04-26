@@ -1,13 +1,12 @@
-import numpy as np
 import matplotlib.pyplot as plt
-import math
 import cubicSpline
 
+# Change out this list of list with a list of your waypoints in a list of lists
 waypoints =[[0, 1], [1, 3], [2, 5], [3, 4], [4, 6], [5, 8], [6, 7], [7, 9], [8, 10], [9, 12],
             [10, 14], [11, 15], [12, 14], [13, 13], [14, 12], [15, 11], [16, 12], [17, 14], [18, 16], [19, 18]]
 splinex = []
 spliney = []
-other = [[7, 2], [7, 0], [10, 2], [10,0]]
+other = [[7, 2], [7, 0], [10, 2], [10,0]] # use this to graph other things, like obstacles
 
 for i in range(len(waypoints)):
     splinex.append(waypoints[i][0])
