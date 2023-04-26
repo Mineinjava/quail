@@ -1,6 +1,7 @@
-<img src="https://github.com/Mineinjava/quail/blob/main/images/quail_above_border.png" width="40%" align="right">
 
 # quail
+<img src="https://github.com/Mineinjava/quail/blob/main/images/quail_above_border.png" width="40%" align="right">
+
 Bird-brained swerve drive utility.
 
 To use quail, you need a few things. The first is swerve modules. More than two. I don't care where your swerve modules are. They could be 52 miles apart and in the shape of a pentagon and quail would still work. I also don't care what motors or gear ratios you use.
