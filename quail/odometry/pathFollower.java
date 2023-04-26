@@ -1,4 +1,9 @@
-package quail;
+package quail.odometry;
+
+import quail.robotMovement;
+import quail.util.PIDController;
+import quail.util.util;
+import quail.util.Vec2d;
 
 /** class that helps you follow paths
  *

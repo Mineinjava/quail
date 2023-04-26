@@ -1,5 +1,7 @@
 package quail;
 
+import quail.util.Vec2d;
+
 /** A base class for differential swerve modules
  *
  */

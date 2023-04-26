@@ -1,4 +1,4 @@
-package quail;
+package quail.util;
 
 /**
  * Represents a two-dimensional vector.

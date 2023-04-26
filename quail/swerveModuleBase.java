@@ -2,6 +2,9 @@ package quail;
 
 import java.lang.Math;
 
+import quail.util.util;
+import quail.util.Vec2d;
+
 public class swerveModuleBase {
     public Vec2d position;
     protected final double steeringRatio;
