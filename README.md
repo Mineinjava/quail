@@ -4,7 +4,7 @@
 
 Bird-brained swerve drive utility.
 
-To use quail, you need a few things. The first is swerve modules. More than two. I don't care where your swerve modules are. They could be 52 miles apart and in the shape of a pentagon and quail would still work. I also don't care what motors or gear ratios you use.
+To use quail, you need a few things. The first is swerve modules. More than two. I don't care where your swerve modules are. They could be 52 miles apart and in the shape of a pentagon and quail would still work.
 
 The second thing you need is a little knowledge of Java. You should be able to:
  - use a PID controller
