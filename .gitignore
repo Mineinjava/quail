@@ -3,3 +3,12 @@
 
 # Ignore Gradle build output directory
 build
+
+# Ignore IntelliJ IDEA project-specific settings directory
+.idea
+
+# Ignore Android Studio project-specific settings directory
+*.iml
+
+# Ignore the Visual Studio Code workspace directory
+.vscode/
