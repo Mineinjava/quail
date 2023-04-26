@@ -13,7 +13,11 @@ public class swerveModuleBase {
 
     /**
      * Represents a swerve module
-     * Designed to be inherited. Please override the setAngle() and setRawSpeed() methods.
+     * Designed to be inherited. Please override the setAngle() and setRawSpeed() methods at minimum.
+     * Other things that you may want to include:
+     * - X-lock (rotate all motors so that the robot can't be moved. This is also on the TODO list for the library
+     * - reset module position (set the current angle to 0) using absolute encoders
+     * - re-zero the steering motor using absolute encoders
      * @param position the position of the module relative to the center of rotation
      * @param steeringRatio gear ratio of the steering motor
      * @param driveRatio gear ratio of the drive motor
@@ -31,21 +35,17 @@ public class swerveModuleBase {
         steeringVector = new Vec2d(this.position.getAngle()-(Math.PI/2), this.position.getLength(), false);
     }
 
+    /** calculates the angle to set the steering motor to
+     * @param angle the angle to set the steering motor to
+     * @return the angle to set the steering motor to
+     */
     public double calculateNewAngleSetpoint(double angle) {
-        // calculate the angle distance
-        double shortestAngle = angle - currentAngle;
-        // make sure the angle is between -pi and pi (don't rotate more than 180 degrees)
-        if (shortestAngle > Math.PI) {
-            shortestAngle -= 2 * Math.PI;
-        } else if (shortestAngle < -Math.PI) {
-            shortestAngle += 2 * Math.PI;
-        }
-        // calculate the angle to turn
+        double shortestAngle = util.deltaAngle(currentAngle, angle);
         return currentAngle = currentAngle + shortestAngle;
     }
 
-    // "optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the opposite direction
-    // and rotate less than 90 degrees
+    /** "optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the opposite direction
+    and rotate less than 90 degrees */
     public double calculateOptimizedAngle(double angle) {
         if (Math.abs(angle) > Math.PI / 2) {
             this.motorFlipper = -this.motorFlipper;
@@ -54,7 +54,9 @@ public class swerveModuleBase {
             return angle;
         }
     }
-
+    /** Calulates the angle to set the steering motor to. Wrapper for both calculateOptimizedAngle and calculateNewAngleSetpoint
+     * please use this instead of anything else
+     */
     public double angle() {
         double setpoint;
         if (optimized) {
@@ -65,18 +67,32 @@ public class swerveModuleBase {
         return calculateNewAngleSetpoint(setpoint);
     }
 
+    /** sets the angle of the module
+     * OVERRIDE ME!!! This is where you call your motor controllers
+     * @param angle the angle to set the module to
+     */
     public void setAngle(double angle) {
-        System.out.println("Default quail.swerveModuleBase.setAngle() called. Override me!");
+        System.out.println("Default quail.swerveModuleBase.setAngle() called. Override me!.    Angle: " + angle);
     }
 
+    /** sets the raw speed of the module
+     * OVERRIDE ME!!! This is where you call your motor controllers
+     * @param speed the speed to set the module to
+     */
     public void setRawSpeed(double speed) {
-        System.out.println("Default quail.swerveModuleBase.setRawSpeed() called. Override me!");
+        System.out.println("Default quail.swerveModuleBase.setRawSpeed() called. Override me!. Speed: " + speed);
     }
 
+    /** sets the speed of the module
+     * @param speed the speed to set the module to
+     */
     public void setSpeed(double speed) {
         setRawSpeed(this.motorFlipper * speed);
     }
 
+    /** sets the module's motion to the specified vector
+     * @param vec the vector to set the module to
+     */
     public void set(Vec2d vec) {
         setAngle(vec.getAngle());
         setSpeed(vec.getLength());

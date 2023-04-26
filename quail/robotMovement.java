@@ -1,5 +1,8 @@
 package quail;
 
+/** Can represent a lot of things. Generally represents a vector (robot position, movement, etc.), plus an angle (robot rotation, robot desired rotation, etc.)
+ * Everything should be fairly self-explanatory.
+ */
 public class robotMovement {
     public double rotation;
     public Vec2d translation;
