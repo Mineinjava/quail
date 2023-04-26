@@ -23,7 +23,7 @@ import quail.util.Vec2d;
  *     - set the robot's heading to the gyro heading.
  *
  */
-public class swerveOdometry<T extends swerveModuleBase> {
+public class swerveOdometry {
     public ArrayList<Vec2d> moduleVectors;
     public double x=0;
     public double y=0;
