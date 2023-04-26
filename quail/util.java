@@ -52,9 +52,5 @@ public class util {
         }
         return pairs;
     }
-    public static void test() {
-        differentialSwerveModuleBase[] modules = new differentialSwerveModuleBase[4];
-        List<differentialSwerveModuleBase> newmodules = Arrays.asList(modules);
-        swerveDrive drivetrain = new swerveDrive(newmodules);
-    }
+
 }
