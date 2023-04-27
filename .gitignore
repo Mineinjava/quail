@@ -5,7 +5,7 @@
 build
 
 # Ignore IntelliJ IDEA project-specific settings directory
-.idea
+.idea/
 
 # Ignore Android Studio project-specific settings directory
 *.iml
