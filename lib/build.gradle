@@ -5,14 +5,14 @@
  * For more details take a look at the 'Building Java & JVM projects' chapter in the Gradle
  * User Manual available at https://docs.gradle.org/8.1.1/userguide/building_java_projects.html
  */
-apply plugin: 'maven'
-group = 'com.github.mineinjava'
-
 
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
 }
+
+apply plugin: 'maven'
+group = 'com.github.mineinjava'
 
 repositories {
     // Use Maven Central for resolving dependencies.
