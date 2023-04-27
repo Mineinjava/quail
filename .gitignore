@@ -12,3 +12,6 @@ build
 
 # Ignore the Visual Studio Code workspace directory
 .vscode/
+
+# Ignore local.properties file
+local.properties

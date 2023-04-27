@@ -1,8 +1,8 @@
-package lib.src.main.java.quail;
+package com.mineinjava.quail;
 
 import java.util.List;
 
-import lib.src.main.java.quail.util.Vec2d;
+import com.mineinjava.quail.util.Vec2d;
 
 
 public class swerveDrive<T extends swerveModuleBase> {

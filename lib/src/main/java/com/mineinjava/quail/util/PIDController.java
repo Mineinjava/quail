@@ -1,4 +1,4 @@
-package lib.src.main.java.quail.util;
+package com.mineinjava.quail.util;
 
 public class PIDController {
 

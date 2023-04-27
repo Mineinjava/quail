@@ -1,6 +1,6 @@
-package lib.src.main.java.quail;
+package com.mineinjava.quail;
 
-import lib.src.main.java.quail.util.Vec2d;
+import com.mineinjava.quail.util.Vec2d;
 
 /** A base class for differential swerve modules
  *
