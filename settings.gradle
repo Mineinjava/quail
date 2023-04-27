@@ -13,4 +13,4 @@ plugins {
 }
 
 rootProject.name = 'quail'
-include('lib')
+include('quail')
