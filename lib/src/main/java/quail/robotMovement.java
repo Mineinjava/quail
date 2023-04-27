@@ -1,5 +1,5 @@
 package lib.src.main.java.quail;
-a
+
 import lib.src.main.java.quail.util.Vec2d;
 
 /** Can represent a lot of things. Generally represents a vector (robot position, movement, etc.), plus an angle (robot rotation, robot desired rotation, etc.)
