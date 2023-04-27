@@ -1,9 +1,9 @@
-package quail;
+package com.mineinjava.quail;
 
 import java.lang.Math;
 
-import quail.util.util;
-import quail.util.Vec2d;
+import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.Vec2d;
 
 public class swerveModuleBase {
     public Vec2d position;

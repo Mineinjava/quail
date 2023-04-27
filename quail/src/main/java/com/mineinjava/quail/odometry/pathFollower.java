@@ -1,16 +1,16 @@
-package quail.odometry;
+package com.mineinjava.quail.odometry;
 
-import quail.robotMovement;
-import quail.util.PIDController;
-import quail.util.util;
-import quail.util.Vec2d;
+import com.mineinjava.quail.robotMovement;
+import com.mineinjava.quail.util.PIDController;
+import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.Vec2d;
 
 /** class that helps you follow paths
  *
  */
 public class pathFollower {
     public swerveOdometry odometry;
-    public path path;
+    public com.mineinjava.quail.odometry.path path;
     public double speed;
     public double maxTurnSpeed;
     public double maxTurnAcceleration;
@@ -18,7 +18,7 @@ public class pathFollower {
     public PIDController turnController;
     public double precision;
 
-    public pathFollower(swerveOdometry odometry, path path, double speed, double maxTurnSpeed,
+    public pathFollower(swerveOdometry odometry, com.mineinjava.quail.odometry.path path, double speed, double maxTurnSpeed,
                         double maxTurnAcceleration, double maxAcceleration, PIDController turnController, double precision) {
         this.odometry = odometry;
         this.path = path;
@@ -35,7 +35,7 @@ public class pathFollower {
      * This exists so that you can reuse the path follower between autonomous paths and movements.
      * @param path the path to follow
      */
-    public void setPath(path path) {
+    public void setPath(com.mineinjava.quail.odometry.path path) {
         this.path = path;
     }
 

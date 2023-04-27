@@ -1,8 +1,8 @@
-package quail.odometry;
+package com.mineinjava.quail.odometry;
 
 import java.util.ArrayList;
 
-import quail.util.Vec2d;
+import com.mineinjava.quail.util.Vec2d;
 
 /**
  * Represents a path that the robot can follow.

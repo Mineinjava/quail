@@ -1,11 +1,10 @@
-package quail.util;
+package com.mineinjava.quail.util;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import quail.differentialSwerveModuleBase;
-import quail.swerveDrive;
+import com.mineinjava.quail.differentialSwerveModuleBase;
+import com.mineinjava.quail.swerveDrive;
 
 public class util {
     /** Calculates the smallest angle between two angles
