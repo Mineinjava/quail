@@ -6,12 +6,15 @@
  * User Manual available at https://docs.gradle.org/8.1.1/userguide/building_java_projects.html
  */
 
+
+
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'maven-publish'
 }
 
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 group = 'com.github.mineinjava'
 
 repositories {
