@@ -20,6 +20,8 @@ group = 'com.github.mineinjava'
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+    maven { url "https://jitpack.io" }
+    google()
 }
 
 dependencies {
@@ -44,13 +46,14 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId = 'com.github.mineinjava'
-            artifactId = 'quail'
-
-            from components.java
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.mineinjava' //your git id
+                artifactId = 'quail' //your-repository
+            }
         }
     }
 }
