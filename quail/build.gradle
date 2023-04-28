@@ -46,15 +46,3 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'com.github.mineinjava' //your git id
-                artifactId = 'quail' //your-repository
-                version = '0.0.6-a' //your-version
-            }
-        }
-    }
-}
