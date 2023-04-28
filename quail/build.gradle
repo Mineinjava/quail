@@ -44,3 +44,13 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = 'com.github.mineinjava'
+            artifactId = 'quail'
+
+            from components.java
+        }
+    }
+}
