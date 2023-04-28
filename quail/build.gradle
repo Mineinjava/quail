@@ -16,7 +16,6 @@ plugins {
 
 apply plugin: 'maven-publish'
 group = 'com.github.mineinjava'
-artifact = 'quail'
 
 repositories {
     // Use Maven Central for resolving dependencies.
