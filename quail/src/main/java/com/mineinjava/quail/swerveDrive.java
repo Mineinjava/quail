@@ -36,7 +36,7 @@ public class swerveDrive<T extends swerveModuleBase> {
         moveVector = moveVector.rotate(gyroOffset, false);
          // create a list of four vec2d objects and iterate over them with a for loop (not foreach)
         Vec2d[] moduleVectors = new Vec2d[this.swerveModules.size()];
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < this.swerveModules.size(); i++) {
             swerveModuleBase module = swerveModules.get(i);
             Vec2d moduleOffCenterVector = module.position.subtract(centerPoint);
             moduleVectors[i] = moveVector.add(moduleOffCenterVector.scale(rotationSpeed));
