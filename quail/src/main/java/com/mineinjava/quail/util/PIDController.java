@@ -3,7 +3,6 @@ package com.mineinjava.quail.util;
 public class PIDController {
 
     private double Kp, Ki, Kd;
-    private double elapsedTime;
     private double lastError;
     private double integralSum = 0;
     public double error;
@@ -13,7 +12,7 @@ public class PIDController {
      * @param Ki Integral coefficient
      * @param Kd Derivative coefficient
      */
-    public PIDController(double Kp, double Ki, double Kd, double elapsedTime) {
+    public PIDController(double Kp, double Ki, double Kd) {
         this.Kp = Kp;
         this.Ki = Ki;
         this.Kd = Kd;
@@ -40,8 +39,6 @@ public class PIDController {
         // Ki value
         integralSum += (m_error * elapsedTime);
 
-        double out = (Kp * m_error) + (Ki * integralSum) + (Kd * derivative);
-
-        return(out);
+        return((Kp * m_error) + (Ki * integralSum) + (Kd * derivative));
     }
 }
