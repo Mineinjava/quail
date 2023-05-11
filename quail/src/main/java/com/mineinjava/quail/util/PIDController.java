@@ -5,6 +5,7 @@ public class PIDController {
     private double Kp, Ki, Kd;
     private double elapsedTime;
     private double integralSum, lastError;
+    private double integralSum = 0;
     public double error;
     /**
      * construct PID Controller
@@ -27,7 +28,7 @@ public class PIDController {
      */
     public double update(double target, double state, double elapsedTime) {
 
-        state = -state;
+        // state = -state;
 
         // Calculate error
         double m_error = target - state;
