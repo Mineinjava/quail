@@ -5,7 +5,7 @@ public class PIDController {
     private double Kp, Ki, Kd;
     private double elapsedTime;
     private double integralSum, lastError;
-
+    public double error;
     /**
      * construct PID Controller
      * @param Kp Proportional coefficient
@@ -30,15 +30,16 @@ public class PIDController {
         state = -state;
 
         // Calculate error
-        double error = target - state;
+        double m_error = target - state;
+        error = m_error;
 
         // Kd value
-        double derivative = (error - lastError) / elapsedTime;
+        double derivative = (m_error - lastError) / elapsedTime;
 
         // Ki value
-        integralSum = Ki + (error * elapsedTime);
+        integralSum += (m_error * elapsedTime);
 
-        double out = (Kp * error) + (Ki * integralSum) + (Kd * derivative);
+        double out = (Kp * m_error) + (Ki * integralSum) + (Kd * derivative);
 
         return(out);
     }
