@@ -4,7 +4,7 @@ public class PIDController {
 
     private double Kp, Ki, Kd;
     private double elapsedTime;
-    private double integralSum, lastError;
+    private double lastError;
     private double integralSum = 0;
     public double error;
     /**
