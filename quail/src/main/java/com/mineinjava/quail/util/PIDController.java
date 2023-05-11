@@ -1,23 +1,21 @@
 package com.mineinjava.quail.util;
-
 public class PIDController {
-
     private double Kp, Ki, Kd;
-    private double lastError;
-    private double integralSum = 0;
-    public double error;
+    private double elapsedTime;
+    private double integralSum, lastError;
+    public double ERROR = 0;
+
     /**
      * construct PID Controller
      * @param Kp Proportional coefficient
      * @param Ki Integral coefficient
      * @param Kd Derivative coefficient
      */
-    public PIDController(double Kp, double Ki, double Kd) {
+    public PIDController(double Kp, double Ki, double Kd, double elapsedTime) {
         this.Kp = Kp;
         this.Ki = Ki;
         this.Kd = Kd;
     }
-
     /**
      * Update the PID Controller Output
      * @param target where you want to be - the reference
@@ -26,19 +24,19 @@ public class PIDController {
      * @return the command to the motor - motor power
      */
     public double update(double target, double state, double elapsedTime) {
-
-        // state = -state;
+        state = -state;
 
         // Calculate error
-        double m_error = target - state;
-        error = m_error;
-
+        double error = target - state;
+        this.ERROR = error;
         // Kd value
-        double derivative = (m_error - lastError) / elapsedTime;
+        double derivative = (error - lastError) / elapsedTime;
 
         // Ki value
-        integralSum += (m_error * elapsedTime);
+        integralSum = Ki + (error * elapsedTime);
 
-        return((Kp * m_error) + (Ki * integralSum) + (Kd * derivative));
+        double out = (Kp * error) + (Ki * integralSum) + (Kd * derivative);
+
+        return(out);
     }
 }
