@@ -65,7 +65,7 @@ public class swerveDrive<T extends swerveModuleBase> {
                 maxMagnitude = moduleVector.getLength();
             }
         }
-        if (maxMagnitude > maxAllowableMagnitude) {
+        if ((maxMagnitude > maxAllowableMagnitude) && (maxMagnitude != 0)) {
             for (int i = 0; i < this.swerveModules.size(); i++) {
                 moduleVectors[i] = moduleVectors[i].scale(maxAllowableMagnitude / maxMagnitude);
             }
