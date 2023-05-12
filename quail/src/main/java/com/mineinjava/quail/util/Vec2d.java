@@ -182,6 +182,9 @@ public class Vec2d
 	 */
 	public double getAngle()
 	{
+		if (this.getLength() == 0d){
+			throw new ArithmeticException("Cannot calculate the angle of a zero vector");
+		}
 		double a = Math.acos(this.x / this.getLength());
 		return this.y < 0d ? 2d * Math.PI - a : a;
 	}
