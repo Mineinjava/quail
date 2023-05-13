@@ -9,15 +9,18 @@ public class swerveDrive<T extends swerveModuleBase> {
     public final List<T> swerveModules;
     /** Represents a swerve drive
      * Designed to be inherited from. While it will work without being inherited from, you may want to add some features such as:
+     *
      * - reset gyro, both from controller and from vision odometry
      * - reset module positions
      * - X-lock modules
      * - set module positions (hopefully your swerve modules are not moving relative to your robot)
      * - acceleration limiting
+     *
      * Normal use of this class would look something like:
+     *
      * - create a list of swerve modules
      * - create a swerveDrive object with the list of swerve modules
-     * - every time you want to move, call calculateMoveAngles() and normalize the returned values
+     * - every time you want to move, call `move()` with the desired movement vector and rotation speed
      * - obtain the module vectors from the swerve modules and pass them into the swerveOdometry class (optional)
      * - pass the normalized vectors into the swerve modules
      *
