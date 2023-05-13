@@ -80,4 +80,9 @@ public class swerveDrive<T extends swerveModuleBase> {
     public Vec2d[] normalizeModuleVectors(Vec2d[] moduleVectors) {
         return normalizeModuleVectors(moduleVectors, 1);
     }
+    public void XLockModules() {
+        for (swerveModuleBase module : this.swerveModules) {
+            module.XLock();
+        }
+    }
 }
