@@ -41,6 +41,21 @@ java {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
+task sourcesJar(type: Jar, dependsOn: classes) {
+    archiveClassifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
 
 tasks.named('test') {
     // Use JUnit Platform for unit tests.
