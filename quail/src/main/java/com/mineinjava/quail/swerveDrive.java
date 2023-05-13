@@ -55,7 +55,8 @@ public class swerveDrive<T extends swerveModuleBase> {
 
     /**
      * @param moduleVectors list of module vectors to be normalized
-     * @param maxAllowableMagnitude the maximum magnitude of the vectors
+     * @param maxAllowableMagnitude the maximum magnitude of the vectors (this function clamps the largest vector to
+     *                              this magnitude and scales the rest--this parameter is the upper limit on the clamp)
      * @return an array of vectors appropriately scaled so that the largest vector has a magnitude no greater than `maxAllowableMagnitude`.
      */
     public Vec2d[] normalizeModuleVectors(Vec2d[] moduleVectors, double maxAllowableMagnitude) {
