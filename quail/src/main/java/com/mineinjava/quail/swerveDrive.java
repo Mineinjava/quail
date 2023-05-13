@@ -43,6 +43,13 @@ public class swerveDrive<T extends swerveModuleBase> {
         }
         return moduleVectors;
     }
+    public void move(robotMovement movement, double gyroOffset){
+        Vec2d[] moduleVectors = calculateMoveAngles(movement.translation, movement.rotation, gyroOffset);
+        moduleVectors = normalizeModuleVectors(moduleVectors);
+        for (int i=0; i < this.swerveModules.size(); i++){
+            swerveModules.get(i).set(moduleVectors[i]);
+        }
+    }
 
     /**
      * @param moveVector the vector to move in
