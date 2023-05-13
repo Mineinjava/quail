@@ -75,6 +75,11 @@ public class swerveModuleBase {
         return calculateNewAngleSetpoint(setpoint);
     }
 
+    public void XLock() {
+        this.setSpeed(0);
+        this.setAngle(this.position.getAngle());
+    }
+
     /** sets the angle of the module
      * OVERRIDE ME!!! This is where you call your motor controllers
      * @param angle the angle to set the module to
