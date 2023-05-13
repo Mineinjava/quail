@@ -83,7 +83,7 @@ public class swerveModuleBase {
         System.out.println("Default quail.swerveModuleBase.setAngle() called. Override me!.    Angle: " + angle);
     }
     public void setAngle(double angle) {
-        setRawAngle(calculateDesiredAngleWrapper());
+        setRawAngle(calculateDesiredAngleWrapper(angle));
     }
 
     /** sets the raw speed of the module
