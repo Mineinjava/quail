@@ -11,9 +11,7 @@ public class swerveDrive<T extends swerveModuleBase> {
      * Designed to be inherited from. While it will work without being inherited from, you may want to add some features such as:
      *
      * - reset gyro, both from controller and from vision odometry
-     * - reset module positions
-     * - X-lock modules
-     * - set module positions (hopefully your swerve modules are not moving relative to your robot)
+     * - reset module positions (from absolute encoders or vision odometry)
      * - acceleration limiting
      *
      * Normal use of this class would look something like:
