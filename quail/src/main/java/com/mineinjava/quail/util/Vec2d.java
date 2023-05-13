@@ -215,6 +215,9 @@ public class Vec2d
 	 */
 	public Vec2d rotate(double rotation, boolean isDegrees)
 	{
+		if (this.getLength() == 0d){
+			return new Vec2d(0d, 0d);
+		}
 		if(isDegrees)
 		{
 			rotation *= Math.PI / 180d;
