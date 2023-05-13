@@ -1,6 +1,7 @@
 package com.mineinjava.quail.odometry;
 
 import com.mineinjava.quail.robotMovement;
+import com.mineinjava.quail.util.MiniPID;
 import com.mineinjava.quail.util.PIDController;
 import com.mineinjava.quail.util.util;
 import com.mineinjava.quail.util.Vec2d;
@@ -15,11 +16,11 @@ public class pathFollower {
     public double maxTurnSpeed;
     public double maxTurnAcceleration;
     public double maxAcceleration;
-    public PIDController turnController;
+    public MiniPID turnController;
     public double precision;
 
     public pathFollower(swerveOdometry odometry, com.mineinjava.quail.odometry.path path, double speed, double maxTurnSpeed,
-                        double maxTurnAcceleration, double maxAcceleration, PIDController turnController, double precision) {
+                        double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision) {
         this.odometry = odometry;
         this.path = path;
         this.speed = speed;
@@ -42,13 +43,12 @@ public class pathFollower {
     /**
      * Calculate the next movement to follow the path
      * This does return a field-centric movement vector. It does not limit acceleration (yet)
-     * @param elapsedTime time since last call
      * @return the next movement to follow the path
      */
-    public robotMovement calculateNextDriveMovement(double elapsedTime) {
+    public robotMovement calculateNextDriveMovement() {
         // calculate the next movement to follow the path
         double deltaAngle = util.deltaAngle(this.odometry.theta, this.path.finalHeading);
-        double turnSpeed = turnController.update(0, deltaAngle, elapsedTime);
+        double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.length();
         turnSpeed = util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
         Vec2d movementVector = this.path.vectorToNearestPoint(this.odometry.x, this.odometry.y, this.path.currentPoint);
