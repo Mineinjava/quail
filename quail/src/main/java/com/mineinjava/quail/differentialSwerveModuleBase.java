@@ -33,4 +33,9 @@ public class differentialSwerveModuleBase extends swerveModuleBase {
         
         return motorSpeeds;
     }
+    public double calculateModuleAngle(double motor1pos, double motor2pos) {
+        double averageRotation = (motor1pos + motor2pos) / 2;
+        return averageRotation / steeringRatio;
+    }
+
 }

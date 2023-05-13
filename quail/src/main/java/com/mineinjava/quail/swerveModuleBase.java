@@ -50,22 +50,27 @@ public class swerveModuleBase {
     /** "optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the opposite direction
     and rotate less than 90 degrees */
     public double calculateOptimizedAngle(double angle) {
-        if (Math.abs(angle) > Math.PI / 2) {
-            this.motorFlipper = -this.motorFlipper;
+        double deltaAngle = util.deltaAngle(currentAngle, angle);
+        if (deltaAngle > Math.PI/2) {
+            motorFlipper = -1;
             return angle - Math.PI;
+        } else if (deltaAngle < -Math.PI/2) {
+            motorFlipper = -1;
+            return angle + Math.PI;
         } else {
+            motorFlipper = 1;
             return angle;
         }
     }
     /** Calulates the angle to set the steering motor to. Wrapper for both calculateOptimizedAngle and calculateNewAngleSetpoint
      * please use this instead of anything else
      */
-    public double angle() {
+    public double calculateDesiredAngleWrapper(double angle) {
         double setpoint;
         if (optimized) {
-            setpoint = calculateOptimizedAngle(currentAngle);
+            setpoint = calculateOptimizedAngle(angle);
         } else {
-            setpoint = currentAngle;
+            setpoint = angle;
         }
         return calculateNewAngleSetpoint(setpoint);
     }
@@ -74,8 +79,11 @@ public class swerveModuleBase {
      * OVERRIDE ME!!! This is where you call your motor controllers
      * @param angle the angle to set the module to
      */
-    public void setAngle(double angle) {
+    public void setRawAngle(double angle) {
         System.out.println("Default quail.swerveModuleBase.setAngle() called. Override me!.    Angle: " + angle);
+    }
+    public void setAngle(double angle) {
+        setRawAngle(calculateDesiredAngleWrapper());
     }
 
     /** sets the raw speed of the module
