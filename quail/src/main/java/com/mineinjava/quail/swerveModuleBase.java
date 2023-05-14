@@ -51,10 +51,7 @@ public class swerveModuleBase {
     and rotate less than 90 degrees */
     public double calculateOptimizedAngle(double angle) {
         double deltaAngle = util.deltaAngle(currentAngle, angle);
-        if (deltaAngle > Math.PI/2) {
-            motorFlipper = -1;
-            return angle - Math.PI;
-        } else if (deltaAngle < -Math.PI/2) {
+        if (Math.abs(deltaAngle) > Math.PI/2) {
             motorFlipper = -1;
             return angle + Math.PI;
         } else {
