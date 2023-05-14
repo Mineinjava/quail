@@ -48,13 +48,13 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     archiveClassifier = 'javadoc'
-    from javadoc.destinationDir
+    from sourceSets.main.allJava
 }
 
 
 artifacts {
     archives sourcesJar
-    archives javadocJar
+    // archives javadocJar
 }
 
 tasks.named('test') {
