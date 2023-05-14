@@ -7,6 +7,10 @@ import com.mineinjava.quail.differentialSwerveModuleBase;
 import com.mineinjava.quail.swerveDrive;
 
 public class util {
+
+    public static double floormod(double a, double b) {
+        return a - (b * Math.floor(a / b));
+    }
     /** Calculates the smallest angle between two angles
      * Useful for determining how far and in which direction to rotate anything
      * angle returned is in radians, counterclockwise from angle 1 to angle 2
@@ -16,13 +20,9 @@ public class util {
      */
     public static double deltaAngle(double angle1, double angle2){
         // calculate the smallest angle to rotate between the current angle and the target angle
-        double deltaAngle = (angle1 % (Math.PI*2)) - (angle2 % (Math.PI*2));
-        if (deltaAngle > Math.PI) {
-            deltaAngle += 2 * Math.PI;
-        } else if (deltaAngle < -Math.PI) {
-            deltaAngle -= 2 * Math.PI;
-        }
-        return deltaAngle;
+        double deltaAngle = angle2 - angle1;
+        deltaAngle = floormod(deltaAngle + Math.PI, 2 * Math.PI) - Math.PI;
+        return deltaAngle % 360;
     }
 
 
