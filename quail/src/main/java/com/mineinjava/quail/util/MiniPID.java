@@ -115,7 +115,7 @@ public class MiniPID{
      * Typically tuned second for "Position" based modes, and third for "Rate" or continuous based modes. <br>
      * Affects output through <b>output+=previous_errors*Igain ;previous_errors+=current_error</b>
      *
-     * @see {@link #setMaxIOutput(double) setMaxIOutput} for how to restrict
+     * see setMaxIOutput(double) setMaxIOutput for how to restrict
      *
      * @param i New gain value for the Integral term
      */
@@ -137,14 +137,14 @@ public class MiniPID{
     /**
      * Changes the D parameter <br>
      * This has two primary effects:
-     * <list>
-     * <li> Adds a "startup kick" and speeds up system response during setpoint changes
-     * <li> Adds "drag" and slows the system when moving toward the target
-     * </list>
+     *
+     * - Adds a "startup kick" and speeds up system response during setpoint changes
+     * - Adds "drag" and slows the system when moving toward the target
+     *
      * A small D value can be useful for both improving response times, and preventing overshoot.
      * However, in many systems a large D value will cause significant instability, particularly
      * for large setpoint changes.
-     * <br>
+     *
      * Affects output through <b>output += -D*(current_input_value - last_input_value)</b>
      *
      * @param d New gain value for the Derivative term
