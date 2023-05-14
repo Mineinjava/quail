@@ -16,7 +16,7 @@ public class util {
      */
     public static double deltaAngle(double angle1, double angle2){
         // calculate the smallest angle to rotate between the current angle and the target angle
-        double deltaAngle = angle1 % (Math.PI*2) - angle2 % (Math.PI*2);
+        double deltaAngle = (angle1 % (Math.PI*2)) - (angle2 % (Math.PI*2));
         if (deltaAngle > Math.PI) {
             deltaAngle += 2 * Math.PI;
         } else if (deltaAngle < -Math.PI) {
