@@ -35,12 +35,13 @@ public class swerveDrive<T extends swerveModuleBase> {
      */
     public Vec2d[] calculateMoveAngles(Vec2d moveVector, double rotationSpeed, double gyroOffset, Vec2d centerPoint) {
         moveVector = moveVector.rotate(gyroOffset, false);
-         // create a list of four vec2d objects and iterate over them with a for loop (not foreach)
+        // create a list of four vec2d objects and iterate over them with a for loop (not foreach)
         Vec2d[] moduleVectors = new Vec2d[this.swerveModules.size()];
         for (int i = 0; i < this.swerveModules.size(); i++) {
             swerveModuleBase module = swerveModules.get(i);
             Vec2d moduleOffCenterVector = module.position.subtract(centerPoint);
-            moduleVectors[i] = moveVector.add(moduleOffCenterVector.scale(rotationSpeed));
+            Vec2d moduleRotationVector = moduleOffCenterVector.rotate(-Math.PI/2, false);
+            moduleVectors[i] = moveVector.add(moduleRotationVector.scale(rotationSpeed));
         }
         return moduleVectors;
     }
