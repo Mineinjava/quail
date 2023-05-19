@@ -40,7 +40,7 @@ public class swerveDrive<T extends swerveModuleBase> {
         for (int i = 0; i < this.swerveModules.size(); i++) {
             swerveModuleBase module = swerveModules.get(i);
             Vec2d moduleOffCenterVector = module.position.subtract(centerPoint);
-            Vec2d moduleRotationVector = moduleOffCenterVector.rotate(-Math.PI/2, false);
+            Vec2d moduleRotationVector = moduleOffCenterVector; //.rotate(-Math.PI/2, false);
             moduleVectors[i] = moveVector.add(moduleRotationVector.scale(rotationSpeed));
         }
         return moduleVectors;
