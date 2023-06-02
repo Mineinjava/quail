@@ -4,7 +4,7 @@ import numpy as np
 import bresenhams
 import traceback
 from perlin_noise import PerlinNoise
-HERUISTIC_WEIGHT = 0
+HERUISTIC_WEIGHT = 1
 
 def reconstruct_path(goal:node):
     path = []
@@ -44,7 +44,6 @@ def theta_star(start:node, goal:point, grid):
     while len(openSet) > 0:
         openSet.sort(key=lambda x: x.shortestDist + (HERUISTIC_WEIGHT * x.set_heuristic_distance(goal)))
         s = openSet.pop(0)
-        print("os", openSet)
         if s == goal:
             return reconstruct_path(s)
         closedSet.append(s)
@@ -57,8 +56,6 @@ def theta_star(start:node, goal:point, grid):
                 update_vertex(s, neighbor, goal, grid)
                 if neighbor not in openSet and neighbor.parent != None:
                     openSet.append(neighbor)
-
-
     return None
 
 
@@ -67,8 +64,8 @@ if __name__ == '__main__':
     """test case"""
     import matplotlib.pyplot as plt
     from cubicSpline import interpolate_xy
-    WIDTH = 20
-    HEIGHT = 20
+    WIDTH = 132
+    HEIGHT = 132
     FILL_PCT = 0.15
     start = node(0, 0)
     goal = node(WIDTH-1, HEIGHT-1)
@@ -112,5 +109,5 @@ if __name__ == '__main__':
 
     plt.imshow(grid, cmap='gray', interpolation='none', origin='lower')
     plt.plot(splinex, spliney, marker='o')
-    plt.plot(splinedx, splinedy, marker='.')
+    plt.plot(splinedx, splinedy, marker='')
     plt.show()
