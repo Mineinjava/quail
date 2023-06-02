@@ -17,6 +17,10 @@ class point2d:
     def line_of_sight(self, other: 'point2d', grid) -> bool:
         """Returns true if there is a line of sight between self and other.
         """
+        if self == other:
+            return True
+        if self is None or other is None:
+            return False
         intersected_points = [point2d(x, y) for x, y in
                               bresenhams.supercover(self.as_tuple(),
                                                     other.as_tuple())]
@@ -26,9 +30,10 @@ class point2d:
         for point in intersected_points:
             if point.x < 0 or point.y < 0 or point.x >= grid.shape[
                 0] or point.y >= grid.shape[1]:
-                continue
+                return False
             elif grid[point.x][point.y] == 1:
                 return False
+
         return True
 
     def __str__(self):

@@ -15,7 +15,6 @@ class node(point2d):
     def set_shortestDist(self, shortestDist:float):
         self.shortestDist = shortestDist
 
-
     def set_heuristic_distance(self, goal:point2d):
         if self.heuristic_distance is None:
             self.heuristic_distance = self.distance(goal)
@@ -23,7 +22,7 @@ class node(point2d):
 
 
     def get_neighbors(self, diagonal:bool=True)->list:
-        neighbors = []
+        neighbors:list = []
         for i in range(-1, 1+1):
             for j in range(-1, 1+1):
                 if i == 0 and j == 0:
@@ -33,6 +32,8 @@ class node(point2d):
 
                 else:
                     neighbors.append(node(self.x + i, self.y + j))
+
+        #neighbors = [neighbor for neighbor in neighbors if neighbor.x >= 0 and neighbor.y >= 0]
 
         return neighbors
 

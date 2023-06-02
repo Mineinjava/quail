@@ -147,7 +147,8 @@ def supercover(a, b):
                     pts.append([x, y-ystep])
             pts.append([x, y])
             errorprev = error
-    return cover_even_more(pts)
+    #return cover_even_more(pts)
+    return pts
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
