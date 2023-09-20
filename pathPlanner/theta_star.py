@@ -64,9 +64,9 @@ if __name__ == '__main__':
     """test case"""
     import matplotlib.pyplot as plt
     from cubicSpline import interpolate_xy
-    WIDTH = 10
-    HEIGHT = 30
-    FILL_PCT = 1
+    WIDTH = 50
+    HEIGHT = 50
+    FILL_PCT = 0.15
     start = node(0, 0)
     goal = node(WIDTH-1, HEIGHT-1)
     grid = []
