@@ -64,9 +64,9 @@ if __name__ == '__main__':
     """test case"""
     import matplotlib.pyplot as plt
     from cubicSpline import interpolate_xy
-    WIDTH = 132
-    HEIGHT = 132
-    FILL_PCT = 0.15
+    WIDTH = 10
+    HEIGHT = 30
+    FILL_PCT = 1
     start = node(0, 0)
     goal = node(WIDTH-1, HEIGHT-1)
     grid = []
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         grid.append(arr)
 
     '''
-    noise = PerlinNoise(octaves=8)
+    noise = PerlinNoise(octaves=10)
     xpix, ypix = WIDTH, HEIGHT
     pic = [[noise([i/xpix, j/ypix]) for j in range(xpix)] for i in range(ypix)]
 
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     plt.imshow(grid, cmap='gray', interpolation='none', origin='lower')
     plt.show()
     grid[0][0] = 0
-    grid[WIDTH-1][HEIGHT-1] = 0
+    grid[HEIGHT-1][WIDTH-1] = 0
 
     path = theta_star(start, goal, grid)
     print(path)
@@ -100,7 +100,7 @@ if __name__ == '__main__':
         splinex.append(path[i].x)
         spliney.append(path[i].y)
 
-    splinedx, splinedy = interpolate_xy(splinex, spliney, len(splinex) * 3)
+    splinedx, splinedy = interpolate_xy(splinex, spliney, len(splinex) * 30)
 
 
     if SWAP_XY:
