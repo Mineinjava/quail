@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.geometry.Vec2d;
 import com.mineinjava.quail.robotMovement;
 import com.mineinjava.quail.swerveDrive;
 import com.mineinjava.quail.swerveModuleBase;
-import com.mineinjava.quail.util.Vec2d;
 
 /** Represents a swerve drive position on the field
  * and provides methods for calculating the robot's position.

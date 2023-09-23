@@ -3,7 +3,7 @@ package com.mineinjava.quail;
 import java.lang.Math;
 
 import com.mineinjava.quail.util.util;
-import com.mineinjava.quail.util.Vec2d;
+import com.mineinjava.quail.util.geometry.Vec2d;
 
 public class swerveModuleBase {
     public Vec2d position;

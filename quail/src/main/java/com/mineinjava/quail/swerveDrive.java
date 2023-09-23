@@ -2,7 +2,7 @@ package com.mineinjava.quail;
 
 import java.util.List;
 
-import com.mineinjava.quail.util.Vec2d;
+import com.mineinjava.quail.util.geometry.Vec2d;
 
 
 public class swerveDrive<T extends swerveModuleBase> {
