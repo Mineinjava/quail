@@ -42,9 +42,11 @@ public abstract class TwoWheelLocalizer{
 
         forwardSolver = new LUDecomposition(inverseMatrix).getSolver();
 
+        /*
         if (forwardSolver.isNonSingular()) {
             throw new IllegalArgumentException("The specified configuration cannot support full localization");
         }
+        */
     }
 
     private Pose2d calculatePoseDelta(List<Double> wheelDeltas, double headingDelta) {
