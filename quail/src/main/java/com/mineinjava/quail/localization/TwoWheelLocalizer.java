@@ -19,7 +19,8 @@ public abstract class TwoWheelLocalizer{
     List<Pose2d> wheelPoses;
     DecompositionSolver forwardSolver;
     
-    private Pose2d poseEstimate, poseVelocity;
+    private Pose2d poseEstimate = new Pose2d(0, 0, 0);
+    private Pose2d poseVelocity;
     private List<Double> lastWheelPositions = new ArrayList<>();
     private double lastHeading;
 
