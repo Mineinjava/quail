@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
 import org.apache.commons.math3.linear.DecompositionSolver;
 import org.apache.commons.math3.linear.LUDecomposition;
+import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
 import com.mineinjava.quail.util.MathUtil;
@@ -50,16 +51,13 @@ public abstract class TwoWheelLocalizer{
     }
 
     private Pose2d calculatePoseDelta(List<Double> wheelDeltas, double headingDelta) {
-        RealMatrix matrix = new Array2DRowRealMatrix(
-            new double[][] {{headingDelta}}
-        ).transpose();
-        
-        RealMatrix rawPoseDelta = forwardSolver.solve(matrix);
-        
+        RealMatrix inputMatrix = MatrixUtils.createRealMatrix(new double[][]{toDoubleArray(wheelDeltas, headingDelta)}).transpose();
+        RealMatrix rawPoseDelta = forwardSolver.solve(inputMatrix);
+
         return new Pose2d(
-            rawPoseDelta.getEntry(0, 0),
-            rawPoseDelta.getEntry(1, 0),
-            rawPoseDelta.getEntry(2, 0)
+                rawPoseDelta.getEntry(0, 0),
+                rawPoseDelta.getEntry(1, 0),
+                rawPoseDelta.getEntry(2, 0)
         );
     }
 
@@ -144,5 +142,14 @@ public abstract class TwoWheelLocalizer{
         double newHeading = Angle.norm(fieldPose.heading + fieldPoseDelta.heading);
         
         return new Pose2d(newX, newY, newHeading);
+    }
+
+    private double[] toDoubleArray(List<Double> list, double value) {
+        double[] array = new double[list.size() + 1];
+        for (int i = 0; i < list.size(); i++) {
+            array[i] = list.get(i);
+        }
+        array[list.size()] = value;
+        return array;
     }
 }
