@@ -87,6 +87,10 @@ public abstract class TwoWheelLocalizer{
         lastHeading = heading;
     }
 
+    public Pose2d getPoseEstimate() {
+        return poseEstimate;
+    }
+
     /**
      * Returns the positions of the tracking wheels in the desired distance units (not encoder counts!)
      */
