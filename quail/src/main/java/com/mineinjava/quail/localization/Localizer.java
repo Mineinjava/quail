@@ -4,7 +4,7 @@ import com.mineinjava.quail.util.geometry.Pose2d;
 
 public abstract class Localizer {
     
-    Pose2d getPoseEstimate() { return null; }
+    public Pose2d getPoseEstimate() { return null; }
 
-    void setPoseEstimate(Pose2d pose) {};
+    public void setPoseEstimate(Pose2d pose) {};
 }

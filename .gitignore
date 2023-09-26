@@ -14,4 +14,4 @@ build
 .vscode/
 
 # Ignore local.properties file
-local.properties
+bin/main/
