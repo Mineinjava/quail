@@ -14,7 +14,7 @@ import com.mineinjava.quail.util.geometry.Angle;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
-public abstract class TwoWheelLocalizer{
+public abstract class TwoWheelLocalizer extends Localizer{
     
     List<Pose2d> wheelPoses;
     DecompositionSolver forwardSolver;
@@ -51,6 +51,10 @@ public abstract class TwoWheelLocalizer{
         */
     }
 
+    /**
+     * Returns the robot's pose
+     * @return the robot's pose
+     */
     private Pose2d calculatePoseDelta(List<Double> wheelDeltas, double headingDelta) {
         RealMatrix inputMatrix = MatrixUtils.createRealMatrix(new double[][]{toDoubleArray(wheelDeltas, headingDelta)}).transpose();
         RealMatrix rawPoseDelta = forwardSolver.solve(inputMatrix);
@@ -62,6 +66,9 @@ public abstract class TwoWheelLocalizer{
         );
     }
 
+    /**
+     * Updates the robot's position on the field using the deadwheel positions.
+     */
     public void update() {
         List<Double> wheelPositions = getWheelPositions();
         double heading = getHeading();
@@ -88,8 +95,23 @@ public abstract class TwoWheelLocalizer{
         lastHeading = heading;
     }
 
+    /**
+     * Returns the robot's pose
+     * @return the robot's pose (Pose2d)
+     */
+    @Override
     public Pose2d getPoseEstimate() {
         return poseEstimate;
+    }
+
+    /**
+     * Sets the robot's pose
+     * Use this method to override with Vision data or for initial pose
+     * @param pose the robot's pose
+     */
+    @Override
+    public void setPoseEstimate(Pose2d pose) {
+        poseEstimate = pose;
     }
 
     /**
@@ -116,6 +138,12 @@ public abstract class TwoWheelLocalizer{
         return null; // You can return a Double value here if needed
     }
 
+    /**
+     * Returns the robot's releative pose.
+     * @param fieldPose the robot's pose on the field
+     * @param robotPoseDelta the robot's pose delta
+     * @return the robot's relative pose
+     */
     public static Pose2d relativeOdometryUpdate(Pose2d fieldPose, Pose2d robotPoseDelta) {
         double dtheta = robotPoseDelta.heading;
         double sineTerm, cosTerm;

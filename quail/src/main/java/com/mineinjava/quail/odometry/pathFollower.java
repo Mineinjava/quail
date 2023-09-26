@@ -1,6 +1,7 @@
 package com.mineinjava.quail.odometry;
 
 import com.mineinjava.quail.robotMovement;
+import com.mineinjava.quail.localization.swerveOdometry;
 import com.mineinjava.quail.util.MiniPID;
 import com.mineinjava.quail.util.util;
 import com.mineinjava.quail.util.geometry.Vec2d;
