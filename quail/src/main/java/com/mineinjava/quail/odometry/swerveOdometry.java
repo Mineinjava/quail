@@ -22,6 +22,8 @@ import com.mineinjava.quail.util.Vec2d;
  *     - pass the returned vector into one of the updateDelta methods
  *     - set the robot's heading to the gyro heading.
  *
+ * when constructing this class, pass in the positions of the modules relative to robot center
+ *
  */
 public class swerveOdometry {
     public ArrayList<Vec2d> moduleVectors;
@@ -128,7 +130,7 @@ public class swerveOdometry {
      *
      * Also note that this method is not field-centric. You will have to rotate the returned vector.
      *
-     * @param modules the positions of the modules
+     * @param modules the positions (current angle and current velocity) of the modules
      * @return the robot's movement
      */
     public robotMovement calculateOdometry(ArrayList<Vec2d> modules){
