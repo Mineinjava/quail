@@ -2,13 +2,16 @@
 .gradle
 
 # Ignore Gradle build output directory
-build
+
 
 # Ignore IntelliJ IDEA project-specific settings directory
 .idea/
-!javadoc
+
 # Ignore Android Studio project-specific settings directory
 *.iml
+
+/quail/build/*
+!/quail/build/docs
 
 # Ignore the Visual Studio Code workspace directory
 .vscode/
