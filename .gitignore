@@ -15,3 +15,4 @@ build
 
 # Ignore local.properties file
 local.properties
+*.DS_Store
