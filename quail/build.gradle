@@ -51,10 +51,12 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     from sourceSets.main.allJava
 }
 
-
 artifacts {
     archives sourcesJar
-    // archives javadocJar
+    archives javadocJar
+}
+tasks.withType(Javadoc) {
+    failOnError false
 }
 
 tasks.named('test') {
