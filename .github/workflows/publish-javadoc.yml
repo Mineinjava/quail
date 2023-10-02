@@ -19,4 +19,4 @@ jobs:
           target-folder: javadoc
           project: gradle
       - name: list debug
-        run: apt-get install tree && tree .
+        run: apt-get install tree && tree
