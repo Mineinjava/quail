@@ -11,10 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.3.0
+        uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           javadoc-branch: javadoc
           java-version: 17
           target-folder: javadoc
           project: gradle
+      - name: list debug
+        run: apt-get install tree && tree .
