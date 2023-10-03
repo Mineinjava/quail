@@ -1,4 +1,4 @@
-package com.mineinjava.quail.util;
+package com.mineinjava.quail.util.geometry;
 
 /**
  * Represents a two-dimensional vector.

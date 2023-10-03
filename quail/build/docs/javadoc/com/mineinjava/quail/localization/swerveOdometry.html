@@ -5,7 +5,7 @@
 <title>swerveOdometry (quail API)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="declaration: package: com.mineinjava.quail.odometry, class: swerveOdometry">
+<meta name="description" content="declaration: package: com.mineinjava.quail.localization, class: swerveOdometry">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -67,16 +67,18 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.mineinjava.quail.odometry</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.mineinjava.quail.localization</a></div>
 <h1 title="Class swerveOdometry" class="title">Class swerveOdometry</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">com.mineinjava.quail.odometry.swerveOdometry</div>
+<div class="inheritance"><a href="Localizer.html" title="class in com.mineinjava.quail.localization">com.mineinjava.quail.localization.Localizer</a>
+<div class="inheritance">com.mineinjava.quail.localization.swerveOdometry</div>
+</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">swerveOdometry</span>
-<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
+<span class="extends-implements">extends <a href="Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></span></div>
 <div class="block">Represents a swerve drive position on the field
  and provides methods for calculating the robot's position.
  A standard workflow would look something like this:
@@ -104,7 +106,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></code></div>
 <div class="col-second even-row-color"><code><a href="#lastSpeedVector" class="member-name-link">lastSpeedVector</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;</code></div>
+<div class="col-first odd-row-color"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;</code></div>
 <div class="col-second odd-row-color"><code><a href="#moduleVectors" class="member-name-link">moduleVectors</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>double</code></div>
@@ -129,11 +131,11 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.swerveDrive)" class="member-name-link">swerveOdometry</a><wbr>(<a href="../swerveDrive.html" title="class in com.mineinjava.quail">swerveDrive</a>&nbsp;drivetrain)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.util.Vec2d%5B%5D)" class="member-name-link">swerveOdometry</a><wbr>(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>[]&nbsp;moduleVectors)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.util.geometry.Vec2d%5B%5D)" class="member-name-link">swerveOdometry</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>[]&nbsp;moduleVectors)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.ArrayList)" class="member-name-link">swerveOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;moduleVectors)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.ArrayList)" class="member-name-link">swerveOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;moduleVectors)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">swerveOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;moduleVectors)</code></div>
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">swerveOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;moduleVectors)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 </div>
 </section>
@@ -150,7 +152,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateFastOdometry(java.util.ArrayList)" class="member-name-link">calculateFastOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;modules)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateFastOdometry(java.util.ArrayList)" class="member-name-link">calculateFastOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;modules)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Calculates the robot's movement based on the module positions
  This is the recommended method to use if:
@@ -160,13 +162,24 @@ loadScripts(document, 'script');</script>
  Again, due to drift, it is recommended not to use the robot's rotation value given from this method.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateOdometry(com.mineinjava.quail.util.Vec2d%5B%5D)" class="member-name-link">calculateOdometry</a><wbr>(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>[]&nbsp;modules)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateOdometry(com.mineinjava.quail.util.geometry.Vec2d%5B%5D)" class="member-name-link">calculateOdometry</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>[]&nbsp;modules)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateOdometry(java.util.ArrayList)" class="member-name-link">calculateOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;modules)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateOdometry(java.util.ArrayList)" class="member-name-link">calculateOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;modules)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Calculates the robot's movement based on the module positions
  NOTE: due to drift, it is recommended not to use the robot's rotation value given from this method.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPoseEstimate()" class="member-name-link">getPoseEstimate</a>()</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Returns the robot's pose</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPoseEstimate(com.mineinjava.quail.util.geometry.Pose2d)" class="member-name-link">setPoseEstimate</a><wbr>(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;pose)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Sets the robot's pose
+ Use this method to override with Vision data or for initial pose</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDeltaOdometry(double,double,double)" class="member-name-link">updateDeltaOdometry</a><wbr>(double&nbsp;dx,
@@ -176,13 +189,13 @@ loadScripts(document, 'script');</script>
 <div class="block">Updates the robot's position based on a change in x, y, and a theta.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDeltaOdometry(com.mineinjava.quail.util.Vec2d)" class="member-name-link">updateDeltaOdometry</a><wbr>(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;dpos)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDeltaOdometry(com.mineinjava.quail.util.geometry.Vec2d)" class="member-name-link">updateDeltaOdometry</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;dpos)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">updates the robot's position based on a change in x, y (represented by a vector)
  All values must be field-centric.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDeltaOdometry(com.mineinjava.quail.util.Vec2d,double)" class="member-name-link">updateDeltaOdometry</a><wbr>(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;dpos,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateDeltaOdometry(com.mineinjava.quail.util.geometry.Vec2d,double)" class="member-name-link">updateDeltaOdometry</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;dpos,
  double&nbsp;dtheta)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the robot's position based on a change in x, y, (represented by a vector) and a theta.</div>
@@ -195,13 +208,13 @@ loadScripts(document, 'script');</script>
 <div class="block">sets the robot's position to a specific x, y, and theta.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateOdometry(com.mineinjava.quail.util.Vec2d)" class="member-name-link">updateOdometry</a><wbr>(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;pos)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateOdometry(com.mineinjava.quail.util.geometry.Vec2d)" class="member-name-link">updateOdometry</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;pos)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">sets the robot's position to a specific x, y (represented by a vector)
  All values must be field-centric.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateOdometry(com.mineinjava.quail.util.Vec2d,double)" class="member-name-link">updateOdometry</a><wbr>(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;pos,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#updateOdometry(com.mineinjava.quail.util.geometry.Vec2d,double)" class="member-name-link">updateOdometry</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;pos,
  double&nbsp;mtheta)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">sets the robot's position to a specific x, y, (represented by a vector) and theta.</div>
@@ -226,7 +239,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="moduleVectors">
 <h3>moduleVectors</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;</span>&nbsp;<span class="element-name">moduleVectors</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;</span>&nbsp;<span class="element-name">moduleVectors</span></div>
 </section>
 </li>
 <li>
@@ -262,21 +275,21 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.util.Vec2d[])">
+<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.util.geometry.Vec2d[])">
 <h3>swerveOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">swerveOdometry</span><wbr><span class="parameters">(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>[]&nbsp;moduleVectors)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">swerveOdometry</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>[]&nbsp;moduleVectors)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.List)">
 <h3>swerveOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">swerveOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;moduleVectors)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">swerveOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;moduleVectors)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="&lt;init&gt;(java.util.ArrayList)">
 <h3>swerveOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">swerveOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;moduleVectors)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">swerveOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;moduleVectors)</span></div>
 </section>
 </li>
 <li>
@@ -310,9 +323,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updateDeltaOdometry(com.mineinjava.quail.util.Vec2d,double)">
+<section class="detail" id="updateDeltaOdometry(com.mineinjava.quail.util.geometry.Vec2d,double)">
 <h3>updateDeltaOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDeltaOdometry</span><wbr><span class="parameters">(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;dpos,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDeltaOdometry</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;dpos,
  double&nbsp;dtheta)</span></div>
 <div class="block">Updates the robot's position based on a change in x, y, (represented by a vector) and a theta.
  All values must be field-centric.</div>
@@ -340,9 +353,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updateOdometry(com.mineinjava.quail.util.Vec2d,double)">
+<section class="detail" id="updateOdometry(com.mineinjava.quail.util.geometry.Vec2d,double)">
 <h3>updateOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateOdometry</span><wbr><span class="parameters">(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;pos,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateOdometry</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;pos,
  double&nbsp;mtheta)</span></div>
 <div class="block">sets the robot's position to a specific x, y, (represented by a vector) and theta.
  All values must be field-centric.</div>
@@ -354,9 +367,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updateOdometry(com.mineinjava.quail.util.Vec2d)">
+<section class="detail" id="updateOdometry(com.mineinjava.quail.util.geometry.Vec2d)">
 <h3>updateOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateOdometry</span><wbr><span class="parameters">(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;pos)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateOdometry</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;pos)</span></div>
 <div class="block">sets the robot's position to a specific x, y (represented by a vector)
  All values must be field-centric.</div>
 <dl class="notes">
@@ -366,9 +379,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updateDeltaOdometry(com.mineinjava.quail.util.Vec2d)">
+<section class="detail" id="updateDeltaOdometry(com.mineinjava.quail.util.geometry.Vec2d)">
 <h3>updateDeltaOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDeltaOdometry</span><wbr><span class="parameters">(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&nbsp;dpos)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDeltaOdometry</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;dpos)</span></div>
 <div class="block">updates the robot's position based on a change in x, y (represented by a vector)
  All values must be field-centric.</div>
 <dl class="notes">
@@ -378,9 +391,36 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
+<section class="detail" id="getPoseEstimate()">
+<h3>getPoseEstimate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></span>&nbsp;<span class="element-name">getPoseEstimate</span>()</div>
+<div class="block">Returns the robot's pose</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="Localizer.html#getPoseEstimate()">getPoseEstimate</a></code>&nbsp;in class&nbsp;<code><a href="Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></code></dd>
+<dt>Returns:</dt>
+<dd>the robot's pose</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="setPoseEstimate(com.mineinjava.quail.util.geometry.Pose2d)">
+<h3>setPoseEstimate</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPoseEstimate</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;pose)</span></div>
+<div class="block">Sets the robot's pose
+ Use this method to override with Vision data or for initial pose</div>
+<dl class="notes">
+<dt>Overrides:</dt>
+<dd><code><a href="Localizer.html#setPoseEstimate(com.mineinjava.quail.util.geometry.Pose2d)">setPoseEstimate</a></code>&nbsp;in class&nbsp;<code><a href="Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></code></dd>
+<dt>Parameters:</dt>
+<dd><code>pose</code> - the robot's pose</dd>
+</dl>
+</section>
+</li>
+<li>
 <section class="detail" id="calculateOdometry(java.util.ArrayList)">
 <h3>calculateOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></span>&nbsp;<span class="element-name">calculateOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;modules)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></span>&nbsp;<span class="element-name">calculateOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;modules)</span></div>
 <div class="block">Calculates the robot's movement based on the module positions
  NOTE: due to drift, it is recommended not to use the robot's rotation value given from this method.
  Instead, use the robot's gyro.
@@ -398,15 +438,15 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="calculateOdometry(com.mineinjava.quail.util.Vec2d[])">
+<section class="detail" id="calculateOdometry(com.mineinjava.quail.util.geometry.Vec2d[])">
 <h3>calculateOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></span>&nbsp;<span class="element-name">calculateOdometry</span><wbr><span class="parameters">(<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>[]&nbsp;modules)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></span>&nbsp;<span class="element-name">calculateOdometry</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>[]&nbsp;modules)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="calculateFastOdometry(java.util.ArrayList)">
 <h3>calculateFastOdometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></span>&nbsp;<span class="element-name">calculateFastOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/Vec2d.html" title="class in com.mineinjava.quail.util">Vec2d</a>&gt;&nbsp;modules)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></span>&nbsp;<span class="element-name">calculateFastOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;modules)</span></div>
 <div class="block">Calculates the robot's movement based on the module positions
  This is the recommended method to use if:
  - the sum of all the module placement vectors is (0, 0)

@@ -90,17 +90,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>double</code></div>
-<div class="col-second even-row-color"><code><a href="#maxAcceleration" class="member-name-link">maxAcceleration</a></code></div>
+<div class="col-first even-row-color"><code><a href="../localization/Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></code></div>
+<div class="col-second even-row-color"><code><a href="#localizer" class="member-name-link">localizer</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-first odd-row-color"><code>double</code></div>
-<div class="col-second odd-row-color"><code><a href="#maxTurnAcceleration" class="member-name-link">maxTurnAcceleration</a></code></div>
+<div class="col-second odd-row-color"><code><a href="#maxAcceleration" class="member-name-link">maxAcceleration</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code>double</code></div>
-<div class="col-second even-row-color"><code><a href="#maxTurnSpeed" class="member-name-link">maxTurnSpeed</a></code></div>
+<div class="col-second even-row-color"><code><a href="#maxTurnAcceleration" class="member-name-link">maxTurnAcceleration</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-first odd-row-color"><code><a href="swerveOdometry.html" title="class in com.mineinjava.quail.odometry">swerveOdometry</a></code></div>
-<div class="col-second odd-row-color"><code><a href="#odometry" class="member-name-link">odometry</a></code></div>
+<div class="col-first odd-row-color"><code>double</code></div>
+<div class="col-second odd-row-color"><code><a href="#maxTurnSpeed" class="member-name-link">maxTurnSpeed</a></code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><code><a href="path.html" title="class in com.mineinjava.quail.odometry">path</a></code></div>
 <div class="col-second even-row-color"><code><a href="#path" class="member-name-link">path</a></code></div>
@@ -125,7 +125,7 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.odometry.swerveOdometry,com.mineinjava.quail.odometry.path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double)" class="member-name-link">pathFollower</a><wbr>(<a href="swerveOdometry.html" title="class in com.mineinjava.quail.odometry">swerveOdometry</a>&nbsp;odometry,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.odometry.path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double)" class="member-name-link">pathFollower</a><wbr>(<a href="../localization/Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  <a href="path.html" title="class in com.mineinjava.quail.odometry">path</a>&nbsp;path,
  double&nbsp;speed,
  double&nbsp;maxTurnSpeed,
@@ -178,9 +178,9 @@ loadScripts(document, 'script');</script>
 <h2>Field Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="odometry">
-<h3>odometry</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="swerveOdometry.html" title="class in com.mineinjava.quail.odometry">swerveOdometry</a></span>&nbsp;<span class="element-name">odometry</span></div>
+<section class="detail" id="localizer">
+<h3>localizer</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../localization/Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></span>&nbsp;<span class="element-name">localizer</span></div>
 </section>
 </li>
 <li>
@@ -234,9 +234,9 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.odometry.swerveOdometry,com.mineinjava.quail.odometry.path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double)">
+<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.odometry.path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double)">
 <h3>pathFollower</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">pathFollower</span><wbr><span class="parameters">(<a href="swerveOdometry.html" title="class in com.mineinjava.quail.odometry">swerveOdometry</a>&nbsp;odometry,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">pathFollower</span><wbr><span class="parameters">(<a href="../localization/Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  <a href="path.html" title="class in com.mineinjava.quail.odometry">path</a>&nbsp;path,
  double&nbsp;speed,
  double&nbsp;maxTurnSpeed,
