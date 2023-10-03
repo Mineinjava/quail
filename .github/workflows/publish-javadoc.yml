@@ -10,14 +10,18 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy JavaDoc 🚀
-        uses: MathieuSoysal/Javadoc-publisher.yml@v2.4.0
+      - name: Git checkout
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v3.13.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          javadoc-branch: javadoc
-          java-version: 17
-          target-folder: javadoc
-          project: gradle
-          custom-command: ./gradlew javadoc
-      - name: list debug
-        run: apt-get install tree && tree
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+      - name: Build Javadoc
+        run: ./gradlew javadoc
+        shell: bash
+      - name: Deploy Javadoc
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: javadoc
