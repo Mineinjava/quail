@@ -17,6 +17,7 @@ jobs:
           javadoc-branch: javadoc
           java-version: 17
           target-folder: javadoc
+          subdirectory: quail
           project: gradle
       - name: list debug
         run: apt-get install tree && tree
