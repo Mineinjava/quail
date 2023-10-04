@@ -1,4 +1,4 @@
-package com.mineinjava.quail.odometry;
+package com.mineinjava.quail.localization;
 
 
 import java.util.ArrayList;
@@ -6,10 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.geometry.Pose2d;
+import com.mineinjava.quail.util.geometry.Vec2d;
 import com.mineinjava.quail.robotMovement;
 import com.mineinjava.quail.swerveDrive;
 import com.mineinjava.quail.swerveModuleBase;
-import com.mineinjava.quail.util.Vec2d;
 
 /** Represents a swerve drive position on the field
  * and provides methods for calculating the robot's position.
@@ -25,7 +26,7 @@ import com.mineinjava.quail.util.Vec2d;
  * when constructing this class, pass in the positions of the modules relative to robot center
  *
  */
-public class swerveOdometry {
+public class swerveOdometry extends Localizer {
     public ArrayList<Vec2d> moduleVectors;
     public double x=0;
     public double y=0;
@@ -119,6 +120,23 @@ public class swerveOdometry {
      */
     public void updateDeltaOdometry(Vec2d dpos){
         this.updateDeltaOdometry(dpos.x, dpos.y, 0);
+    }
+    /**
+     * Returns the robot's pose
+     * @return the robot's pose
+     */
+    @Override
+    public Pose2d getPoseEstimate() {
+        return new Pose2d(this.x, this.y, this.theta);
+    }
+    /**
+     * Sets the robot's pose
+     * Use this method to override with Vision data or for initial pose
+     * @param pose the robot's pose
+     */
+    @Override
+    public void setPoseEstimate(Pose2d pose) {
+        this.updateOdometry(pose.x, pose.y, pose.heading);
     }
     /**
      * Calculates the robot's movement based on the module positions
