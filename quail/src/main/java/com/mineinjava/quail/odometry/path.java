@@ -8,18 +8,15 @@ import com.mineinjava.quail.util.Vec2d;
 /**
  * Represents a path that the robot can follow.
  * Instantiate with a list of points.
+ *
+ * The robot will follow the path by going to each point in order.
+ * For example, I would pass in points=[(0,0), (1,0), (1,1), (0,1)] to make the robot travel in a square
  */
 public class path {
     public ArrayList<double[]> points;
     int currentPoint = 0;
     double finalHeading = 0;
-    /** creates a path with the specified points.
-     *
-     * @param points - a list of points that the robot will follow, in the form of [x, y] where x and y are both doubles.
-     */
-    public path(ArrayList<double[]> points) {
-        this.points = points;
-    }
+
     /** creates a path with the specified points and final heading.
      *
      * @param points - a list of points that the robot will follow, in the form of [x, y] where x and y are both doubles.
