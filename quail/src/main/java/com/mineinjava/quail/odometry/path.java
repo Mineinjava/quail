@@ -1,5 +1,6 @@
 package com.mineinjava.quail.odometry;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.mineinjava.quail.util.Vec2d;
@@ -12,8 +13,21 @@ public class path {
     public ArrayList<double[]> points;
     int currentPoint = 0;
     double finalHeading = 0;
+    /** creates a path with the specified points.
+     *
+     * @param points - a list of points that the robot will follow, in the form of [x, y] where x and y are both doubles.
+     */
     public path(ArrayList<double[]> points) {
         this.points = points;
+    }
+    /** creates a path with the specified points and final heading.
+     *
+     * @param points - a list of points that the robot will follow, in the form of [x, y] where x and y are both doubles.
+     * @param finalHeading - the heading that the robot will be at when it reaches the end of the path.
+     */
+    public path(ArrayList<double[]> points, double finalHeading) {
+        this.points = points;
+        this.finalHeading = finalHeading;
     }
     /** returns the next point in the path. Also increments the current point.
      */
