@@ -73,10 +73,10 @@ public class path {
 
     /** calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
      *
-     * @param x
-     * @param y
-     * @param minIndex
-     * @return
+     * @param x - x
+     * @param y - y
+     * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
+     * @return - a vector from (x,y) to the nearest point on the path
      */
     public Vec2d vectorToNearestPoint(double x, double y, int minIndex){
         double[] nearestPoint = this.nearestPoint(x, y, minIndex);
@@ -97,10 +97,10 @@ public class path {
     }
     /** calculates the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
      *
-     * @param x
-     * @param y
-     * @param minIndex
-     * @return
+     * @param x - x
+     * @param y - y
+     * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
+     * @return - the nearest point on the path
      */
     public double[] nearestPoint(double x, double y, int minIndex){
         double[] nearestPoint = points.get(minIndex);
