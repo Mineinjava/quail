@@ -118,11 +118,11 @@ public class swerveOdometry extends Localizer {
      * All values must be field-centric.
      * @param dpos
      */
-    public void updateDeltaOdometry(Vec2d dpos){
+    public void updateDeltaPoseEstimate(Vec2d dpos){
         this.updateDeltaOdometry(dpos.x, dpos.y, 0);
     }
     /**
-     * Returns the robot's pose
+     * Returns the robot's pose when given a change in position as a vector and a change in rotation.
      * @return the robot's pose
      */
     @Override
