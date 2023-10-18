@@ -59,6 +59,14 @@ public class pathFollower {
         if (movementVector.getLength() < this.precision) {
             this.path.currentPoint++;
         }
+        if (this.isFinished()) {
+            return new robotMovement(0, new Vec2d(0, 0)); // the path is over
+        }
         return new robotMovement(turnSpeed, movementVector);
+    }
+    /** returns true if the robot is finished following the path.
+     */
+    public Boolean isFinished() {
+       return this.path.vectorToNearestPoint(this.odometry.x, this.odometry.y, this.path.currentPoint).getLength() < this.precision;
     }
 }

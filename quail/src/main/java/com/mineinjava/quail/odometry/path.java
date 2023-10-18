@@ -1,5 +1,6 @@
 package com.mineinjava.quail.odometry;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import com.mineinjava.quail.util.geometry.Vec2d;
@@ -7,13 +8,31 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 /**
  * Represents a path that the robot can follow.
  * Instantiate with a list of points.
+ *
+ * The robot will follow the path by going to each point in order.
+ *
+ * For example, I would pass in points=[[0,0], [1,0], [1,1], [0,1]] to make the robot travel in a square
+ *
+ * The robot will go to [0,0], then [1,0], then [1,1], then [0,1]
+ *
+ * The robot will stop at the last point in the path, and its heading will be the finalHeading that is passed in.
+ *
  */
 public class path {
     public ArrayList<double[]> points;
     int currentPoint = 0;
+    int lastpoint = 0;
     double finalHeading = 0;
-    public path(ArrayList<double[]> points) {
+
+    /** creates a path with the specified points and final heading.
+     *
+     * @param points - a list of points that the robot will follow, in the form of [x, y] where x and y are both doubles.
+     * @param finalHeading - the heading that the robot will be at when it reaches the end of the path.
+     */
+    public path(ArrayList<double[]> points, double finalHeading) {
         this.points = points;
+        this.finalHeading = finalHeading;
+        lastpoint = points.size() - 1;
     }
     /** returns the next point in the path. Also increments the current point.
      */
@@ -56,10 +75,10 @@ public class path {
 
     /** calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
      *
-     * @param x
-     * @param y
-     * @param minIndex
-     * @return
+     * @param x - x
+     * @param y - y
+     * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
+     * @return - a vector from (x,y) to the nearest point on the path
      */
     public Vec2d vectorToNearestPoint(double x, double y, int minIndex){
         double[] nearestPoint = this.nearestPoint(x, y, minIndex);
@@ -80,10 +99,10 @@ public class path {
     }
     /** calculates the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
      *
-     * @param x
-     * @param y
-     * @param minIndex
-     * @return
+     * @param x - x
+     * @param y - y
+     * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
+     * @return - the nearest point on the path
      */
     public double[] nearestPoint(double x, double y, int minIndex){
         double[] nearestPoint = points.get(minIndex);
