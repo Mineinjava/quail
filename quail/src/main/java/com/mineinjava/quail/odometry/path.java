@@ -10,7 +10,13 @@ import com.mineinjava.quail.util.Vec2d;
  * Instantiate with a list of points.
  *
  * The robot will follow the path by going to each point in order.
- * For example, I would pass in points=[(0,0), (1,0), (1,1), (0,1)] to make the robot travel in a square
+ *
+ * For example, I would pass in points=[[0,0], [1,0], [1,1], [0,1]] to make the robot travel in a square
+ *
+ * The robot will go to [0,0], then [1,0], then [1,1], then [0,1]
+ *
+ * The robot will stop at the last point in the path, and its heading will be the finalHeading that is passed in.
+ *
  */
 public class path {
     public ArrayList<double[]> points;
