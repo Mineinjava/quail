@@ -21,6 +21,7 @@ import com.mineinjava.quail.util.Vec2d;
 public class path {
     public ArrayList<double[]> points;
     int currentPoint = 0;
+    int lastpoint = 0;
     double finalHeading = 0;
 
     /** creates a path with the specified points and final heading.
@@ -31,6 +32,7 @@ public class path {
     public path(ArrayList<double[]> points, double finalHeading) {
         this.points = points;
         this.finalHeading = finalHeading;
+        lastpoint = points.size() - 1;
     }
     /** returns the next point in the path. Also increments the current point.
      */
