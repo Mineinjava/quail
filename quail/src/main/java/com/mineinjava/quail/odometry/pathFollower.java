@@ -67,7 +67,10 @@ public class pathFollower {
     /** returns true if the robot is finished following the path.
      */
     public Boolean isFinished() {
-        Pose2d currentPose = this.localizer.getPoseEstimate();
+       Pose2d currentPose = this.localizer.getPoseEstimate();
+       if (this.path.currentPoint >= this.path.points.size() - 1) {
+           return true;
+       }
        return this.path.vectorToNearestPoint(currentPose.x, currentPose.y, this.path.currentPoint).getLength() < this.precision;
     }
 }
