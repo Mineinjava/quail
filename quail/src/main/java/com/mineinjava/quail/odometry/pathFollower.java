@@ -49,28 +49,35 @@ public class pathFollower {
     public robotMovement calculateNextDriveMovement() {
         // calculate the next movement to follow the path
         Pose2d currentPose = this.localizer.getPoseEstimate();
-        double deltaAngle = util.deltaAngle(currentPose.heading, this.path.finalHeading);
+        double deltaAngle = util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
+
         double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.length();
         turnSpeed = util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
-        Vec2d movementVector = this.path.vectorToNearestPoint(currentPose.x, currentPose.y, this.path.currentPoint);
-        movementVector.scale(this.speed/movementVector.getLength());
+
+        Vec2d movementVector = this.path.vectorToNearestPoint(currentPose, this.path.currentPoint);
+        movementVector.scale(this.speed / movementVector.getLength());
         movementVector.rotate(-currentPose.heading, false);
+
         if (movementVector.getLength() < this.precision) {
             this.path.currentPoint++;
         }
         if (this.isFinished()) {
             return new robotMovement(0, new Vec2d(0, 0)); // the path is over
         }
+
         return new robotMovement(turnSpeed, movementVector);
     }
+    
     /** returns true if the robot is finished following the path.
      */
     public Boolean isFinished() {
        Pose2d currentPose = this.localizer.getPoseEstimate();
+
        if (this.path.currentPoint >= this.path.points.size() - 1) {
            return true;
        }
-       return this.path.vectorToNearestPoint(currentPose.x, currentPose.y, this.path.currentPoint).getLength() < this.precision;
+
+       return this.path.vectorToNearestPoint(currentPose, this.path.currentPoint).getLength() < this.precision;
     }
 }

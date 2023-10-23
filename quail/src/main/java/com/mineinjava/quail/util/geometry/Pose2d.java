@@ -82,4 +82,13 @@ public class Pose2d {
     public String toString() {
         return String.format("(%.3f, %.3f, %.3f°)", x, y, Math.toDegrees(heading));
     }
+
+    /**
+     * Returns a pose from the given list
+     * @param list - double[] in the format [x, y, theta]
+     * @return
+     */
+    public Pose2d fromList(double[] list) {
+        return new Pose2d(list[0], list[1], list[2]);
+    }
 }
