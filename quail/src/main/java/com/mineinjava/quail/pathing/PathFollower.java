@@ -1,4 +1,4 @@
-package com.mineinjava.quail.odometry;
+package com.mineinjava.quail.pathing;
 
 import com.mineinjava.quail.robotMovement;
 import com.mineinjava.quail.localization.Localizer;
@@ -10,17 +10,17 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 /** class that helps you follow paths
  *
  */
-public class pathFollower {
-    public Localizer localizer;
-    public com.mineinjava.quail.odometry.path path;
+public class PathFollower {
+    public Path path;
     public double speed;
     public double maxTurnSpeed;
     public double maxTurnAcceleration;
     public double maxAcceleration;
     public MiniPID turnController;
     public double precision;
+    private Localizer localizer;
 
-    public pathFollower(Localizer localizer, com.mineinjava.quail.odometry.path path, double speed, double maxTurnSpeed,
+    public PathFollower(Localizer localizer, Path path, double speed, double maxTurnSpeed,
                         double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision) {
         this.localizer = localizer;
         this.path = path;
@@ -31,13 +31,13 @@ public class pathFollower {
         this.turnController = turnController;
         this.precision = precision;
     }
-
+    
     /**
      * Update the path to follow
      * This exists so that you can reuse the path follower between autonomous paths and movements.
      * @param path the path to follow
      */
-    public void setPath(com.mineinjava.quail.odometry.path path) {
+    public void setPath(Path path) {
         this.path = path;
     }
 

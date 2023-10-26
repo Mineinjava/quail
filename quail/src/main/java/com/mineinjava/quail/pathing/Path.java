@@ -1,4 +1,4 @@
-package com.mineinjava.quail.odometry;
+package com.mineinjava.quail.pathing;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ import com.mineinjava.quail.util.geometry.Vec2d;
  * The robot will stop at the last point in the path, and its heading will be the heading of the last pose in the path.
  *
  */
-public class path {
+public class Path {
     public ArrayList<Pose2d> points;
     int currentPoint = 0;
     int lastpoint = 0;
@@ -27,7 +27,7 @@ public class path {
      *
      * @param points - a list of points that the robot will follow (list of Pose2d in order)
      */
-    public path(ArrayList<Pose2d> points) {
+    public Path(ArrayList<Pose2d> points) {
         this.points = points;
         lastpoint = points.size() - 1;
     }
