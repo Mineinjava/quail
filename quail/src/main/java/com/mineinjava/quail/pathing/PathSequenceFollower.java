@@ -15,6 +15,8 @@ public class PathSequenceFollower {
     ArrayList<SequenceSegment> segments;
     int currentSegment = 0;
 
+    private long startTime = System.nanoTime();
+
     public PathSequenceFollower(PathFollower pathFollower) {
         this.pathFollower = pathFollower;
         this.segments = new ArrayList<SequenceSegment>();
@@ -55,5 +57,9 @@ public class PathSequenceFollower {
 
     public boolean isFinished() {
         return currentSegment < segments.size();
+    }
+
+    public double getElapsedTime() {
+        return (System.nanoTime() - startTime) / 1e9;
     }
 }
