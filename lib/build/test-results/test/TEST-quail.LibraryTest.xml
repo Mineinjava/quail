@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="quail.LibraryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-04-27T15:25:54" hostname="SpinQ-Gemini-6e8d7783.local" time="0.017">
-  <properties/>
-  <testcase name="someLibraryMethodReturnsTrue()" classname="quail.LibraryTest" time="0.017"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
