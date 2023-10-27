@@ -20,14 +20,17 @@ public class PathSequenceFollower {
         this.segments = new ArrayList<SequenceSegment>();
     }
 
-    public void addPath(Path path) {
+    public PathSequenceFollower addPath(Path path) {
         segments.add(new SequenceSegment(this, SegmentType.PATH, () -> {
             pathFollower.setPath(path);
         }));
+
+        return this;
     }
 
-    public void addDisplacementMarker(Runnable action) {
+    public PathSequenceFollower addDisplacementMarker(Runnable action) {
         segments.add(new SequenceSegment(this, SegmentType.MARKER, action));
+        return this;
     }
 
     public SequenceSegment getCurrentSegment() {
