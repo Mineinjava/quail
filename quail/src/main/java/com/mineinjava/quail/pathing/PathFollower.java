@@ -1,5 +1,7 @@
 package com.mineinjava.quail.pathing;
 
+import java.util.ArrayList;
+
 import com.mineinjava.quail.robotMovement;
 import com.mineinjava.quail.localization.Localizer;
 import com.mineinjava.quail.util.MiniPID;
@@ -31,6 +33,12 @@ public class PathFollower {
         this.turnController = turnController;
         this.precision = precision;
     }
+
+    public PathFollower(Localizer localizer, double speed, double maxTurnSpeed, double maxTurnAcceleration,
+                        double maxAcceleration, MiniPID turnController, double precision) {
+        this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision);
+    }
+
     
     /**
      * Update the path to follow

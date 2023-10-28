@@ -16,6 +16,7 @@ public class PathSequenceFollower {
     int currentSegment = 0;
 
     private long startTime = System.nanoTime();
+    private long lastTime = System.nanoTime();
 
     public PathSequenceFollower(PathFollower pathFollower) {
         this.pathFollower = pathFollower;
@@ -35,12 +36,23 @@ public class PathSequenceFollower {
         return this;
     }
 
+    public PathSequenceFollower addLocalTemporalMarker(double delay, Runnable action) {
+        segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
+            if (lastTime > delay) {
+                action.run();
+                nextSegment();
+            }
+        }));
+        return this;
+    }
+
     public SequenceSegment getCurrentSegment() {
         return segments.get(currentSegment);
     }
 
     public void nextSegment() {
         currentSegment++;
+        lastTime = System.nanoTime();
     }
 
     public robotMovement followPathSequence() {
