@@ -15,6 +15,8 @@ The second thing you need is a little knowledge of Java. You should be able to:
 
 But, most importantly, you need a desire for freedom.
 
+In case you can't read code, there are docs [here](https://astr0clad.github.io/quail_docs/)
+
 ---
 I wish I knew Kotlin so I could make it purple. 💜
 
