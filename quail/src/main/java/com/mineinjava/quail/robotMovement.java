@@ -5,36 +5,36 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 /** Can represent a lot of things. Generally represents a vector (robot position, movement, etc.), plus an angle (robot rotation, robot desired rotation, etc.)
  * Everything should be fairly self-explanatory.
  */
-public class robotMovement {
+public class RobotMovement {
     public double rotation;
     public Vec2d translation;
 
-    public robotMovement(double rotation, Vec2d translation) {
+    public RobotMovement(double rotation, Vec2d translation) {
         this.rotation = rotation;
         this.translation = translation;
     }
 
-    public robotMovement(double rotation, double translationX, double translationY) {
+    public RobotMovement(double rotation, double translationX, double translationY) {
         this(rotation, new Vec2d(translationX, translationY));
     }
 
-    public robotMovement(Vec2d translation) {
+    public RobotMovement(Vec2d translation) {
         this(0, translation);
     }
 
-    public robotMovement(double rotation) {
+    public RobotMovement(double rotation) {
         this(rotation, 0, 0);
     }
 
-    public robotMovement() {
+    public RobotMovement() {
         this(0, 0, 0);
     }
 
-    public robotMovement add(robotMovement other) {
-        return new robotMovement(this.rotation + other.rotation, this.translation.add(other.translation));
+    public RobotMovement add(RobotMovement other) {
+        return new RobotMovement(this.rotation + other.rotation, this.translation.add(other.translation));
     }
 
-    public robotMovement subtract(robotMovement other) {
-        return new robotMovement(this.rotation - other.rotation, this.translation.subtract(other.translation));
+    public RobotMovement subtract(RobotMovement other) {
+        return new RobotMovement(this.rotation - other.rotation, this.translation.subtract(other.translation));
     }
 }

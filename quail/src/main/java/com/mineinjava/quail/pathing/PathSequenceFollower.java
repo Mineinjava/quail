@@ -2,7 +2,7 @@ package com.mineinjava.quail.pathing;
 
 import java.util.ArrayList;
 
-import com.mineinjava.quail.robotMovement;
+import com.mineinjava.quail.RobotMovement;
 
 /**
  * A class that helps you follow a sequence of paths
@@ -55,15 +55,15 @@ public class PathSequenceFollower {
         lastTime = System.nanoTime();
     }
 
-    public robotMovement followPathSequence() {
+    public RobotMovement followPathSequence() {
         if (segments.get(currentSegment).getType() == SegmentType.PATH) {
             segments.get(currentSegment).run();
             return pathFollower.calculateNextDriveMovement();
         } else if (segments.get(currentSegment).getType() == SegmentType.MARKER){
             segments.get(currentSegment).run();
-            return new robotMovement(0, 0, 0);
+            return new RobotMovement(0, 0, 0);
         } else {
-            return new robotMovement(0, 0, 0);
+            return new RobotMovement(0, 0, 0);
         }
     }
 

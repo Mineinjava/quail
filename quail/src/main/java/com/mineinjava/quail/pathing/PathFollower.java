@@ -2,7 +2,7 @@ package com.mineinjava.quail.pathing;
 
 import java.util.ArrayList;
 
-import com.mineinjava.quail.robotMovement;
+import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.localization.Localizer;
 import com.mineinjava.quail.util.MiniPID;
 import com.mineinjava.quail.util.util;
@@ -54,7 +54,7 @@ public class PathFollower {
      * This does return a field-centric movement vector. It does not limit acceleration (yet)
      * @return the next movement to follow the path
      */
-    public robotMovement calculateNextDriveMovement() {
+    public RobotMovement calculateNextDriveMovement() {
         // calculate the next movement to follow the path
         Pose2d currentPose = this.localizer.getPoseEstimate();
         double deltaAngle = util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
@@ -71,10 +71,10 @@ public class PathFollower {
             this.path.currentPoint++;
         }
         if (this.isFinished()) {
-            return new robotMovement(0, new Vec2d(0, 0)); // the path is over
+            return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
         }
 
-        return new robotMovement(turnSpeed, movementVector);
+        return new RobotMovement(turnSpeed, movementVector);
     }
     
     /** returns true if the robot is finished following the path.

@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.Util;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
-import com.mineinjava.quail.robotMovement;
-import com.mineinjava.quail.swerveDrive;
+import com.mineinjava.quail.RobotMovement;
+import com.mineinjava.quail.SwerveDrive;
 import com.mineinjava.quail.swerveModuleBase;
 
 /** Represents a swerve drive position on the field
@@ -31,7 +31,7 @@ public class swerveOdometry extends Localizer {
     public double x=0;
     public double y=0;
     public double theta=0;
-    public robotMovement lastSpeedVector = new robotMovement(0, 0, 0);
+    public RobotMovement lastSpeedVector = new RobotMovement(0, 0, 0);
 
     public swerveOdometry(Vec2d[] moduleVectors){
         this.moduleVectors = new ArrayList<Vec2d>(Arrays.asList(moduleVectors));
@@ -46,7 +46,7 @@ public class swerveOdometry extends Localizer {
         this.moduleVectors = moduleVectors;
         assert moduleVectors.size() >= 2;
     }
-    public swerveOdometry(swerveDrive drivetrain) {
+    public swerveOdometry(SwerveDrive drivetrain) {
         this(extractModuleVectors(drivetrain));
     }
 
@@ -55,7 +55,7 @@ public class swerveOdometry extends Localizer {
      * @param drivetrain The drivetrain to extract the module vectors from.
      * @return An array of module vectors.
      */
-    private static Vec2d[] extractModuleVectors(swerveDrive drivetrain){
+    private static Vec2d[] extractModuleVectors(SwerveDrive drivetrain){
         ArrayList<Vec2d> moduleVectors = new ArrayList<>();
         for (Object module : drivetrain.swerveModules) {
             swerveModuleBase newmodule = (swerveModuleBase) module;
@@ -151,9 +151,9 @@ public class swerveOdometry extends Localizer {
      * @param modules the positions (current angle and current velocity) of the modules
      * @return the robot's movement
      */
-    public robotMovement calculateOdometry(ArrayList<Vec2d> modules){
+    public RobotMovement calculateOdometry(ArrayList<Vec2d> modules){
         // to account for errors, we will take the average of all the module pairs
-        List<List<Vec2d>> modulePairs = util.getPairs(modules.toArray(new Vec2d[0]));
+        List<List<Vec2d>> modulePairs = Util.getPairs(modules.toArray(new Vec2d[0]));
         // lists to be averaged over
         List<Double> rotationValues = new ArrayList<>();
         List<Vec2d> movementVectors = new ArrayList<>();
@@ -186,11 +186,11 @@ public class swerveOdometry extends Localizer {
         }
         // average the movement vectors
         translation = translation.scale((double) 1 /movementVectors.size());
-        this.lastSpeedVector = new robotMovement(rotation, translation);
-        return new robotMovement(rotation, translation);
+        this.lastSpeedVector = new RobotMovement(rotation, translation);
+        return new RobotMovement(rotation, translation);
     }
 
-    public robotMovement calculateOdometry(Vec2d[] modules){
+    public RobotMovement calculateOdometry(Vec2d[] modules){
         return this.calculateOdometry(new ArrayList<Vec2d>(Arrays.asList(modules)));
     }
 
@@ -209,7 +209,7 @@ public class swerveOdometry extends Localizer {
      * @param modules the positions of the modules (Vec2d)
      * @return the robot's movement.
      */
-    public robotMovement calculateFastOdometry(ArrayList<Vec2d> modules){
+    public RobotMovement calculateFastOdometry(ArrayList<Vec2d> modules){
         // take average of all modules (this is the robot's movement vector)
         Vec2d averageModulePosition = new Vec2d(0, 0);
         for (Vec2d module : modules) {
@@ -229,7 +229,7 @@ public class swerveOdometry extends Localizer {
         }
         // average the rotation speed
         rotation /= modules.size();
-        this.lastSpeedVector = new robotMovement(rotation, averageModulePosition);
-        return new robotMovement(rotation, averageModulePosition);
+        this.lastSpeedVector = new RobotMovement(rotation, averageModulePosition);
+        return new RobotMovement(rotation, averageModulePosition);
     }
 }

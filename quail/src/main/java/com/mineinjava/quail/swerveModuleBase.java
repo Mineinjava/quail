@@ -2,10 +2,10 @@ package com.mineinjava.quail;
 
 import java.lang.Math;
 
-import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.Util;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
-public class swerveModuleBase {
+public class SwerveModuleBase {
     public Vec2d position;
     protected final double steeringRatio;
     protected final double driveRatio;
@@ -25,12 +25,12 @@ public class swerveModuleBase {
      * @param steeringRatio gear ratio of the steering motor
      * @param driveRatio gear ratio of the drive motor
      */
-    public swerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
+    public SwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
         // default optimized value is true
         this(position, steeringRatio, driveRatio, true);
     }
 
-    public swerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, boolean optimized) {
+    public SwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, boolean optimized) {
         this.position = position;
         this.steeringRatio = steeringRatio;
         this.driveRatio = driveRatio;
@@ -43,14 +43,14 @@ public class swerveModuleBase {
      * @return the angle to set the steering motor to
      */
     public double calculateNewAngleSetpoint(double angle) {
-        double shortestAngle = util.deltaAngle(currentAngle, angle);
+        double shortestAngle = Util.deltaAngle(currentAngle, angle);
         return currentAngle = currentAngle + shortestAngle;
     }
 
     /** "optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the opposite direction
     and rotate less than 90 degrees */
     public double calculateOptimizedAngle(double angle) {
-        double deltaAngle = util.deltaAngle(currentAngle, angle);
+        double deltaAngle = Util.deltaAngle(currentAngle, angle);
         if (Math.abs(deltaAngle) > Math.PI/2) {
             motorFlipper = -1;
             return angle + Math.PI;

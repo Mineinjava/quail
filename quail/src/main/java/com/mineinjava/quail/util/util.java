@@ -3,10 +3,7 @@ package com.mineinjava.quail.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mineinjava.quail.differentialSwerveModuleBase;
-import com.mineinjava.quail.swerveDrive;
-
-public class util {
+public class Util {
 
     public static double floormod(double a, double b) {
         return a - (b * Math.floor(a / b));
