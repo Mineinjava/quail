@@ -86,6 +86,6 @@ public class PathFollower {
            return true;
        }
 
-       return this.path.vectorToNearestPoint(currentPose, this.path.currentPoint).getLength() < this.precision;
+       return this.path.vectorToNearestPoint(currentPose, this.path.lastpoint).getLength() < this.precision;
     }
 }
