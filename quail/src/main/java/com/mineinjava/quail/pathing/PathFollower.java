@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.localization.Localizer;
 import com.mineinjava.quail.util.MiniPID;
-import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.Util;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
@@ -57,11 +57,11 @@ public class PathFollower {
     public RobotMovement calculateNextDriveMovement() {
         // calculate the next movement to follow the path
         Pose2d currentPose = this.localizer.getPoseEstimate();
-        double deltaAngle = util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
+        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.length();
-        turnSpeed = util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
+        turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
         Vec2d movementVector = this.path.vectorToNearestPoint(currentPose, this.path.currentPoint);
         movementVector.scale(this.speed / movementVector.getLength());

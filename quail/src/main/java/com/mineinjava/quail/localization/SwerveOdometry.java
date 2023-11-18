@@ -10,7 +10,7 @@ import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.SwerveDrive;
-import com.mineinjava.quail.swerveModuleBase;
+import com.mineinjava.quail.SwerveModuleBase;
 
 /** Represents a swerve drive position on the field
  * and provides methods for calculating the robot's position.
@@ -26,7 +26,7 @@ import com.mineinjava.quail.swerveModuleBase;
  * when constructing this class, pass in the positions of the modules relative to robot center
  *
  */
-public class swerveOdometry extends Localizer {
+public class SwerveOdometry extends Localizer {
     public ArrayList<Vec2d> moduleVectors;
     public double x=0;
     public double y=0;
@@ -58,7 +58,7 @@ public class swerveOdometry extends Localizer {
     private static Vec2d[] extractModuleVectors(SwerveDrive drivetrain){
         ArrayList<Vec2d> moduleVectors = new ArrayList<>();
         for (Object module : drivetrain.swerveModules) {
-            swerveModuleBase newmodule = (swerveModuleBase) module;
+            SwerveModuleBase newmodule = (SwerveModuleBase) module;
             moduleVectors.add(newmodule.position);
         }
         return moduleVectors.toArray(new Vec2d[0]);
