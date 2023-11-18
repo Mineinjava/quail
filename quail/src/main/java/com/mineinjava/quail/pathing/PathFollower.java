@@ -82,7 +82,7 @@ public class PathFollower {
     public Boolean isFinished() {
        Pose2d currentPose = this.localizer.getPoseEstimate();
 
-       if (this.path.currentPoint >= this.path.points.size() - 1) {
+       if (this.path.currentPoint > this.path.points.size()) {
            return true;
        }
 
