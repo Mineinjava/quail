@@ -57,7 +57,7 @@ public class PathFollower {
     public RobotMovement calculateNextDriveMovement() {
         // calculate the next movement to follow the path
         Pose2d currentPose = this.localizer.getPoseEstimate();
-        if (currentPose.heading == null) {currentPose.heading = 0;}
+        if (currentPose == null) {currentPose = new Pose2d(0, 0, 0);}
         double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
