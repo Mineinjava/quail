@@ -21,7 +21,7 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 public class Path {
     public ArrayList<Pose2d> points;
     public int currentPoint = 0;
-    int lastpoint = 0;
+    public int lastpoint = 0;
 
     /** creates a path with the specified points and final heading.
      *
