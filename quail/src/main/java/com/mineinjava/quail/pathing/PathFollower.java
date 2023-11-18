@@ -20,7 +20,7 @@ public class PathFollower {
     public double maxAcceleration;
     public MiniPID turnController;
     public double precision;
-    private Localizer localizer;
+    public Localizer localizer;
 
     public PathFollower(Localizer localizer, Path path, double speed, double maxTurnSpeed,
                         double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision) {
