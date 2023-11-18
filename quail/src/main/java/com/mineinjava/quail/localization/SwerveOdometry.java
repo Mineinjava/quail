@@ -33,20 +33,20 @@ public class SwerveOdometry extends Localizer {
     public double theta=0;
     public RobotMovement lastSpeedVector = new RobotMovement(0, 0, 0);
 
-    public swerveOdometry(Vec2d[] moduleVectors){
+    public SwerveOdometry(Vec2d[] moduleVectors){
         this.moduleVectors = new ArrayList<Vec2d>(Arrays.asList(moduleVectors));
         assert moduleVectors.length >= 2;
     }
-    public swerveOdometry(List<Vec2d> moduleVectors){
+    public SwerveOdometry(List<Vec2d> moduleVectors){
         this.moduleVectors = new ArrayList<Vec2d>(moduleVectors);
         assert moduleVectors.size() >= 2;
 
     }
-    public swerveOdometry(ArrayList<Vec2d> moduleVectors){
+    public SwerveOdometry(ArrayList<Vec2d> moduleVectors){
         this.moduleVectors = moduleVectors;
         assert moduleVectors.size() >= 2;
     }
-    public swerveOdometry(SwerveDrive drivetrain) {
+    public SwerveOdometry(SwerveDrive drivetrain) {
         this(extractModuleVectors(drivetrain));
     }
 
