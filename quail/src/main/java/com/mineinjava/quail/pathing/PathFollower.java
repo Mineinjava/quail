@@ -80,6 +80,10 @@ public class PathFollower {
     /** returns true if the robot is finished following the path.
      */
     public Boolean isFinished() {
+        if( this.localizer == null ) {
+            throw new NullPointerException("localizer is null, ensure that you have instantiated the localizer object");
+        }
+
        Pose2d currentPose = this.localizer.getPoseEstimate();
 
        if (this.path.currentPoint > this.path.points.size()) {
