@@ -59,13 +59,13 @@ public class PathFollower {
         // calculate the next movement to follow the path
         Pose2d currentPose = this.localizer.getPoseEstimate();
         this.currentPose = currentPose;
-        double deltaAngle = Util.deltaAngle(this.currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
+        double deltaAngle = Util.deltaAngle(this.localizer.getPoseEstimate().heading, this.path.getCurrentPoint().heading); // this may or may not work
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.length();
         turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
-        Vec2d movementVector = this.path.vectorToNearestPoint(currentPose, this.path.currentPoint);
+        Vec2d movementVector = this.path.vectorToNearestPoint(this.localizer.getPoseEstimate(), this.path.currentPoint);
         movementVector.scale(this.speed / movementVector.getLength());
         movementVector.rotate(-currentPose.heading, false);
 
