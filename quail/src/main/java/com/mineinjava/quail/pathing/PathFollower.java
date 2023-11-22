@@ -59,7 +59,7 @@ public class PathFollower {
         // calculate the next movement to follow the path
         Pose2d currentPose = this.localizer.getPoseEstimate();
         this.currentPose = currentPose;
-        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
+        double deltaAngle = Util.deltaAngle(this.currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.length();
