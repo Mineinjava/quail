@@ -26,7 +26,7 @@ import com.mineinjava.quail.SwerveModuleBase;
  * when constructing this class, pass in the positions of the modules relative to robot center
  *
  */
-public class SwerveOdometry extends Localizer {
+public class SwerveOdometry implements Localizer {
     public ArrayList<Vec2d> moduleVectors;
     public double x=0;
     public double y=0;
