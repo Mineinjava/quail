@@ -100,7 +100,7 @@ public class Path {
      * @return - the nearest point on the path
      */
     public Pose2d nearestPoint(Pose2d point, int minIndex){
-        Pose2d nearestPoint = points.get(minIndex);
+        Pose2d nearestPoint = points.get(minIndex - 1);
         double nearestDistance = Math.sqrt(Math.pow(point.x - nearestPoint.x, 2) + Math.pow(point.y - nearestPoint.y, 2));
 
         for (int i = minIndex + 1; i < points.size(); i++) {
