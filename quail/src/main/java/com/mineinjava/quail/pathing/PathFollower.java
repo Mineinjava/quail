@@ -21,7 +21,6 @@ public class PathFollower {
     public MiniPID turnController;
     public double precision;
     public Localizer localizer;
-    public Pose2d currentPose;
 
     public PathFollower(Localizer localizer, Path path, double speed, double maxTurnSpeed,
                         double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision) {
@@ -58,9 +57,7 @@ public class PathFollower {
     public RobotMovement calculateNextDriveMovement() {
         // calculate the next movement to follow the path
         Pose2d currentPose = this.localizer.getPoseEstimate();
-        this.currentPose = currentPose;
-        double currentHeading = currentPose.heading;
-        double deltaAngle = Util.deltaAngle(currentHeading, this.path.getCurrentPoint().heading); // this may or may not work
+        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.length();

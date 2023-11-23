@@ -43,7 +43,7 @@ public class Path {
     /** returns the current point in the path.
      */
     public Pose2d getCurrentPoint() {
-        if (currentPoint < points.size()) {
+        if (currentPoint - 1 < points.size()) {
             return points.get(currentPoint);
         } else {
             return null;
