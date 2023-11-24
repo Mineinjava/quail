@@ -84,11 +84,11 @@ public class PathFollower {
             throw new NullPointerException("localizer is null, ensure that you have instantiated the localizer object");
         }
 
-       Pose2d currentPose = this.localizer.getPoseEstimate();
-
-       if (this.path.currentPoint > this.path.points.size()) {
+       if (this.path.currentPoint - 1 > this.path.points.size()) {
            return true;
        }
+
+       Pose2d currentPose = this.localizer.getPoseEstimate();
 
        return this.path.vectorToNearestPoint(currentPose, this.path.lastpoint).getLength() < this.precision;
     }
