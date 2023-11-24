@@ -72,14 +72,15 @@ public class Path {
     }
 
     /** calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
-     *
+     * if the return is (0, 0), then you have exceeded the length of points
+     * 
      * @param point - the point to calculate the vector from
      * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
      * @return - a vector from (x,y) to the nearest point on the path
      */
     public Vec2d vectorToNearestPoint(Pose2d point, int minIndex){
-        if (minIndex > 0) {
-            minIndex--;
+        if (minIndex > points.size()) {
+            return new Vec2d(0, 0);
         }
         Pose2d nearestPoint = this.nearestPoint(point, minIndex);
         return new Vec2d(nearestPoint.x - point.x, nearestPoint.y - point.y);
