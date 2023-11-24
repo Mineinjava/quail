@@ -46,7 +46,7 @@ public class Path {
         if (currentPoint - 1 < points.size()) {
             return points.get(currentPoint - 1);
         } else {
-            return null;
+            return points.get(points.size() - 1);
         }
     }
     /** returns the point at the specified index relative to the current point.
