@@ -44,7 +44,7 @@ public class Path {
      */
     public Pose2d getCurrentPoint() {
         if (currentPoint < points.size()) {
-            return points.get(currentPoint - 1);
+            return points.get((currentPoint == 0) ? currentPoint : currentPoint - 1);
         } else {
             return points.get(points.size() - 1);
         }
