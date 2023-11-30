@@ -63,7 +63,7 @@ public class PathFollower {
         turnSpeed /= this.path.length();
         turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
-        Vec2d movementVector = this.path.vectorToNearestPoint(this.localizer.getPoseEstimate(), this.path.currentPoint + 1);
+        Vec2d movementVector = this.path.vectorToNearestPoint(this.localizer.getPoseEstimate(), this.path.currentPoint);
         movementVector.scale(this.speed / movementVector.getLength());
         movementVector.rotate(-currentPose.heading, false);
 

@@ -78,7 +78,7 @@ public class Path {
      * @return - a vector from (x,y) to the nearest point on the path
      */
     public Vec2d vectorToNearestPoint(Pose2d point, int minIndex){
-        Pose2d nearestPoint = this.nearestPoint(point, minIndex);
+        Pose2d nearestPoint = this.nearestPoint(point, minIndex + 1);
         return new Vec2d(nearestPoint.x - point.x, nearestPoint.y - point.y);
 
     }
