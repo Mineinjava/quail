@@ -94,6 +94,6 @@ public class PathFollower {
 
        Pose2d currentPose = this.localizer.getPoseEstimate();
 
-       return this.path.vectorToNearestPoint(currentPose, this.path.lastpoint).getLength() < this.precision;
+       return this.path.vectorToNearestPoint(currentPose, this.path.lastPointIndex).getLength() < this.precision;
     }
 }

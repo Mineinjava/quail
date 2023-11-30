@@ -21,7 +21,7 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 public class Path {
     public ArrayList<Pose2d> points;
     public int currentPointIndex = 0;
-    public int lastpoint = 0;
+    public int lastPointIndex = 0;
 
     /** creates a path with the specified points and final heading.
      *
@@ -29,12 +29,12 @@ public class Path {
      */
     public Path(ArrayList<Pose2d> points) {
         this.points = points;
-        lastpoint = points.size() - 1;
+        lastPointIndex = points.size() - 1;
     }
     /** returns the next point in the path. Also increments the current point.
      */
     public Pose2d getNextPoint() {
-        if (currentPointIndex < lastpoint) {
+        if (currentPointIndex < lastPointIndex) {
             return points.get(currentPointIndex + 1);
         } else {
             return null;
@@ -42,8 +42,8 @@ public class Path {
     }
     /** returns the current point in the path.
      */
-    public Pose2d getCurrentPointIndex() {
-        if (currentPointIndex <= lastpoint) {
+    public Pose2d getCurrentPoint() {
+        if (currentPointIndex <= lastPointIndex) {
             return points.get(currentPointIndex);
         } else {
             return null;
@@ -76,6 +76,9 @@ public class Path {
     */
     public double distanceToNextPoint(Pose2d point){
         Pose2d nextPoint = this.getNextPoint();
+        if(nextPoint == null){
+            return 0;
+        }
         return Math.sqrt(Math.pow(point.x - nextPoint.x, 2) + Math.pow(point.y - nextPoint.y, 2));
     }
     /** calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
