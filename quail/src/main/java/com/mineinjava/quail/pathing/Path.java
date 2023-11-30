@@ -104,7 +104,7 @@ public class Path {
         double nearestDistance = Math.sqrt(Math.pow(point.x - nearestPoint.x, 2) + Math.pow(point.y - nearestPoint.y, 2));
 
         for (int i = minIndex; i < points.size(); i++) {
-            Pose2d p = points.get(i - 1);
+            Pose2d p = points.get(i);
             double distance = Math.sqrt(Math.pow(point.x - point.x, 2) + Math.pow(point.y - point.y, 2));
 
             if (distance < nearestDistance) {
