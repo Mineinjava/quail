@@ -34,8 +34,8 @@ public class Path {
     /** returns the next point in the path. Also increments the current point.
      */
     public Pose2d getNextPoint() {
-        if (currentPoint < points.size()) {
-            return points.get(currentPoint++);
+        if (currentPoint <= lastPoint) {
+            return points.get(currentPoint + 1);
         } else {
             return null;
         }
@@ -43,10 +43,10 @@ public class Path {
     /** returns the current point in the path.
      */
     public Pose2d getCurrentPoint() {
-        if (currentPoint < points.size()) {
-            return points.get((currentPoint == 0) ? currentPoint : currentPoint - 1);
+        if (currentPoint <= lastPoint) {
+            return points.get(currentPoint);i
         } else {
-            return points.get(points.size() - 1);
+            return null;
         }
     }
     /** returns the point at the specified index relative to the current point.
@@ -100,7 +100,7 @@ public class Path {
      * @return - the nearest point on the path
      */
     public Pose2d nearestPoint(Pose2d point, int minIndex){
-        Pose2d nearestPoint = points.get(0);
+        Pose2d nearestPoint = points.get(minIndex);
         double nearestDistance = Math.sqrt(Math.pow(point.x - nearestPoint.x, 2) + Math.pow(point.y - nearestPoint.y, 2));
 
         for (int i = minIndex; i < points.size(); i++) {
