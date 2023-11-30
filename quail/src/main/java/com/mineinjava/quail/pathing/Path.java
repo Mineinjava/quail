@@ -34,7 +34,7 @@ public class Path {
     /** returns the next point in the path. Also increments the current point.
      */
     public Pose2d getNextPoint() {
-        if (currentPoint <= lastPoint) {
+        if (currentPoint <= lastpoint) {
             return points.get(currentPoint + 1);
         } else {
             return null;
@@ -43,8 +43,8 @@ public class Path {
     /** returns the current point in the path.
      */
     public Pose2d getCurrentPoint() {
-        if (currentPoint <= lastPoint) {
-            return points.get(currentPoint);i
+        if (currentPoint <= lastpoint) {
+            return points.get(currentPoint);
         } else {
             return null;
         }
