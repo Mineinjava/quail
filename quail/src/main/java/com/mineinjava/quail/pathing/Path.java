@@ -13,19 +13,19 @@ import com.mineinjava.quail.util.geometry.Vec2d;
  *
  * For example, I would pass in poses =[[0,0,0], [1,0,0], [1,1,0], [0,1,0]] to make the robot travel in a square
  *
- * The robot will go to [0,0], then [1,0], then [1,1], then [0,1] always facing '0')
+ * The robot will go to [0,0], then [1,0], then [1,1], then [0,1] always facing '0'
  *
  * The robot will stop at the last point in the path, and its heading will be the heading of the last pose in the path.
  *
  */
 public class Path {
     public ArrayList<Pose2d> points;
-    public int currentPoint = 0;
+    public int currentPointIndex = 0;
     public int lastpoint = 0;
 
     /** creates a path with the specified points and final heading.
      *
-     * @param points - a list of points that the robot will follow (list of Pose2d in order)
+     * @param points - a list of pose2ds that the robot will follow in order
      */
     public Path(ArrayList<Pose2d> points) {
         this.points = points;
@@ -34,17 +34,17 @@ public class Path {
     /** returns the next point in the path. Also increments the current point.
      */
     public Pose2d getNextPoint() {
-        if (currentPoint < lastpoint) {
-            return points.get(currentPoint + 1);
+        if (currentPointIndex < lastpoint) {
+            return points.get(currentPointIndex + 1);
         } else {
             return null;
         }
     }
     /** returns the current point in the path.
      */
-    public Pose2d getCurrentPoint() {
-        if (currentPoint <= lastpoint) {
-            return points.get(currentPoint);
+    public Pose2d getCurrentPointIndex() {
+        if (currentPointIndex <= lastpoint) {
+            return points.get(currentPointIndex);
         } else {
             return null;
         }
@@ -52,8 +52,8 @@ public class Path {
     /** returns the point at the specified index relative to the current point.
      */
     public Pose2d getPointRelativeToCurrent(int index){
-        if (currentPoint + index < points.size()) {
-            return points.get(currentPoint + index);
+        if (currentPointIndex + index < points.size()) {
+            return points.get(currentPointIndex + index);
         } else {
             return null;
         }
@@ -70,7 +70,14 @@ public class Path {
         }
         return length;
     }
-
+    /** returns the distance from the current point to the next point.
+    *@param point - the point to calculate the distance from
+    *@return - the distance from the current point to the next point
+    */
+    public double distanceToNextPoint(Pose2d point){
+        Pose2d nextPoint = this.getNextPoint();
+        return Math.sqrt(Math.pow(point.x - nextPoint.x, 2) + Math.pow(point.y - nextPoint.y, 2));
+    }
     /** calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
      * 
      * @param point - the point to calculate the vector from

@@ -56,19 +56,23 @@ public class PathFollower {
      */
     public RobotMovement calculateNextDriveMovement() {
         // calculate the next movement to follow the path
+        if( this.localizer == null ) {
+            throw new NullPointerException("localizer is null, ensure that you have instantiated the localizer object");
+        }
+
         Pose2d currentPose = this.localizer.getPoseEstimate();
-        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
+        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPointIndex().heading); // this may or may not work
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
-        turnSpeed /= this.path.length();
+        turnSpeed /= this.path.distanceToNextPoint(currentPose);
         turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
-        Vec2d movementVector = this.path.vectorToNearestPoint(this.localizer.getPoseEstimate(), this.path.currentPoint);
+        Vec2d movementVector = this.path.vectorToNearestPoint(this.localizer.getPoseEstimate(), this.path.currentPointIndex);
         movementVector.scale(this.speed / movementVector.getLength());
         movementVector.rotate(-currentPose.heading, false);
 
         if (movementVector.getLength() < this.precision) {
-            this.path.currentPoint++;
+            this.path.currentPointIndex++;
         }
         if (this.isFinished()) {
             return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
@@ -84,7 +88,7 @@ public class PathFollower {
             throw new NullPointerException("localizer is null, ensure that you have instantiated the localizer object");
         }
 
-       if (this.path.currentPoint - 1 > this.path.points.size()) {
+       if (this.path.currentPointIndex - 1 > this.path.points.size()) {
            return true;
        }
 

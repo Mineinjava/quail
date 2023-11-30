@@ -23,6 +23,11 @@ public class PathSequenceFollower {
         this.segments = new ArrayList<SequenceSegment>();
     }
 
+    /**
+     * Add a path to the sequence
+     * @param path the path to be added to the sequence
+     * @return
+     */
     public PathSequenceFollower addPath(Path path) {
         segments.add(new SequenceSegment(this, SegmentType.PATH, () -> {
             pathFollower.setPath(path);
@@ -31,11 +36,22 @@ public class PathSequenceFollower {
         return this;
     }
 
+    /**
+     * Add a displacement marker to the sequence (runs a runnable when the robot reaches the marker)
+     * @param action the action to be completed by the marker
+     * @return
+     */
     public PathSequenceFollower addDisplacementMarker(Runnable action) {
         segments.add(new SequenceSegment(this, SegmentType.MARKER, action));
         return this;
     }
 
+    /**
+     * Add a temporal marker to the sequence (runs a runnable after a certain amount of local time)
+     * @param delay the delay after the last segment ends before marker is run (in seconds)
+     * @param action the action to be completed by the marker
+     * @return
+     */
     public PathSequenceFollower addLocalTemporalMarker(double delay, Runnable action) {
         segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
             if (lastTime > delay) {
@@ -46,15 +62,27 @@ public class PathSequenceFollower {
         return this;
     }
 
+    /**
+     * Returns the current segment
+     * @return
+     */
     public SequenceSegment getCurrentSegment() {
         return segments.get(currentSegment);
     }
 
+    /**
+     * Moves on to the next segment (can be used to force the sequence to move on)
+     * @return
+     */
     public void nextSegment() {
         currentSegment++;
         lastTime = System.nanoTime();
     }
 
+    /**
+     * Follows the pathsequence using PathFollower and markers
+     * @return
+     */
     public RobotMovement followPathSequence() {
         if (segments.get(currentSegment).getType() == SegmentType.PATH) {
             segments.get(currentSegment).run();
@@ -67,10 +95,18 @@ public class PathSequenceFollower {
         }
     }
 
+    /**
+     * Returns true if the sequence is finished
+     * @return
+     */
     public boolean isFinished() {
         return currentSegment < segments.size();
     }
 
+    /**
+     * Returns the elapsed time since the sequence started
+     * @return
+     */
     public double getElapsedTime() {
         return (System.nanoTime() - startTime) / 1e9;
     }
