@@ -85,7 +85,6 @@ class Waypoint(Pose2d):
             return True
         elif (oldRobotPose.distance(robotPose) > self.distance(
                 robotPose)):
-            print("checkign circle intersect")
             return circle_intersect_line(self, robotPose.x, robotPose.y,
                                   oldRobotPose.x, oldRobotPose.y)
 
@@ -126,7 +125,6 @@ if __name__ == "__main__":
     print(points)
 
     WAYPOINTS = [Waypoint(point[0], point[1], 0) for point in points]
-    print(WAYPOINTS)
     robotPose = INITIAL_POSE
     robotPoseHistory = [robotPose]
 
@@ -136,7 +134,6 @@ if __name__ == "__main__":
         drift_looptime = LOOPTIME + random.uniform(-LOOPTIME_DEVIATION,
                                                    LOOPTIME_DEVIATION)
         global robotPose
-        print(robotPose)
         global robotPoseHistory
         if WAYPOINTS[0].is_hit(robotPose, robotPoseHistory[-1]):
             WAYPOINTS.pop(0)
