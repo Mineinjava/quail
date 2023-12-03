@@ -61,7 +61,7 @@ public class PathFollower {
         }
 
         Pose2d currentPose = this.localizer.getPoseEstimate();
-        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPointIndex().heading); // this may or may not work
+        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.distanceToNextPoint(currentPose);
