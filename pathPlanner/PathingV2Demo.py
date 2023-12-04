@@ -2,19 +2,23 @@ import random
 
 import matplotlib.pyplot as plt
 
-LOOPTIME = 0.250  # seconds
+# Simulation Constants
+LOOPTIME = 0.2  # seconds
+LOOPTIME_DEVIATION = 0  # seconds
 
-MAXVELOCITY = 2.25  #
-MAXACCELERATION = 2  # m/s^2
-MAXANGULARVELOCITY = 1.0  # rad/s
-MAXANGULARACCELERATION = 1.0  # rad/s^2
+MAX_VELOCITY = 2.25  # m/s
+MAX_ACCELERATION = 0.5  # m/s^2
+MAX_ANGULAR_VELOCITY = 1.0  # rad/s
+MAX_ANGULAR_ACCELERATION = 1.0  # rad/s^2
+CRUISE_VELOCITY = 0.3 # m/s
 
-CruiseVelocity = 1.3
+PRECISION_RADIUS = 0.05
+SLOW_DOWN_RADIUS = 0.5
 
-PRECISION_RADIUS = 0.0254
-LOOPTIME_DEVIATION = 0.00  # seconds
+USE_SPLINE = True
+SPLINE_RESOLUTION = 30
 
-SLOW_DOWN_RADIUS = 1
+SHOW_GRID = True
 
 
 class Pose2d:
@@ -103,7 +107,7 @@ class RobotPose(Pose2d):
 
 if __name__ == "__main__":
     INITIAL_POSE = RobotPose(0, 0, 0)
-    ipoints = [(0,0), (0, 12), (3, 6), (0, 1), (2, 0), (3, 1)]
+    ipoints = [(0,0), (1,1), (2,0), (3,1), (4,0), (5,1)]
     splinex = [point[0] for point in ipoints]
     spliney = [point[1] for point in ipoints]
     import numpy as np
@@ -119,8 +123,8 @@ if __name__ == "__main__":
         plt.pause(0.01)
 
     import cubicSpline
-
-    splinex, spliney = cubicSpline.interpolate_xy(splinex, spliney, 20)
+    if USE_SPLINE:
+        splinex, spliney = cubicSpline.interpolate_xy(splinex, spliney, SPLINE_RESOLUTION)
     points = list(zip(splinex, spliney))
     print(points)
 
@@ -128,6 +132,8 @@ if __name__ == "__main__":
     robotPose = INITIAL_POSE
     robotPoseHistory = [robotPose]
 
+    velocities = []
+    accelerations = []
 
     def loop():
         global LOOPTIME
@@ -148,23 +154,27 @@ if __name__ == "__main__":
 
         if robotPose.distance(WAYPOINTS[-1]) >= SLOW_DOWN_RADIUS:
             desiredvel /= desiredvel.length()
-            desiredvel *= CruiseVelocity
+            desiredvel *= CRUISE_VELOCITY
 
         desiredvel *= LOOPTIME
-        if desiredvel.length() > MAXVELOCITY:
+        if desiredvel.length() > MAX_VELOCITY:
             desiredvel /= desiredvel.length()
-            desiredvel *= MAXVELOCITY
+            desiredvel *= MAX_VELOCITY
 
         desiredvel /= LOOPTIME
 
         accel = (desiredvel - vel) / LOOPTIME
-        if accel.length() > MAXACCELERATION:
+        if accel.length() > MAX_ACCELERATION:
             accel /= accel.length()
-            accel *= MAXACCELERATION
+            accel *= MAX_ACCELERATION
+
+        accelerations.append(accel.length())
 
         robotPose.velocity = vel + (accel * LOOPTIME)
+        velocities.append(robotPose.velocity.length())
         robotPose += robotPose.velocity * drift_looptime
         # update_line(h1[0], (robotPose.x, robotPose.y))
+
         return True
 
     import time
@@ -183,9 +193,26 @@ if __name__ == "__main__":
 
     print("simulated time: ", len(robotPoseHistory) * LOOPTIME, "s")
 
+
+    times = [i * LOOPTIME for i in range(len(velocities))]
+
+    plt.subplot(2, 1, 1)
+    plt.plot(times, velocities, 'g-', label="Velocity")
+    plt.plot(times, accelerations, 'r-', label="Acceleration")
+    plt.title("Acceleration and Velocity vs Time")
+    plt.xlabel("Time (s)")
+    plt.legend()
+    plt.grid(SHOW_GRID)
+
+    plt.subplot(2, 1, 2)
     plt.plot(x, y, 'ro')
     plt.plot([point[0] for point in ipoints],
              [point[1] for point in ipoints], 'bx-')
     plt.plot([point[0] for point in points],
              [point[1] for point in points], 'cx-')
+    plt.title("Path")
+    plt.ylabel("Y (m)")
+    plt.xlabel("X (m)")
+    plt.grid(SHOW_GRID)
+
     plt.show()
