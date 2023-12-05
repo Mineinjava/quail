@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Simulation Constants
 LOOPTIME = 0.2  # seconds
-LOOPTIME_DEVIATION = 0  # seconds
+LOOPTIME_DEVIATION = 0.00  # seconds
 
 MAX_VELOCITY = 2.25  # m/s
 MAX_ACCELERATION = 0.5  # m/s^2
@@ -16,6 +16,7 @@ PRECISION_RADIUS = 0.05
 SLOW_DOWN_RADIUS = 0.5
 
 USE_SPLINE = True
+# USE_SPLINE = False
 SPLINE_RESOLUTION = 30
 
 SHOW_GRID = True
@@ -107,7 +108,7 @@ class RobotPose(Pose2d):
 
 if __name__ == "__main__":
     INITIAL_POSE = RobotPose(0, 0, 0)
-    ipoints = [(0,0), (1,1), (2,0), (3,1), (4,0), (5,1)]
+    ipoints = [(0,5), (5,5), (5,0), (5,-5), (0,-5), (5,1)]
     splinex = [point[0] for point in ipoints]
     spliney = [point[1] for point in ipoints]
     import numpy as np
@@ -173,7 +174,7 @@ if __name__ == "__main__":
         robotPose.velocity = vel + (accel * LOOPTIME)
         velocities.append(robotPose.velocity.length())
         robotPose += robotPose.velocity * drift_looptime
-        # update_line(h1[0], (robotPose.x, robotPose.y))
+        update_line(h1[0], (robotPose.x, robotPose.y))
 
         return True
 

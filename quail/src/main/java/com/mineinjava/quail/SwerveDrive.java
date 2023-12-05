@@ -12,7 +12,6 @@ public class SwerveDrive<T extends SwerveModuleBase> {
      *
      * - reset gyro, both from controller and from vision odometry
      * - reset module positions (from absolute encoders or vision odometry)
-     * - acceleration limiting
      *
      * Normal use of this class would look something like:
      *
