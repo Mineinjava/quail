@@ -1,26 +1,37 @@
+from math import sqrt
 import random
 
 import matplotlib.pyplot as plt
 
-# Simulation Constants
-LOOPTIME = 0.2  # seconds
-LOOPTIME_DEVIATION = 0.00  # seconds
+PATH = [(-36, 48), (-24,36), (-12, 0), (-12,-64)]
+START_POSE = (-36, 48, 0)
 
-MAX_VELOCITY = 2.25  # m/s
-MAX_ACCELERATION = 0.5  # m/s^2
+# Simulation Constants
+LOOPTIME = 0.02  # seconds
+LOOPTIME_DEVIATION = 0.0  # seconds
+
+MAX_VELOCITY = 62  # your unit per second
+MAX_ACCELERATION = 25  # your unit per second squared
 MAX_ANGULAR_VELOCITY = 1.0  # rad/s
 MAX_ANGULAR_ACCELERATION = 1.0  # rad/s^2
-CRUISE_VELOCITY = 0.3 # m/s
+CRUISE_VELOCITY = 30 # your unit per second
 
-PRECISION_RADIUS = 0.05
-SLOW_DOWN_RADIUS = 0.5
+PRECISION_RADIUS = 2 # your unit
+SLOW_DOWN_RADIUS = 10 # your unit
 
 USE_SPLINE = True
 # USE_SPLINE = False
-SPLINE_RESOLUTION = 30
+SPLINE_RESOLUTION = 20
 
+ANIMATE = True
+
+SHOW_ACCEL_VELO_GRAPH = False
 SHOW_GRID = True
+GRID_INCREMENT = 24 # your unit
 
+FIELD_IMAGE = "./centerstage.png"
+FIELD_WIDTH = 144 # your unit
+FIELD_LENGTH = 144 # your unit
 
 class Pose2d:
     def __init__(self, x, y, theta):
@@ -107,21 +118,27 @@ class RobotPose(Pose2d):
 
 
 if __name__ == "__main__":
-    INITIAL_POSE = RobotPose(0, 0, 0)
-    ipoints = [(0,5), (5,5), (5,0), (5,-5), (0,-5), (5,1)]
+    INITIAL_POSE = RobotPose(START_POSE[0], START_POSE[1], START_POSE[2])
+    ipoints = PATH
     splinex = [point[0] for point in ipoints]
     spliney = [point[1] for point in ipoints]
     import numpy as np
 
-    h1 = plt.plot([], [], 'rx-')
-    plt.xlim(min(splinex) - 2, max(splinex) + 2)
-    plt.ylim(min(spliney) - 2, max(spliney) + 2)
-    def update_line(hl, new_data):
-        hl.set_xdata(np.append(hl.get_xdata(), new_data[0]))
-        hl.set_ydata(np.append(hl.get_ydata(), new_data[1]))
-        plt.autoscale()
-        plt.draw()
-        plt.pause(0.01)
+    half_width = FIELD_WIDTH/2
+    half_length = FIELD_LENGTH/2
+    
+    plt.style.use('dark_background')
+    if ANIMATE:
+        h1 = plt.plot([], [], 'rx-')
+        plt.xlim(-half_width, half_width)
+        plt.ylim(-half_length, half_length)
+        if SHOW_GRID:
+            plt.grid(True)
+        def update_line(hl, new_data):
+            hl.set_xdata(np.append(hl.get_xdata(), new_data[0]))
+            hl.set_ydata(np.append(hl.get_ydata(), new_data[1]))
+            plt.draw()
+            plt.pause(0.01)
 
     import cubicSpline
     if USE_SPLINE:
@@ -174,8 +191,8 @@ if __name__ == "__main__":
         robotPose.velocity = vel + (accel * LOOPTIME)
         velocities.append(robotPose.velocity.length())
         robotPose += robotPose.velocity * drift_looptime
-        update_line(h1[0], (robotPose.x, robotPose.y))
-
+        if ANIMATE:
+            update_line(h1[0], (robotPose.x, robotPose.y))
         return True
 
     import time
@@ -194,26 +211,50 @@ if __name__ == "__main__":
 
     print("simulated time: ", len(robotPoseHistory) * LOOPTIME, "s")
 
+    total_dist = 0
+    for i in range(1, len(robotPoseHistory)):
+        distance = sqrt((robotPoseHistory[i].x - robotPoseHistory[i-1].x)**2 +
+                        (robotPoseHistory[i].y - robotPoseHistory[i-1].y)**2)
+        total_dist += distance
 
-    times = [i * LOOPTIME for i in range(len(velocities))]
+    print("Total distance: ", total_dist)
 
-    plt.subplot(2, 1, 1)
-    plt.plot(times, velocities, 'g-', label="Velocity")
-    plt.plot(times, accelerations, 'r-', label="Acceleration")
-    plt.title("Acceleration and Velocity vs Time")
-    plt.xlabel("Time (s)")
-    plt.legend()
-    plt.grid(SHOW_GRID)
+    if SHOW_ACCEL_VELO_GRAPH:
+        times = [i * LOOPTIME for i in range(len(velocities))]
 
-    plt.subplot(2, 1, 2)
-    plt.plot(x, y, 'ro')
+        plt.subplot(2, 1, 1)
+        plt.plot(times, velocities, 'g-', label="Velocity", color="lime")
+        plt.plot(times, accelerations, 'r-', label="Acceleration")
+        plt.title("Acceleration and Velocity vs Time")
+        plt.xlabel("Time (s)")
+        plt.legend()
+        plt.grid(SHOW_GRID)
+        plt.subplot(2, 1, 2)
+
+    plt.ylim(-half_length, half_length)
+    plt.xlim(-half_width, half_width)
+    plt.imshow(plt.imread("./centerstage.png"), extent=[-half_length, half_length, -half_width, half_width])
     plt.plot([point[0] for point in ipoints],
-             [point[1] for point in ipoints], 'bx-')
+             [point[1] for point in ipoints], 'bx-', 
+             color="fuchsia", label="Point to Point/Direct")
     plt.plot([point[0] for point in points],
-             [point[1] for point in points], 'cx-')
+             [point[1] for point in points], 'rx-', 
+             label="Spline")
+    plt.plot(x, y, 'ro', color="lime", label="Loop Point/Predicted Localized Point")
     plt.title("Path")
-    plt.ylabel("Y (m)")
-    plt.xlabel("X (m)")
-    plt.grid(SHOW_GRID)
+    plt.legend()
+    plt.ylabel("Y")
+    plt.xlabel("X")
+    plt.grid(SHOW_GRID, which="both", axis="both", linestyle="-", linewidth=0.5)
+    plt.xticks(np.arange(-half_length, half_length + 1, GRID_INCREMENT))
+    plt.yticks(np.arange(-half_width, half_width + 1, GRID_INCREMENT))
 
+    plt.text(-half_width, half_length * 1.1, 
+             "Simulated time: " + str(round(len(robotPoseHistory) * LOOPTIME, 2)) + "s\nTotal distance: " + str(round(total_dist, 2)) + " units", 
+             horizontalalignment='center', 
+             verticalalignment='center', 
+             bbox=dict(facecolor='white', alpha=0.5)
+             )
+
+    plt.pause(0.01)
     plt.show()
