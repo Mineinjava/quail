@@ -6,7 +6,5 @@ public interface Localizer {
 
     public Pose2d getPoseEstimate();
 
-    public ArrayList<Pose2d> poseHistory;
-
     public void setPoseEstimate(Pose2d pose);
 }
