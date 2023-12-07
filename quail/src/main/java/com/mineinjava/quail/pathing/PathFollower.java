@@ -51,7 +51,6 @@ public class PathFollower {
         this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision, slowDownDistance, kP);
     }
 
-    
     /**
      * Update the path to follow
      * This exists so that you can reuse the path follower between autonomous paths and movements.
