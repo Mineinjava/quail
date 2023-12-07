@@ -141,8 +141,12 @@ public class Path {
             Pose2d p2 = points.get(i + 1);
             length += Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
         }
-        Pose2d firstPoint = points.get(currentPointIndex);
-        length += Math.sqrt(Math.pow(position.x - firstPoint.x, 2) + Math.pow(position.y - firstPoint.y, 2));
+        
+        if (currentPointIndex < points.size()) {
+            Pose2d firstPoint = points.get(currentPointIndex);
+            length += Math.sqrt(Math.pow(position.x - firstPoint.x, 2) + Math.pow(position.y - firstPoint.y, 2));
+        }
+        
         return length;
     }
 }
