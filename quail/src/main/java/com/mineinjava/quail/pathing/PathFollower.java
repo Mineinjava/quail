@@ -28,6 +28,7 @@ public class PathFollower {
     public Pose2d lastRobotPose;
     public Pose2d currentPose;
     public double kP;
+    public Vec2d lastMovementVector;
 
     public double loopTime;
 
@@ -73,6 +74,8 @@ public class PathFollower {
 
         this.currentPose = this.localizer.getPoseEstimate();
         this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
+        this.lastTime = System.currentTimeMillis();
+
         double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
         if (this.lastRobotPose == null) {
             this.lastRobotPose = currentPose;
@@ -91,7 +94,8 @@ public class PathFollower {
         if (idealMovementVector.getLength() > this.speed) {
             idealMovementVector = idealMovementVector.normalize().scale(this.speed);
         }
-        Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime);
+        //Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime);
+        Vec2d oldVelocity = this.lastMovementVector;
         Vec2d accelerationVector = idealMovementVector.subtract(oldVelocity).scale(1/this.loopTime);
 
         if (accelerationVector.getLength() > this.maxAcceleration) {
@@ -103,8 +107,8 @@ public class PathFollower {
         turnSpeed /= this.path.distanceToNextPoint(currentPose);
         turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
-        this.lastTime = System.currentTimeMillis();
         this.lastRobotPose = currentPose;
+        this.lastMovementVector = movementVector;
         return new RobotMovement(turnSpeed, movementVector);
     }
     
