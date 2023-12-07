@@ -44,7 +44,7 @@ public class PathFollower {
 
     public PathFollower(Localizer localizer, double speed, double maxTurnSpeed, double maxTurnAcceleration,
                         double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP) {
-        this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision, slowDownDistancem, kP);
+        this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision, slowDownDistance, kP);
     }
 
     
