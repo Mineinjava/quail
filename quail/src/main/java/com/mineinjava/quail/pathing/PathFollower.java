@@ -21,9 +21,15 @@ public class PathFollower {
     public MiniPID turnController;
     public double precision;
     public Localizer localizer;
+    public double slowDownDistance;
+
+    public double lastTime;
+
+    public Pose2d lastRobotPose;
+    public double kP;
 
     public PathFollower(Localizer localizer, Path path, double speed, double maxTurnSpeed,
-                        double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision) {
+                        double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP) {
         this.localizer = localizer;
         this.path = path;
         this.speed = speed;
@@ -32,11 +38,13 @@ public class PathFollower {
         this.maxAcceleration = maxAcceleration;
         this.turnController = turnController;
         this.precision = precision;
+        this.slowDownDistance = slowDownDistance; // in the future add an option to calculate it based on max accel.
+        this.kP = kP;
     }
 
     public PathFollower(Localizer localizer, double speed, double maxTurnSpeed, double maxTurnAcceleration,
-                        double maxAcceleration, MiniPID turnController, double precision) {
-        this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision);
+                        double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP) {
+        this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision, slowDownDistancem, kP);
     }
 
     
@@ -61,23 +69,40 @@ public class PathFollower {
         }
 
         Pose2d currentPose = this.localizer.getPoseEstimate();
+        double loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
         double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
-
-        double turnSpeed = turnController.getOutput(0, deltaAngle);
-        turnSpeed /= this.path.distanceToNextPoint(currentPose);
-        turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
-
-        Vec2d movementVector = this.path.vectorToNearestPoint(this.localizer.getPoseEstimate(), this.path.currentPointIndex);
-        movementVector.scale(this.speed / movementVector.getLength());
-        movementVector.rotate(-currentPose.heading, false);
-
-        if (movementVector.getLength() < this.precision) {
+        if (this.lastRobotPose == null) {
+            this.lastRobotPose = currentPose;
+        }
+        if (this.path.getCurrentPoint().isHit(this.precision, currentPose, this.lastRobotPose)) {
             this.path.currentPointIndex++;
         }
         if (this.isFinished()) {
             return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
         }
 
+
+
+        Vec2d idealMovementVector = this.path.vectorToCurrentPoint(currentPose);
+        if (this.path.remainingLength(currentPose) < this.slowDownDistance) {
+            idealMovementVector = idealMovementVector.normalize().scale(this.path.remainingLength(currentPose)*this.kP);
+        }
+        if (idealMovementVector.getLength() > this.speed) {
+            idealMovementVector = idealMovementVector.normalize().scale(this.speed);
+        }
+        Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/loopTime);
+        Vec2d accelerationVector = idealMovementVector.subtract(oldVelocity).scale(1/loopTime);
+
+        if (accelerationVector.getLength() > this.maxAcceleration) {
+            accelerationVector = accelerationVector.normalize().scale(this.maxAcceleration);
+        }
+        Vec2d movementVector = oldVelocity.add(accelerationVector.scale(loopTime));
+
+        double turnSpeed = turnController.getOutput(0, deltaAngle);
+        turnSpeed /= this.path.distanceToNextPoint(currentPose);
+        turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
+
+        this.lastTime = System.currentTimeMillis();
         return new RobotMovement(turnSpeed, movementVector);
     }
     

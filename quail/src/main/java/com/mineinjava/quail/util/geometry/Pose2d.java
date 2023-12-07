@@ -73,6 +73,10 @@ public class Pose2d {
                Double.compare(pose2d.heading, heading) == 0;
     }
 
+    public double distanceTo(Pose2d other) {
+        return Math.sqrt(Math.pow(other.x - x, 2) + Math.pow(other.y - y, 2));
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(x, y, heading);
@@ -90,5 +94,17 @@ public class Pose2d {
      */
     public Pose2d fromList(double[] list) {
         return new Pose2d(list[0], list[1], list[2]);
+    }
+
+    public boolean isHit(double radius, Pose2d robotPose, Pose2d oldRobotPose) {
+        if (this.distanceTo(robotPose) < radius) {
+            return true;
+        } else {
+            return MathUtil.LineSegHitCircle(robotPose, oldRobotPose, this, radius);
+        }
+
+    }
+    public Vec2d vectorTo(Pose2d other) {
+        return other.vec().subtract(vec());
     }
 }

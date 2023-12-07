@@ -58,6 +58,13 @@ public class Path {
             return null;
         }
     }
+    public Vec2d vectorToCurrentPoint(Pose2d point){
+        Pose2d nextPoint = this.getNextPoint();
+        if(nextPoint == null){
+            return null;
+        }
+        return new Vec2d(nextPoint.x - point.x, nextPoint.y - point.y);
+    }
     /** returns the overall length of the path.
      */
     public double length(){
@@ -123,5 +130,19 @@ public class Path {
             }
         }
         return nearestPoint;
+    }
+    /** returns the remaining length of the path.
+     */
+    public double remainingLength(Pose2d position){
+        double length = 0;
+
+        for (int i = currentPointIndex; i < points.size() - 1; i++) {
+            Pose2d p1 = points.get(i);
+            Pose2d p2 = points.get(i + 1);
+            length += Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+        }
+        Pose2d firstPoint = points.get(currentPointIndex);
+        length += Math.sqrt(Math.pow(position.x - firstPoint.x, 2) + Math.pow(position.y - firstPoint.y, 2));
+        return length;
     }
 }
