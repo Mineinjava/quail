@@ -162,7 +162,7 @@ public abstract class TwoWheelLocalizer implements Localizer{
         Vec2d fieldPositionDelta = new Vec2d(xDelta, yDelta);
         
         Pose2d fieldPoseDelta = new Pose2d(
-            fieldPositionDelta.rotate(fieldPose.heading, false),
+            fieldPositionDelta.rotate(fieldPose.heading, true),
             robotPoseDelta.heading
         );
         
@@ -170,7 +170,7 @@ public abstract class TwoWheelLocalizer implements Localizer{
         double newY = fieldPose.y + fieldPoseDelta.y;
         double newHeading = Angle.norm(fieldPose.heading + fieldPoseDelta.heading);
         
-        return new Pose2d(newX, newY, newHeading);
+        return new Pose2d(newX, newY, Math.toRadians(newHeading));
     }
 
     private double[] toDoubleArray(List<Double> list, double value) {
