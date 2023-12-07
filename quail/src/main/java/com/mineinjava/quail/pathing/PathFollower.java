@@ -129,7 +129,7 @@ public class PathFollower {
             throw new NullPointerException("localizer is null, ensure that you have instantiated the localizer object");
         }
 
-       if (this.path.currentPointIndex - 1 > this.path.points.size()) {
+       if (this.path.currentPointIndex > this.path.points.size()) {
            return true;
        }
 
