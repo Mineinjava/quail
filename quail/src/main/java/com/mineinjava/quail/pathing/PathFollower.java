@@ -95,6 +95,9 @@ public class PathFollower {
             idealMovementVector = idealMovementVector.normalize().scale(this.speed);
         }
         //Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime);
+        if (this.lastMovementVector == null) {
+            this.lastMovementVector = new Vec2d(0, 0);
+        }
         Vec2d oldVelocity = this.lastMovementVector;
         Vec2d accelerationVector = idealMovementVector.subtract(oldVelocity).scale(1/this.loopTime);
 
