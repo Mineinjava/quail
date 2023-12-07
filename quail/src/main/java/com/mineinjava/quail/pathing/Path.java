@@ -59,7 +59,7 @@ public class Path {
         }
     }
     public Vec2d vectorToCurrentPoint(Pose2d point){
-        Pose2d nextPoint = this.getNextPoint();
+        Pose2d nextPoint = this.getCurrentPoint();
         if(nextPoint == null){
             return null;
         }
