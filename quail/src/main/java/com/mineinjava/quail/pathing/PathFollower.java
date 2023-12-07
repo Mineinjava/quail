@@ -26,7 +26,11 @@ public class PathFollower {
     public double lastTime;
 
     public Pose2d lastRobotPose;
+    public Pose2d currentPose;
     public double kP;
+
+    public double loopTime;
+
 
     public PathFollower(Localizer localizer, Path path, double speed, double maxTurnSpeed,
                         double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP) {
@@ -68,8 +72,8 @@ public class PathFollower {
             throw new NullPointerException("localizer is null, ensure that you have instantiated the localizer object");
         }
 
-        Pose2d currentPose = this.localizer.getPoseEstimate();
-        double loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
+        this.currentPose = this.localizer.getPoseEstimate();
+        this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
         double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
         if (this.lastRobotPose == null) {
             this.lastRobotPose = currentPose;
@@ -81,22 +85,20 @@ public class PathFollower {
             return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
         }
 
-
-
-        Vec2d idealMovementVector = this.path.vectorToCurrentPoint(currentPose);
-        if (this.path.remainingLength(currentPose) < this.slowDownDistance) {
+        Vec2d idealMovementVector = this.path.vectorToCurrentPoint(this.currentPose);
+        if (this.path.remainingLength(this.currentPose) < this.slowDownDistance) {
             idealMovementVector = idealMovementVector.normalize().scale(this.path.remainingLength(currentPose)*this.kP);
         }
         if (idealMovementVector.getLength() > this.speed) {
             idealMovementVector = idealMovementVector.normalize().scale(this.speed);
         }
-        Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/loopTime);
-        Vec2d accelerationVector = idealMovementVector.subtract(oldVelocity).scale(1/loopTime);
+        Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime);
+        Vec2d accelerationVector = idealMovementVector.subtract(oldVelocity).scale(1/this.loopTime);
 
         if (accelerationVector.getLength() > this.maxAcceleration) {
             accelerationVector = accelerationVector.normalize().scale(this.maxAcceleration);
         }
-        Vec2d movementVector = oldVelocity.add(accelerationVector.scale(loopTime));
+        Vec2d movementVector = oldVelocity.add(accelerationVector.scale(this.loopTime));
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
         turnSpeed /= this.path.distanceToNextPoint(currentPose);
