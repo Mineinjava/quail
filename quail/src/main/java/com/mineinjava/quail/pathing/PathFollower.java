@@ -104,6 +104,7 @@ public class PathFollower {
         turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
         this.lastTime = System.currentTimeMillis();
+        this.lastRobotPose = currentPose;
         return new RobotMovement(turnSpeed, movementVector);
     }
     
