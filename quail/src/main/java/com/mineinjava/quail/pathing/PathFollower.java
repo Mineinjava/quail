@@ -73,7 +73,20 @@ public class PathFollower {
 
         this.currentPose = this.localizer.getPoseEstimate();
         this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
-        double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // this may or may not work
+
+        double target_heading = this.path.getCurrentPoint().heading;
+        if(this.path.getCurrentPoint().heading > Math.PI) {
+            target_heading -= 2*Math.PI;
+        } else if(this.path.getCurrentPoint().heading < -Math.PI) {
+            target_heading += 2*Math.PI;
+        }
+        double current_heading = currentPose.heading;
+        if(currentPose.heading > Math.PI) {
+            current_heading -= 2*Math.PI;
+        } else if(currentPose.heading < -Math.PI) {
+            current_heading += 2*Math.PI;
+        }
+        double deltaAngle = Util.deltaAngle(current_heading, target_heading); // this may or may not work
         if (this.lastRobotPose == null) {
             this.lastRobotPose = currentPose;
         }
