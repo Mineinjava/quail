@@ -162,7 +162,7 @@ public abstract class TwoWheelLocalizer implements Localizer{
         Vec2d fieldPositionDelta = new Vec2d(xDelta, yDelta);
         
         Pose2d fieldPoseDelta = new Pose2d(
-            fieldPositionDelta.rotate(fieldPose.heading, true),
+            fieldPositionDelta.rotate(fieldPose.heading, false),
             robotPoseDelta.heading
         );
         
