@@ -170,7 +170,7 @@ public abstract class TwoWheelLocalizer implements Localizer{
         double newY = fieldPose.y + fieldPoseDelta.y;
         double newHeading = Angle.norm(fieldPose.heading + fieldPoseDelta.heading);
         
-        return new Pose2d(newX, newY, Math.toRadians(newHeading));
+        return new Pose2d(newX, newY, newHeading);
     }
 
     private double[] toDoubleArray(List<Double> list, double value) {
