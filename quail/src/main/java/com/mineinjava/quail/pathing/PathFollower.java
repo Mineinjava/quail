@@ -78,6 +78,9 @@ public class PathFollower {
 
         double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading);
 
+        if(this.path.getCurrentPoint() == null){
+            return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
+        }
         if (this.lastRobotPose == null) {
             this.lastRobotPose = currentPose;
         }
@@ -95,7 +98,10 @@ public class PathFollower {
         if (idealMovementVector.getLength() > this.speed) {
             idealMovementVector = idealMovementVector.normalize().scale(this.speed);
         }
-        //Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime); -- this is probably better but never worked.
+        //Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime);
+        if (this.lastMovementVector == null) {
+            this.lastMovementVector = new Vec2d(0, 0);
+        }
         Vec2d oldVelocity = this.lastMovementVector;
         Vec2d accelerationVector = idealMovementVector.subtract(oldVelocity).scale(1/this.loopTime);
 
