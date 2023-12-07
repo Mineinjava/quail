@@ -75,10 +75,7 @@ def circle_intersect_line(pose, x1, y1, x2, y2):
         t1 = (-b - discriminant) / (2 * a)
         t2 = (-b + discriminant) / (2 * a)
 
-        if not (0 <= t1 <= 1 or 0 <= t2 <= 1):
-            return False
-        else:
-            return True
+        return (0 <= t1 <= 1 and 0 <= t2 <= 1)
 
 
 class Waypoint(Pose2d):
@@ -174,7 +171,7 @@ if __name__ == "__main__":
         robotPose.velocity = vel + (accel * LOOPTIME)
         velocities.append(robotPose.velocity.length())
         robotPose += robotPose.velocity * drift_looptime
-        update_line(h1[0], (robotPose.x, robotPose.y))
+        # update_line(h1[0], (robotPose.x, robotPose.y))
 
         return True
 
