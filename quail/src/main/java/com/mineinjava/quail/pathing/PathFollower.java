@@ -76,6 +76,9 @@ public class PathFollower {
         this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
         this.lastTime = System.currentTimeMillis();
 
+        if (currentPose == null) {
+            return new RobotMovement(0, new Vec2d(0, 0)); // error?
+        }
         double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading);
 
         if(this.path.getCurrentPoint() == null){
