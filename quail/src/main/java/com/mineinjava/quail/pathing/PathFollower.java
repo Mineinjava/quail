@@ -71,6 +71,9 @@ public class PathFollower {
         if( this.localizer == null ) {
             throw new NullPointerException("localizer is null, ensure that you have instantiated the localizer object");
         }
+        if (this.isFinished()) {
+            return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
+        }
 
         this.currentPose = this.localizer.getPoseEstimate();
         this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
@@ -89,9 +92,6 @@ public class PathFollower {
         }
         if (this.path.getCurrentPoint().isHit(this.precision, currentPose, this.lastRobotPose)) {
             this.path.currentPointIndex++;
-        }
-        if (this.isFinished()) {
-            return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
         }
 
         Vec2d idealMovementVector = this.path.vectorToCurrentPoint(this.currentPose);
