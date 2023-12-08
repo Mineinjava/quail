@@ -132,6 +132,9 @@ public class PathFollower {
        if (this.path.currentPointIndex + 1 > this.path.points.size()) {
            return true;
        }
+       if (this.path.getCurrentPoint() == null) {
+           return true;
+       }
 
        Pose2d currentPose = this.localizer.getPoseEstimate();
 
