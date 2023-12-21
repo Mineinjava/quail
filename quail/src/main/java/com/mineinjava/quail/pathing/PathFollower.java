@@ -95,6 +95,9 @@ public class PathFollower {
         }
 
         Vec2d idealMovementVector = this.path.vectorToCurrentPoint(this.currentPose);
+        if (idealMovementVector == null) {
+            return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
+        }
         if (this.path.remainingLength(this.currentPose) < this.slowDownDistance) {
             idealMovementVector = idealMovementVector.normalize().scale(this.path.remainingLength(currentPose)*this.kP);
         }
