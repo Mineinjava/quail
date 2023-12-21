@@ -126,7 +126,7 @@ public class SwerveOdometry implements Localizer {
      * @return the robot's pose
      */
     @Override
-    public Pose2d getPoseEstimate() {
+    public Pose2d getPose() {
         return new Pose2d(this.x, this.y, this.theta);
     }
     /**
@@ -135,7 +135,7 @@ public class SwerveOdometry implements Localizer {
      * @param pose the robot's pose
      */
     @Override
-    public void setPoseEstimate(Pose2d pose) {
+    public void setPose(Pose2d pose) {
         this.updateOdometry(pose.x, pose.y, pose.heading);
     }
     /**
