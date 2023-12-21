@@ -75,7 +75,7 @@ public class PathFollower {
             return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
         }
 
-        this.currentPose = this.localizer.getPoseEstimate();
+        this.currentPose = this.localizer.getPose();
         this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
         this.lastTime = System.currentTimeMillis();
 
@@ -139,7 +139,7 @@ public class PathFollower {
            return true;
        }
 
-       Pose2d currentPose = this.localizer.getPoseEstimate();
+       Pose2d currentPose = this.localizer.getPose();
 
        return this.path.vectorToNearestPoint(currentPose, this.path.lastPointIndex).getLength() < this.precision;
     }
