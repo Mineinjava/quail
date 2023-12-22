@@ -68,7 +68,9 @@ public class PathSequenceFollower {
      * @return
      */
     public PathSequenceFollower setTranslationConstraints(ConstraintsPair constraints) {
-        pathFollower.setTranslationConstraints(constraints);
+        segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
+            pathFollower.setTranslationConstraints(constraints);
+        }));
         return this;
     }
 
@@ -78,7 +80,9 @@ public class PathSequenceFollower {
      * @return
      */
     public PathSequenceFollower setRotationConstraints(ConstraintsPair constraints) {
-        pathFollower.setRotationConstraints(constraints);
+        segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
+            pathFollower.setRotationConstraints(constraints);
+        }));
         return this;
     }
 
