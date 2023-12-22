@@ -263,4 +263,20 @@ public class PathFollower {
     public double getLoopTime() {
         return this.loopTime;
     }
+    /**
+     * Sets the translation constraints of the path follower
+     * @param constraints
+     */
+    public void setTranslationConstraints(ConstraintsPair constraints) {
+        this.speed = constraints.getMaxVelocity();
+        this.maxAcceleration = constraints.getMaxAcceleration();
+    }
+    /**
+     * Sets the rotation constraints of the path follower
+     * @param constraints
+     */
+    public void setRotationConstraints(ConstraintsPair constraints) {
+        this.maxTurnSpeed = constraints.getMaxVelocity();
+        this.maxTurnAcceleration = constraints.getMaxAcceleration();
+    }
 }

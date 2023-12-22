@@ -63,6 +63,26 @@ public class PathSequenceFollower {
     }
 
     /**
+     * Set the translation constraints for the path follower, used for all paths AFTER this call
+     * @param constraints the constraints to be set (your units)
+     * @return
+     */
+    public PathSequenceFollower setTranslationConstraints(ConstraintsPair constraints) {
+        pathFollower.setTranslationConstraints(constraints);
+        return this;
+    }
+
+    /**
+     * Set the rotation constraints for the path follower, used for all paths AFTER this call
+     * @param constraints the constraints to be set (your units)
+     * @return
+     */
+    public PathSequenceFollower setRotationConstraints(ConstraintsPair constraints) {
+        pathFollower.setRotationConstraints(constraints);
+        return this;
+    }
+
+    /**
      * Returns the current segment
      * @return
      */
