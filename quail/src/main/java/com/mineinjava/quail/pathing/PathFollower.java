@@ -13,24 +13,25 @@ import com.mineinjava.quail.util.geometry.Vec2d;
  *
  */
 public class PathFollower {
-    public Path path;
-    public double speed;
-    public double maxTurnSpeed;
-    public double maxTurnAcceleration;
-    public double maxAcceleration;
-    public MiniPID turnController;
-    public double precision;
-    public Localizer localizer;
-    public double slowDownDistance;
+    private Path path;
+    private double speed;
+    private double maxTurnSpeed;
+    private double maxTurnAcceleration;
+    private double maxAcceleration;
+    private MiniPID turnController;
+    private double precision;
+    private Localizer localizer;
+    private double slowDownDistance;
 
-    public double lastTime;
+    private double lastTime;
 
-    public Pose2d lastRobotPose;
-    public Pose2d currentPose;
-    public double kP;
-    public Vec2d lastMovementVector;
+    private Pose2d lastRobotPose;
+    private Pose2d currentPose;
+    private double kP;
+    private Vec2d lastMovementVector;
 
-    public double loopTime;
+    private double loopTime;
+
 
 
     public PathFollower(Localizer localizer, Path path, double speed, double maxTurnSpeed,
@@ -51,14 +52,11 @@ public class PathFollower {
                         double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP) {
         this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision, slowDownDistance, kP);
     }
-
-    /**
-     * Update the path to follow
-     * This exists so that you can reuse the path follower between autonomous paths and movements.
-     * @param path the path to follow
-     */
-    public void setPath(Path path) {
-        this.path = path;
+    
+    public PathFollower(Localizer localizer, Path path, ConstraintsPair translationPair, ConstraintsPair rotationPair,
+                        MiniPID turnController, double precision, double slowDownDistance, double kP) {
+        this(localizer, path, translationPair.getMaxVelocity(), rotationPair.getMaxVelocity(), rotationPair.getMaxAcceleration(),
+                translationPair.getMaxAcceleration(), turnController, precision, slowDownDistance, kP);
     }
 
     /**
@@ -142,5 +140,127 @@ public class PathFollower {
        Pose2d currentPose = this.localizer.getPose();
 
        return this.path.vectorToNearestPoint(currentPose, this.path.lastPointIndex).getLength() < this.precision;
+    }
+
+
+    /**
+     * Update the path to follow
+     * This exists so that you can reuse the path follower between autonomous paths and movements.
+     * @param path the path to follow
+     */
+    public void setPath(Path path) {
+        this.path = path;
+    }
+    /**
+     * Returns the path that the robot is following
+     * @return
+     */
+    public Path getPath() {
+        return this.path;
+    }
+    /**
+     * Sets the speed of the robot
+     * @param speed the goal of the robot (in your units)
+     */
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+    /**
+     * Returns the speed of the robot
+     * @return the speed of the robot
+     */
+    public double getSpeed() {
+        return this.speed;
+    }
+    /**
+     * Sets the maximum turn speed of the robot
+     * @param maxTurnSpeed the maximum turn speed of the robot (rad/s)
+     */
+    public void setMaxTurnSpeed(double maxTurnSpeed) {
+        this.maxTurnSpeed = maxTurnSpeed;
+    }
+    /**
+     * Returns the maximum turn speed of the robot
+     * @return the maximum turn speed of the robot (rad/s)
+     */
+    public double getMaxTurnSpeed() {
+        return this.maxTurnSpeed;
+    }
+    /**
+     * Sets the maximum turn acceleration of the robot
+     * @param maxTurnAcceleration the maximum turn acceleration of the robot (rad/s^2)
+     */
+    public void setMaxTurnAcceleration(double maxTurnAcceleration) {
+        this.maxTurnAcceleration = maxTurnAcceleration;
+    }
+    /**
+     * Returns the maximum turn acceleration of the robot
+     * @return the maximum turn acceleration of the robot (rad/s^2)
+     */
+    public double getMaxTurnAcceleration() {
+        return this.maxTurnAcceleration;
+    }
+    /**
+     * Sets the maximum acceleration of the robot
+     * @param maxAcceleration the maximum acceleration of the robot (your units/s^2)
+     */
+    public void setMaxAcceleration(double maxAcceleration) {
+        this.maxAcceleration = maxAcceleration;
+    }
+    /**
+     * Returns the maximum acceleration of the robot
+     * @return the maximum acceleration of the robot (your units/s^2)
+     */
+    public double getMaxAcceleration() {
+        return this.maxAcceleration;
+    }
+    /**
+     * Sets the turning PID controller of the robot
+     * @param turnController the turn controller of the robot
+     */
+    public void setTurnController(MiniPID turnController) {
+        this.turnController = turnController;
+    }
+    /**
+     * Sets the precision of the path follower (how close the robot needs to be to the point to move on)
+     * @param precision the precision of the path follower (your units)
+     */
+    public void setPrecision(double precision) {
+        this.precision = precision;
+    }
+    /**
+     * Set the localizer of the robot
+     * @param localizer
+     */ 
+    public void setLocalizer(Localizer localizer) {
+        this.localizer = localizer;
+    }
+    /**
+     * Returns the localizer of the robot
+     * @return the localizer of the robot
+     */
+    public Localizer getLocalizer() {
+        return this.localizer;
+    }
+    /**
+     * Sets the distance from the last point that the robot will begin to slowdown
+     * @param slowDownDistance the slow down distance of the robot (your units)
+     */
+    public void setSlowDownDistance(double slowDownDistance) {
+        this.slowDownDistance = slowDownDistance;
+    }
+    /**
+     * Sets the kP of the slowdown distance (proporational to the distance)
+     * @param kP
+     */
+    public void setSlowdownKP(double kP) {
+        this.kP = kP;
+    }
+    /**
+     * Returns the measured looptime of the path follower (useful for simulation)
+     * @return the measured looptime of the path follower (seconds)
+     */
+    public double getLoopTime() {
+        return this.loopTime;
     }
 }
