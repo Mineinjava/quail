@@ -2,7 +2,7 @@
 # quail
 <img src="https://github.com/Mineinjava/quail/blob/main/images/quail_above_border.png" width="40%" align="right">
 
-[![](https://jitpack.io/v/mineinjava/quail.svg)](https://jitpack.io/#mineinjava/quail)
+[![](https://jitpack.io/v/mineinjava/quail.svg) ![](https://jitpack.io/v/Mineinjava/Quail/month.svg)](https://jitpack.io/#mineinjava/quail)
 
 Bird-brained swerve drive utility.
 
