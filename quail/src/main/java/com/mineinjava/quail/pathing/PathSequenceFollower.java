@@ -124,7 +124,7 @@ public class PathSequenceFollower {
      * @return
      */
     public boolean isFinished() {
-        return currentSegment < segments.size();
+        return !(currentSegment < segments.size());
     }
 
     /**
