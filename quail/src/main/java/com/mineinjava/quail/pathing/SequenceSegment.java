@@ -28,6 +28,7 @@ public class SequenceSegment {
                 pathSequenceFollower.nextSegment();
                 isRunning = false;
             } else {
+                isRunning = true;
                 return;
             }
         }

@@ -29,7 +29,7 @@ public class PathSequenceFollower {
      * @return
      */
     public PathSequenceFollower addPath(Path path) {
-        segments.add(new SequenceSegment(this, SegmentType.PATH, () -> {
+        this.segments.add(new SequenceSegment(this, SegmentType.PATH, () -> {
             pathFollower.setPath(path);
         }));
 
@@ -42,7 +42,7 @@ public class PathSequenceFollower {
      * @return
      */
     public PathSequenceFollower addDisplacementMarker(Runnable action) {
-        segments.add(new SequenceSegment(this, SegmentType.MARKER, action));
+        this.segments.add(new SequenceSegment(this, SegmentType.MARKER, action));
         return this;
     }
 
@@ -53,7 +53,7 @@ public class PathSequenceFollower {
      * @return
      */
     public PathSequenceFollower addLocalTemporalMarker(double delay, Runnable action) {
-        segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
+        this.segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
             if (lastTime > delay) {
                 action.run();
                 nextSegment();
@@ -68,7 +68,7 @@ public class PathSequenceFollower {
      * @return
      */
     public PathSequenceFollower setTranslationConstraints(ConstraintsPair constraints) {
-        segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
+        this.segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
             pathFollower.setTranslationConstraints(constraints);
         }));
         return this;
@@ -80,7 +80,7 @@ public class PathSequenceFollower {
      * @return
      */
     public PathSequenceFollower setRotationConstraints(ConstraintsPair constraints) {
-        segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
+        this.segments.add(new SequenceSegment(this, SegmentType.MARKER, () -> {
             pathFollower.setRotationConstraints(constraints);
         }));
         return this;
@@ -91,7 +91,7 @@ public class PathSequenceFollower {
      * @return
      */
     public SequenceSegment getCurrentSegment() {
-        return segments.get(currentSegment);
+        return this.segments.get(currentSegment);
     }
 
     /**
@@ -109,7 +109,7 @@ public class PathSequenceFollower {
      */
     public RobotMovement followPathSequence() {
         if (segments.get(currentSegment).getType() == SegmentType.PATH) {
-            segments.get(currentSegment).run();
+            this.segments.get(currentSegment).run();
             return pathFollower.calculateNextDriveMovement();
         } else if (segments.get(currentSegment).getType() == SegmentType.MARKER){
             segments.get(currentSegment).run();
@@ -124,7 +124,7 @@ public class PathSequenceFollower {
      * @return
      */
     public boolean isFinished() {
-        return !(currentSegment < segments.size());
+        return !(currentSegment < this.segments.size());
     }
 
     /**
