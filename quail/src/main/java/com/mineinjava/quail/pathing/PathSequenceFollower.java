@@ -11,9 +11,9 @@ import com.mineinjava.quail.RobotMovement;
  */
 public class PathSequenceFollower {
     
-    PathFollower pathFollower;
-    ArrayList<SequenceSegment> segments;
-    int currentSegment = 0;
+    public PathFollower pathFollower;
+    public ArrayList<SequenceSegment> segments;
+    public int currentSegment = 0;
 
     private long startTime = System.nanoTime();
     private long lastTime = System.nanoTime();
@@ -133,5 +133,13 @@ public class PathSequenceFollower {
      */
     public double getElapsedTime() {
         return (System.nanoTime() - startTime) / 1e9;
+    }
+
+    /**
+     * Return the amount of segments in the sequence
+     * @return
+     */
+    public int getSegmentCount() {
+        return this.segments.size();
     }
 }
