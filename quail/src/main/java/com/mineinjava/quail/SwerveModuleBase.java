@@ -17,8 +17,10 @@ public class SwerveModuleBase {
     /**
      * Represents a swerve module
      * Designed to be inherited. Please override the setAngle() and setRawSpeed() methods at minimum.
+     *
+     * All angles are in radians. All length is in the unit of your choice
+     *
      * Other things that you may want to include:
-     * - X-lock (rotate all motors so that the robot can't be moved. This is also on the TODO list for the library
      * - reset module position (set the current angle to 0) using absolute encoders
      * - re-zero the steering motor using absolute encoders
      * @param position the position of the module relative to the center of rotation

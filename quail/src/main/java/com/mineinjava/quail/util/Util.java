@@ -19,7 +19,7 @@ public class Util {
         // calculate the smallest angle to rotate between the current angle and the target angle
         double deltaAngle = angle2 - angle1;
         deltaAngle = floormod(deltaAngle + Math.PI, 2 * Math.PI) - Math.PI;
-        return deltaAngle % 360;
+        return deltaAngle % (2 * Math.PI);
     }
 
 
