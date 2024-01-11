@@ -1,9 +1,11 @@
 from math import sqrt
 import random
+import math
 
 import matplotlib.pyplot as plt
 
-PATH = [(-36, 48), (-24,36), (-12, 0), (-12,-64)]
+# PATH = [(-36, 12), (-12,-12), (12, 12), (36,-12)]
+PATH = [(-36, 48), (-24,36), (-12, 0), (-12,-52), (0, -52), (0, 0), (12, 0), (12, 36), (24, 48), (36, 48)]
 START_POSE = (-36, 48, 0)
 
 # Simulation Constants
@@ -15,17 +17,20 @@ MAX_ACCELERATION = 25  # your unit per second squared
 MAX_ANGULAR_VELOCITY = 1.0  # rad/s
 MAX_ANGULAR_ACCELERATION = 1.0  # rad/s^2
 CRUISE_VELOCITY = 30 # your unit per second
+ONE_FRAME_ACCEL = MAX_ACCELERATION * LOOPTIME
 
-PRECISION_RADIUS = 2 # your unit
-SLOW_DOWN_RADIUS = 10 # your unit
+PRECISION_RADIUS = 3 # your unit
+SLOW_DOWN_RADIUS =  CRUISE_VELOCITY / ONE_FRAME_ACCEL # your unit
+LOOKAHEAD = 0.0 # WARNING: BETA. YMMV
 
-USE_SPLINE = True
-# USE_SPLINE = False
+SLOW_DOWN_TURN = True
+
+USE_SPLINE = False
 SPLINE_RESOLUTION = 20
 
-ANIMATE = True
+ANIMATE = False
 
-SHOW_ACCEL_VELO_GRAPH = False
+SHOW_ACCEL_VELO_GRAPH = True
 SHOW_GRID = True
 GRID_INCREMENT = 24 # your unit
 
@@ -65,7 +70,16 @@ class Pose2d:
     def __str__(self):
         return "x: " + str(self.x) + ", y: " + str(
             self.y) + ", theta: " + str(self.theta)
+    def dot(self, other): # WARNING: BOTH POSE2DS ARE TREATES AS VECTORS WITH ORIGIN (0,0)
+        return self.x * other.x + self.y * other.y
 
+    def anglesimilarity(self, other):
+        # need to get cosine squared of half the angle between the two vectors
+        cos = (self.dot(other)/(self.length() * other.length()))
+        return (1 + cos) / 2
+
+def lerp(a, b, t):
+    return a + (b - a) * t
 
 # https://stackoverflow.com/a/1084899/13224997
 def circle_intersect_line(pose, x1, y1, x2, y2):
@@ -144,6 +158,7 @@ if __name__ == "__main__":
     print(points)
 
     WAYPOINTS = [Waypoint(point[0], point[1], 0) for point in points]
+    PreviousWaypoint = Waypoint(INITIAL_POSE.x, INITIAL_POSE.y, 0)
     robotPose = INITIAL_POSE
     robotPoseHistory = [robotPose]
 
@@ -152,11 +167,13 @@ if __name__ == "__main__":
 
     def loop():
         global LOOPTIME
+        global PreviousWaypoint
         drift_looptime = LOOPTIME + random.uniform(-LOOPTIME_DEVIATION,
                                                    LOOPTIME_DEVIATION)
         global robotPose
         global robotPoseHistory
         if WAYPOINTS[0].is_hit(robotPose, robotPoseHistory[-1]):
+            PreviousWaypoint = WAYPOINTS[0]
             WAYPOINTS.pop(0)
         if len(WAYPOINTS) == 0:
             return False
@@ -165,11 +182,32 @@ if __name__ == "__main__":
 
         robotPoseHistory.append(robotPose)
 
-        desiredvel = WAYPOINTS[0] - robotPose
+        vec_next_wpt = WAYPOINTS[0] - robotPose
+
+        if len(WAYPOINTS) > 1:
+            vec_second_wpt = WAYPOINTS[1] - WAYPOINTS[0]
+        else:
+            vec_second_wpt = vec_next_wpt
+
+        t = 1 - (vec_next_wpt.length() / PreviousWaypoint.distance(WAYPOINTS[0]))
+        v = 1 + (LOOKAHEAD * t * ((1-t) ** 4))
+        desiredvel = (vec_next_wpt * v) + (vec_second_wpt * (1-v))
 
         if robotPose.distance(WAYPOINTS[-1]) >= SLOW_DOWN_RADIUS:
             desiredvel /= desiredvel.length()
             desiredvel *= CRUISE_VELOCITY
+
+        else:
+            desiredvel /= desiredvel.length()
+            desiredvel *= lerp(CRUISE_VELOCITY, ONE_FRAME_ACCEL, 1-(robotPose.distance(WAYPOINTS[-1]) / (SLOW_DOWN_RADIUS-PRECISION_RADIUS)))
+
+        # slow down on corners
+        if (SLOW_DOWN_TURN and (len(WAYPOINTS) > 1)):
+            if robotPose.distance(WAYPOINTS[0]) <= SLOW_DOWN_RADIUS:
+                anglediff = vec_next_wpt.anglesimilarity(vec_second_wpt)
+                desiredvel /= desiredvel.length()
+                desiredvel *= lerp(CRUISE_VELOCITY, (anglediff*CRUISE_VELOCITY)+ONE_FRAME_ACCEL, 1-(robotPose.distance(WAYPOINTS[0]) / (SLOW_DOWN_RADIUS-PRECISION_RADIUS)))
+                print(anglediff, 1-(robotPose.distance(WAYPOINTS[0]) / SLOW_DOWN_RADIUS)**2, desiredvel.length())
 
         desiredvel *= LOOPTIME
         if desiredvel.length() > MAX_VELOCITY:
@@ -237,7 +275,7 @@ if __name__ == "__main__":
     plt.plot([point[0] for point in points],
              [point[1] for point in points], 'rx-', 
              label="Spline")
-    plt.plot(x, y, 'ro', color="lime", label="Loop Point/Predicted Localized Point")
+    plt.plot(x, y, 'r-', color="lime", label="Loop Point/Predicted Localized Point")
     plt.title("Path")
     plt.legend()
     plt.ylabel("Y")
