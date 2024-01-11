@@ -20,17 +20,15 @@ public class SequenceSegment {
     }
 
     public void run() {
-        if (!isRunning) {
-            action.run();
-        }
-
         isRunning = true;
+        action.run();
 
         if (type == SegmentType.PATH) {
             if (pathSequenceFollower.pathFollower.isFinished()) {
                 pathSequenceFollower.nextSegment();
                 isRunning = false;
             } else {
+                isRunning = true;
                 return;
             }
         }

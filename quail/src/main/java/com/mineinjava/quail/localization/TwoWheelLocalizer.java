@@ -100,7 +100,7 @@ public abstract class TwoWheelLocalizer implements Localizer{
      * @return the robot's pose (Pose2d)
      */
     @Override
-    public Pose2d getPoseEstimate() {
+    public Pose2d getPose() {
         return poseEstimate;
     }
 
@@ -110,7 +110,7 @@ public abstract class TwoWheelLocalizer implements Localizer{
      * @param pose the robot's pose
      */
     @Override
-    public void setPoseEstimate(Pose2d pose) {
+    public void setPose(Pose2d pose) {
         poseEstimate = pose;
     }
 
