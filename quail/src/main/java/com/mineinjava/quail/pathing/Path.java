@@ -88,6 +88,36 @@ public class Path {
         }
         return Math.sqrt(Math.pow(point.x - nextPoint.x, 2) + Math.pow(point.y - nextPoint.y, 2));
     }
+    public double distanceToCurrentPoint(Pose2d point){
+        Pose2d currentPoint = this.getCurrentPoint();
+        if(currentPoint == null){
+            return 0;
+        }
+        return Math.sqrt(Math.pow(point.x - currentPoint.x, 2) + Math.pow(point.y - currentPoint.y, 2));
+    }
+    public Vec2d vector_last_to_current_point(){
+        Pose2d currentPoint = this.getCurrentPoint();
+        if(currentPoint == null){
+            return null;
+        }
+        Pose2d lastPoint = this.getPointRelativeToCurrent(-1);
+        if(lastPoint == null){
+            return null;
+        }
+        return new Vec2d(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
+    }
+    /// next movement vector for lookahead
+    public Vec2d nextMovementVector(){
+        Pose2d currentPoint = this.getCurrentPoint();
+        if(currentPoint == null){
+            return null;
+        }
+        Pose2d nextPoint = this.getNextPoint();
+        if(nextPoint == null){
+            return null;
+        }
+        return new Vec2d(nextPoint.x - currentPoint.x, nextPoint.y - currentPoint.y);
+    }
     /** calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex
      * 
      * @param point - the point to calculate the vector from

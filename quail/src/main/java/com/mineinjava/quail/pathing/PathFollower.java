@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.localization.Localizer;
+import com.mineinjava.quail.util.MathUtil;
 import com.mineinjava.quail.util.MiniPID;
 import com.mineinjava.quail.util.Util;
 import com.mineinjava.quail.util.geometry.Pose2d;
@@ -99,6 +100,15 @@ public class PathFollower {
         if (this.path.remainingLength(this.currentPose) < this.slowDownDistance) {
             idealMovementVector = idealMovementVector.normalize().scale(this.path.remainingLength(currentPose)*this.kP);
         }
+        else {
+            if (this.path.distanceToCurrentPoint(currentPose) < this.precision){
+                Vec2d lastVector = this.path.vector_last_to_current_point();
+                double angleDiff = lastVector.angleSimilarity(idealMovementVector);
+                double desiredSpeed = MathUtil.lerp(this.speed, this.speed * angleDiff, this.path.distanceToCurrentPoint(currentPose) / (this.slowDownDistance - this.precision));
+                idealMovementVector = idealMovementVector.normalize().scale(desiredSpeed);
+            }
+        }
+
         if (idealMovementVector.getLength() > this.speed) {
             idealMovementVector = idealMovementVector.normalize().scale(this.speed);
         }
