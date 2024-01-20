@@ -99,7 +99,7 @@ public class PathFollower {
         if (this.path.remainingLength(this.currentPose) < this.slowDownDistance) {
             idealMovementVector = idealMovementVector.normalize().scale(this.path.remainingLength(currentPose)*this.kP);
         }
-        if (idealMovementVector.getLength() > this.speed) {
+        else {
             idealMovementVector = idealMovementVector.normalize().scale(this.speed);
         }
         //Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime);
