@@ -31,12 +31,14 @@ public class PathFollower {
     private double kP;
     private Vec2d lastMovementVector;
 
+    private double minVelocity;
+
     private double loopTime;
 
 
 
     public PathFollower(Localizer localizer, Path path, double speed, double maxTurnSpeed,
-                        double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP) {
+                        double maxTurnAcceleration, double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP, double minVelocity) {
         this.localizer = localizer;
         this.path = path;
         this.speed = speed;
@@ -47,17 +49,18 @@ public class PathFollower {
         this.precision = precision;
         this.slowDownDistance = slowDownDistance; // in the future add an option to calculate it based on max accel.
         this.kP = kP;
+        this.minVelocity = minVelocity;
     }
 
     public PathFollower(Localizer localizer, double speed, double maxTurnSpeed, double maxTurnAcceleration,
-                        double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP) {
-        this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision, slowDownDistance, kP);
+                        double maxAcceleration, MiniPID turnController, double precision, double slowDownDistance, double kP, double minVelocity) {
+        this(localizer, new Path(new ArrayList<Pose2d>()), speed, maxTurnSpeed, maxTurnAcceleration, maxAcceleration, turnController, precision, slowDownDistance, kP, minVelocity);
     }
     
     public PathFollower(Localizer localizer, Path path, ConstraintsPair translationPair, ConstraintsPair rotationPair,
-                        MiniPID turnController, double precision, double slowDownDistance, double kP) {
+                        MiniPID turnController, double precision, double slowDownDistance, double kP, double minVelocity) {
         this(localizer, path, translationPair.getMaxVelocity(), rotationPair.getMaxVelocity(), rotationPair.getMaxAcceleration(),
-                translationPair.getMaxAcceleration(), turnController, precision, slowDownDistance, kP);
+                translationPair.getMaxAcceleration(), turnController, precision, slowDownDistance, kP, minVelocity);
     }
 
     /**
@@ -112,6 +115,10 @@ public class PathFollower {
         if (idealMovementVector.getLength() > this.speed) {
             idealMovementVector = idealMovementVector.normalize().scale(this.speed);
         }
+        if (idealMovementVector.getLength() < this.minVelocity){
+            idealMovementVector = idealMovementVector.normalize().scale(this.minVelocity);
+        }
+        
         //Vec2d oldVelocity = this.lastRobotPose.vectorTo(currentPose).scale(1/this.loopTime);
         if (this.lastMovementVector == null) {
             this.lastMovementVector = new Vec2d(0, 0);
