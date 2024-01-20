@@ -76,7 +76,7 @@ public class SwerveModuleBase {
 
     public void XLock() {
         this.setSpeed(0);
-        this.setAngle(this.position.getAngle());
+        this.setAngle(this.position.getAngle() + (Math.PI / 2));
     }
 
     /** sets the angle of the module
