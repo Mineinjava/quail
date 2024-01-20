@@ -29,4 +29,7 @@ public class MathUtil {
 
         return ((0d <= t1 && t1 <= 1d) && (0d <= t2 && t2 <= 1d));
     }
+    public static double lerp(double a, double b, double t) {
+        return a + (b - a) * t;
+    }
 }

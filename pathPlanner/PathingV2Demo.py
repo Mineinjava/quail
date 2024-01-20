@@ -28,9 +28,9 @@ SLOW_DOWN_TURN = True
 USE_SPLINE = False
 SPLINE_RESOLUTION = 20
 
-ANIMATE = False
+ANIMATE = True
 
-SHOW_ACCEL_VELO_GRAPH = True
+SHOW_ACCEL_VELO_GRAPH = False
 SHOW_GRID = True
 GRID_INCREMENT = 24 # your unit
 
@@ -209,12 +209,9 @@ if __name__ == "__main__":
                 desiredvel *= lerp(CRUISE_VELOCITY, (anglediff*CRUISE_VELOCITY)+ONE_FRAME_ACCEL, 1-(robotPose.distance(WAYPOINTS[0]) / (SLOW_DOWN_RADIUS-PRECISION_RADIUS)))
                 print(anglediff, 1-(robotPose.distance(WAYPOINTS[0]) / SLOW_DOWN_RADIUS)**2, desiredvel.length())
 
-        desiredvel *= LOOPTIME
         if desiredvel.length() > MAX_VELOCITY:
             desiredvel /= desiredvel.length()
             desiredvel *= MAX_VELOCITY
-
-        desiredvel /= LOOPTIME
 
         accel = (desiredvel - vel) / LOOPTIME
         if accel.length() > MAX_ACCELERATION:
