@@ -130,6 +130,13 @@ public class SwerveOdometry implements Localizer {
         return new Pose2d(this.x, this.y, this.theta);
     }
     /**
+     * sets the angle of the odometry
+     * @param angle robot heading in radians
+     */
+    public void setAngle(double angle) {
+        this.theta = angle;
+    }
+    /**
      * Sets the robot's pose
      * Use this method to override with Vision data or for initial pose
      * @param pose the robot's pose
