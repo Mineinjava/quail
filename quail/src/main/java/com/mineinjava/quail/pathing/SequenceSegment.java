@@ -1,5 +1,9 @@
 package com.mineinjava.quail.pathing;
 
+
+/**
+ * DEPRECATED - DO NOT USE
+ */
 public class SequenceSegment {
     private PathSequenceFollower pathSequenceFollower;
     private Runnable action;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.mineinjava.quail.RobotMovement;
 
 /**
+ * DEPRECATED - DO NOT USE
  * A class that helps you follow a sequence of paths
  * 
  * This is useful for autonomous, where you want to follow a path, then do something, then follow another path, etc.
