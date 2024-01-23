@@ -2,10 +2,10 @@ package com.mineinjava.quail;
 
 import java.lang.Math;
 
-import com.mineinjava.quail.util.util;
+import com.mineinjava.quail.util.Util;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
-public class swerveModuleBase {
+public class SwerveModuleBase {
     public Vec2d position;
     protected final double steeringRatio;
     protected final double driveRatio;
@@ -17,20 +17,22 @@ public class swerveModuleBase {
     /**
      * Represents a swerve module
      * Designed to be inherited. Please override the setAngle() and setRawSpeed() methods at minimum.
+     *
+     * All angles are in radians. All length is in the unit of your choice
+     *
      * Other things that you may want to include:
-     * - X-lock (rotate all motors so that the robot can't be moved. This is also on the TODO list for the library
      * - reset module position (set the current angle to 0) using absolute encoders
      * - re-zero the steering motor using absolute encoders
      * @param position the position of the module relative to the center of rotation
      * @param steeringRatio gear ratio of the steering motor
      * @param driveRatio gear ratio of the drive motor
      */
-    public swerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
+    public SwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
         // default optimized value is true
         this(position, steeringRatio, driveRatio, true);
     }
 
-    public swerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, boolean optimized) {
+    public SwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, boolean optimized) {
         this.position = position;
         this.steeringRatio = steeringRatio;
         this.driveRatio = driveRatio;
@@ -43,14 +45,14 @@ public class swerveModuleBase {
      * @return the angle to set the steering motor to
      */
     public double calculateNewAngleSetpoint(double angle) {
-        double shortestAngle = util.deltaAngle(currentAngle, angle);
+        double shortestAngle = Util.deltaAngle(currentAngle, angle);
         return currentAngle = currentAngle + shortestAngle;
     }
 
     /** "optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the opposite direction
     and rotate less than 90 degrees */
     public double calculateOptimizedAngle(double angle) {
-        double deltaAngle = util.deltaAngle(currentAngle, angle);
+        double deltaAngle = Util.deltaAngle(currentAngle, angle);
         if (Math.abs(deltaAngle) > Math.PI/2) {
             motorFlipper = -1;
             return angle + Math.PI;
@@ -74,7 +76,7 @@ public class swerveModuleBase {
 
     public void XLock() {
         this.setSpeed(0);
-        this.setAngle(this.position.getAngle());
+        this.setAngle(this.position.getAngle() + (Math.PI / 2));
     }
 
     /** sets the angle of the module

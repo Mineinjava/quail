@@ -3,10 +3,7 @@ package com.mineinjava.quail.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mineinjava.quail.differentialSwerveModuleBase;
-import com.mineinjava.quail.swerveDrive;
-
-public class util {
+public class Util {
 
     public static double floormod(double a, double b) {
         return a - (b * Math.floor(a / b));
@@ -22,7 +19,7 @@ public class util {
         // calculate the smallest angle to rotate between the current angle and the target angle
         double deltaAngle = angle2 - angle1;
         deltaAngle = floormod(deltaAngle + Math.PI, 2 * Math.PI) - Math.PI;
-        return deltaAngle % 360;
+        return deltaAngle % (2 * Math.PI);
     }
 
 

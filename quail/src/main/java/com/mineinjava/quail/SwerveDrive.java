@@ -5,14 +5,13 @@ import java.util.List;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
 
-public class swerveDrive<T extends swerveModuleBase> {
+public class SwerveDrive<T extends SwerveModuleBase> {
     public final List<T> swerveModules;
     /** Represents a swerve drive
      * Designed to be inherited from. While it will work without being inherited from, you may want to add some features such as:
      *
      * - reset gyro, both from controller and from vision odometry
      * - reset module positions (from absolute encoders or vision odometry)
-     * - acceleration limiting
      *
      * Normal use of this class would look something like:
      *
@@ -24,7 +23,7 @@ public class swerveDrive<T extends swerveModuleBase> {
      *
      * @param swerveModules a list of swerve modules
      */
-    public swerveDrive(List<T> swerveModules) {
+    public SwerveDrive(List<T> swerveModules) {
         this.swerveModules = swerveModules;
     }
     /**
@@ -38,14 +37,14 @@ public class swerveDrive<T extends swerveModuleBase> {
         // create a list of four vec2d objects and iterate over them with a for loop (not foreach)
         Vec2d[] moduleVectors = new Vec2d[this.swerveModules.size()];
         for (int i = 0; i < this.swerveModules.size(); i++) {
-            swerveModuleBase module = swerveModules.get(i);
+            SwerveModuleBase module = swerveModules.get(i);
             Vec2d moduleOffCenterVector = module.position.subtract(centerPoint);
             Vec2d moduleRotationVector = moduleOffCenterVector; //.rotate(-Math.PI/2, false);
             moduleVectors[i] = moveVector.add(moduleRotationVector.scale(rotationSpeed));
         }
         return moduleVectors;
     }
-    public void move(robotMovement movement, double gyroOffset){
+    public void move(RobotMovement movement, double gyroOffset){
         Vec2d[] moduleVectors = calculateMoveAngles(movement.translation, movement.rotation, gyroOffset);
         moduleVectors = normalizeModuleVectors(moduleVectors);
         for (int i=0; i < this.swerveModules.size(); i++){
@@ -90,7 +89,7 @@ public class swerveDrive<T extends swerveModuleBase> {
         return normalizeModuleVectors(moduleVectors, 1);
     }
     public void XLockModules() {
-        for (swerveModuleBase module : this.swerveModules) {
+        for (SwerveModuleBase module : this.swerveModules) {
             module.XLock();
         }
     }

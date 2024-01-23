@@ -14,7 +14,7 @@ import com.mineinjava.quail.util.geometry.Angle;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
-public abstract class TwoWheelLocalizer extends Localizer{
+public abstract class TwoWheelLocalizer implements Localizer{
     
     List<Pose2d> wheelPoses;
     DecompositionSolver forwardSolver;
@@ -100,7 +100,7 @@ public abstract class TwoWheelLocalizer extends Localizer{
      * @return the robot's pose (Pose2d)
      */
     @Override
-    public Pose2d getPoseEstimate() {
+    public Pose2d getPose() {
         return poseEstimate;
     }
 
@@ -110,7 +110,7 @@ public abstract class TwoWheelLocalizer extends Localizer{
      * @param pose the robot's pose
      */
     @Override
-    public void setPoseEstimate(Pose2d pose) {
+    public void setPose(Pose2d pose) {
         poseEstimate = pose;
     }
 

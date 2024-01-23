@@ -5,13 +5,13 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 /** A base class for differential swerve modules
  *
  */
-public class differentialSwerveModuleBase extends swerveModuleBase {
+public class DifferentialSwerveModuleBase extends SwerveModuleBase {
 
-    public differentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
+    public DifferentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
         super(position, steeringRatio, driveRatio);
     }
 
-    public differentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, boolean optimized) {
+    public DifferentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, boolean optimized) {
         super(position, steeringRatio, driveRatio, optimized);
     }
 
