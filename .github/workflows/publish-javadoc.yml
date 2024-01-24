@@ -19,7 +19,7 @@ jobs:
           java-version: '17'
           cache: 'gradle'
       - name: Build Javadoc
-        run: cd; mkdir -p /github/workspace; mkdir -p /github/workspace/docs; ./gradlew javadoc
+        run: ./gradlew javadoc; echo "$PWD"
         shell: bash
       - name: Deploy Javadoc
         uses: JamesIves/github-pages-deploy-action@v4.4.3
