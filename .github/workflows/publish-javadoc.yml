@@ -27,3 +27,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: javadoc
           folder: quail/build/docs
+      - name: Deploy Javadoc
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: javadoc
+          folder: javadoc
