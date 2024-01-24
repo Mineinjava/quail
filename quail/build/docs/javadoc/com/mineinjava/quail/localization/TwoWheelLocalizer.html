@@ -71,14 +71,17 @@ loadScripts(document, 'script');</script>
 <h1 title="Class TwoWheelLocalizer" class="title">Class TwoWheelLocalizer</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance"><a href="Localizer.html" title="class in com.mineinjava.quail.localization">com.mineinjava.quail.localization.Localizer</a>
 <div class="inheritance">com.mineinjava.quail.localization.TwoWheelLocalizer</div>
 </div>
-</div>
 <section class="class-description" id="class-description">
+<dl class="notes">
+<dt>All Implemented Interfaces:</dt>
+<dd><code><a href="Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a></code></dd>
+</dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public abstract class </span><span class="element-name type-name-label">TwoWheelLocalizer</span>
-<span class="extends-implements">extends <a href="Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></span></div>
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
+implements <a href="Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a></span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -117,7 +120,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the heading velocity of the robot (usually from a gyroscope or IMU).</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPoseEstimate()" class="member-name-link">getPoseEstimate</a>()</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPose()" class="member-name-link">getPose</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Returns the robot's pose</div>
 </div>
@@ -138,7 +141,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Returns the robot's releative pose.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPoseEstimate(com.mineinjava.quail.util.geometry.Pose2d)" class="member-name-link">setPoseEstimate</a><wbr>(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;pose)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPose(com.mineinjava.quail.util.geometry.Pose2d)" class="member-name-link">setPose</a><wbr>(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;pose)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the robot's pose
  Use this method to override with Vision data or for initial pose</div>
@@ -187,27 +190,27 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getPoseEstimate()">
-<h3>getPoseEstimate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></span>&nbsp;<span class="element-name">getPoseEstimate</span>()</div>
+<section class="detail" id="getPose()">
+<h3>getPose</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></span>&nbsp;<span class="element-name">getPose</span>()</div>
 <div class="block">Returns the robot's pose</div>
 <dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="Localizer.html#getPoseEstimate()">getPoseEstimate</a></code>&nbsp;in class&nbsp;<code><a href="Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="Localizer.html#getPose()">getPose</a></code>&nbsp;in interface&nbsp;<code><a href="Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a></code></dd>
 <dt>Returns:</dt>
 <dd>the robot's pose (Pose2d)</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="setPoseEstimate(com.mineinjava.quail.util.geometry.Pose2d)">
-<h3>setPoseEstimate</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPoseEstimate</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;pose)</span></div>
+<section class="detail" id="setPose(com.mineinjava.quail.util.geometry.Pose2d)">
+<h3>setPose</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPose</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;pose)</span></div>
 <div class="block">Sets the robot's pose
  Use this method to override with Vision data or for initial pose</div>
 <dl class="notes">
-<dt>Overrides:</dt>
-<dd><code><a href="Localizer.html#setPoseEstimate(com.mineinjava.quail.util.geometry.Pose2d)">setPoseEstimate</a></code>&nbsp;in class&nbsp;<code><a href="Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></code></dd>
+<dt>Specified by:</dt>
+<dd><code><a href="Localizer.html#setPose(com.mineinjava.quail.util.geometry.Pose2d)">setPose</a></code>&nbsp;in interface&nbsp;<code><a href="Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>pose</code> - the robot's pose</dd>
 </dl>

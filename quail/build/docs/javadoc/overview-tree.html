@@ -52,7 +52,7 @@ loadScripts(document, 'script');</script>
 <ul class="horizontal">
 <li><a href="com/mineinjava/quail/package-tree.html">com.mineinjava.quail</a>, </li>
 <li><a href="com/mineinjava/quail/localization/package-tree.html">com.mineinjava.quail.localization</a>, </li>
-<li><a href="com/mineinjava/quail/odometry/package-tree.html">com.mineinjava.quail.odometry</a>, </li>
+<li><a href="com/mineinjava/quail/pathing/package-tree.html">com.mineinjava.quail.pathing</a>, </li>
 <li><a href="com/mineinjava/quail/util/package-tree.html">com.mineinjava.quail.util</a>, </li>
 <li><a href="com/mineinjava/quail/util/geometry/package-tree.html">com.mineinjava.quail.util.geometry</a></li>
 </ul>
@@ -64,26 +64,45 @@ loadScripts(document, 'script');</script>
 <ul>
 <li class="circle">com.mineinjava.quail.util.geometry.<a href="com/mineinjava/quail/util/geometry/Angle.html" class="type-name-link" title="class in com.mineinjava.quail.util.geometry">Angle</a></li>
 <li class="circle">com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/Constants.html" class="type-name-link" title="class in com.mineinjava.quail.util">Constants</a></li>
-<li class="circle">com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/Localizer.html" class="type-name-link" title="class in com.mineinjava.quail.localization">Localizer</a>
-<ul>
-<li class="circle">com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/swerveOdometry.html" class="type-name-link" title="class in com.mineinjava.quail.localization">swerveOdometry</a></li>
-<li class="circle">com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/TwoWheelLocalizer.html" class="type-name-link" title="class in com.mineinjava.quail.localization">TwoWheelLocalizer</a></li>
-</ul>
-</li>
+<li class="circle">com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/ConstraintsPair.html" class="type-name-link" title="class in com.mineinjava.quail.pathing">ConstraintsPair</a></li>
 <li class="circle">com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/MathUtil.html" class="type-name-link" title="class in com.mineinjava.quail.util">MathUtil</a></li>
 <li class="circle">com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/MiniPID.html" class="type-name-link" title="class in com.mineinjava.quail.util">MiniPID</a></li>
-<li class="circle">com.mineinjava.quail.odometry.<a href="com/mineinjava/quail/odometry/path.html" class="type-name-link" title="class in com.mineinjava.quail.odometry">path</a></li>
-<li class="circle">com.mineinjava.quail.odometry.<a href="com/mineinjava/quail/odometry/pathFollower.html" class="type-name-link" title="class in com.mineinjava.quail.odometry">pathFollower</a></li>
+<li class="circle">com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" class="type-name-link" title="class in com.mineinjava.quail.pathing">Path</a></li>
+<li class="circle">com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/PathFollower.html" class="type-name-link" title="class in com.mineinjava.quail.pathing">PathFollower</a></li>
+<li class="circle">com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/PathSequenceFollower.html" class="type-name-link" title="class in com.mineinjava.quail.pathing">PathSequenceFollower</a></li>
 <li class="circle">com.mineinjava.quail.util.geometry.<a href="com/mineinjava/quail/util/geometry/Pose2d.html" class="type-name-link" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></li>
-<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/robotMovement.html" class="type-name-link" title="class in com.mineinjava.quail">robotMovement</a></li>
-<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/swerveDrive.html" class="type-name-link" title="class in com.mineinjava.quail">swerveDrive</a>&lt;T&gt;</li>
-<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/swerveModuleBase.html" class="type-name-link" title="class in com.mineinjava.quail">swerveModuleBase</a>
+<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/RobotMovement.html" class="type-name-link" title="class in com.mineinjava.quail">RobotMovement</a></li>
+<li class="circle">com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/SequenceSegment.html" class="type-name-link" title="class in com.mineinjava.quail.pathing">SequenceSegment</a></li>
+<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/SwerveDrive.html" class="type-name-link" title="class in com.mineinjava.quail">SwerveDrive</a>&lt;T&gt;</li>
+<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/SwerveModuleBase.html" class="type-name-link" title="class in com.mineinjava.quail">SwerveModuleBase</a>
 <ul>
-<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/differentialSwerveModuleBase.html" class="type-name-link" title="class in com.mineinjava.quail">differentialSwerveModuleBase</a></li>
+<li class="circle">com.mineinjava.quail.<a href="com/mineinjava/quail/DifferentialSwerveModuleBase.html" class="type-name-link" title="class in com.mineinjava.quail">DifferentialSwerveModuleBase</a></li>
 </ul>
 </li>
-<li class="circle">com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/util.html" class="type-name-link" title="class in com.mineinjava.quail.util">util</a></li>
+<li class="circle">com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/SwerveOdometry.html" class="type-name-link" title="class in com.mineinjava.quail.localization">SwerveOdometry</a> (implements com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>)</li>
+<li class="circle">com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/TwoWheelLocalizer.html" class="type-name-link" title="class in com.mineinjava.quail.localization">TwoWheelLocalizer</a> (implements com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>)</li>
+<li class="circle">com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/Util.html" class="type-name-link" title="class in com.mineinjava.quail.util">Util</a></li>
 <li class="circle">com.mineinjava.quail.util.geometry.<a href="com/mineinjava/quail/util/geometry/Vec2d.html" class="type-name-link" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="hierarchy">
+<h2 title="Interface Hierarchy">Interface Hierarchy</h2>
+<ul>
+<li class="circle">com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/Localizer.html" class="type-name-link" title="interface in com.mineinjava.quail.localization">Localizer</a></li>
+</ul>
+</section>
+<section class="hierarchy">
+<h2 title="Enum Class Hierarchy">Enum Class Hierarchy</h2>
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" class="type-name-link external-link" title="class or interface in java.lang">Object</a>
+<ul>
+<li class="circle">java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Enum.html" class="type-name-link external-link" title="class or interface in java.lang">Enum</a>&lt;E&gt; (implements java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Comparable.html" title="class or interface in java.lang" class="external-link">Comparable</a>&lt;T&gt;, java.lang.constant.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/constant/Constable.html" title="class or interface in java.lang.constant" class="external-link">Constable</a>, java.io.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a>)
+<ul>
+<li class="circle">com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/SegmentType.html" class="type-name-link" title="enum class in com.mineinjava.quail.pathing">SegmentType</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

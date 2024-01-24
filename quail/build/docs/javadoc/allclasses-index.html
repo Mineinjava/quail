@@ -15,7 +15,11 @@
 <script type="text/javascript" src="script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="all-classes-index-page">
-<script type="text/javascript">var pathtoroot = "./";
+<script type="text/javascript">var evenRowColor = "even-row-color";
+var oddRowColor = "odd-row-color";
+var tableTab = "table-tab";
+var activeTableTab = "active-table-tab";
+var pathtoroot = "./";
 loadScripts(document, 'script');</script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -50,8 +54,9 @@ loadScripts(document, 'script');</script>
 <h1 title="All Classes and Interfaces" class="title">All Classes and Interfaces</h1>
 </div>
 <div id="all-classes-table">
-<div class="caption"><span>Classes</span></div>
-<div class="summary-table two-column-summary">
+<div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="all-classes-table-tab0" role="tab" aria-selected="true" aria-controls="all-classes-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('all-classes-table', 'all-classes-table', 2)" class="active-table-tab">All Classes and Interfaces</button><button id="all-classes-table-tab1" role="tab" aria-selected="false" aria-controls="all-classes-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('all-classes-table', 'all-classes-table-tab1', 2)" class="table-tab">Interfaces</button><button id="all-classes-table-tab2" role="tab" aria-selected="false" aria-controls="all-classes-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('all-classes-table', 'all-classes-table-tab2', 2)" class="table-tab">Classes</button><button id="all-classes-table-tab3" role="tab" aria-selected="false" aria-controls="all-classes-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('all-classes-table', 'all-classes-table-tab3', 2)" class="table-tab">Enum Classes</button></div>
+<div id="all-classes-table.tabpanel" role="tabpanel">
+<div class="summary-table two-column-summary" aria-labelledby="all-classes-table-tab0">
 <div class="table-header col-first">Class</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/geometry/Angle.html" title="class in com.mineinjava.quail.util.geometry">Angle</a></div>
@@ -62,53 +67,73 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Contains constants used throughout the program.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/differentialSwerveModuleBase.html" title="class in com.mineinjava.quail">differentialSwerveModuleBase</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/pathing/ConstraintsPair.html" title="class in com.mineinjava.quail.pathing">ConstraintsPair</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/DifferentialSwerveModuleBase.html" title="class in com.mineinjava.quail">DifferentialSwerveModuleBase</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">A base class for differential swerve modules</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/localization/Localizer.html" title="class in com.mineinjava.quail.localization">Localizer</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab1"><a href="com/mineinjava/quail/localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab1">&nbsp;</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/MathUtil.html" title="class in com.mineinjava.quail.util">MathUtil</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/MathUtil.html" title="class in com.mineinjava.quail.util">MathUtil</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Small, easy to use PID implementation with advanced controller capability.<br>
  Minimal usage:<br>
  MiniPID pid = new MiniPID(p,i,d); <br>
  ...looping code...{ <br>
    output= pid.getOutput(sensorvalue,target); <br>
- }</div>
+ }
+
+ see http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-direction/improving-the-beginners-pid-introduction</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/odometry/path.html" title="class in com.mineinjava.quail.odometry">path</a></div>
-<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Represents a path that the robot can follow.</div>
 </div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/odometry/pathFollower.html" title="class in com.mineinjava.quail.odometry">pathFollower</a></div>
-<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/pathing/PathFollower.html" title="class in com.mineinjava.quail.pathing">PathFollower</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">class that helps you follow paths</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/pathing/PathSequenceFollower.html" title="class in com.mineinjava.quail.pathing">PathSequenceFollower</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">DEPRECATED - DO NOT USE
+ A class that helps you follow a sequence of paths
+ 
+ This is useful for autonomous, where you want to follow a path, then do something, then follow another path, etc.</div>
 </div>
 <div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/robotMovement.html" title="class in com.mineinjava.quail">robotMovement</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/RobotMovement.html" title="class in com.mineinjava.quail">RobotMovement</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Can represent a lot of things.</div>
 </div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/swerveDrive.html" title="class in com.mineinjava.quail">swerveDrive</a>&lt;<a href="com/mineinjava/quail/swerveDrive.html" title="type parameter in swerveDrive">T</a> extends <a href="com/mineinjava/quail/swerveModuleBase.html" title="class in com.mineinjava.quail">swerveModuleBase</a>&gt;</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab3"><a href="com/mineinjava/quail/pathing/SegmentType.html" title="enum class in com.mineinjava.quail.pathing">SegmentType</a></div>
+<div class="col-last even-row-color all-classes-table all-classes-table-tab3">
+<div class="block">DEPRECATED - DO NOT USE</div>
+</div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/pathing/SequenceSegment.html" title="class in com.mineinjava.quail.pathing">SequenceSegment</a></div>
+<div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
+<div class="block">DEPRECATED - DO NOT USE</div>
+</div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/SwerveDrive.html" title="class in com.mineinjava.quail">SwerveDrive</a>&lt;<a href="com/mineinjava/quail/SwerveDrive.html" title="type parameter in SwerveDrive">T</a> extends <a href="com/mineinjava/quail/SwerveModuleBase.html" title="class in com.mineinjava.quail">SwerveModuleBase</a>&gt;</div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/swerveModuleBase.html" title="class in com.mineinjava.quail">swerveModuleBase</a></div>
+<div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/SwerveModuleBase.html" title="class in com.mineinjava.quail">SwerveModuleBase</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/localization/swerveOdometry.html" title="class in com.mineinjava.quail.localization">swerveOdometry</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/localization/SwerveOdometry.html" title="class in com.mineinjava.quail.localization">SwerveOdometry</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Represents a swerve drive position on the field
  and provides methods for calculating the robot's position.</div>
 </div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/localization/TwoWheelLocalizer.html" title="class in com.mineinjava.quail.localization">TwoWheelLocalizer</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
-<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/util.html" title="class in com.mineinjava.quail.util">util</a></div>
+<div class="col-first even-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/Util.html" title="class in com.mineinjava.quail.util">Util</a></div>
 <div class="col-last even-row-color all-classes-table all-classes-table-tab2">&nbsp;</div>
 <div class="col-first odd-row-color all-classes-table all-classes-table-tab2"><a href="com/mineinjava/quail/util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></div>
 <div class="col-last odd-row-color all-classes-table all-classes-table-tab2">
 <div class="block">Represents a two-dimensional vector.</div>
+</div>
 </div>
 </div>
 </div>
