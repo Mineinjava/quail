@@ -106,6 +106,9 @@ public class Path {
         }
         return new Vec2d(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
     }
+    public double distance_last_to_current_point(){
+        return vector_last_to_current_point().getLength();
+    }
     /// next movement vector for lookahead
     public Vec2d nextMovementVector(){
         Pose2d currentPoint = this.getCurrentPoint();

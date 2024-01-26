@@ -132,7 +132,7 @@ public class PathFollower {
         Vec2d movementVector = oldVelocity.add(accelerationVector.scale(this.loopTime));
 
         double turnSpeed = turnController.getOutput(0, deltaAngle);
-        turnSpeed /= this.path.distanceToNextPoint(currentPose);
+        turnSpeed /= this.path.distance_last_to_current_point();
         turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
         this.lastRobotPose = currentPose;
