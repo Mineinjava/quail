@@ -4,7 +4,7 @@ package com.mineinjava.quail.util.geometry;
  * Represents a vector with input ramping to control acceleration
  * Useful for joystick ramp limiting
  */
-class AccelerationLimitedVector{
+public class AccelerationLimitedVector{
     Vec2d idealVector;
     Vec2d currentVector;
     double maxAcceleration;
@@ -53,7 +53,7 @@ class AccelerationLimitedVector{
         if(accelerationVector.getLength() > maxAcceleration){
             accelerationVector = accelerationVector.normalize().scale(maxAcceleration);
         }
-        currentVector = currentVector.add(accelerationVector.normalize().scale(looptime));
+        currentVector = currentVector.add(accelerationVector.scale(looptime));
         return currentVector;
     }
 
