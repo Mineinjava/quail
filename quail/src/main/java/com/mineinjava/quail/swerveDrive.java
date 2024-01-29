@@ -7,6 +7,7 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 
 public class swerveDrive<T extends swerveModuleBase> {
     public final List<T> swerveModules;
+    private double maxModuleSpeed = 1.0; 
     /** Represents a swerve drive
      * Designed to be inherited from. While it will work without being inherited from, you may want to add some features such as:
      *
@@ -28,6 +29,13 @@ public class swerveDrive<T extends swerveModuleBase> {
         this.swerveModules = swerveModules;
     }
     /**
+     * @param swerveModules a list of swerve modules
+     * @param maxModuleSpeed maximum allowed speed for swerve modules
+     */
+    pulic swerveDrive(List<T> swerveModules, double maxModuleSpeed){
+        this.maxModuleSpeed = maxModuleSpeed;
+     }
+    /**
      * @param moveVector the vector to move in
      * @param rotationSpeed speed of rotation
      * @param centerPoint modified center of rotation. Pass in Vec2d(0, 0) for default center of rotation
@@ -47,7 +55,7 @@ public class swerveDrive<T extends swerveModuleBase> {
     }
     public void move(robotMovement movement, double gyroOffset){
         Vec2d[] moduleVectors = calculateMoveAngles(movement.translation, movement.rotation, gyroOffset);
-        moduleVectors = normalizeModuleVectors(moduleVectors);
+        moduleVectors = normalizeModuleVectors(moduleVectors, maxModuleSpeed);
         for (int i=0; i < this.swerveModules.size(); i++){
             swerveModules.get(i).set(moduleVectors[i]);
         }
