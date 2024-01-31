@@ -29,7 +29,7 @@ public class PathFollower {
     private Pose2d lastRobotPose;
     private Pose2d currentPose;
     private double kP;
-    private Vec2d lastMovementVector;
+    private Vec2d lastMovementVector = new Vec2d(0,0);
 
     private double minVelocity;
 
@@ -107,7 +107,7 @@ public class PathFollower {
             if (this.path.distanceToCurrentPoint(currentPose) < this.precision){
                 Vec2d lastVector = this.path.vector_last_to_current_point();
                 double angleDiff = lastVector.angleSimilarity(idealMovementVector);
-                double desiredSpeed = MathUtil.lerp(this.speed, this.speed * angleDiff, this.path.distanceToCurrentPoint(currentPose) / (this.slowDownDistance - this.precision));
+                double desiredSpeed = MathUtil.lerp(this.speed, (this.speed * angleDiff) + this.minVelocity, this.path.distanceToCurrentPoint(currentPose) / (this.slowDownDistance - this.precision));
                 idealMovementVector = idealMovementVector.normalize().scale(desiredSpeed);
             }
         }
@@ -155,8 +155,7 @@ public class PathFollower {
        }
 
        Pose2d currentPose = this.localizer.getPose();
-
-       return this.path.vectorToNearestPoint(currentPose, this.path.lastPointIndex).getLength() < this.precision;
+       return false;
     }
 
 
