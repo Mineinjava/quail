@@ -3,30 +3,55 @@ package com.mineinjava.quail.util.geometry;
 import java.util.Objects;
 
 import com.mineinjava.quail.util.MathUtil;
-
+/**
+ * Represents a two-dimensional position and heading
+ * ALL angles MUST be in ccw+ radians
+ */
 public class Pose2d {
     public final double x;
     public final double y;
     public final double heading;
 
+    /**
+     * Returns zero pose (x, y, and heading all are zero
+     */
     public Pose2d() {
         this(0.0, 0.0, 0.0);
     }
 
+    /**
+     * @param x x position
+     * @param y y position
+     * @param heading heading
+     */
     public Pose2d(double x, double y, double heading) {
         this.x = x;
         this.y = y;
         this.heading = heading;
     }
 
+    /**
+     * Useful for conversion from vector
+     * @param pos vector representing the x and y position
+     * @param heading heading
+     */
     public Pose2d(Vec2d pos, double heading) {
         this(pos.x, pos.y, heading);
     }
 
+    /**
+     * Converts x and y position to a vector
+     * Does not include heading
+     * @return vector representing the x and y position
+     */
     public Vec2d vec() {
         return new Vec2d(x, y);
     }
 
+    /**
+     * Converts the heading to a vector
+     * @return unit vector (length=1) with angle matching (@code heading)
+     */
     public Vec2d headingVec() {
         return new Vec2d(Math.cos(heading), Math.sin(heading));
     }
@@ -89,13 +114,20 @@ public class Pose2d {
 
     /**
      * Returns a pose from the given list
-     * @param list - double[] in the format [x, y, theta]
+     * @param list - double[] in the format [x, y, heading]
      * @return
      */
     public Pose2d fromList(double[] list) {
         return new Pose2d(list[0], list[1], list[2]);
     }
 
+    /**
+     * detects if the circle with (@code radius) is "hit" by a straight line between (@code robotPose) and (@code oldRobotPose)
+     * @param radius circle radius for hit detection
+     * @param robotPose position one for hit detection
+     * @param oldRobotPose position two for hit detection
+     * @return Boolean whether the pose it "hit" or not
+     */
     public boolean isHit(double radius, Pose2d robotPose, Pose2d oldRobotPose) {
         if (this.distanceTo(robotPose) < radius) {
             return true;
@@ -104,6 +136,9 @@ public class Pose2d {
         }
 
     }
+    /**
+     * @return Vec2d a vector from this Pose2d to another Pose2d
+     */
     public Vec2d vectorTo(Pose2d other) {
         return other.vec().subtract(vec());
     }
