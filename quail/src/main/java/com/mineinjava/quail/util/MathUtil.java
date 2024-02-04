@@ -7,8 +7,13 @@ public class MathUtil {
         double epsilon = 1e-6; // Adjust the epsilon value as needed
         return Math.abs(value1 - value2) < epsilon;
     }
+    /**
+     * Detects if a line segment defined by two positions will intersect a circle with given center and radius
+     * Note that the headings for all three Pose2d arguments are not used
+     * https://stackoverflow.com/a/1084899/13224997
+     */
     public static boolean LineSegHitCircle(Pose2d lineSegStart, Pose2d lineSegEnd, Pose2d circleCenter, double circleRadius) {
-        // https://stackoverflow.com/a/1084899/13224997
+
         Vec2d d = lineSegEnd.vec().subtract(lineSegStart.vec());
         Vec2d f = lineSegStart.vec().subtract(circleCenter.vec());
 
@@ -29,6 +34,10 @@ public class MathUtil {
 
         return ((0d <= t1 && t1 <= 1d) && (0d <= t2 && t2 <= 1d));
     }
+    /**
+     * basic lerp function
+     * @return value between a and b at t
+     */
     public static double lerp(double a, double b, double t) {
         return a + (b - a) * t;
     }

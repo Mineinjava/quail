@@ -8,6 +8,7 @@ public class Util {
     public static double floormod(double a, double b) {
         return a - (b * Math.floor(a / b));
     }
+
     /** Calculates the smallest angle between two angles
      * Useful for determining how far and in which direction to rotate anything
      * angle returned is in radians, counterclockwise from angle 1 to angle 2

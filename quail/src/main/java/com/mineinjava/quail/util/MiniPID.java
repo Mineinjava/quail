@@ -1,12 +1,13 @@
 package com.mineinjava.quail.util;
 /*
-    This program was not written by me. It was written by tekdemo and is licensed under the GNU General Public License
+    The code in this file was not written by authors of quail. It was written by tekdemo and is licensed under the GNU General Public License
     v3.0.
     The original source code can be found at https://github.com/tekdemo/MiniPID-Java
 
-    I have made minor changes to the original source code.
+    Quail authors have made minor changes. These changes are licensed under the GNU General Public License v3.0.
 
     Copyright (C) 2018-present tekdemo
+    Changes Copyright (C) 2023-present Marcus Kauffman
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,6 +22,7 @@ package com.mineinjava.quail.util;
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
 /**
  * Small, easy to use PID implementation with advanced controller capability.<br>
  * Minimal usage:<br>
