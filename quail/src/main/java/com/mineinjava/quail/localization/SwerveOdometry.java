@@ -1,6 +1,5 @@
 package com.mineinjava.quail.localization;
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +39,6 @@ public class SwerveOdometry implements Localizer {
     public SwerveOdometry(List<Vec2d> moduleVectors){
         this.moduleVectors = new ArrayList<Vec2d>(moduleVectors);
         assert moduleVectors.size() >= 2;
-
     }
     public SwerveOdometry(ArrayList<Vec2d> moduleVectors){
         this.moduleVectors = moduleVectors;
@@ -66,6 +64,7 @@ public class SwerveOdometry implements Localizer {
 
     /**
      * Updates the robot's position based on a change in x, y, and a theta.
+     * Note that these values represent a change in position, not velocity. Multiply velocity by delta time to get delta position.
      * All values must be field-centric.
      * @param dx
      * @param dy
@@ -79,6 +78,7 @@ public class SwerveOdometry implements Localizer {
 
     /**
      * Updates the robot's position based on a change in x, y, (represented by a vector) and a theta.
+     * Note that these values represent a change in position, not velocity. Multiply velocity by delta time to get delta position.
      * All values must be field-centric.
      * @param dpos
      * @param dtheta
@@ -116,6 +116,7 @@ public class SwerveOdometry implements Localizer {
     }
     /** updates the robot's position based on a change in x, y (represented by a vector)
      * All values must be field-centric.
+     * Note that these values represent a change in position, not velocity. Multiply velocity by delta time to get delta position.
      * @param dpos
      */
     public void updateDeltaPoseEstimate(Vec2d dpos){
@@ -146,7 +147,7 @@ public class SwerveOdometry implements Localizer {
         this.updateOdometry(pose.x, pose.y, pose.heading);
     }
     /**
-     * Calculates the robot's movement based on the module positions
+     * Calculates the robot's velocity based on the module positions
      * NOTE: due to drift, it is recommended not to use the robot's rotation value given from this method.
      * Instead, use the robot's gyro.
      *
@@ -156,7 +157,7 @@ public class SwerveOdometry implements Localizer {
      * Also note that this method is not field-centric. You will have to rotate the returned vector.
      *
      * @param modules the positions (current angle and current velocity) of the modules
-     * @return the robot's movement
+     * @return the robot's movement (velocity and angular velocity)
      */
     public RobotMovement calculateOdometry(ArrayList<Vec2d> modules){
         // to account for errors, we will take the average of all the module pairs
@@ -214,7 +215,7 @@ public class SwerveOdometry implements Localizer {
      * Also note that this method is not field-centric. You will have to rotate the returned vector.
      *
      * @param modules the positions of the modules (Vec2d)
-     * @return the robot's movement.
+     * @return the robot's movement (velocity and angular velocity)
      */
     public RobotMovement calculateFastOdometry(ArrayList<Vec2d> modules){
         // take average of all modules (this is the robot's movement vector)
