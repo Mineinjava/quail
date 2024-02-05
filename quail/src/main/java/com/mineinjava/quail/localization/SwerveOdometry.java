@@ -23,7 +23,7 @@ import com.mineinjava.quail.SwerveModuleBase;
  *     - set the robot's heading to the gyro heading.
  *
  * when constructing this class, pass in the positions of the modules relative to robot center
- *
+ * TODO: Make it possible to update odometry via a velocity vector.
  */
 public class SwerveOdometry implements Localizer {
     public ArrayList<Vec2d> moduleVectors;

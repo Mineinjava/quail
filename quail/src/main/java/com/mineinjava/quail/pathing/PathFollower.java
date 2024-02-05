@@ -11,7 +11,7 @@ import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
 /** class that helps you follow paths
- *
+ * TODO: Don't treat point as reached if angle is outside angular precision
  */
 public class PathFollower {
     private Path path;

@@ -23,6 +23,7 @@ public class ConstraintsPair {
     public double getMaxVelocity() {
         return velocity;
     }
+
     /**
      * Returns the constraints' max acceleration
      * @return
