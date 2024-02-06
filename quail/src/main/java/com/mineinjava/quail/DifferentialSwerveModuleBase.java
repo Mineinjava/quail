@@ -30,12 +30,14 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
 
         motorSpeeds[0] = adjustedRotationSpeed + adjustedWheelSpeed;
         motorSpeeds[1] = adjustedRotationSpeed - adjustedWheelSpeed;
-        
+
         return motorSpeeds;
     }
+    /**
+     * Calculates the module angle based on the positions of the two motors
+     */
     public double calculateModuleAngle(double motor1pos, double motor2pos) {
         double averageRotation = (motor1pos + motor2pos) / 2;
         return averageRotation / steeringRatio;
     }
-
 }
