@@ -128,6 +128,15 @@ public class Path {
         }
         return new Vec2d(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
     }
+
+    /**
+     * @return distance from last point to current point
+     */
+
+    public double distance_last_to_current_point(){
+        return vector_last_to_current_point().getLength();
+    }
+  
     /**
      * next movement vector for lookahead
      * @return a vector from the current point to the next point
