@@ -77,7 +77,8 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PathFollower</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">class that helps you follow paths</div>
+<div class="block">class that helps you follow paths
+ TODO: Don't treat point as reached if angle is outside angular precision</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -318,7 +319,7 @@ loadScripts(document, 'script');</script>
 <h3>calculateNextDriveMovement</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../RobotMovement.html" title="class in com.mineinjava.quail">RobotMovement</a></span>&nbsp;<span class="element-name">calculateNextDriveMovement</span>()</div>
 <div class="block">Calculate the next movement to follow the path
- This does return a field-centric movement vector. It does not limit acceleration (yet)</div>
+ This does return a field-centric movement vector.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the next movement to follow the path</dd>

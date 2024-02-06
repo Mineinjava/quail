@@ -93,7 +93,8 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
      - pass the returned vector into one of the updateDelta methods
      - set the robot's heading to the gyro heading.
 
- when constructing this class, pass in the positions of the modules relative to robot center</div>
+ when constructing this class, pass in the positions of the modules relative to robot center
+ TODO: Make it possible to update odometry via a velocity vector.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -170,7 +171,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../RobotMovement.html" title="class in com.mineinjava.quail">RobotMovement</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateOdometry(java.util.ArrayList)" class="member-name-link">calculateOdometry</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;modules)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Calculates the robot's movement based on the module positions
+<div class="block">Calculates the robot's velocity based on the module positions
  NOTE: due to drift, it is recommended not to use the robot's rotation value given from this method.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></code></div>
@@ -321,6 +322,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
  double&nbsp;dy,
  double&nbsp;dtheta)</span></div>
 <div class="block">Updates the robot's position based on a change in x, y, and a theta.
+ Note that these values represent a change in position, not velocity. Multiply velocity by delta time to get delta position.
  All values must be field-centric.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -336,6 +338,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDeltaOdometry</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;dpos,
  double&nbsp;dtheta)</span></div>
 <div class="block">Updates the robot's position based on a change in x, y, (represented by a vector) and a theta.
+ Note that these values represent a change in position, not velocity. Multiply velocity by delta time to get delta position.
  All values must be field-centric.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -391,7 +394,8 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <h3>updateDeltaPoseEstimate</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">updateDeltaPoseEstimate</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;dpos)</span></div>
 <div class="block">updates the robot's position based on a change in x, y (represented by a vector)
- All values must be field-centric.</div>
+ All values must be field-centric.
+ Note that these values represent a change in position, not velocity. Multiply velocity by delta time to get delta position.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>dpos</code> - </dd>
@@ -440,7 +444,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <section class="detail" id="calculateOdometry(java.util.ArrayList)">
 <h3>calculateOdometry</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../RobotMovement.html" title="class in com.mineinjava.quail">RobotMovement</a></span>&nbsp;<span class="element-name">calculateOdometry</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/ArrayList.html" title="class or interface in java.util" class="external-link">ArrayList</a>&lt;<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&gt;&nbsp;modules)</span></div>
-<div class="block">Calculates the robot's movement based on the module positions
+<div class="block">Calculates the robot's velocity based on the module positions
  NOTE: due to drift, it is recommended not to use the robot's rotation value given from this method.
  Instead, use the robot's gyro.
 
@@ -452,7 +456,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <dt>Parameters:</dt>
 <dd><code>modules</code> - the positions (current angle and current velocity) of the modules</dd>
 <dt>Returns:</dt>
-<dd>the robot's movement</dd>
+<dd>the robot's movement (velocity and angular velocity)</dd>
 </dl>
 </section>
 </li>
@@ -480,7 +484,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <dt>Parameters:</dt>
 <dd><code>modules</code> - the positions of the modules (Vec2d)</dd>
 <dt>Returns:</dt>
-<dd>the robot's movement.</dd>
+<dd>the robot's movement (velocity and angular velocity)</dd>
 </dl>
 </section>
 </li>
