@@ -103,7 +103,7 @@ public class PathFollower {
         }
         else {
             if (this.path.distanceToCurrentPoint(currentPose) < this.precision){
-                Vec2d lastVector = this.path.vector_last_to_current_point();
+                Vec2d lastVector = this.path.vectorLastToCurrentPoint();
                 double angleDiff = lastVector.angleSimilarity(idealMovementVector);
                 double desiredSpeed = MathUtil.lerp(this.speed, (this.speed * angleDiff) + this.minVelocity, this.path.distanceToCurrentPoint(currentPose) / (this.slowDownDistance - this.precision));
                 idealMovementVector = idealMovementVector.normalize().scale(desiredSpeed);
