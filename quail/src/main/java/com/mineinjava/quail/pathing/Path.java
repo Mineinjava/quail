@@ -115,9 +115,8 @@ public class Path {
     }
     /**
      * @return a vector from the last point to the current point
-     * TODO: Convert to camelCase
      */
-    public Vec2d vector_last_to_current_point(){
+    public Vec2d vectorLastToCurrentPoint(){
         Pose2d currentPoint = this.getCurrentPoint();
         if(currentPoint == null){
             return null;
@@ -134,7 +133,7 @@ public class Path {
      */
 
     public double distance_last_to_current_point(){
-        return vector_last_to_current_point().getLength();
+        return vectorLastToCurrentPoint().getLength();
     }
   
     /**
