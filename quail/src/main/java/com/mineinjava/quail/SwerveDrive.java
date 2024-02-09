@@ -31,7 +31,8 @@ public class SwerveDrive<T extends SwerveModuleBase> {
      * @param swerveModules a list of swerve modules
      * @param maxModuleSpeed maximum allowed speed for swerve modules
      */
-    pulic swerveDrive(List<T> swerveModules, double maxModuleSpeed){
+    public SwerveDrive(List<T> swerveModules, double maxModuleSpeed){
+        this.swerveModules = swerveModules;
         this.maxModuleSpeed = maxModuleSpeed;
      }
     /**
