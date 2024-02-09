@@ -73,7 +73,11 @@ public class SwerveModuleBase {
         }
         return calculateNewAngleSetpoint(setpoint);
     }
-
+    /**
+     * "X-Locks" the modules
+     * points all of the wheels toward the center of the robot to make the robot harder to push
+     * not very useful if all of your swerve modules are colinear
+     */
     public void XLock() {
         this.setSpeed(0);
         this.setAngle(this.position.getAngle() + (Math.PI / 2));

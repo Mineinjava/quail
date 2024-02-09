@@ -4,6 +4,7 @@ import java.lang.Math;
 
 /**
  * Various utilities for working with angles.
+ * ALL angles MUST be in ccw+ radians
  */
 public class Angle {
     private static final double TAU = 2 * Math.PI;

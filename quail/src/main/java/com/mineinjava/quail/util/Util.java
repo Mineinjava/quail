@@ -8,6 +8,7 @@ public class Util {
     public static double floormod(double a, double b) {
         return a - (b * Math.floor(a / b));
     }
+
     /** Calculates the smallest angle between two angles
      * Useful for determining how far and in which direction to rotate anything
      * angle returned is in radians, counterclockwise from angle 1 to angle 2
@@ -41,6 +42,9 @@ public class Util {
         }
     }
 
+    /**
+     * returns a list of all the pairs that can be formed from a list
+     */
     public static <T> List<List<T>> getPairs(T[] inputArray) {
         List<List<T>> pairs = new ArrayList<>();
         for (int i = 0; i < inputArray.length; i++) {
