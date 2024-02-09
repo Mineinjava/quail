@@ -98,6 +98,14 @@ public class Vec2d
 		double scale = Math.sqrt(this.x * this.x + this.y * this.y);
 		return new Vec2d(this.x / scale, this.y / scale);
 	}
+
+	/**
+	 * 	Cosine squared of half the angle between two vectors
+ 	 */
+	public double angleSimilarity(Vec2d other){
+		double cos = this.dot(other) / (this.getLength() * other.getLength());
+		return (1+cos)/2;
+	}
 	
 	/**
 	 * Scales the vector.

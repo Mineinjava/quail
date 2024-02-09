@@ -29,13 +29,14 @@ package com.mineinjava.quail.util;
  *   output= pid.getOutput(sensorvalue,target); <br>
  * }
  *
- * @see http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-direction/improving-the-beginners-pid-introduction
+ * see http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-direction/improving-the-beginners-pid-introduction
  */
 public class MiniPID{
     //**********************************
     // Class private variables
     //**********************************
 
+    private double deadband = 0;
     private double P=0;
     private double I=0;
     private double D=0;
@@ -151,6 +152,16 @@ public class MiniPID{
      */
     public void setD(double d){
         D=d;
+        checkSigns();
+    }
+
+
+    /**
+     * Sets the deadband
+     * If output is too small, it gets "rounded" to zero
+    */
+    public void setDeadband(double deadband){
+        this.deadband = deadband;
         checkSigns();
     }
 
@@ -357,7 +368,12 @@ public class MiniPID{
         // System.out.printf("Final output %5.2f [ %5.2f, %5.2f , %5.2f  ], eSum %.2f\n",output,Poutput, Ioutput, Doutput,errorSum );
         // System.out.printf("%5.2f\t%5.2f\t%5.2f\t%5.2f\n",output,Poutput, Ioutput, Doutput );
 
+        if(Math.abs(output) < this.deadband){
+            output = 0;
+        }
+
         lastOutput=output;
+
         return output;
     }
 
