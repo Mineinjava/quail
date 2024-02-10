@@ -58,11 +58,14 @@ public class Path {
     /** returns the point at the specified index relative to the current point.
      */
     public Pose2d getPointRelativeToCurrent(int index){
-        if (currentPointIndex + index < points.size()) {
-            return points.get(currentPointIndex + index);
-        } else {
+        if (currentPointIndex + index < 0){
             return null;
         }
+        if (currentPointIndex + index > points.size()) {
+            return null;
+        }
+
+        return points.get(currentPointIndex + index);
     }
 
     /**
