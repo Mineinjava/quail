@@ -122,11 +122,11 @@ public class Path {
     public Vec2d vectorLastToCurrentPoint(){
         Pose2d currentPoint = this.getCurrentPoint();
         if(currentPoint == null){
-            return null;
+            return new Vec2d(0,0);
         }
         Pose2d lastPoint = this.getPointRelativeToCurrent(-1);
         if(lastPoint == null){
-            return null;
+            return new Vec2d(0,0);
         }
         return new Vec2d(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
     }
