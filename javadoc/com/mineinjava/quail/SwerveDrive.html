@@ -105,8 +105,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">SwerveDrive</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SwerveDrive.html" title="type parameter in SwerveDrive">T</a>&gt;&nbsp;swerveModules)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Represents a swerve drive
- Designed to be inherited from.</div>
+<div class="block">Represents a swerve drive Designed to be inherited from.</div>
 </div>
 </div>
 </section>
@@ -182,19 +181,18 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.util.List)">
 <h3>SwerveDrive</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SwerveDrive</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SwerveDrive.html" title="type parameter in SwerveDrive">T</a>&gt;&nbsp;swerveModules)</span></div>
-<div class="block">Represents a swerve drive
- Designed to be inherited from. While it will work without being inherited from, you may want to add some features such as:
+<div class="block">Represents a swerve drive Designed to be inherited from. While it will work without being
+ inherited from, you may want to add some features such as:
 
- - reset gyro, both from controller and from vision odometry
- - reset module positions (from absolute encoders or vision odometry)
+ <p>- reset gyro, both from controller and from vision odometry - reset module positions (from
+ absolute encoders or vision odometry)
 
- Normal use of this class would look something like:
+ <p>Normal use of this class would look something like:
 
- - create a list of swerve modules
- - create a swerveDrive object with the list of swerve modules
- - every time you want to move, call `move()` with the desired movement vector and rotation speed
- - obtain the module vectors from the swerve modules and pass them into the swerveOdometry class (optional)
- - pass the normalized vectors into the swerve modules</div>
+ <p>- create a list of swerve modules - create a swerveDrive object with the list of swerve
+ modules - every time you want to move, call `move()` with the desired movement vector and
+ rotation speed - obtain the module vectors from the swerve modules and pass them into the
+ swerveOdometry class (optional) - pass the normalized vectors into the swerve modules</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>swerveModules</code> - a list of swerve modules</dd>
@@ -220,7 +218,8 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>moveVector</code> - the vector to move in</dd>
 <dd><code>rotationSpeed</code> - speed of rotation</dd>
-<dd><code>centerPoint</code> - modified center of rotation. Pass in Vec2d(0, 0) for default center of rotation</dd>
+<dd><code>centerPoint</code> - modified center of rotation. Pass in Vec2d(0, 0) for default center of
+     rotation</dd>
 <dd><code>gyroOffset</code> - the gyro rotation in radians</dd>
 </dl>
 </section>
@@ -254,10 +253,12 @@ loadScripts(document, 'script');</script>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>moduleVectors</code> - list of module vectors to be normalized</dd>
-<dd><code>maxAllowableMagnitude</code> - the maximum magnitude of the vectors (this function clamps the largest vector to
-                              this magnitude and scales the rest--this parameter is the upper limit on the clamp)</dd>
+<dd><code>maxAllowableMagnitude</code> - the maximum magnitude of the vectors (this function clamps the
+     largest vector to this magnitude and scales the rest--this parameter is the upper limit on
+     the clamp)</dd>
 <dt>Returns:</dt>
-<dd>an array of vectors appropriately scaled so that the largest vector has a magnitude no greater than `maxAllowableMagnitude`.</dd>
+<dd>an array of vectors appropriately scaled so that the largest vector has a magnitude no
+     greater than `maxAllowableMagnitude`.</dd>
 </dl>
 </section>
 </li>
@@ -269,7 +270,8 @@ loadScripts(document, 'script');</script>
 <dt>Parameters:</dt>
 <dd><code>moduleVectors</code> - list of module vectors to be normalized</dd>
 <dt>Returns:</dt>
-<dd>an array of vectors appropriately scaled so that the largest vector has a magnitude no greater than 1.</dd>
+<dd>an array of vectors appropriately scaled so that the largest vector has a magnitude no
+     greater than 1.</dd>
 </dl>
 </section>
 </li>

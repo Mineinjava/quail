@@ -129,8 +129,7 @@ loadScripts(document, 'script');</script>
  double&nbsp;steeringRatio,
  double&nbsp;driveRatio)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Represents a swerve module
- Designed to be inherited.</div>
+<div class="block">Represents a swerve module Designed to be inherited.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.util.geometry.Vec2d,double,double,boolean)" class="member-name-link">SwerveModuleBase</a><wbr>(<a href="util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;position,
  double&nbsp;steeringRatio,
@@ -164,8 +163,8 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>double</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#calculateOptimizedAngle(double)" class="member-name-link">calculateOptimizedAngle</a><wbr>(double&nbsp;angle)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">"optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the opposite direction
-    and rotate less than 90 degrees</div>
+<div class="block">"optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the
+ opposite direction and rotate less than 90 degrees</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#set(com.mineinjava.quail.util.geometry.Vec2d)" class="member-name-link">set</a><wbr>(<a href="util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;vec)</code></div>
@@ -178,14 +177,12 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRawAngle(double)" class="member-name-link">setRawAngle</a><wbr>(double&nbsp;angle)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">sets the angle of the module
- OVERRIDE ME!!! This is where you call your motor controllers</div>
+<div class="block">sets the angle of the module OVERRIDE ME!!! This is where you call your motor controllers</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setRawSpeed(double)" class="member-name-link">setRawSpeed</a><wbr>(double&nbsp;speed)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">sets the raw speed of the module
- OVERRIDE ME!!! This is where you call your motor controllers</div>
+<div class="block">sets the raw speed of the module OVERRIDE ME!!! This is where you call your motor controllers</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setSpeed(double)" class="member-name-link">setSpeed</a><wbr>(double&nbsp;speed)</code></div>
@@ -195,9 +192,8 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#XLock()" class="member-name-link">XLock</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">"X-Locks" the modules
- points all of the wheels toward the center of the robot to make the robot harder to push
- not very useful if all of your swerve modules are colinear</div>
+<div class="block">"X-Locks" the modules points all of the wheels toward the center of the robot to make the robot
+ harder to push not very useful if all of your swerve modules are colinear</div>
 </div>
 </div>
 </div>
@@ -272,14 +268,13 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SwerveModuleBase</span><wbr><span class="parameters">(<a href="util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;position,
  double&nbsp;steeringRatio,
  double&nbsp;driveRatio)</span></div>
-<div class="block">Represents a swerve module
- Designed to be inherited. Please override the setAngle() and setRawSpeed() methods at minimum.
+<div class="block">Represents a swerve module Designed to be inherited. Please override the setAngle() and
+ setRawSpeed() methods at minimum.
 
- All angles are in radians. All length is in the unit of your choice
+ <p>All angles are in radians. All length is in the unit of your choice
 
- Other things that you may want to include:
- - reset module position (set the current angle to 0) using absolute encoders
- - re-zero the steering motor using absolute encoders</div>
+ <p>Other things that you may want to include: - reset module position (set the current angle to
+ 0) using absolute encoders - re-zero the steering motor using absolute encoders</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>position</code> - the position of the module relative to the center of rotation</dd>
@@ -322,33 +317,31 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="calculateOptimizedAngle(double)">
 <h3>calculateOptimizedAngle</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">calculateOptimizedAngle</span><wbr><span class="parameters">(double&nbsp;angle)</span></div>
-<div class="block">"optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the opposite direction
-    and rotate less than 90 degrees</div>
+<div class="block">"optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the
+ opposite direction and rotate less than 90 degrees</div>
 </section>
 </li>
 <li>
 <section class="detail" id="calculateDesiredAngleWrapper(double)">
 <h3>calculateDesiredAngleWrapper</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">calculateDesiredAngleWrapper</span><wbr><span class="parameters">(double&nbsp;angle)</span></div>
-<div class="block">Calulates the angle to set the steering motor to. Wrapper for both calculateOptimizedAngle and calculateNewAngleSetpoint
- please use this instead of anything else</div>
+<div class="block">Calulates the angle to set the steering motor to. Wrapper for both calculateOptimizedAngle and
+ calculateNewAngleSetpoint please use this instead of anything else</div>
 </section>
 </li>
 <li>
 <section class="detail" id="XLock()">
 <h3>XLock</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">XLock</span>()</div>
-<div class="block">"X-Locks" the modules
- points all of the wheels toward the center of the robot to make the robot harder to push
- not very useful if all of your swerve modules are colinear</div>
+<div class="block">"X-Locks" the modules points all of the wheels toward the center of the robot to make the robot
+ harder to push not very useful if all of your swerve modules are colinear</div>
 </section>
 </li>
 <li>
 <section class="detail" id="setRawAngle(double)">
 <h3>setRawAngle</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRawAngle</span><wbr><span class="parameters">(double&nbsp;angle)</span></div>
-<div class="block">sets the angle of the module
- OVERRIDE ME!!! This is where you call your motor controllers</div>
+<div class="block">sets the angle of the module OVERRIDE ME!!! This is where you call your motor controllers</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>angle</code> - the angle to set the module to</dd>
@@ -365,8 +358,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="setRawSpeed(double)">
 <h3>setRawSpeed</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setRawSpeed</span><wbr><span class="parameters">(double&nbsp;speed)</span></div>
-<div class="block">sets the raw speed of the module
- OVERRIDE ME!!! This is where you call your motor controllers</div>
+<div class="block">sets the raw speed of the module OVERRIDE ME!!! This is where you call your motor controllers</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>speed</code> - the speed to set the module to</dd>

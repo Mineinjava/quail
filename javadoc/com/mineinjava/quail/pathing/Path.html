@@ -77,20 +77,21 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">Path</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Represents a path that the robot can follow.
- Instantiate with a list of pose2d.
+<div class="block">Represents a path that the robot can follow. Instantiate with a list of pose2d.
 
- The robot will follow the path by going to each pose in order.
+ <p>The robot will follow the path by going to each pose in order.
 
- For example, I would pass in poses =[[0,0,0], [1,0,0], [1,1,0], [0,1,0]] to make the robot travel in a 1 unit square
+ <p>For example, I would pass in poses =[[0,0,0], [1,0,0], [1,1,0], [0,1,0]] to make the robot
+ travel in a 1 unit square
 
- The robot will go to [0,0], then [1,0], then [1,1], then [0,1] always facing '0'
+ <p>The robot will go to [0,0], then [1,0], then [1,1], then [0,1] always facing '0'
 
- The robot will stop at the last point in the path, and its heading will be the heading of the last pose in the path.
+ <p>The robot will stop at the last point in the path, and its heading will be the heading of the
+ last pose in the path.
 
- the LAST POINT is the last point that the robot hit
- the CURRENT POINT is the point that the robot is currently pathing towards
- the NEXT POINT is the point that the robot will path towards after reaching the CURRENT POINT</div>
+ <p>the LAST POINT is the last point that the robot hit the CURRENT POINT is the point that the
+ robot is currently pathing towards the NEXT POINT is the point that the robot will path towards
+ after reaching the CURRENT POINT</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -370,7 +371,8 @@ loadScripts(document, 'script');</script>
 <h3>vectorToNearestPoint</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></span>&nbsp;<span class="element-name">vectorToNearestPoint</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;point,
  int&nbsp;minIndex)</span></div>
-<div class="block">Calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex</div>
+<div class="block">Calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point
+ must be greater than or equal to minIndex</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>point</code> - - the point to calculate the vector from</dd>
@@ -385,7 +387,8 @@ loadScripts(document, 'script');</script>
 <h3>nearestPointIndex</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">int</span>&nbsp;<span class="element-name">nearestPointIndex</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;point,
  int&nbsp;minIndex)</span></div>
-<div class="block">Calculates the index of the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex</div>
+<div class="block">Calculates the index of the nearest point on the path. The index of the nearest point must be
+ greater than or equal to minIndex</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>point</code> - </dd>
@@ -399,7 +402,8 @@ loadScripts(document, 'script');</script>
 <h3>nearestPoint</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></span>&nbsp;<span class="element-name">nearestPoint</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;point,
  int&nbsp;minIndex)</span></div>
-<div class="block">Calculates the nearest point on the path. The index of the nearest point must be greater than or equal to minIndex</div>
+<div class="block">Calculates the nearest point on the path. The index of the nearest point must be greater than
+ or equal to minIndex</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>point</code> - </dd>
