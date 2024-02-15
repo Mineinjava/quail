@@ -1,16 +1,17 @@
 package com.mineinjava.quail.localization;
 
 import com.mineinjava.quail.util.Util;
+import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
 
-public class KalmanFilter {
+public class KalmanFilterLocalizer implements Localizer {
   private Vec2d poseEstimate = new Vec2d(0, 0);
   private double looptime = 0;
   private ArrayList<KalmanPose2d> velocities =
       new ArrayList<KalmanPose2d>(); // / list of velocities, most recent last
 
-  public KalmanFilter(Vec2d initialPose, double looptime) {
+  public KalmanFilterLocalizer(Vec2d initialPose, double looptime) {
     poseEstimate = initialPose;
     this.looptime = looptime;
   }
@@ -51,9 +52,11 @@ public class KalmanFilter {
     return this.poseEstimate;
   }
 
-  public Vec2d getPoseEstimate() {
-    return this.poseEstimate;
+  public Pose2d getPose() {
+    return new Pose2d(poseEstimate.x, poseEstimate.y, 0);
   }
+  public void setPose(Pose2d pose) {
+    this.poseEstimate = new Vec2d(pose.x, pose.y);
 }
 
 class KalmanPose2d extends Vec2d {
