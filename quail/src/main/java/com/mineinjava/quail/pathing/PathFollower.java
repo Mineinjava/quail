@@ -117,8 +117,7 @@ public class PathFollower {
    * @return the next movement to follow the path
    */
   public RobotMovement calculateNextDriveMovement() {
-    // calculate the next movement to follow the path
-    if (this.localizer == null) {
+    if (this.localizer == null) { // sanity check: did the user pass in a localizer
       throw new NullPointerException(
           "localizer is null, ensure that you have instantiated the localizer object");
     }
@@ -133,19 +132,19 @@ public class PathFollower {
     if (currentPose == null) {
       return new RobotMovement(0, new Vec2d(0, 0)); // error?
     }
-    double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading);
+    double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // angle we have to rotate
 
     if (this.path.getCurrentPoint() == null) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
-    if (this.lastRobotPose == null) {
+    if (this.lastRobotPose == null) { // if this is the first loop, the robot hopefully hasn't moved
       this.lastRobotPose = currentPose;
     }
     if (this.path.getCurrentPoint().isHit(this.precision, currentPose, this.lastRobotPose)) {
       this.path.currentPointIndex++;
     }
 
-    Vec2d idealMovementVector = this.path.vectorToCurrentPoint(this.currentPose);
+    Vec2d idealMovementVector = this.path.vectorToCurrentPoint(this.currentPose); // get the vector to the next point
     if (idealMovementVector == null) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
@@ -153,7 +152,7 @@ public class PathFollower {
       idealMovementVector =
           idealMovementVector.normalize().scale(this.path.remainingLength(currentPose) * this.kP);
     } else {
-      if (this.path.distanceToCurrentPoint(currentPose) < this.precision) {
+      if (this.path.distanceToCurrentPoint(currentPose) < this.slowDownDistance){
         Vec2d lastVector = this.path.vectorLastToCurrentPoint();
         double angleDiff = lastVector.angleSimilarity(idealMovementVector);
         double desiredSpeed =

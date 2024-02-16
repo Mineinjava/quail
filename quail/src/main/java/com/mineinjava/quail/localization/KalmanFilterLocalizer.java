@@ -10,6 +10,7 @@ public class KalmanFilterLocalizer implements Localizer {
   private double looptime = 0;
   private ArrayList<KalmanPose2d> velocities =
       new ArrayList<KalmanPose2d>(); // / list of velocities, most recent last
+  public double heading = 0;
 
   public KalmanFilterLocalizer(Vec2d initialPose, double looptime) {
     poseEstimate = initialPose;
@@ -53,10 +54,14 @@ public class KalmanFilterLocalizer implements Localizer {
   }
 
   public Pose2d getPose() {
-    return new Pose2d(poseEstimate.x, poseEstimate.y, 0);
+    return new Pose2d(poseEstimate.x, poseEstimate.y, this.heading);
   }
   public void setPose(Pose2d pose) {
     this.poseEstimate = new Vec2d(pose.x, pose.y);
+}
+public void setHeading(double heading) {
+    this.heading = heading;
+  }
 }
 
 class KalmanPose2d extends Vec2d {
