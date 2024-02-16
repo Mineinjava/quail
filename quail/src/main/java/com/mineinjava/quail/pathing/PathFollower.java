@@ -132,7 +132,9 @@ public class PathFollower {
     if (currentPose == null) {
       return new RobotMovement(0, new Vec2d(0, 0)); // error?
     }
-    double deltaAngle = Util.deltaAngle(currentPose.heading, this.path.getCurrentPoint().heading); // angle we have to rotate
+    double deltaAngle =
+        Util.deltaAngle(
+            currentPose.heading, this.path.getCurrentPoint().heading); // angle we have to rotate
 
     if (this.path.getCurrentPoint() == null) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
@@ -144,7 +146,8 @@ public class PathFollower {
       this.path.currentPointIndex++;
     }
 
-    Vec2d idealMovementVector = this.path.vectorToCurrentPoint(this.currentPose); // get the vector to the next point
+    Vec2d idealMovementVector =
+        this.path.vectorToCurrentPoint(this.currentPose); // get the vector to the next point
     if (idealMovementVector == null) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
@@ -152,7 +155,7 @@ public class PathFollower {
       idealMovementVector =
           idealMovementVector.normalize().scale(this.path.remainingLength(currentPose) * this.kP);
     } else {
-      if (this.path.distanceToCurrentPoint(currentPose) < this.slowDownDistance){
+      if (this.path.distanceToCurrentPoint(currentPose) < this.slowDownDistance) {
         Vec2d lastVector = this.path.vectorLastToCurrentPoint();
         double angleDiff = lastVector.angleSimilarity(idealMovementVector);
         double desiredSpeed =
