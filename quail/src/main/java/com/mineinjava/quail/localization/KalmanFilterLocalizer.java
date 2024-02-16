@@ -48,8 +48,9 @@ public class KalmanFilterLocalizer implements Localizer {
     Vec2d kinematicsPoseEstimate = this.poseEstimate.add(velocity.scale(this.looptime));
     // update the pose estimate with a weighted average of the vision and kinematics pose estimates
     w = Util.clamp(w, 0, 1); // make sure w is between 0 and 1 (inclusive)
+    System.out.println("k " + kinematicsPoseEstimate.toString() + "v " + visionPoseEstimate.toString() + "n " + this.velocities.size());
     this.poseEstimate =
-        visionPoseEstimate.scale(w).add(kinematicsPoseEstimate.scale(1 - w)).scale(0.5);
+        ((visionPoseEstimate.scale(w)).add(kinematicsPoseEstimate.scale(1 - w)));
     return this.poseEstimate;
   }
 
