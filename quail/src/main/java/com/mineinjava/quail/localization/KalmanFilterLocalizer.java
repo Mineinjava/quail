@@ -56,10 +56,12 @@ public class KalmanFilterLocalizer implements Localizer {
   public Pose2d getPose() {
     return new Pose2d(poseEstimate.x, poseEstimate.y, this.heading);
   }
+
   public void setPose(Pose2d pose) {
     this.poseEstimate = new Vec2d(pose.x, pose.y);
-}
-public void setHeading(double heading) {
+  }
+
+  public void setHeading(double heading) {
     this.heading = heading;
   }
 }
