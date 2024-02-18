@@ -388,7 +388,7 @@ public class MiniPID {
     // Ioutput, Doutput,errorSum );
     // System.out.printf("%5.2f\t%5.2f\t%5.2f\t%5.2f\n",output,Poutput, Ioutput, Doutput );
 
-    if (Math.abs(output) < this.deadband) {
+    if (Math.abs(error) < this.deadband) {
       output = 0;
     }
 
