@@ -4,9 +4,8 @@ package quail.util.geometry;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
-
 import com.mineinjava.quail.util.geometry.Angle;
+import org.junit.jupiter.api.Test;
 
 class AngleTest {
 
@@ -29,7 +28,7 @@ class AngleTest {
     assertEquals(180, a.getDegrees());
   }
 
-  @Test 
+  @Test
   void angleAddition() {
     Angle a = Angle.fromRadians(0);
     Angle b = Angle.fromRadians(Math.PI);
@@ -69,7 +68,6 @@ class AngleTest {
     assertEquals(Angle.norm(a.getRadians()), a.norm().getRadians());
   }
 
-
   @Test
   void angleNormalizationDelta() {
     Angle a = Angle.fromDegrees(800);
@@ -86,7 +84,7 @@ class AngleTest {
     assertEquals(a, b);
 
     a = Angle.fromDegrees(0);
-    b = Angle.fromDegrees(0);
+    b = Angle.fromDegrees(180);
     assertNotEquals(a, b);
   }
 }

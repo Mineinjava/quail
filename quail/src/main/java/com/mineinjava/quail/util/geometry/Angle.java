@@ -1,6 +1,6 @@
 /*
  * Class to represent an ccw+ angle in radians and provide various utilities for working with angles in radians or degrees.
- * 
+ *
  * The purpose is to provide a more intuitive and safe way to work with angles in radians and degrees.
  */
 
@@ -14,6 +14,7 @@ public class Angle {
 
   /**
    * Constructs a new {@link Angle} with the given measure in radians.
+   *
    * @param radians
    */
   private Angle(double radians) {
@@ -22,6 +23,7 @@ public class Angle {
 
   /**
    * Factory method to create a new {@link Angle} with the given measure in radians.
+   *
    * @param radians measure in radians (ccw+)
    * @return a new {@link Angle} with the given measure in radians
    */
@@ -31,6 +33,7 @@ public class Angle {
 
   /**
    * Factory method to create a new {@link Angle} with the given measure in degrees.
+   *
    * @param degrees measure in degrees (ccw+)
    * @return a new {@link Angle} with the given measure in degrees
    */
@@ -40,6 +43,7 @@ public class Angle {
 
   /**
    * Returns the measure of this angle in degrees.
+   *
    * @return the measure of this angle in degrees
    */
   public double getDegrees() {
@@ -48,6 +52,7 @@ public class Angle {
 
   /**
    * Returns the measure of this angle in radians.
+   *
    * @return the measure of this angle in radians
    */
   public double getRadians() {
@@ -56,6 +61,7 @@ public class Angle {
 
   /**
    * Add {@code angle} to this angle and return the result.
+   *
    * @param angle angle to add
    * @return the result of adding {@code angle} to this angle
    */
