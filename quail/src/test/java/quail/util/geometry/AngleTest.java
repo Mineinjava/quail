@@ -86,7 +86,7 @@ class AngleTest {
     assertEquals(a, b);
 
     a = Angle.fromDegrees(0);
-    b = Angle.fromDegrees(180);
+    b = Angle.fromDegrees(0);
     assertNotEquals(a, b);
   }
 }
