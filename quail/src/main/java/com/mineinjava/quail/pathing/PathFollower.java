@@ -142,7 +142,7 @@ public class PathFollower {
       this.lastRobotPose = currentPose;
     }
     if (this.path.getCurrentPoint().isHit(this.precision, currentPose, this.lastRobotPose)) {
-      this.path.currentPointIndex++;
+      this.path.incrementCurrentPointIndex();
     }
 
     Vec2d idealMovementVector =
@@ -202,7 +202,7 @@ public class PathFollower {
           "localizer is null, ensure that you have instantiated the localizer object");
     }
 
-    if (this.path.currentPointIndex + 1 > this.path.points.size()) {
+    if (this.path.getCurrentPointIndex() + 1 > this.path.points.size()) {
       return true;
     }
     if (this.path.getCurrentPoint() == null) {

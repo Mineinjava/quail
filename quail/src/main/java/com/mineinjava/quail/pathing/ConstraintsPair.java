@@ -1,8 +1,9 @@
 package com.mineinjava.quail.pathing;
 
 /**
- * Represents a pair of constraints (max velocity and max acceleration) for use in the path follower.
- * This can be either translational or angular velocity. If angular velocity, units are in radians.
+ * Represents a pair of constraints (max velocity and max acceleration) for use in the path
+ * follower. This can be either translational or angular velocity. If angular velocity, units are in
+ * radians.
  */
 public class ConstraintsPair {
 
@@ -38,4 +39,3 @@ public class ConstraintsPair {
     return acceleration;
   }
 }
-

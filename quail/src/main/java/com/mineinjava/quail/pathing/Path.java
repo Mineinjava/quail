@@ -23,8 +23,8 @@ import java.util.ArrayList;
  */
 public class Path {
   public ArrayList<Pose2d> points;
-  public int currentPointIndex = 0;
-  public int lastPointIndex = 0;
+  private int currentPointIndex = 0;
+  public int lastPointIndex;
 
   /**
    * creates a path with the specified points and final heading.
@@ -36,6 +36,20 @@ public class Path {
     lastPointIndex = points.size() - 1;
   }
 
+  public void incrementCurrentPointIndex() {
+    if (currentPointIndex == lastPointIndex) {
+      throw new IllegalArgumentException("CurrentPointIndex is already at the last point.");
+    }
+    currentPointIndex++;
+  }
+
+  public void setCurrentPointIndex(int index) {
+    if (index < 0 || index > lastPointIndex) {
+      throw new IllegalArgumentException("Cannot set currentPointIndex to " + index + " because it would be out of bounds.");
+    }
+    currentPointIndex = index;
+  }
+
   /** returns the next point in the path. */
   public Pose2d getNextPoint() {
     if (currentPointIndex < lastPointIndex) {
@@ -45,7 +59,10 @@ public class Path {
     }
   }
 
-  /** returns the current point in the path. */
+  public int getCurrentPointIndex() {
+    return currentPointIndex;
+  }
+
   public Pose2d getCurrentPoint() {
     if (currentPointIndex <= lastPointIndex) {
       return points.get(currentPointIndex);
@@ -59,7 +76,7 @@ public class Path {
     if (currentPointIndex + index < 0) {
       return null;
     }
-    if (currentPointIndex + index > points.size()) {
+    if (currentPointIndex + index >= points.size()) {
       return null;
     }
 
@@ -226,4 +243,5 @@ public class Path {
 
     return length;
   }
+
 }
