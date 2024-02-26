@@ -1,10 +1,9 @@
 // Tests for the Angle class
 
-package quail.util.geometry;
+package com.mineinjava.quail.util.geometry;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.mineinjava.quail.util.geometry.Angle;
 import org.junit.jupiter.api.Test;
 
 class AngleTest {

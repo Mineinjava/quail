@@ -1,6 +1,6 @@
 package com.mineinjava.quail.localization;
 
-import com.mineinjava.quail.util.Util;
+import com.mineinjava.quail.util.MathUtil;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class KalmanFilterLocalizer implements Localizer {
     // update the last pose estimate with the velocity
     Vec2d kinematicsPoseEstimate = this.poseEstimate.add(velocity.scale(this.looptime));
     // update the pose estimate with a weighted average of the vision and kinematics pose estimates
-    w = Util.clamp(w, 0, 1); // make sure w is between 0 and 1 (inclusive)
+    w = MathUtil.clamp(w, 0, 1); // make sure w is between 0 and 1 (inclusive)
     this.poseEstimate = ((visionPoseEstimate.scale(w)).add(kinematicsPoseEstimate.scale(1 - w)));
     return this.poseEstimate;
   }
