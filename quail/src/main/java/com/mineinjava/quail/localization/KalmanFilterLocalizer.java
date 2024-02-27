@@ -24,13 +24,20 @@ public class KalmanFilterLocalizer implements Localizer {
    * @param observedPose the current pose estimate (get this from vision usually)
    * @param velocity the current velocity
    * @param poseEstimateLatency the time since the last vision update
+   * @param w how much weight to "trust" the vision estimate
+   * @param timestampMillis the current system time in ms
    */
-  public Vec2d update(Vec2d observedPose, Vec2d velocity, double poseEstimateLatency, double w) {
-    KalmanPose2d currentVelocity = new KalmanPose2d(velocity, System.currentTimeMillis());
+  public Vec2d update(
+      Vec2d observedPose,
+      Vec2d velocity,
+      double poseEstimateLatency,
+      double w,
+      double timestampMillis) {
+    KalmanPose2d currentVelocity = new KalmanPose2d(velocity, timestampMillis);
     velocities.add(currentVelocity); // add the current velocity to the list of velocities
     // trim the list of velocities to only include the relevant ones.
     while (velocities.size() > 0
-        && velocities.get(0).timestamp < System.currentTimeMillis() - poseEstimateLatency) {
+        && velocities.get(0).timestamp < timestampMillis - poseEstimateLatency) {
       velocities.remove(0);
     }
     // distance traveled since the vision update
