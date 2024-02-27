@@ -135,10 +135,11 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPose(com.mineinjava.quail.util.geometry.Pose2d)" class="member-name-link">setPose</a><wbr>(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;pose)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(com.mineinjava.quail.util.geometry.Vec2d,com.mineinjava.quail.util.geometry.Vec2d,double,double)" class="member-name-link">update</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;observedPose,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(com.mineinjava.quail.util.geometry.Vec2d,com.mineinjava.quail.util.geometry.Vec2d,double,double,double)" class="member-name-link">update</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;observedPose,
  <a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;velocity,
  double&nbsp;poseEstimateLatency,
- double&nbsp;w)</code></div>
+ double&nbsp;w,
+ double&nbsp;timestampMillis)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the pose estimate based on the current velocity and the time since the last vision
  update</div>
@@ -190,12 +191,13 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="update(com.mineinjava.quail.util.geometry.Vec2d,com.mineinjava.quail.util.geometry.Vec2d,double,double)">
+<section class="detail" id="update(com.mineinjava.quail.util.geometry.Vec2d,com.mineinjava.quail.util.geometry.Vec2d,double,double,double)">
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></span>&nbsp;<span class="element-name">update</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;observedPose,
  <a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;velocity,
  double&nbsp;poseEstimateLatency,
- double&nbsp;w)</span></div>
+ double&nbsp;w,
+ double&nbsp;timestampMillis)</span></div>
 <div class="block">Updates the pose estimate based on the current velocity and the time since the last vision
  update</div>
 <dl class="notes">
@@ -203,6 +205,8 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <dd><code>observedPose</code> - the current pose estimate (get this from vision usually)</dd>
 <dd><code>velocity</code> - the current velocity</dd>
 <dd><code>poseEstimateLatency</code> - the time since the last vision update</dd>
+<dd><code>w</code> - how much weight to "trust" the vision estimate</dd>
+<dd><code>timestampMillis</code> - the current system time in ms</dd>
 </dl>
 </section>
 </li>
