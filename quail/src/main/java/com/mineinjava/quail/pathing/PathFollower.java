@@ -145,11 +145,12 @@ public class PathFollower {
       this.path.incrementCurrentPointIndex();
     }
 
-    Vec2d idealMovementVector =
-        this.path.vectorToCurrentPoint(this.currentPose); // get the vector to the next point
-    if (idealMovementVector == null) {
+    if (this.path.isFinished()) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
+
+    Vec2d idealMovementVector =
+        this.path.vectorToCurrentPoint(this.currentPose); // get the vector to the next point
     if (this.path.remainingLength(this.currentPose) < this.slowDownDistance) {
       idealMovementVector =
           idealMovementVector.normalize().scale(this.path.remainingLength(currentPose) * this.kP);
@@ -202,15 +203,7 @@ public class PathFollower {
           "localizer is null, ensure that you have instantiated the localizer object");
     }
 
-    if (this.path.getCurrentPointIndex() + 1 > this.path.points.size()) {
-      return true;
-    }
-    if (this.path.getCurrentPoint() == null) {
-      return true;
-    }
-
-    Pose2d currentPose = this.localizer.getPose();
-    return false;
+    return this.path.isFinished();
   }
 
   /**

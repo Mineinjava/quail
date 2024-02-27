@@ -22,9 +22,10 @@ import java.util.ArrayList;
  * after reaching the CURRENT POINT
  */
 public class Path {
-  public ArrayList<Pose2d> points;
+  public final ArrayList<Pose2d> points;
   private int currentPointIndex = 0;
-  public int lastPointIndex;
+  private final int lastPointIndex;
+  private boolean isFinished = false;
 
   /**
    * creates a path with the specified points and final heading.
@@ -36,72 +37,102 @@ public class Path {
     lastPointIndex = points.size() - 1;
   }
 
-  public void incrementCurrentPointIndex() {
-    if (currentPointIndex == lastPointIndex) {
-      throw new IllegalArgumentException("CurrentPointIndex is already at the last point.");
+  public boolean isFinished() {
+    return isFinished;
+  }
+
+  public void finishPath() {
+    if (isFinished) {
+      throw new IllegalStateException("Path is already marked as finished. Cannot finish again.");
     }
+    isFinished = true;
+  }
+
+  public void incrementCurrentPointIndex() {
+    // If we are finished, we should not be able to increment the current point index
+    if (isFinished) {
+      throw new IllegalStateException(
+          "Path is already marked as finished. Cannot increment current point index.");
+    }
+
+    // Check if we are at the last point, if so mark the path as finished
+    if (currentPointIndex == lastPointIndex) {
+      this.finishPath();
+      return;
+    } else if (currentPointIndex > lastPointIndex) {
+      throw new IllegalStateException(
+          "Path is already marked as finished. Cannot increment current point index.");
+    }
+
     currentPointIndex++;
   }
 
-  public void setCurrentPointIndex(int index) {
-    if (index < 0 || index > lastPointIndex) {
-      throw new IllegalArgumentException("Cannot set currentPointIndex to " + index + " because it would be out of bounds.");
-    }
-    currentPointIndex = index;
-  }
-
-  /** returns the next point in the path. */
+  /**
+   * Gets the next point in the path. If the path is finished, or if we are on the last point,
+   * returns null.
+   *
+   * @return the next point in the path
+   */
   public Pose2d getNextPoint() {
-    if (currentPointIndex < lastPointIndex) {
-      return points.get(currentPointIndex + 1);
-    } else {
+    if (isFinished) {
       return null;
     }
+
+    if (currentPointIndex + 1 > lastPointIndex) {
+      return null;
+    }
+
+    return points.get(currentPointIndex + 1);
   }
 
   public int getCurrentPointIndex() {
     return currentPointIndex;
   }
 
+  /**
+   * Gets the current point in the path. If the path is finished, returns null.
+   *
+   * @return the current point in the path
+   */
   public Pose2d getCurrentPoint() {
-    if (currentPointIndex <= lastPointIndex) {
-      return points.get(currentPointIndex);
-    } else {
+    if (isFinished) {
       return null;
     }
+
+    return points.get(currentPointIndex);
   }
 
   /** returns the point at the specified index relative to the current point. */
   public Pose2d getPointRelativeToCurrent(int index) {
-    if (currentPointIndex + index < 0) {
-      return null;
-    }
-    if (currentPointIndex + index >= points.size()) {
+    if (isFinished) {
       return null;
     }
 
-    return points.get(currentPointIndex + index);
+    int newIndex = currentPointIndex + index;
+
+    if (newIndex < 0 || newIndex > lastPointIndex) {
+      throw new IllegalArgumentException(
+          "Cannot get point at index " + index + " because it would be out of bounds.");
+    }
+
+    return points.get(newIndex);
   }
 
   /**
    * @return a vector from the passed pose to the current point
    */
   public Vec2d vectorToCurrentPoint(Pose2d point) {
-    Pose2d nextPoint = this.getCurrentPoint();
-    if (nextPoint == null) {
+    if (isFinished) {
       return null;
     }
-    return new Vec2d(nextPoint.x - point.x, nextPoint.y - point.y);
+    return this.getCurrentPoint().vec().subtract(point.vec());
   }
 
   /** returns the overall length of the path assuming the robot paths on straight lines */
   public double length() {
     double length = 0;
-
     for (int i = 0; i < points.size() - 1; i++) {
-      Pose2d p1 = points.get(i);
-      Pose2d p2 = points.get(i + 1);
-      length += Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+      length += points.get(i).distanceTo(points.get(i + 1));
     }
     return length;
   }
@@ -243,5 +274,4 @@ public class Path {
 
     return length;
   }
-
 }
