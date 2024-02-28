@@ -34,6 +34,7 @@ Quail is designed for use and tested in FRC and FTC, but it should work in any j
     - Includes heading odometry (can run field oriented without gyroscope and/or provide corrections to gyroscope via Kálmán filter)
 - 2-deadwheel odometry (robot can know where it is (requires additional hardware & gyro))
 - Autonomous navigation and pathing
+- Kálmán filter for use with vision
 
 **Not quite working**
 - Path sequences
