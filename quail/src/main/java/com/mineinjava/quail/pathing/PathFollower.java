@@ -120,34 +120,39 @@ public class PathFollower {
       throw new NullPointerException(
           "localizer is null, ensure that you have instantiated the localizer object");
     }
+
+    // Check if the path is already finished, if so, return a movement of 0
     if (this.isFinished()) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
 
+    // Get the current pose of the robot, throw an exception if it is null
     this.currentPose = this.localizer.getPose();
     this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
     this.lastTime = System.currentTimeMillis();
-
     if (currentPose == null) {
-      return new RobotMovement(0, new Vec2d(0, 0)); // error?
+      throw new NullPointerException(
+          "currentPose is null, ensure that you have instantiated the localizer object");
     }
-    double deltaAngle =
-        MathUtil.deltaAngle(
-            currentPose.heading, this.path.getCurrentPoint().heading); // angle we have to rotate
 
-    if (this.path.getCurrentPoint() == null) {
-      return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
-    }
+    // FFirst loop, we don't have a last robot pose, so we set it to the current pose
     if (this.lastRobotPose == null) { // if this is the first loop, the robot hopefully hasn't moved
       this.lastRobotPose = currentPose;
     }
+
+    // Check if the robot has reached the current point, if so, increment the current point index
     if (this.path.getCurrentPoint().isHit(this.precision, currentPose, this.lastRobotPose)) {
       this.path.incrementCurrentPointIndex();
     }
 
+    // Check if the path is finished, if so, return a movement of 0
     if (this.path.isFinished()) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
+
+    double deltaAngle =
+            MathUtil.deltaAngle(
+                    currentPose.heading, this.path.getCurrentPoint().heading); // angle we have to rotate
 
     Vec2d idealMovementVector =
         this.path.vectorToCurrentPoint(this.currentPose); // get the vector to the next point
@@ -188,7 +193,7 @@ public class PathFollower {
     Vec2d movementVector = oldVelocity.add(accelerationVector.scale(this.loopTime));
 
     double turnSpeed = turnController.getOutput(0, deltaAngle);
-    turnSpeed /= this.path.distance_last_to_current_point();
+    turnSpeed /= this.path.distanceLastToCurrentPoint();
     turnSpeed = MathUtil.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
     this.lastRobotPose = currentPose;
