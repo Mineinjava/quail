@@ -1,28 +1,47 @@
 package com.mineinjava.quail.util;
 
 /*
-   The code in this file was not written by authors of quail. It was written by tekdemo and is licensed under the GNU General Public License
-   v3.0.
-   The original source code can be found at https://github.com/tekdemo/MiniPID-Java
+The code in this file was not written by authors of Quail. It was written by tekdemo and is licensed under the GNU General Public License
+v3.0.
+The original source code can be found at https://github.com/tekdemo/MiniPID-Java
 
-   Quail authors have made minor changes. These changes are licensed under the GNU General Public License v3.0.
+Quail authors have made minor changes. These changes are licensed under the GNU General Public License v3.0.
 
-   Copyright (C) 2018-present tekdemo
-   Changes Copyright (C) 2023-present Marcus Kauffman
+Copyright (C) 2018-present tekdemo
+Changes Copyright (C) 2023-present Marcus Kauffman
 
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-   You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+// Copyright (C) Marcus Kauffman 2023-Present
+
+// This work would not have been possible without the work of many
+// contributors, most notably Colin Montigel. See ACKNOWLEDGEMENT.md for
+// more details.
+
+// This file is part of Quail.
+
+// Quail is free software: you can redistribute it and/or modify it
+// underthe terms of the GNU General Public License as published by the
+// Free Software Foundation, version 3.
+
+// Quail is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+// FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+// for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with Quail. If not, see <https://www.gnu.org/licenses/>
 
 /**
  * Small, easy to use PID implementation with advanced controller capability.<br>

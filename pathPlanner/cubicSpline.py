@@ -16,20 +16,25 @@
 # Modified by: Marcus Kauffman in 2023 (released under GNU GPLv3 license)
 # This is a direct port of the C# code to Python by Marcus Kauffman in 2023
 
-# Copyright (C) 2023  Marcus Kauffman,
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
+# Copyright (C) Marcus Kauffman 2023-Present
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
+# This work would not have been possible without the work of many
+# contributors, most notably Colin Montigel. See ACKNOWLEDGEMENT.md for
+# more details.
+
+# This file is part of Quail.
+
+# Quail is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, version 3.
+
+# Quail is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+# for more details.
 
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+# along with Quail. If not, see <https://www.gnu.org/licenses/>.
 
 import math
 import numpy as np

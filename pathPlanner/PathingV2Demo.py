@@ -1,3 +1,23 @@
+# Copyright (C) Marcus Kauffman 2023-Present
+
+# This work would not have been possible without the work of many
+# contributors, most notably Colin Montigel. See ACKNOWLEDGEMENT.md for
+# more details.
+
+# This file is part of Quail.
+
+# Quail is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free
+# Software Foundation, version 3.
+
+# Quail is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+# FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+# for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Quail. If not, see <https://www.gnu.org/licenses/>.
+
 from math import sqrt
 import random
 import math
@@ -137,7 +157,7 @@ if __name__ == "__main__":
 
     half_width = FIELD_WIDTH/2
     half_length = FIELD_LENGTH/2
-    
+
     plt.style.use('dark_background')
     if ANIMATE:
         h1 = plt.plot([], [], 'rx-')
@@ -267,10 +287,10 @@ if __name__ == "__main__":
     plt.xlim(-half_width, half_width)
     plt.imshow(plt.imread("./centerstage.png"), extent=[-half_length, half_length, -half_width, half_width])
     plt.plot([point[0] for point in ipoints],
-             [point[1] for point in ipoints], 'bx-', 
+             [point[1] for point in ipoints], 'bx-',
              color="fuchsia", label="Point to Point/Direct")
     plt.plot([point[0] for point in points],
-             [point[1] for point in points], 'rx-', 
+             [point[1] for point in points], 'rx-',
              label="Spline")
     plt.plot(x, y, 'r-', color="lime", label="Loop Point/Predicted Localized Point")
     plt.title("Path")
@@ -281,10 +301,10 @@ if __name__ == "__main__":
     plt.xticks(np.arange(-half_length, half_length + 1, GRID_INCREMENT))
     plt.yticks(np.arange(-half_width, half_width + 1, GRID_INCREMENT))
 
-    plt.text(-half_width, half_length * 1.1, 
-             "Simulated time: " + str(round(len(robotPoseHistory) * LOOPTIME, 2)) + "s\nTotal distance: " + str(round(total_dist, 2)) + " units", 
-             horizontalalignment='center', 
-             verticalalignment='center', 
+    plt.text(-half_width, half_length * 1.1,
+             "Simulated time: " + str(round(len(robotPoseHistory) * LOOPTIME, 2)) + "s\nTotal distance: " + str(round(total_dist, 2)) + " units",
+             horizontalalignment='center',
+             verticalalignment='center',
              bbox=dict(facecolor='white', alpha=0.5)
              )
 
