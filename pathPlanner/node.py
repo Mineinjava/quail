@@ -44,7 +44,6 @@ class node(point2d):
         for i in range(-1, 1+1):
             for j in range(-1, 1+1):
                 if not (i == 0 and j == 0):
-                    print("i, j", i, j)
                     backupneighbors.append(node(self.x + i, self.y + j))
                     jumppoint = jump((self.x, self.y), i, j, grid)
                     if jumppoint != (self.x, self.y):
