@@ -1,7 +1,10 @@
+import time
+
 import point
 from node import node
 import numpy as np
 import bresenhams
+from time import perf_counter
 import traceback
 from perlin_noise import PerlinNoise
 HERUISTIC_WEIGHT = 1
@@ -50,12 +53,9 @@ def theta_star(start:node, goal:point, grid):
         for neighbor in s.neighbors:
             if neighbor in closedSet:
                 continue
-            #if neighbor.x >= len(grid) or neighbor.y >= len(grid[0]):
-            #    continue
-            if True:# grid[neighbor.x-1][neighbor.y-1] == 0:
-                update_vertex(s, neighbor, goal, grid)
-                if neighbor not in openSet and neighbor.parent != None:
-                    openSet.append(neighbor)
+            update_vertex(s, neighbor, goal, grid)
+            if neighbor not in openSet and neighbor.parent != None:
+                openSet.append(neighbor)
     return None
 
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     from cubicSpline import interpolate_xy
     WIDTH = 50
     HEIGHT = 50
-    FILL_PCT = 0.15
+    FILL_PCT = 0.3
     start = node(0, 0)
     goal = node(WIDTH-1, HEIGHT-1)
     grid = []
@@ -92,7 +92,10 @@ if __name__ == '__main__':
     grid[0][0] = 0
     grid[HEIGHT-1][WIDTH-1] = 0
 
+    start_time = time.perf_counter()
     path = theta_star(start, goal, grid)
+    end_time = time.perf_counter()
+    print("Time taken: ", (end_time - start_time) * 1000)
     print(path)
     splinex = []
     spliney = []
