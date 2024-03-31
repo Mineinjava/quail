@@ -30,7 +30,7 @@ def update_vertex(s:node, neighbor:node, goal:node, grid):
             neighbor.set_shortestDist(s.parent.shortestDist + s.parent.distance(neighbor))
             neighbor.set_heuristic_distance(goal)
     else:
-        if True: #neighbor.line_of_sight(s, grid):
+        if neighbor.line_of_sight(s, grid):
             if s.shortestDist + s.distance(neighbor) < neighbor.shortestDist:
                 neighbor.parent = s
                 neighbor.set_shortestDist(s.shortestDist + s.distance(neighbor))
