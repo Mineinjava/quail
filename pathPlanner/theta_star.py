@@ -53,7 +53,7 @@ def theta_star(start:node, goal:point, grid):
         if s == goal:
             return reconstruct_path(s)
         closedSet.append(s)
-        for neighbor in s.neighbors:
+        for neighbor in s.get_neighbors(diagonal=True, grid=grid):
             if neighbor in closedSet:
                 continue
             update_vertex(s, neighbor, goal, grid)
@@ -69,7 +69,7 @@ if __name__ == '__main__':
     from cubicSpline import interpolate_xy
     WIDTH = 50
     HEIGHT = 50
-    FILL_PCT = 0.3
+    FILL_PCT = 0.35
     start = node(0, 0)
     goal = node(WIDTH-1, HEIGHT-1)
     grid = []
@@ -81,7 +81,7 @@ if __name__ == '__main__':
         grid.append(arr)
 
     '''
-    noise = PerlinNoise(octaves=10)
+    noise = PerlinNoise(octaves=5)
     xpix, ypix = WIDTH, HEIGHT
     pic = [[noise([i/xpix, j/ypix]) for j in range(xpix)] for i in range(ypix)]
 
