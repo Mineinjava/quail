@@ -14,7 +14,6 @@ def jump(pos, dx, dy, grid):
             return (x - dx, y - dy)
         # calculate sum of all point around the current point
         sum_ = grid[x-1:x+2, y-1:y+2].sum()
-        print(pos, sum_)
         if sum_ != 0:
             return (x, y)
         x = x + dx
