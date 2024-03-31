@@ -21,6 +21,14 @@ class point2d:
             return True
         if self is None or other is None:
             return False
+
+        if self.x < 0 or self.y < 0 or self.x >= grid.shape[0] or self.y >= grid.shape[1]:
+            return False
+        if other.x < 0 or other.y < 0 or other.x >= grid.shape[0] or other.y >= grid.shape[1]:
+            return False
+        if grid[self.x][self.y] == 1 or grid[other.x][other.y] == 1:
+            return False
+
         intersected_points = [point2d(x, y) for x, y in
                               bresenhams.supercover(self.as_tuple(),
                                                     other.as_tuple())]
