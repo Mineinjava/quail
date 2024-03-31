@@ -3,12 +3,14 @@ import time
 import point
 from node import node
 import numpy as np
+from numba import njit
 import bresenhams
 from time import perf_counter
 import traceback
 from queue import PriorityQueue
 from perlin_noise import PerlinNoise
 HERUISTIC_WEIGHT = 1
+
 
 def reconstruct_path(goal:node):
     path = []
@@ -92,6 +94,7 @@ if __name__ == '__main__':
     plt.show()
     grid[0][0] = 0
     grid[HEIGHT-1][WIDTH-1] = 0
+    theta_star(start, goal, grid)
 
     start_time = time.perf_counter()
     path = theta_star(start, goal, grid)

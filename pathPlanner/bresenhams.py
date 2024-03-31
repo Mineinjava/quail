@@ -1,3 +1,6 @@
+from numba import njit
+
+@njit(fastmath=True, cache=True)
 def get_line(start, end):
 
     """Bresenham's Line Algorithm

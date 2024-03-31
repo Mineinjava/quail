@@ -1,5 +1,6 @@
 from typing import Optional, Union
 import bresenhams
+from numba import njit
 
 
 class point2d:
@@ -13,7 +14,6 @@ class point2d:
 
     def as_tuple(self) -> tuple:
         return (self.x, self.y)
-
     def line_of_sight(self, other: 'point2d', grid) -> bool:
         """Returns true if there is a line of sight between self and other.
         """
