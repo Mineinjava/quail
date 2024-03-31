@@ -30,7 +30,7 @@ class point2d:
             return False
 
         intersected_points = [point2d(x, y) for x, y in
-                              bresenhams.supercover(self.as_tuple(),
+                              bresenhams.get_line(self.as_tuple(),
                                                     other.as_tuple())]
         intersected_points.append(other)
         intersected_points.append(self)
