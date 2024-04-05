@@ -25,6 +25,7 @@ import java.util.List;
 
 public class SwerveDrive<T extends SwerveModuleBase> {
   public final List<T> swerveModules;
+  private double maxModuleSpeed = 1.0;
 
   /**
    * Represents a swerve drive Designed to be inherited from. While it will work without being
@@ -44,6 +45,15 @@ public class SwerveDrive<T extends SwerveModuleBase> {
    */
   public SwerveDrive(List<T> swerveModules) {
     this.swerveModules = swerveModules;
+  }
+
+  /**
+   * @param swerveModules a list of swerve modules
+   * @param maxModuleSpeed maximum allowed speed for swerve modules
+   */
+  public SwerveDrive(List<T> swerveModules, double maxModuleSpeed) {
+    this.swerveModules = swerveModules;
+    this.maxModuleSpeed = maxModuleSpeed;
   }
 
   /**
@@ -70,7 +80,7 @@ public class SwerveDrive<T extends SwerveModuleBase> {
   public void move(RobotMovement movement, double gyroOffset) {
     Vec2d[] moduleVectors =
         calculateMoveAngles(movement.translation, movement.rotation, gyroOffset);
-    moduleVectors = normalizeModuleVectors(moduleVectors);
+    moduleVectors = normalizeModuleVectors(moduleVectors, this.maxModuleSpeed);
     for (int i = 0; i < this.swerveModules.size(); i++) {
       swerveModules.get(i).set(moduleVectors[i]);
     }
