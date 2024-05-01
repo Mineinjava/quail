@@ -2,6 +2,8 @@
 # quail
 <img src="https://github.com/Mineinjava/quail/blob/main/images/quail_above_border.png" width="40%" align="right">
 
+Looking to contribute to or use Quail? You may find value in joining the Discord server: https://discord.gg/ABznnnBB
+
 [![](https://jitpack.io/v/mineinjava/quail.svg) ![](https://jitpack.io/v/Mineinjava/Quail/month.svg)](https://jitpack.io/#mineinjava/quail)
 
 Bird-brained swerve drive utility.
