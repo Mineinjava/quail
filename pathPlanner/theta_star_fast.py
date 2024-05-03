@@ -36,7 +36,7 @@ import heapq
 from heapq import heappush, heappop
 
 USE_JUMP = False
-GRID_SHAPE = (50, 50)
+GRID_SHAPE = (15, 15)
 
 
 def reconstruct_path(goal: List) -> \
@@ -58,6 +58,7 @@ def get_grid_value(grid: Tuple[int], x: int, y: int) -> int:
     out of bounds"""
     if x < 0 or y < 0 or x >= GRID_SHAPE[0] or y >= GRID_SHAPE[1]:
         return 1
+    value = grid[x] >> y & 1
     return (grid[x] >> y) & 1
 
 
@@ -137,10 +138,8 @@ def line_of_sight(s: List,
     for point in intersected_points:
         if point[0] < 0 or point[1] < 0 or point[0] >= GRID_SHAPE[0] \
                 or point[1] >= GRID_SHAPE[1]:
-            print("F")
             return False
         elif get_grid_value(grid, point[0], point[1]) == 1:
-            print("F")
             return False
 
     return True
@@ -210,7 +209,6 @@ def jump(pos: Tuple[int, int], dx: int, dy: int, grid: Tuple[int]) \
             for j in range(-1, 1 + 1):
                 sum_ += get_grid_value(grid, x + i, y + j)
         if sum_ != 0:
-            print("sum")
             return (x-dx, y-dy)
         x = x + dx
         y = y + dy
@@ -232,7 +230,8 @@ def get_neighbors(s: List,
                                          None])
                 jumppoint = jump(s[1], i, j, grid)
                 if jumppoint != s[1]:
-                    neighbors.append([None, jumppoint, s, None])
+                    pass
+                    #neighbors.append([None, jumppoint, s, None])
 
     if len(neighbors) == 0:
         neighbors = backup_neighbors
@@ -244,7 +243,8 @@ def get_neighbors(s: List,
             continue
         elif get_grid_value(grid, neighbor[1][0], neighbor[1][1]) == 1:
             continue
-        new_neighbors.append([heuristic_distance(neighbor, goal, s[3]),
+        else:
+            new_neighbors.append([heuristic_distance(neighbor, goal, s[3]),
                               neighbor[1],  # keep pos the same
                               neighbor[2],  # keep parent the same
                               s[3] + node_distance(s, neighbor)])
@@ -268,9 +268,9 @@ def theta_star(start_pose: Tuple[int, int], goal_pose: Tuple[int, int],
         s = heappop(open_set)
         if s[1] == goal_pose:
             return reconstruct_path(s)
-        closed_set.append(s)
+        closed_set.append(s[1])
         for neighbor in get_neighbors(s, grid=grid, goal=goal_node):
-            if neighbor in closed_set:
+            if neighbor[1] in closed_set:
                 continue
             update_vertex(s, neighbor, goal_node, grid)
             if neighbor not in open_set and neighbor[2] is not None:
@@ -289,7 +289,7 @@ if __name__ == "__main__":
     goal = (GRID_SHAPE[0] - 1, GRID_SHAPE[1] - 1)
     grid = []
 
-    noise = PerlinNoise(octaves=3, seed=999)
+    noise = PerlinNoise(octaves=3, seed=980)
     xpix, ypix = GRID_SHAPE
     pic = [[noise([i / xpix, j / ypix]) for j in range(xpix)] for i in
            range(ypix)]
@@ -301,7 +301,7 @@ if __name__ == "__main__":
     # convert the grid to a 1d tuple
     for x in range(GRID_SHAPE[0]):
         for y in range(GRID_SHAPE[1]):
-            pathing_grid[x] = pathing_grid[x] + (grid[x][y] << -y)
+            pathing_grid[x] = pathing_grid[x] + (grid[x][y] << y)
 
     import time
 
@@ -317,8 +317,8 @@ if __name__ == "__main__":
     import matplotlib.pyplot as plt
 
     for point in path:
-        xs.append(point[1][0])
-        ys.append(point[1][1])
+        xs.append(point[1][1])
+        ys.append(point[1][0])
 
     plt.plot(xs, ys, 'ro-')
 
