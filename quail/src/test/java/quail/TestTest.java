@@ -27,10 +27,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class LibraryTest {
+class TestTest {
   @Test
   void someLibraryMethodReturnsTrue() {
+    System.out.println("pass");
     // Library classUnderTest = new Library();
     // assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
+    assertTrue(True);
   }
 }
