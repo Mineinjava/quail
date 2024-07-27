@@ -33,6 +33,6 @@ class TestTest {
     System.out.println("pass");
     // Library classUnderTest = new Library();
     // assertTrue(classUnderTest.someLibraryMethod(), "someLibraryMethod should return 'true'");
-    assertTrue(True);
+    assertTrue(true);
   }
 }
