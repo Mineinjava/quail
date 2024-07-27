@@ -89,23 +89,23 @@ public class Vec2dTest {
   }
 
   @Test
-    void Subtract() {
-      Vec2d vec1 = new Vec2d(10, 1);
-      Vec2d vec2 = new Vec2d(2, 20);
+  void Subtract() {
+    Vec2d vec1 = new Vec2d(10, 1);
+    Vec2d vec2 = new Vec2d(2, 20);
 
-      assertEquals(new Vec2d(8, -19), vec1.subtract(vec2));
-      assertEquals(new Vec2d(-8, 19), vec2.subtract(vec1));
-      assertEquals(new Vec2d(9.9, 0.8), vec1.subtract(0.1, 0.2));
+    assertEquals(new Vec2d(8, -19), vec1.subtract(vec2));
+    assertEquals(new Vec2d(-8, 19), vec2.subtract(vec1));
+    assertEquals(new Vec2d(9.9, 0.8), vec1.subtract(0.1, 0.2));
   }
 
   @Test
-    void GetAngle(){
-      Vec2d vec1 = new Vec2d();
-      Vec2d vec2 = new Vec2d(0, 1);
-      Vec2d vec3 = new Vec2d(0, -1);
+  void GetAngle() {
+    Vec2d vec1 = new Vec2d();
+    Vec2d vec2 = new Vec2d(0, 1);
+    Vec2d vec3 = new Vec2d(0, -1);
 
-      assertEquals(0, vec1.getAngle());
-      assertEquals(Math.PI / 2, vec2.getAngle());
-      assertEquals(Math.PI * 3 / 2, vec3.getAngle());
+    assertEquals(0, vec1.getAngle());
+    assertEquals(Math.PI / 2, vec2.getAngle());
+    assertEquals(Math.PI * 3 / 2, vec3.getAngle());
   }
 }
