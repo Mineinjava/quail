@@ -108,4 +108,23 @@ public class Vec2dTest {
     assertEquals(Math.PI / 2, vec2.getAngle());
     assertEquals(Math.PI * 3 / 2, vec3.getAngle());
   }
+
+  @Test
+  void DistanceTo() {
+    Vec2d vec1 = new Vec2d(0, 0);
+    Vec2d vec2 = new Vec2d(1, 0);
+    Vec2d vec3 = new Vec2d(0, 1);
+    Vec2d vec4 = new Vec2d(-1, 0);
+    Vec2d vec5 = new Vec2d(0, -1);
+
+    assertEquals(Double.NaN, vec1.distanceTo(vec1));
+    assertEquals(Double.NaN, vec1.distanceTo(vec2));
+
+    assertEquals(Math.PI/2, vec2.distanceTo(vec3));
+    assertEquals(Math.PI/2, vec5.distanceTo(vec4));
+    assertEquals(Math.PI/2, vec3.distanceTo(vec4));
+
+    assertEquals(Math.PI, vec2.distanceTo(vec4));
+  }
+
 }
