@@ -41,7 +41,9 @@ public class AngleTest {
     assertEquals(Math.PI, Angle.normDelta(Math.PI), "Math.PI is unchanged");
     assertEquals(Math.PI, Angle.normDelta(-Math.PI), "-pi wraps to pi");
     assertEquals(
-        Math.PI / 2, Angle.normDelta(Math.PI * 5 / 2), "Angles greater than pi should wrap correctly");
+        Math.PI / 2,
+        Angle.normDelta(Math.PI * 5 / 2),
+        "Angles greater than pi should wrap correctly");
     assertEquals(
         Math.PI / -2, Angle.normDelta(Math.PI / -2), "Angles less than pi should wrap correctly");
   }
