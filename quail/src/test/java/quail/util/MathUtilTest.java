@@ -24,10 +24,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Disabled;
-
 import com.mineinjava.quail.util.MathUtil;
 import com.mineinjava.quail.util.geometry.Pose2d;
+import java.util.List;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 public class MathUtilTest {
@@ -42,20 +42,21 @@ public class MathUtilTest {
   }
 
   @Test
-  void SkewerCircle(){
+  void SkewerCircle() {
     assertTrue(
         MathUtil.LineSegHitCircle(
             new Pose2d(0, -1, 0), new Pose2d(0, 1, 0), new Pose2d(0, 0, 0), 0.1),
         "skewer");
   }
+
   @Test
   @Disabled
-  void PopCircle() { //TODO: Fix the function do make this work
+  void PopCircle() { // TODO: Fix the function do make this work
     assertTrue(
-        MathUtil.LineSegHitCircle(
-            new Pose2d(0, 0, 0), new Pose2d(1, 1, 0), new Pose2d(0, 0, 0), 1),
+        MathUtil.LineSegHitCircle(new Pose2d(0, 0, 0), new Pose2d(1, 1, 0), new Pose2d(0, 0, 0), 1),
         "pop");
-  } 
+  }
+
   @Test
   void InsideCircle() {
     assertFalse(
@@ -63,6 +64,7 @@ public class MathUtilTest {
             new Pose2d(-1, -1, 0), new Pose2d(1, 1, 0), new Pose2d(0, 0, 0), 10),
         "inside");
   }
+
   @Test
   void MissCircle() {
     assertFalse(
@@ -74,5 +76,19 @@ public class MathUtilTest {
   @Test
   void Lerp() {
     assertEquals(5, MathUtil.lerp(0, 10, 0.5));
+  }
+
+  @Test
+  void Clamp() {
+    assertEquals(0, MathUtil.clamp(-50, 0, 5), "Too Small");
+    assertEquals(5, MathUtil.clamp(50, 0, 5), "Too Large");
+    assertEquals(2, MathUtil.clamp(2, 0, 5), "Inside");
+  }
+
+  @Test
+  void GetPairs() {
+    Double[] i = {1d, 2d, 3d};
+    List<List<Double>> pairs = MathUtil.getPairs(i);
+    assertEquals(3, pairs.size());
   }
 }
