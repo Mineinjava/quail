@@ -99,15 +99,39 @@ loadScripts(document, 'script');</script>
 <h2>Method Summary</h2>
 <div id="method-summary-table">
 <div class="table-tabs" role="tablist" aria-orientation="horizontal"><button id="method-summary-table-tab0" role="tab" aria-selected="true" aria-controls="method-summary-table.tabpanel" tabindex="0" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table', 3)" class="active-table-tab">All Methods</button><button id="method-summary-table-tab1" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab1', 3)" class="table-tab">Static Methods</button><button id="method-summary-table-tab4" role="tab" aria-selected="false" aria-controls="method-summary-table.tabpanel" tabindex="-1" onkeydown="switchTab(event)" onclick="show('method-summary-table', 'method-summary-table-tab4', 3)" class="table-tab">Concrete Methods</button></div>
-<div id="method-summary-table.tabpanel" role="tabpanel">
-<div class="summary-table three-column-summary" aria-labelledby="method-summary-table-tab0">
+<div id="method-summary-table.tabpanel" role="tabpanel" aria-labelledby="method-summary-table-tab0">
+<div class="summary-table three-column-summary">
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#clamp(double,double,double)" class="member-name-link">clamp</a><wbr>(double&nbsp;value,
+ double&nbsp;min,
+ double&nbsp;max)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">clamps a value between a min and a max</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#deltaAngle(double,double)" class="member-name-link">deltaAngle</a><wbr>(double&nbsp;angle1,
+ double&nbsp;angle2)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">Calculates the smallest angle between two angles Useful for determining how far and in which
+ direction to rotate anything angle returned is in radians, counterclockwise from angle 1 to
+ angle 2</div>
+</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static boolean</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#epsilonEquals(double,double)" class="member-name-link">epsilonEquals</a><wbr>(double&nbsp;value1,
  double&nbsp;value2)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#floormod(double,double)" class="member-name-link">floormod</a><wbr>(double&nbsp;a,
+ double&nbsp;b)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">&nbsp;</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static &lt;T&gt;&nbsp;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#getPairs(T%5B%5D)" class="member-name-link">getPairs</a><wbr>(T[]&nbsp;inputArray)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4">
+<div class="block">returns a list of all the pairs that can be formed from a list</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static double</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#lerp(double,double,double)" class="member-name-link">lerp</a><wbr>(double&nbsp;a,
  double&nbsp;b,
@@ -186,6 +210,52 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>value between a and b at t</dd>
 </dl>
+</section>
+</li>
+<li>
+<section class="detail" id="floormod(double,double)">
+<h3>floormod</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">floormod</span><wbr><span class="parameters">(double&nbsp;a,
+ double&nbsp;b)</span></div>
+</section>
+</li>
+<li>
+<section class="detail" id="deltaAngle(double,double)">
+<h3>deltaAngle</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">deltaAngle</span><wbr><span class="parameters">(double&nbsp;angle1,
+ double&nbsp;angle2)</span></div>
+<div class="block">Calculates the smallest angle between two angles Useful for determining how far and in which
+ direction to rotate anything angle returned is in radians, counterclockwise from angle 1 to
+ angle 2</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>angle1</code> - </dd>
+<dd><code>angle2</code> - </dd>
+<dt>Returns:</dt>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="clamp(double,double,double)">
+<h3>clamp</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="return-type">double</span>&nbsp;<span class="element-name">clamp</span><wbr><span class="parameters">(double&nbsp;value,
+ double&nbsp;min,
+ double&nbsp;max)</span></div>
+<div class="block">clamps a value between a min and a max</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>value</code> - </dd>
+<dd><code>min</code> - </dd>
+<dd><code>max</code> - </dd>
+<dt>Returns:</dt>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="getPairs(T[])">
+<h3 id="getPairs(java.lang.Object[])">getPairs</h3>
+<div class="member-signature"><span class="modifiers">public static</span>&nbsp;<span class="type-parameters">&lt;T&gt;</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;T&gt;&gt;</span>&nbsp;<span class="element-name">getPairs</span><wbr><span class="parameters">(T[]&nbsp;inputArray)</span></div>
+<div class="block">returns a list of all the pairs that can be formed from a list</div>
 </section>
 </li>
 </ul>
