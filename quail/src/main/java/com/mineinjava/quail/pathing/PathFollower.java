@@ -31,7 +31,7 @@ import java.util.ArrayList;
 /**
  * Class that helps you follow paths
  *
- * <p> TODO: Don't treat point as reached if angle is outside angular precision
+ * <p>TODO: Don't treat point as reached if angle is outside angular precision
  */
 public class PathFollower {
   private Path path;
@@ -133,7 +133,7 @@ public class PathFollower {
   /**
    * Calculate the next movement to follow the path.
    *
-   * <p> This does return a field-centric movement vector.
+   * <p>This does return a field-centric movement vector.
    *
    * @return the next movement to follow the path
    */
@@ -232,14 +232,13 @@ public class PathFollower {
     }
 
     Pose2d currentPose = this.localizer.getPose();
-    return false; //TODO: Fix this
+    return false; // TODO: Fix this
   }
 
   /**
    * Update the path to follow.
    *
-   * <p> This exists so that you can reuse the path follower between
-   * autonomous paths and movements.
+   * <p>This exists so that you can reuse the path follower between autonomous paths and movements.
    *
    * @param path the path to follow
    */
@@ -340,8 +339,7 @@ public class PathFollower {
   /**
    * Sets the precision of the path follower.
    *
-   * <p> (how close the robot needs to be to the point to move
-   * on)
+   * <p>(how close the robot needs to be to the point to move on)
    *
    * @param precision the precision of the path follower (your units)
    */
@@ -378,7 +376,8 @@ public class PathFollower {
 
   /**
    * Sets the kP of the slowdown distance.
-   * <p> (proporational to the distance)
+   *
+   * <p>(proporational to the distance)
    *
    * @param kP
    */

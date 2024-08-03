@@ -213,10 +213,9 @@ public class Vec2d {
   }
 
   /**
-   * Rotates the vector by the passed amount. 
+   * Rotates the vector by the passed amount.
    *
-   * <p> Positive rotation is counterclockwise, and negative
-   * rotation is clockwise.
+   * <p>Positive rotation is counterclockwise, and negative rotation is clockwise.
    *
    * @param rotation - the angle to rotate
    * @param isDegrees - whether or not the passed rotation is in degrees or radians

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 /**
  * Represents a path that the robot can follow.
  *
- * <p> Instantiate with a list of pose2d.
+ * <p>Instantiate with a list of pose2d.
  *
  * <p>The robot will follow the path by going to each pose in order.
  *
@@ -40,9 +40,10 @@ import java.util.ArrayList;
  * last pose in the path.
  *
  * <ul>
- *  <li> The `LAST POINT` is the last point that the robot hit. 
- *  <li> The `CURRENT POINT` is the point that the robot is currently pathing towards 
- *  <li> The NEXT POINT is the point that the robot will path towards after reaching the CURRENT POINT
+ *   <li>The `LAST POINT` is the last point that the robot hit.
+ *   <li>The `CURRENT POINT` is the point that the robot is currently pathing towards
+ *   <li>The NEXT POINT is the point that the robot will path towards after reaching the CURRENT
+ *       POINT
  * </ul>
  */
 public class Path {
@@ -90,9 +91,7 @@ public class Path {
     return points.get(currentPointIndex + index);
   }
 
-  /**
-   * Returns a vector from the passed pose to the current point.
-   */
+  /** Returns a vector from the passed pose to the current point. */
   public Vec2d vectorToCurrentPoint(Pose2d point) {
     Pose2d nextPoint = this.getCurrentPoint();
     if (nextPoint == null) {
@@ -141,9 +140,7 @@ public class Path {
     return Math.sqrt(Math.pow(point.x - currentPoint.x, 2) + Math.pow(point.y - currentPoint.y, 2));
   }
 
-  /**
-   * Returns a vector from the last point to the current point.
-   */
+  /** Returns a vector from the last point to the current point. */
   public Vec2d vectorLastToCurrentPoint() {
     Pose2d currentPoint = this.getCurrentPoint();
     if (currentPoint == null) {
@@ -156,9 +153,7 @@ public class Path {
     return new Vec2d(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
   }
 
-  /**
-   * Returns the distance from last point to current point.
-   */
+  /** Returns the distance from last point to current point. */
   public double distance_last_to_current_point() {
     return vectorLastToCurrentPoint().getLength();
   }
@@ -181,8 +176,9 @@ public class Path {
   }
 
   /**
-   * Calculates a vector from (x,y) to the nearest point on the path. 
-   * <p> The index of the nearest point must be greater than or equal to minIndex
+   * Calculates a vector from (x,y) to the nearest point on the path.
+   *
+   * <p>The index of the nearest point must be greater than or equal to minIndex
    *
    * @param point the point to calculate the vector from
    * @param minIndex the index of the nearest point must be greater than or equal to minIndex
@@ -195,7 +191,8 @@ public class Path {
 
   /**
    * Calculates the index of the nearest point on the path.
-   * <p> The index of the nearest point must be greater than or equal to minIndex
+   *
+   * <p>The index of the nearest point must be greater than or equal to minIndex
    *
    * @param point
    * @param minIndex
@@ -207,8 +204,9 @@ public class Path {
   }
 
   /**
-   * Calculates the nearest point on the path. 
-   * <p> The index of the nearest point must be greater than or equal to minIndex
+   * Calculates the nearest point on the path.
+   *
+   * <p>The index of the nearest point must be greater than or equal to minIndex
    *
    * @param point
    * @param minIndex - the index of the nearest point must be greater than or equal to minIndex

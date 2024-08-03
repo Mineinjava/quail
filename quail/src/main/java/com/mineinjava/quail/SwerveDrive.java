@@ -30,25 +30,25 @@ public class SwerveDrive<T extends SwerveModuleBase> {
   /**
    * Represents a swerve drive .
    *
-   * <p> Designed to be inherited from. 
-   * <p> While it will work without being inherited from, you may want to add some features such as:
+   * <p>Designed to be inherited from.
+   *
+   * <p>While it will work without being inherited from, you may want to add some features such as:
    *
    * <ul>
-   * <li> reset gyro, both from controller and from vision odometry 
-   * <li> reset module positions (from absolute encoders)
+   *   <li>reset gyro, both from controller and from vision odometry
+   *   <li>reset module positions (from absolute encoders)
    * </ul>
    *
    * <p>Normal use of this class would look something like:
    *
    * <ul>
-   * <li> Create a list of swerve modules 
-   * <li> Create a swerveDrive object with the list of swerve
-   * modules 
-   * <li> Every time you want to move, call `move()` with the desired movement vector and
-   * rotation speed 
-   * <li> Obtain the module vectors from the swerve modules and pass them into the
-   * swerveOdometry class (optional) 
-   * <li> Pass the normalized vectors into the swerve modules
+   *   <li>Create a list of swerve modules
+   *   <li>Create a swerveDrive object with the list of swerve modules
+   *   <li>Every time you want to move, call `move()` with the desired movement vector and rotation
+   *       speed
+   *   <li>Obtain the module vectors from the swerve modules and pass them into the swerveOdometry
+   *       class (optional)
+   *   <li>Pass the normalized vectors into the swerve modules
    * </ul>
    *
    * @param swerveModules a list of swerve modules
@@ -87,9 +87,7 @@ public class SwerveDrive<T extends SwerveModuleBase> {
     return moduleVectors;
   }
 
-  /**
-   * Attempts to move the drivetrain
-   */
+  /** Attempts to move the drivetrain */
   public void move(RobotMovement movement, double gyroOffset) {
     Vec2d[] moduleVectors =
         calculateMoveAngles(movement.translation, movement.rotation, gyroOffset);

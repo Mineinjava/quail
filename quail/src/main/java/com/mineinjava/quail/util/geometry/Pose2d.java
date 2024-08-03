@@ -23,19 +23,16 @@ package com.mineinjava.quail.util.geometry;
 import com.mineinjava.quail.util.MathUtil;
 import java.util.Objects;
 
-/** 
- * Represents a two-dimensional position and heading.
- * ALL angles MUST be in ccw+ radians 
- */
+/** Represents a two-dimensional position and heading. ALL angles MUST be in ccw+ radians */
 public class Pose2d {
   public final double x;
   public final double y;
   public final double heading;
 
-  /** 
+  /**
    * Returns zero pose.
    *
-   * <p> (x, y, and heading all are zero)
+   * <p>(x, y, and heading all are zero)
    */
   public Pose2d() {
     this(0.0, 0.0, 0.0);
@@ -163,9 +160,7 @@ public class Pose2d {
     }
   }
 
-  /**
-   * Returns a vector from this Pose2d to another Pose2d
-   */
+  /** Returns a vector from this Pose2d to another Pose2d */
   public Vec2d vectorTo(Pose2d other) {
     return other.vec().subtract(vec());
   }

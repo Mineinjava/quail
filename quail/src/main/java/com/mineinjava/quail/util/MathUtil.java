@@ -36,8 +36,8 @@ public class MathUtil {
    * and radius.
    *
    * <p>Note that the headings for all three Pose2d arguments are not used
-   * 
-   * <p> https://stackoverflow.com/a/1084899/13224997
+   *
+   * <p>https://stackoverflow.com/a/1084899/13224997
    */
   public static boolean LineSegHitCircle(
       Pose2d lineSegStart, Pose2d lineSegEnd, Pose2d circleCenter, double circleRadius) {
