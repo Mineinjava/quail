@@ -77,7 +77,9 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">AccelerationLimitedVector</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Represents a vector with input ramping to control acceleration Useful for joystick ramp limiting</div>
+<div class="block">Represents a vector with input ramping to control acceleration.
+
+ <p>Useful for joystick ramp limiting</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,13 +93,13 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(double)" class="member-name-link">AccelerationLimitedVector</a><wbr>(double&nbsp;maxAcceleration)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Creates a new AccelerationLimitedVector</div>
+<div class="block">Creates a new AccelerationLimitedVector.</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.util.geometry.Vec2d,com.mineinjava.quail.util.geometry.Vec2d,double)" class="member-name-link">AccelerationLimitedVector</a><wbr>(<a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;idealVector,
  <a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;currentVector,
  double&nbsp;maxAcceleration)</code></div>
 <div class="col-last odd-row-color">
-<div class="block">Creates a new AccelerationLimitedVector</div>
+<div class="block">Creates a new AccelerationLimitedVector.</div>
 </div>
 </div>
 </section>
@@ -116,18 +118,18 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getIdealVector()" class="member-name-link">getIdealVector</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Gets the ideal vector</div>
+<div class="block">Gets the ideal vector.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update()" class="member-name-link">update</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">calculates a new output vector based on the time since the last update</div>
+<div class="block">Calculates a new output vector based on the time since the last update.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(com.mineinjava.quail.util.geometry.Vec2d)" class="member-name-link">update</a><wbr>(<a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;newIdealVector)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">updates the ideal vector and calculates a new output vector based on the time since the last
- update</div>
+<div class="block">Updates the ideal vector and calculates a new output vector based on the time since the last
+ update.</div>
 </div>
 </div>
 </div>
@@ -152,7 +154,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AccelerationLimitedVector</span><wbr><span class="parameters">(<a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;idealVector,
  <a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;currentVector,
  double&nbsp;maxAcceleration)</span></div>
-<div class="block">Creates a new AccelerationLimitedVector</div>
+<div class="block">Creates a new AccelerationLimitedVector.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>idealVector</code> - The vector to ramp to</dd>
@@ -165,7 +167,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(double)">
 <h3>AccelerationLimitedVector</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">AccelerationLimitedVector</span><wbr><span class="parameters">(double&nbsp;maxAcceleration)</span></div>
-<div class="block">Creates a new AccelerationLimitedVector</div>
+<div class="block">Creates a new AccelerationLimitedVector.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>maxAcceleration</code> - The maximum acceleration</dd>
@@ -184,7 +186,7 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="getIdealVector()">
 <h3>getIdealVector</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></span>&nbsp;<span class="element-name">getIdealVector</span>()</div>
-<div class="block">Gets the ideal vector</div>
+<div class="block">Gets the ideal vector.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>current ideal vector</dd>
@@ -195,9 +197,10 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="update()">
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></span>&nbsp;<span class="element-name">update</span>()</div>
-<div class="block">calculates a new output vector based on the time since the last update</div>
+<div class="block">Calculates a new output vector based on the time since the last update.</div>
 <dl class="notes">
 <dt>Returns:</dt>
+<dd>new output vector</dd>
 </dl>
 </section>
 </li>
@@ -205,12 +208,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="update(com.mineinjava.quail.util.geometry.Vec2d)">
 <h3>update</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></span>&nbsp;<span class="element-name">update</span><wbr><span class="parameters">(<a href="Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;newIdealVector)</span></div>
-<div class="block">updates the ideal vector and calculates a new output vector based on the time since the last
- update</div>
+<div class="block">Updates the ideal vector and calculates a new output vector based on the time since the last
+ update.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>newIdealVector</code> - The new ideal vector</dd>
+<dd><code>newIdealVector</code> - the new ideal vector</dd>
 <dt>Returns:</dt>
+<dd>new output vector</dd>
 </dl>
 </section>
 </li>

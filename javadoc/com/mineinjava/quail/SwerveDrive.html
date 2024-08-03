@@ -105,7 +105,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(java.util.List)" class="member-name-link">SwerveDrive</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SwerveDrive.html" title="type parameter in SwerveDrive">T</a>&gt;&nbsp;swerveModules)</code></div>
 <div class="col-last even-row-color">
-<div class="block">Represents a swerve drive Designed to be inherited from.</div>
+<div class="block">Represents a swerve drive .</div>
 </div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.util.List,double)" class="member-name-link">SwerveDrive</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SwerveDrive.html" title="type parameter in SwerveDrive">T</a>&gt;&nbsp;swerveModules,
  double&nbsp;maxModuleSpeed)</code></div>
@@ -138,7 +138,9 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#move(com.mineinjava.quail.RobotMovement,double)" class="member-name-link">move</a><wbr>(<a href="RobotMovement.html" title="class in com.mineinjava.quail">RobotMovement</a>&nbsp;movement,
  double&nbsp;gyroOffset)</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
+<div class="block">Attempts to move the drivetrain</div>
+</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>[]</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#normalizeModuleVectors(com.mineinjava.quail.util.geometry.Vec2d%5B%5D)" class="member-name-link">normalizeModuleVectors</a><wbr>(<a href="util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>[]&nbsp;moduleVectors)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
@@ -184,18 +186,28 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="&lt;init&gt;(java.util.List)">
 <h3>SwerveDrive</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">SwerveDrive</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="SwerveDrive.html" title="type parameter in SwerveDrive">T</a>&gt;&nbsp;swerveModules)</span></div>
-<div class="block">Represents a swerve drive Designed to be inherited from. While it will work without being
- inherited from, you may want to add some features such as:
+<div class="block">Represents a swerve drive .
 
- <p>- reset gyro, both from controller and from vision odometry - reset module positions (from
- absolute encoders or vision odometry)
+ <p>Designed to be inherited from.
+
+ <p>While it will work without being inherited from, you may want to add some features such as:
+
+ <ul>
+   <li>reset gyro, both from controller and from vision odometry
+   <li>reset module positions (from absolute encoders)
+ </ul>
 
  <p>Normal use of this class would look something like:
 
- <p>- create a list of swerve modules - create a swerveDrive object with the list of swerve
- modules - every time you want to move, call `move()` with the desired movement vector and
- rotation speed - obtain the module vectors from the swerve modules and pass them into the
- swerveOdometry class (optional) - pass the normalized vectors into the swerve modules</div>
+ <ul>
+   <li>Create a list of swerve modules
+   <li>Create a swerveDrive object with the list of swerve modules
+   <li>Every time you want to move, call `move()` with the desired movement vector and rotation
+       speed
+   <li>Obtain the module vectors from the swerve modules and pass them into the swerveOdometry
+       class (optional)
+   <li>Pass the normalized vectors into the swerve modules
+ </ul></div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>swerveModules</code> - a list of swerve modules</dd>
@@ -244,6 +256,7 @@ loadScripts(document, 'script');</script>
 <h3>move</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">move</span><wbr><span class="parameters">(<a href="RobotMovement.html" title="class in com.mineinjava.quail">RobotMovement</a>&nbsp;movement,
  double&nbsp;gyroOffset)</span></div>
+<div class="block">Attempts to move the drivetrain</div>
 </section>
 </li>
 <li>
