@@ -27,8 +27,7 @@ import java.util.List;
 
 public class MathUtil {
   public static boolean epsilonEquals(double value1, double value2) {
-    double epsilon = 1e-6; // Adjust the epsilon value as needed
-    return Math.abs(value1 - value2) < epsilon;
+    return Math.abs(value1 - value2) < Constants.EPSILON;
   }
 
   /**
@@ -77,8 +76,11 @@ public class MathUtil {
   }
 
   /**
-   * Calculates the smallest angle between two angles Useful for determining how far and in which
-   * direction to rotate anything angle returned is in radians, counterclockwise from angle 1 to
+   * Calculates the smallest angle between two angles.
+   * <p>Useful for determining how far and in which
+   * direction to rotate 
+   * 
+   * <p>Angle returned is in radians, counterclockwise from angle 1 to
    * angle 2
    *
    * @param angle1
