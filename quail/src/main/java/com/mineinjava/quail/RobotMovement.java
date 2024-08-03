@@ -23,9 +23,10 @@ package com.mineinjava.quail;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
 /**
- * Can represent a lot of things. Generally represents a vector (robot position, movement, etc.),
- * plus an angle (robot rotation, robot desired rotation, etc.) Everything should be fairly
- * self-explanatory.
+ * Can represent a lot of things.
+ * <p>Generally represents a vector (robot position, movement, etc.),
+ * plus an angle (robot rotation, robot desired rotation, etc.) 
+ * <p>Everything should be fairly self-explanatory.
  */
 public class RobotMovement {
   public double rotation;

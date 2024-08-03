@@ -28,18 +28,28 @@ public class SwerveDrive<T extends SwerveModuleBase> {
   private double maxModuleSpeed = 1.0;
 
   /**
-   * Represents a swerve drive Designed to be inherited from. While it will work without being
-   * inherited from, you may want to add some features such as:
+   * Represents a swerve drive .
    *
-   * <p>- reset gyro, both from controller and from vision odometry - reset module positions (from
-   * absolute encoders or vision odometry)
+   * <p> Designed to be inherited from. 
+   * <p> While it will work without being inherited from, you may want to add some features such as:
+   *
+   * <ul>
+   * <li> reset gyro, both from controller and from vision odometry 
+   * <li> reset module positions (from absolute encoders)
+   * </ul>
    *
    * <p>Normal use of this class would look something like:
    *
-   * <p>- create a list of swerve modules - create a swerveDrive object with the list of swerve
-   * modules - every time you want to move, call `move()` with the desired movement vector and
-   * rotation speed - obtain the module vectors from the swerve modules and pass them into the
-   * swerveOdometry class (optional) - pass the normalized vectors into the swerve modules
+   * <ul>
+   * <li> Create a list of swerve modules 
+   * <li> Create a swerveDrive object with the list of swerve
+   * modules 
+   * <li> Every time you want to move, call `move()` with the desired movement vector and
+   * rotation speed 
+   * <li> Obtain the module vectors from the swerve modules and pass them into the
+   * swerveOdometry class (optional) 
+   * <li> Pass the normalized vectors into the swerve modules
+   * </ul>
    *
    * @param swerveModules a list of swerve modules
    */
@@ -77,6 +87,9 @@ public class SwerveDrive<T extends SwerveModuleBase> {
     return moduleVectors;
   }
 
+  /**
+   * Attempts to move the drivetrain
+   */
   public void move(RobotMovement movement, double gyroOffset) {
     Vec2d[] moduleVectors =
         calculateMoveAngles(movement.translation, movement.rotation, gyroOffset);

@@ -33,14 +33,17 @@ public class SwerveModuleBase {
   protected int motorFlipper = 1; // optimization for motor rotation
 
   /**
-   * Represents a swerve module Designed to be inherited. Please override the setAngle() and
-   * setRawSpeed() methods at minimum.
+   * Represents a swerve module Designed to be inherited. 
+   * <p> Please override the setAngle() and setRawSpeed() methods at minimum.
    *
    * <p>All angles are in radians. All length is in the unit of your choice
    *
-   * <p>Other things that you may want to include: - reset module position (set the current angle to
-   * 0) using absolute encoders - re-zero the steering motor using absolute encoders
-   *
+   * <p>Other things that you may want to include: 
+   * <ul>
+   * <li> reset module position (set the current angle to
+   * 0) using absolute encoders 
+   * <li> re-zero the steering motor using absolute encoders
+   * </ul>
    * @param position the position of the module relative to the center of rotation
    * @param steeringRatio gear ratio of the steering motor
    * @param driveRatio gear ratio of the drive motor
@@ -61,7 +64,7 @@ public class SwerveModuleBase {
   }
 
   /**
-   * calculates the angle to set the steering motor to
+   * Calculates the angle to set the steering motor to,
    *
    * @param angle the angle to set the steering motor to
    * @return the angle to set the steering motor to
@@ -72,7 +75,9 @@ public class SwerveModuleBase {
   }
 
   /**
-   * "optimized" motor rotation: if the angle is greater than 90 degrees, rotate the motor in the
+   * "Optimized" motor rotation.
+   *
+   * <p> if the angle is greater than 90 degrees, rotate the motor in the
    * opposite direction and rotate less than 90 degrees
    */
   public double calculateOptimizedAngle(double angle) {
@@ -87,8 +92,10 @@ public class SwerveModuleBase {
   }
 
   /**
-   * Calulates the angle to set the steering motor to. Wrapper for both calculateOptimizedAngle and
-   * calculateNewAngleSetpoint please use this instead of anything else
+   * Calulates the angle to set the steering motor to.
+   * <p> Wrapper for both {@link calculateOptimizedAngle} and
+   * {@link calculateNewAngleSetpoint}
+   * <p>please use this instead of anything else
    */
   public double calculateDesiredAngleWrapper(double angle) {
     double setpoint;
@@ -101,8 +108,10 @@ public class SwerveModuleBase {
   }
 
   /**
-   * "X-Locks" the modules points all of the wheels toward the center of the robot to make the robot
-   * harder to push not very useful if all of your swerve modules are colinear
+   * "X-Locks" the modules.
+   * <p> Points all of the wheels toward the center of the robot to make the robot
+   * harder to push.
+   * <p> not very useful if all of your swerve modules are colinear
    */
   public void XLock() {
     this.setSpeed(0);
@@ -110,7 +119,9 @@ public class SwerveModuleBase {
   }
 
   /**
-   * sets the angle of the module OVERRIDE ME!!! This is where you call your motor controllers
+   * Sets the angle of the module.
+   *
+   * <p>OVERRIDE ME!!! This is where you call your motor controllers
    *
    * @param angle the angle to set the module to
    */
@@ -124,7 +135,8 @@ public class SwerveModuleBase {
   }
 
   /**
-   * sets the raw speed of the module OVERRIDE ME!!! This is where you call your motor controllers
+   * Sets the raw speed of the module.
+   * <p> OVERRIDE ME!!! This is where you call your motor controllers
    *
    * @param speed the speed to set the module to
    */
@@ -134,7 +146,7 @@ public class SwerveModuleBase {
   }
 
   /**
-   * sets the speed of the module
+   * Sets the speed of the module.
    *
    * @param speed the speed to set the module to
    */
@@ -143,7 +155,7 @@ public class SwerveModuleBase {
   }
 
   /**
-   * sets the module's motion to the specified vector
+   * Sets the module's motion to the specified vector;
    *
    * @param vec the vector to set the module to
    */

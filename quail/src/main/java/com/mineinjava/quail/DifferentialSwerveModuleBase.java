@@ -22,7 +22,7 @@ package com.mineinjava.quail;
 
 import com.mineinjava.quail.util.geometry.Vec2d;
 
-/** A base class for differential swerve modules */
+/** A base class for differential swerve modules. */
 public class DifferentialSwerveModuleBase extends SwerveModuleBase {
 
   public DifferentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
@@ -35,7 +35,7 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
   }
 
   /**
-   * Calculates the motor speeds for a differential swerve module
+   * Calculates the motor speeds for a differential swerve module.
    *
    * @param rotationSpeed the current rotation speed of the pod
    * @param wheelSpeed the current speed of the wheel
@@ -54,7 +54,7 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
     return motorSpeeds;
   }
 
-  /** Calculates the module angle based on the positions of the two motors */
+  /** Calculates the module angle based on the positions of the two motors. */
   public double calculateModuleAngle(double motor1pos, double motor2pos) {
     double averageRotation = (motor1pos + motor2pos) / 2;
     return averageRotation / steeringRatio;
