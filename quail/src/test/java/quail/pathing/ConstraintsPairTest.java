@@ -21,5 +21,5 @@
 package quail.pathing;
 
 public class ConstraintsPairTest {
-   // theres nothing to test 
+  // theres nothing to test
 }
