@@ -39,7 +39,7 @@ public class MathUtil {
    *
    * <p>https://stackoverflow.com/a/1084899/13224997
    */
-  public static boolean LineSegHitCircle(
+  public static boolean lineSegHitCircle(
       Pose2d lineSegStart, Pose2d lineSegEnd, Pose2d circleCenter, double circleRadius) {
 
     Vec2d d = lineSegEnd.vec().subtract(lineSegStart.vec());

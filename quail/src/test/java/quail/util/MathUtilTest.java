@@ -44,7 +44,7 @@ public class MathUtilTest {
   @Test
   void SkewerCircle() {
     assertTrue(
-        MathUtil.LineSegHitCircle(
+        MathUtil.lineSegHitCircle(
             new Pose2d(0, -1, 0), new Pose2d(0, 1, 0), new Pose2d(0, 0, 0), 0.1),
         "skewer");
   }
@@ -53,14 +53,14 @@ public class MathUtilTest {
   @Disabled
   void PopCircle() { // TODO: Fix the function do make this work
     assertTrue(
-        MathUtil.LineSegHitCircle(new Pose2d(0, 0, 0), new Pose2d(1, 1, 0), new Pose2d(0, 0, 0), 1),
+        MathUtil.lineSegHitCircle(new Pose2d(0, 0, 0), new Pose2d(1, 1, 0), new Pose2d(0, 0, 0), 1),
         "pop");
   }
 
   @Test
   void InsideCircle() {
     assertFalse(
-        MathUtil.LineSegHitCircle(
+        MathUtil.lineSegHitCircle(
             new Pose2d(-1, -1, 0), new Pose2d(1, 1, 0), new Pose2d(0, 0, 0), 10),
         "inside");
   }
@@ -68,7 +68,7 @@ public class MathUtilTest {
   @Test
   void MissCircle() {
     assertFalse(
-        MathUtil.LineSegHitCircle(
+        MathUtil.lineSegHitCircle(
             new Pose2d(-1, -1, 0), new Pose2d(1, 1, 0), new Pose2d(0, -10, 0), 1),
         "miss");
   }
