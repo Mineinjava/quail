@@ -20,7 +20,7 @@
 
 package com.mineinjava.quail;
 
-import com.mineinjava.quail.util.Util;
+import com.mineinjava.quail.util.MathUtil;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
 public class SwerveModuleBase {
@@ -67,7 +67,7 @@ public class SwerveModuleBase {
    * @return the angle to set the steering motor to
    */
   public double calculateNewAngleSetpoint(double angle) {
-    double shortestAngle = Util.deltaAngle(currentAngle, angle);
+    double shortestAngle = MathUtil.deltaAngle(currentAngle, angle);
     return currentAngle = currentAngle + shortestAngle;
   }
 
@@ -76,7 +76,7 @@ public class SwerveModuleBase {
    * opposite direction and rotate less than 90 degrees
    */
   public double calculateOptimizedAngle(double angle) {
-    double deltaAngle = Util.deltaAngle(currentAngle, angle);
+    double deltaAngle = MathUtil.deltaAngle(currentAngle, angle);
     if (Math.abs(deltaAngle) > Math.PI / 2) {
       motorFlipper = -1;
       return angle + Math.PI;

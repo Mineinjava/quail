@@ -103,6 +103,9 @@ public class Vec2d {
    */
   public Vec2d normalize() {
     double scale = Math.sqrt(this.x * this.x + this.y * this.y);
+    if (scale == 0) {
+      System.err.println("Cannot normalize a zero vector!");
+    }
     return new Vec2d(this.x / scale, this.y / scale);
   }
 
@@ -199,7 +202,7 @@ public class Vec2d {
    * Calculates the smallest angle to the passed vector.
    *
    * @param vec - the vector to compare to
-   * @return The smallest angular distance between the two vectors.
+   * @return The smallest angular distance between the two vectors in Radians.
    */
   public double distanceTo(Vec2d vec) {
     double l1 = this.getLength();
