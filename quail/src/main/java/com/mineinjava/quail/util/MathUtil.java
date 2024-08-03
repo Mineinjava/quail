@@ -31,8 +31,11 @@ public class MathUtil {
 
   /**
    * Detects if a line segment defined by two positions will intersect a circle with given center
-   * and radius Note that the headings for all three Pose2d arguments are not used
-   * https://stackoverflow.com/a/1084899/13224997
+   * and radius.
+   *
+   * <p>Note that the headings for all three Pose2d arguments are not used
+   * 
+   * <p> https://stackoverflow.com/a/1084899/13224997
    */
   public static boolean LineSegHitCircle(
       Pose2d lineSegStart, Pose2d lineSegEnd, Pose2d circleCenter, double circleRadius) {
@@ -59,7 +62,7 @@ public class MathUtil {
   }
 
   /**
-   * basic lerp function
+   * Basic lerp function.
    *
    * @return value between a and b at t
    */

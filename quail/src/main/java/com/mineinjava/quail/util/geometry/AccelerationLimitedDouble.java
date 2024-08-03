@@ -29,7 +29,7 @@ public class AccelerationLimitedDouble {
   double lastTime = 0;
 
   /**
-   * Creates a new AccelerationLimitedValue
+   * Creates a new AccelerationLimitedValue.
    *
    * @param idealValue The Value to ramp to
    * @param currentValue The current Value
@@ -42,7 +42,7 @@ public class AccelerationLimitedDouble {
   }
 
   /**
-   * Creates a new AccelerationLimitedValue
+   * Creates a new AccelerationLimitedValue.
    *
    * @param maxAcceleration The maximum acceleration
    */
@@ -53,7 +53,7 @@ public class AccelerationLimitedDouble {
   }
 
   /**
-   * Gets the ideal Value
+   * Gets the ideal Value.
    *
    * @return current ideal Value
    */
@@ -62,9 +62,9 @@ public class AccelerationLimitedDouble {
   }
 
   /**
-   * calculates a new output Value based on the time since the last update
+   * Calculates a new output Value based on the time since the last update.
    *
-   * @return
+   * @return new output value
    */
   public double update() {
     if (this.lastTime == 0) {
@@ -83,11 +83,11 @@ public class AccelerationLimitedDouble {
   }
 
   /**
-   * updates the ideal Value and calculates a new output Value based on the time since the last
-   * update
+   * Updates the ideal Value and calculates a new output Value based on the time since the last
+   * update.
    *
    * @param newIdealValue The new ideal Value
-   * @return
+   * @return new output value
    */
   public double update(double newIdealValue) {
     this.idealValue = newIdealValue;

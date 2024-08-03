@@ -25,7 +25,9 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
 
 /**
- * Represents a path that the robot can follow. Instantiate with a list of pose2d.
+ * Represents a path that the robot can follow.
+ *
+ * <p> Instantiate with a list of pose2d.
  *
  * <p>The robot will follow the path by going to each pose in order.
  *
@@ -37,9 +39,11 @@ import java.util.ArrayList;
  * <p>The robot will stop at the last point in the path, and its heading will be the heading of the
  * last pose in the path.
  *
- * <p>the LAST POINT is the last point that the robot hit the CURRENT POINT is the point that the
- * robot is currently pathing towards the NEXT POINT is the point that the robot will path towards
- * after reaching the CURRENT POINT
+ * <ul>
+ *  <li> The `LAST POINT` is the last point that the robot hit. 
+ *  <li> The `CURRENT POINT` is the point that the robot is currently pathing towards 
+ *  <li> The NEXT POINT is the point that the robot will path towards after reaching the CURRENT POINT
+ * </ul>
  */
 public class Path {
   public ArrayList<Pose2d> points;
@@ -47,16 +51,16 @@ public class Path {
   public int lastPointIndex = 0;
 
   /**
-   * creates a path with the specified points and final heading.
+   * Creates a path with the specified points and final heading.
    *
-   * @param points - a list of pose2ds that the robot will follow in order
+   * @param points a list of pose2ds that the robot will follow in order
    */
   public Path(ArrayList<Pose2d> points) {
     this.points = points;
     lastPointIndex = points.size() - 1;
   }
 
-  /** returns the next point in the path. */
+  /** Returns the next point in the path. */
   public Pose2d getNextPoint() {
     if (currentPointIndex < lastPointIndex) {
       return points.get(currentPointIndex + 1);
@@ -65,7 +69,7 @@ public class Path {
     }
   }
 
-  /** returns the current point in the path. */
+  /** Returns the current point in the path. */
   public Pose2d getCurrentPoint() {
     if (currentPointIndex <= lastPointIndex) {
       return points.get(currentPointIndex);
@@ -74,7 +78,7 @@ public class Path {
     }
   }
 
-  /** returns the point at the specified index relative to the current point. */
+  /** Returns the point at the specified index relative to the current point. */
   public Pose2d getPointRelativeToCurrent(int index) {
     if (currentPointIndex + index < 0) {
       return null;
@@ -87,7 +91,7 @@ public class Path {
   }
 
   /**
-   * @return a vector from the passed pose to the current point
+   * Returns a vector from the passed pose to the current point.
    */
   public Vec2d vectorToCurrentPoint(Pose2d point) {
     Pose2d nextPoint = this.getCurrentPoint();
@@ -97,7 +101,7 @@ public class Path {
     return new Vec2d(nextPoint.x - point.x, nextPoint.y - point.y);
   }
 
-  /** returns the overall length of the path assuming the robot paths on straight lines */
+  /** Returns the overall length of the path assuming the robot paths on straight lines */
   public double length() {
     double length = 0;
 
@@ -112,8 +116,8 @@ public class Path {
   /**
    * Returns the distance from the passed point to the next point.
    *
-   * @param point - the point to calculate the distance from
-   * @return - the distance from the current point to the next point
+   * @param point the point to calculate the distance from
+   * @return the distance from the current point to the next point
    */
   public double distanceToNextPoint(Pose2d point) {
     Pose2d nextPoint = this.getNextPoint();
@@ -124,10 +128,10 @@ public class Path {
   }
 
   /**
-   * Returns the distance from the passed point to the current point
+   * Returns the distance from the passed point to the current point.
    *
-   * @param point - the point to calculate the distance from
-   * @return - the distance from the current point to the next point
+   * @param point the point to calculate the distance from
+   * @return the distance from the current point to the next point
    */
   public double distanceToCurrentPoint(Pose2d point) {
     Pose2d currentPoint = this.getCurrentPoint();
@@ -138,7 +142,7 @@ public class Path {
   }
 
   /**
-   * @return a vector from the last point to the current point
+   * Returns a vector from the last point to the current point.
    */
   public Vec2d vectorLastToCurrentPoint() {
     Pose2d currentPoint = this.getCurrentPoint();
@@ -153,14 +157,14 @@ public class Path {
   }
 
   /**
-   * @return distance from last point to current point
+   * Returns the distance from last point to current point.
    */
   public double distance_last_to_current_point() {
     return vectorLastToCurrentPoint().getLength();
   }
 
   /**
-   * next movement vector for lookahead
+   * Next movement vector for lookahead.
    *
    * @return a vector from the current point to the next point
    */
@@ -177,12 +181,12 @@ public class Path {
   }
 
   /**
-   * Calculates a vector from (x,y) to the nearest point on the path. The index of the nearest point
-   * must be greater than or equal to minIndex
+   * Calculates a vector from (x,y) to the nearest point on the path. 
+   * <p> The index of the nearest point must be greater than or equal to minIndex
    *
-   * @param point - the point to calculate the vector from
-   * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
-   * @return - a vector from (x,y) to the nearest point on the path
+   * @param point the point to calculate the vector from
+   * @param minIndex the index of the nearest point must be greater than or equal to minIndex
+   * @return a vector from (x,y) to the nearest point on the path
    */
   public Vec2d vectorToNearestPoint(Pose2d point, int minIndex) {
     Pose2d nearestPoint = this.nearestPoint(point, minIndex);
@@ -190,8 +194,8 @@ public class Path {
   }
 
   /**
-   * Calculates the index of the nearest point on the path. The index of the nearest point must be
-   * greater than or equal to minIndex
+   * Calculates the index of the nearest point on the path.
+   * <p> The index of the nearest point must be greater than or equal to minIndex
    *
    * @param point
    * @param minIndex
@@ -203,8 +207,8 @@ public class Path {
   }
 
   /**
-   * Calculates the nearest point on the path. The index of the nearest point must be greater than
-   * or equal to minIndex
+   * Calculates the nearest point on the path. 
+   * <p> The index of the nearest point must be greater than or equal to minIndex
    *
    * @param point
    * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
@@ -227,7 +231,7 @@ public class Path {
     return nearestPoint;
   }
 
-  /** returns the remaining length of the path. */
+  /** Returns the remaining length of the path. */
   public double remainingLength(Pose2d position) {
     double length = 0;
 

@@ -44,12 +44,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 // along with Quail. If not, see <https://www.gnu.org/licenses/>
 
 /**
- * Small, easy to use PID implementation with advanced controller capability.<br>
- * Minimal usage:<br>
- * MiniPID pid = new MiniPID(p,i,d); <br>
- * ...looping code...{ <br>
- * output= pid.getOutput(sensorvalue,target); <br>
- * }
+ * Small, easy to use PID implementation with advanced controller capability.
  *
  * <p>see
  * http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-direction/improving-the-beginners-pid-introduction
@@ -91,7 +86,9 @@ public class MiniPID {
   // **********************************
 
   /**
-   * Create a MiniPID class object. See setP, setI, setD methods for more detailed parameters.
+   * Create a MiniPID class object. 
+   *
+   * <p> See setP, setI, setD methods for more detailed parameters.
    *
    * @param p Proportional gain. Large if large difference between setpoint and target.
    * @param i Integral gain. Becomes large if setpoint cannot reach target quickly.
@@ -106,7 +103,8 @@ public class MiniPID {
   }
 
   /**
-   * Create a MiniPID class object. See setP, setI, setD, setF methods for more detailed parameters.
+   * Create a MiniPID class object.
+   * <p> See setP, setI, setD, setF methods for more detailed parameters.
    *
    * @param p Proportional gain. Large if large difference between setpoint and target.
    * @param i Integral gain. Becomes large if setpoint cannot reach target quickly.
@@ -127,11 +125,15 @@ public class MiniPID {
   // Configuration functions
   // **********************************
   /**
-   * Configure the Proportional gain parameter. <br>
+   * Configure the Proportional gain parameter. 
+   * <p>
    * This responds quickly to changes in setpoint, and provides most of the initial driving force to
-   * make corrections. <br>
-   * Some systems can be used with only a P gain, and many can be operated with only PI.<br>
-   * For position based controllers, this is the first parameter to tune, with I second. <br>
+   * make corrections. 
+   * <p>
+   * Some systems can be used with only a P gain, and many can be operated with only PI.
+   * <p>
+   * For position based controllers, this is the first parameter to tune, with I second. 
+   * <p>
    * For rate controlled systems, this is often the second after F.
    *
    * @param p Proportional gain. Affects output according to
@@ -143,10 +145,12 @@ public class MiniPID {
   }
 
   /**
-   * Changes the I parameter <br>
+   * Changes the I parameter.
+   * <p>
    * This is used for overcoming disturbances, and ensuring that the controller always gets to the
    * control mode. Typically tuned second for "Position" based modes, and third for "Rate" or
-   * continuous based modes. <br>
+   * continuous based modes. 
+   * <p>
    * Affects output through <b>output+=previous_errors*Igain ;previous_errors+=current_error</b>
    *
    * <p>see setMaxIOutput(double) setMaxIOutput for how to restrict
@@ -169,7 +173,8 @@ public class MiniPID {
   }
 
   /**
-   * Changes the D parameter <br>
+   * Changes the D parameter.
+   * <p>
    * This has two primary effects:
    *
    * <p>- Adds a "startup kick" and speeds up system response during setpoint changes - Adds "drag"
@@ -188,17 +193,24 @@ public class MiniPID {
     checkSigns();
   }
 
-  /** Sets the deadband If output is too small, it gets "rounded" to zero */
+  /** 
+   * Sets the deadband.
+   *
+   * <p>If output is too small, it gets "rounded" to zero 
+   */
   public void setDeadband(double deadband) {
     this.deadband = deadband;
     checkSigns();
   }
 
   /**
-   * Configure the FeedForward parameter. <br>
+   * Configure the FeedForward parameter. 
+   * <p>
    * This is excellent for velocity, rate, and other continuous control modes where you can expect a
-   * rough output value based solely on the setpoint.<br>
-   * Should not be used in "position" based control modes.<br>
+   * rough output value based solely on the setpoint.
+   * <p>
+   * Should not be used in "position" based control modes.
+   * <p>
    * Affects output according to <b>output+=F*Setpoint</b>. Note, that a F-only system is actually
    * open loop.
    *
@@ -210,7 +222,8 @@ public class MiniPID {
   }
 
   /**
-   * Configure the PID object. See setP, setI, setD methods for more detailed parameters.
+   * Configure the PID object.
+   * <p> See setP, setI, setD methods for more detailed parameters.
    *
    * @param p Proportional gain. Large if large difference between setpoint and target.
    * @param i Integral gain. Becomes large if setpoint cannot reach target quickly.
@@ -227,7 +240,8 @@ public class MiniPID {
   }
 
   /**
-   * Configure the PID object. See setP, setI, setD, setF methods for more detailed parameters.
+   * Configure the PID object. 
+   * <p> See setP, setI, setD, setF methods for more detailed parameters.
    *
    * @param p Proportional gain. Large if large difference between setpoint and target.
    * @param i Integral gain. Becomes large if setpoint cannot reach target quickly.
@@ -247,8 +261,9 @@ public class MiniPID {
   }
 
   /**
-   * Set the maximum output value contributed by the I component of the system This can be used to
-   * prevent large windup issues and make tuning simpler
+   * Set the maximum output value contributed by the I component of the system.
+   *
+   * <p> This can be used to prevent large windup issues and make tuning simpler
    *
    * @param maximum Units are the same as the expected output value
    */
@@ -263,7 +278,8 @@ public class MiniPID {
   }
 
   /**
-   * Specify a maximum output range. <br>
+   * Specify a maximum output range. 
+   * <p>
    * When one input is specified, output range is configured to <b>[-output, output]</b>
    *
    * @param output
@@ -273,7 +289,8 @@ public class MiniPID {
   }
 
   /**
-   * Specify a maximum output. When two inputs specified, output range is configured to <b>[minimum,
+   * Specify a maximum output. 
+   * <p> When two inputs specified, output range is configured to <b>[minimum,
    * maximum]</b>
    *
    * @param minimum possible output value
@@ -291,7 +308,7 @@ public class MiniPID {
   }
 
   /**
-   * Set the operating direction of the PID controller
+   * Set the operating direction of the PID controller.
    *
    * @param reversed Set true to reverse PID output
    */
@@ -304,9 +321,11 @@ public class MiniPID {
   // **********************************
 
   /**
-   * Configure setpoint for the PID calculations<br>
-   * This represents the target for the PID system's, such as a position, velocity, or angle. <br>
-   * see quail.util.MiniPID#getOutput(double, double)
+   * Configure setpoint for the PID calculations.
+   * <p>
+   * This represents the target for the PID system's, such as a position, velocity, or angle. 
+   * <p>
+   * see {@link #getOutput(Double, Double)}
    *
    * @param setpoint
    */
@@ -315,7 +334,7 @@ public class MiniPID {
   }
 
   /**
-   * Calculate the output value for the current PID cycle.<br>
+   * Calculate the output value for the current PID cycle.
    *
    * @param actual The monitored value, typically as a sensor input.
    * @param setpoint The target value for the system
@@ -417,9 +436,11 @@ public class MiniPID {
   }
 
   /**
-   * Calculate the output value for the current PID cycle.<br>
-   * In no-parameter mode, this uses the last sensor value, and last setpoint value. <br>
-   * Not typically useful, and use of parameter modes is suggested. <br>
+   * Calculate the output value for the current PID cycle.
+   * <p>
+   * In no-parameter mode, this uses the last sensor value, and last setpoint value. 
+   * <p>
+   * Not typically useful, and use of parameter modes is suggested. 
    *
    * @return calculated output value for driving the system
    */
@@ -428,9 +449,11 @@ public class MiniPID {
   }
 
   /**
-   * Calculate the output value for the current PID cycle.<br>
-   * In one parameter mode, the last configured setpoint will be used.<br>
-   * see MiniPID#setSetpoint()
+   * Calculate the output value for the current PID cycle.
+   * <p>
+   * In one parameter mode, the last configured setpoint will be used.
+   *
+   * <p> see {@link #setSetpoint(double)}
    *
    * @param actual The monitored value, typically as a sensor input.
    * @return calculated output value for driving the system
@@ -440,8 +463,9 @@ public class MiniPID {
   }
 
   /**
-   * Resets the controller. This erases the I term buildup, and removes D gain on the next loop.<br>
-   * This should be used any time the PID is disabled or inactive for extended duration, and the
+   * Resets the controller. 
+   * <p>This erases the I term buildup, and removes D gain on the next loop.
+   * <p>This should be used any time the PID is disabled or inactive for extended duration, and the
    * controlled portion of the system may have changed due to external forces.
    */
   public void reset() {
@@ -450,9 +474,11 @@ public class MiniPID {
   }
 
   /**
-   * Set the maximum rate the output can increase per cycle.<br>
+   * Set the maximum rate the output can increase per cycle.
+   * <p>
    * This can prevent sharp jumps in output when changing setpoints or enabling a PID system, which
-   * might cause stress on physical or electrical systems. <br>
+   * might cause stress on physical or electrical systems. 
+   * <p>
    * Can be very useful for fast-reacting control loops, such as ones with large P or D values and
    * feed-forward systems.
    *
@@ -463,8 +489,10 @@ public class MiniPID {
   }
 
   /**
-   * Set a limit on how far the setpoint can be from the current position <br>
-   * Can simplify tuning by helping tuning over a small range applies to a much larger range. <br>
+   * Set a limit on how far the setpoint can be from the current position. 
+   * <p>
+   * Can simplify tuning by helping tuning over a small range applies to a much larger range. 
+   * <p>
    * This limits the reactivity of P term, and restricts impact of large D term during large
    * setpoint adjustments. Increases lag and I term if range is too small.
    *
@@ -475,12 +503,16 @@ public class MiniPID {
   }
 
   /**
-   * Set a filter on the output to reduce sharp oscillations. <br>
+   * Set a filter on the output to reduce sharp oscillations. 
+   * <p>
    * 0.1 is likely a sane starting value. Larger values use historical data more heavily, with low
-   * values weigh newer data. 0 will disable, filtering, and use only the most recent value. <br>
+   * values weigh newer data. 0 will disable, filtering, and use only the most recent value. 
+   * <p>
    * Increasing the filter strength will P and D oscillations, but force larger I values and
-   * increase I term overshoot.<br>
-   * Uses an exponential wieghted rolling sum filter, according to a simple <br>
+   * increase I term overshoot.
+   * <p>
+   * Uses an exponential wieghted rolling sum filter, according to a simple 
+   * <p>
    *
    * <pre>output*(1-strength)*sum(0..n){output*strength^n}</pre>
    *
@@ -528,7 +560,8 @@ public class MiniPID {
   }
 
   /**
-   * To operate correctly, all PID parameters require the same sign This should align with the
+   * To operate correctly, all PID parameters require the same sign.
+   * <p>This should align with the
    * {@literal}reversed value
    */
   private void checkSigns() {

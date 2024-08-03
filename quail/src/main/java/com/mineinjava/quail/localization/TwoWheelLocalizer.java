@@ -32,6 +32,7 @@ import org.apache.commons.math3.linear.LUDecomposition;
 import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
 
+/** Localizer implementation for a two-wheel + gyro setup commonly seen in FTC */
 public abstract class TwoWheelLocalizer implements Localizer {
 
   List<Pose2d> wheelPoses;
@@ -109,7 +110,7 @@ public abstract class TwoWheelLocalizer implements Localizer {
   }
 
   /**
-   * Returns the robot's pose
+   * Returns the robot's pose.
    *
    * @return the robot's pose (Pose2d)
    */
@@ -119,7 +120,9 @@ public abstract class TwoWheelLocalizer implements Localizer {
   }
 
   /**
-   * Sets the robot's pose Use this method to override with Vision data or for initial pose
+   * Sets the robot's pose.
+   *
+   * <p>Use this method to override with Vision data or for initial pose
    *
    * @param pose the robot's pose
    */

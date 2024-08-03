@@ -30,8 +30,9 @@ import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
 
 /**
- * class that helps you follow paths TODO: Don't treat point as reached if angle is outside angular
- * precision
+ * Class that helps you follow paths
+ *
+ * <p> TODO: Don't treat point as reached if angle is outside angular precision
  */
 public class PathFollower {
   private Path path;
@@ -76,7 +77,7 @@ public class PathFollower {
     this.turnController = turnController;
     this.precision = precision;
     this.slowDownDistance =
-        slowDownDistance; // in the future add an option to calculate it based on max accel.
+        slowDownDistance; // TODO: in the future add an option to calculate it based on max accel.
     this.kP = kP;
     this.minVelocity = minVelocity;
   }
@@ -131,8 +132,9 @@ public class PathFollower {
   }
 
   /**
-   * Calculate the next movement to follow the path This does return a field-centric movement
-   * vector.
+   * Calculate the next movement to follow the path.
+   *
+   * <p> This does return a field-centric movement vector.
    *
    * @return the next movement to follow the path
    */
@@ -231,11 +233,13 @@ public class PathFollower {
     }
 
     Pose2d currentPose = this.localizer.getPose();
-    return false;
+    return false; //TODO: Fix this
   }
 
   /**
-   * Update the path to follow This exists so that you can reuse the path follower between
+   * Update the path to follow.
+   *
+   * <p> This exists so that you can reuse the path follower between
    * autonomous paths and movements.
    *
    * @param path the path to follow
@@ -245,7 +249,7 @@ public class PathFollower {
   }
 
   /**
-   * Returns the path that the robot is following
+   * Returns the path that the robot is following.
    *
    * @return
    */
@@ -254,16 +258,16 @@ public class PathFollower {
   }
 
   /**
-   * Sets the speed of the robot
+   * Sets the speed of the robot.
    *
-   * @param speed the goal of the robot (in your units)
+   * @param speed the goal speed of the robot (in your units)
    */
   public void setSpeed(double speed) {
     this.speed = speed;
   }
 
   /**
-   * Returns the speed of the robot
+   * Returns the speed of the robot.
    *
    * @return the speed of the robot
    */
@@ -272,7 +276,7 @@ public class PathFollower {
   }
 
   /**
-   * Sets the maximum turn speed of the robot
+   * Sets the maximum turn speed of the robot.
    *
    * @param maxTurnSpeed the maximum turn speed of the robot (rad/s)
    */
@@ -281,7 +285,7 @@ public class PathFollower {
   }
 
   /**
-   * Returns the maximum turn speed of the robot
+   * Returns the maximum turn speed of the robot.
    *
    * @return the maximum turn speed of the robot (rad/s)
    */
@@ -290,7 +294,7 @@ public class PathFollower {
   }
 
   /**
-   * Sets the maximum turn acceleration of the robot
+   * Sets the maximum turn acceleration of the robot.
    *
    * @param maxTurnAcceleration the maximum turn acceleration of the robot (rad/s^2)
    */
@@ -299,7 +303,7 @@ public class PathFollower {
   }
 
   /**
-   * Returns the maximum turn acceleration of the robot
+   * Returns the maximum turn acceleration of the robot.
    *
    * @return the maximum turn acceleration of the robot (rad/s^2)
    */
@@ -308,7 +312,7 @@ public class PathFollower {
   }
 
   /**
-   * Sets the maximum acceleration of the robot
+   * Sets the maximum acceleration of the robot.
    *
    * @param maxAcceleration the maximum acceleration of the robot (your units/s^2)
    */
@@ -317,7 +321,7 @@ public class PathFollower {
   }
 
   /**
-   * Returns the maximum acceleration of the robot
+   * Returns the maximum acceleration of the robot.
    *
    * @return the maximum acceleration of the robot (your units/s^2)
    */
@@ -326,7 +330,7 @@ public class PathFollower {
   }
 
   /**
-   * Sets the turning PID controller of the robot
+   * Sets the turning PID controller of the robot.
    *
    * @param turnController the turn controller of the robot
    */
@@ -335,7 +339,9 @@ public class PathFollower {
   }
 
   /**
-   * Sets the precision of the path follower (how close the robot needs to be to the point to move
+   * Sets the precision of the path follower.
+   *
+   * <p> (how close the robot needs to be to the point to move
    * on)
    *
    * @param precision the precision of the path follower (your units)
@@ -345,7 +351,7 @@ public class PathFollower {
   }
 
   /**
-   * Set the localizer of the robot
+   * Set the localizer of the robot.
    *
    * @param localizer
    */
@@ -354,7 +360,7 @@ public class PathFollower {
   }
 
   /**
-   * Returns the localizer of the robot
+   * Returns the localizer of the robot.
    *
    * @return the localizer of the robot
    */
@@ -363,7 +369,7 @@ public class PathFollower {
   }
 
   /**
-   * Sets the distance from the last point that the robot will begin to slowdown
+   * Sets the distance from the last point that the robot will begin to slowdown.
    *
    * @param slowDownDistance the slow down distance of the robot (your units)
    */
@@ -372,7 +378,8 @@ public class PathFollower {
   }
 
   /**
-   * Sets the kP of the slowdown distance (proporational to the distance)
+   * Sets the kP of the slowdown distance.
+   * <p> (proporational to the distance)
    *
    * @param kP
    */
@@ -381,7 +388,7 @@ public class PathFollower {
   }
 
   /**
-   * Returns the measured looptime of the path follower (useful for simulation)
+   * Returns the measured looptime of the path follower (useful for simulation).
    *
    * @return the measured looptime of the path follower (seconds)
    */
@@ -390,7 +397,7 @@ public class PathFollower {
   }
 
   /**
-   * Sets the translation constraints of the path follower
+   * Sets the translation constraints of the path follower.
    *
    * @param constraints
    */
@@ -400,7 +407,7 @@ public class PathFollower {
   }
 
   /**
-   * Sets the rotation constraints of the path follower
+   * Sets the rotation constraints of the path follower.
    *
    * @param constraints
    */

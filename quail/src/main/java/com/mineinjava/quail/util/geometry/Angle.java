@@ -20,7 +20,10 @@
 
 package com.mineinjava.quail.util.geometry;
 
-/** Various utilities for working with angles. ALL angles MUST be in ccw+ radians */
+/** 
+ * Various utilities for working with angles. 
+ * <p> ALL angles MUST be in ccw+ radians 
+ * */
 public class Angle {
   private static final double TAU = 2 * Math.PI;
 

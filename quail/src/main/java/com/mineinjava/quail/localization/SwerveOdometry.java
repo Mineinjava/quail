@@ -31,18 +31,26 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Represents a swerve drive position on the field and provides methods for calculating the robot's
- * position. A standard workflow would look something like this:
+ * Represents a swerve drive position on the field.
  *
- * <p>- check if you have vision and can use it to update the robot pose, use it to update the
- * robot's position and then return - if you don't have vision, get a "real life" vector from the
- * modules **IF AT ALL POSSIBLE, READ FROM ENCODERS--DO NOT ASSUME MODULES ARE IN THE RIGHT PLACE**
- * - pass those vectors into the `calculateOdometry` or `calculateFastOdometry` method. If unsure
- * which one to use, use `calculateOdometry` - rotate the returned vector - pass the returned vector
- * into one of the updateDelta methods - set the robot's heading to the gyro heading.
+ * <p>Also provides methods for calculating the robot's position. A standard usage would look
+ * something like this:
  *
- * <p>when constructing this class, pass in the positions of the modules relative to robot center
- * TODO: Make it possible to update odometry via a velocity vector.
+ * <ul>
+ *   <li>Check if you have vision and can use it to update the robot pose, use it to update the
+ *       robot's position and then return.
+ *   <li>If you don't have vision, get a "real life" vector from the modules **IF AT ALL POSSIBLE,
+ *       READ FROM ENCODERS--DO NOT ASSUME MODULES ARE IN THE RIGHT PLACE**.
+ *   <li>Pass those vectors into the `calculateOdometry` or `calculateFastOdometry` method. If
+ *       unsure which one to use, use `calculateOdometry`
+ *   <li>rotate the returned vector
+ *   <li>pass the returned vector into one of the updateDelta methods
+ *   <li>set the robot's heading to the gyro heading.
+ * </ul>
+ *
+ * <p>When constructing this class, pass in the positions of the modules relative to robot center
+ *
+ * <p>TODO: Make it possible to update odometry via a velocity vector.
  */
 public class SwerveOdometry implements Localizer {
   public ArrayList<Vec2d> moduleVectors;
@@ -51,21 +59,41 @@ public class SwerveOdometry implements Localizer {
   public double theta = 0;
   public RobotMovement lastSpeedVector = new RobotMovement(0, 0, 0);
 
+  /**
+   * Instantiates the SwerveOdometry object
+   *
+   * @param moduleVectors module position vectors
+   */
   public SwerveOdometry(Vec2d[] moduleVectors) {
     this.moduleVectors = new ArrayList<Vec2d>(Arrays.asList(moduleVectors));
     assert moduleVectors.length >= 2;
   }
 
+  /**
+   * Instantiates the SwerveOdometry object
+   *
+   * @param moduleVectors module position vectors
+   */
   public SwerveOdometry(List<Vec2d> moduleVectors) {
     this.moduleVectors = new ArrayList<Vec2d>(moduleVectors);
     assert moduleVectors.size() >= 2;
   }
 
+  /**
+   * Instantiates the SwerveOdometry object
+   *
+   * @param moduleVectors module position vectors
+   */
   public SwerveOdometry(ArrayList<Vec2d> moduleVectors) {
     this.moduleVectors = moduleVectors;
     assert moduleVectors.size() >= 2;
   }
 
+  /**
+   * Instantiates the SwerveOdometry object
+   *
+   * @param drivetrain drivetrain from which to extract the module vectors
+   */
   public SwerveOdometry(SwerveDrive drivetrain) {
     this(extractModuleVectors(drivetrain));
   }
@@ -73,7 +101,7 @@ public class SwerveOdometry implements Localizer {
   /**
    * Extracts the module vectors from a drivetrain.
    *
-   * @param drivetrain The drivetrain to extract the module vectors from.
+   * @param drivetrain The drivetrain from which to extract the module vectors
    * @return An array of module vectors.
    */
   private static Vec2d[] extractModuleVectors(SwerveDrive drivetrain) {
@@ -86,9 +114,11 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * Updates the robot's position based on a change in x, y, and a theta. Note that these values
-   * represent a change in position, not velocity. Multiply velocity by delta time to get delta
-   * position. All values must be field-centric.
+   * Updates the robot's position based on a change in x, y, and a theta.
+   *
+   * <p>Note that these values represent a change in position, not velocity.
+   *
+   * <p>Multiply velocity by delta time to get delta position. All values must be field-centric.
    *
    * @param dx
    * @param dy
@@ -102,8 +132,10 @@ public class SwerveOdometry implements Localizer {
 
   /**
    * Updates the robot's position based on a change in x, y, (represented by a vector) and a theta.
-   * Note that these values represent a change in position, not velocity. Multiply velocity by delta
-   * time to get delta position. All values must be field-centric.
+   *
+   * <p>Note that these values represent a change in position, not velocity.
+   *
+   * <p>Multiply velocity by delta time to get delta position. All values must be field-centric.
    *
    * @param dpos
    * @param dtheta
@@ -113,7 +145,9 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * sets the robot's position to a specific x, y, and theta. All values must be field-centric.
+   * Sets the robot's position to a specific x, y, and theta.
+   *
+   * <p>All values must be field-centric.
    *
    * @param mx
    * @param my
@@ -126,8 +160,9 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * sets the robot's position to a specific x, y, (represented by a vector) and theta. All values
-   * must be field-centric.
+   * Sets the robot's position to a specific x, y, (represented by a vector) and theta.
+   *
+   * <p>All values must be field-centric.
    *
    * @param pos
    * @param mtheta
@@ -137,8 +172,9 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * sets the robot's position to a specific x, y (represented by a vector) All values must be
-   * field-centric.
+   * Sets the robot's position to a specific x, y (represented by a vector).
+   *
+   * <p>All values must be field-centric.
    *
    * @param pos
    */
@@ -148,9 +184,10 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * updates the robot's position based on a change in x, y (represented by a vector) All values
-   * must be field-centric. Note that these values represent a change in position, not velocity.
-   * Multiply velocity by delta time to get delta position.
+   * Updates the robot's position based on a change in x, y (represented by a vector).
+   *
+   * <p>All values must be field-centric. Note that these values represent a change in position, not
+   * velocity. Multiply velocity by delta time to get delta position.
    *
    * @param dpos
    */
@@ -169,7 +206,7 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * sets the angle of the odometry
+   * Sets the angle of the odometry.
    *
    * @param angle robot heading in radians
    */
@@ -178,7 +215,9 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * Sets the robot's pose Use this method to override with Vision data or for initial pose
+   * Sets the robot's pose.
+   *
+   * <p>Use this method to override with Vision data or for initial pose.
    *
    * @param pose the robot's pose
    */
@@ -188,9 +227,10 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * Calculates the robot's velocity based on the module positions NOTE: due to drift, it is
-   * recommended not to use the robot's rotation value given from this method. Instead, use the
-   * robot's gyro.
+   * Calculates the robot's velocity based on the module positions.
+   *
+   * <p>NOTE: due to drift, it is recommended not to use the robot's rotation value given from this
+   * method. Instead, use the robot's gyro.
    *
    * <p>Translation units are somewhat arbitrary (depends on the units of the module positions and
    * vectors passed in) Rotation units are radians
@@ -248,12 +288,23 @@ public class SwerveOdometry implements Localizer {
   }
 
   /**
-   * Calculates the robot's movement based on the module positions This is the recommended method to
-   * use if: - the sum of all the module placement vectors is (0, 0) - this means that the sum of
-   * each module's rotation vectors will equal (0, 0), so the average of the module vectors will be
-   * the robot movement vector Again, due to drift, it is recommended not to use the robot's
-   * rotation value given from this method. Translation values are again arbitrary, but are the same
-   * as the ones given by the other method. Rotation values are radians.
+   * Calculates the robot's movement based on the module positions.
+   *
+   * <p>This is the recommended method to use if:
+   *
+   * <ul>
+   *   <li>The sum of all the module placement vectors is (0, 0)
+   *       <ul>
+   *         <li>This means that the sum of each module's rotation vectors will equal (0, 0), so the
+   *             average of the module vectors will be the robot movement vector
+   *       </ul>
+   * </ul>
+   *
+   * <p>Again, due to drift, it is recommended not to use the robot's rotation value given from this
+   * method.
+   *
+   * <p>Translation values are again arbitrary, but are the same as the ones given by the other
+   * method. Rotation values are radians.
    *
    * <p>Also note that this method is not field-centric. You will have to rotate the returned
    * vector.

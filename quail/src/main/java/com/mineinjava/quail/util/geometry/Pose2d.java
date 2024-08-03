@@ -23,13 +23,20 @@ package com.mineinjava.quail.util.geometry;
 import com.mineinjava.quail.util.MathUtil;
 import java.util.Objects;
 
-/** Represents a two-dimensional position and heading ALL angles MUST be in ccw+ radians */
+/** 
+ * Represents a two-dimensional position and heading.
+ * ALL angles MUST be in ccw+ radians 
+ */
 public class Pose2d {
   public final double x;
   public final double y;
   public final double heading;
 
-  /** Returns zero pose (x, y, and heading all are zero */
+  /** 
+   * Returns zero pose.
+   *
+   * <p> (x, y, and heading all are zero)
+   */
   public Pose2d() {
     this(0.0, 0.0, 0.0);
   }
@@ -46,7 +53,7 @@ public class Pose2d {
   }
 
   /**
-   * Useful for conversion from vector
+   * Useful for conversion from vector.
    *
    * @param pos vector representing the x and y position
    * @param heading heading
@@ -56,7 +63,7 @@ public class Pose2d {
   }
 
   /**
-   * Converts x and y position to a vector Does not include heading
+   * Converts x and y position to a vector Does not include heading.
    *
    * @return vector representing the x and y position
    */
@@ -65,9 +72,9 @@ public class Pose2d {
   }
 
   /**
-   * Converts the heading to a vector
+   * Converts the heading to a vector.
    *
-   * @return unit vector (length=1) with angle matching (@code heading)
+   * @return unit vector (length=1) with angle matching {@code heading}
    */
   public Vec2d headingVec() {
     return new Vec2d(Math.cos(heading), Math.sin(heading));
@@ -130,9 +137,9 @@ public class Pose2d {
   }
 
   /**
-   * Returns a pose from the given list
+   * Returns a pose from the given list.
    *
-   * @param list - double[] in the format [x, y, heading]
+   * @param list double[] in the format [x, y, heading]
    * @return
    */
   public Pose2d fromList(double[] list) {
@@ -140,8 +147,8 @@ public class Pose2d {
   }
 
   /**
-   * detects if the circle with (@code radius) is "hit" by a straight line between (@code robotPose)
-   * and (@code oldRobotPose)
+   * Detects if the circle with (@code radius) is "hit" by a straight line between (@code robotPose)
+   * and (@code oldRobotPose).
    *
    * @param radius circle radius for hit detection
    * @param robotPose position one for hit detection
@@ -157,7 +164,7 @@ public class Pose2d {
   }
 
   /**
-   * @return Vec2d a vector from this Pose2d to another Pose2d
+   * Returns a vector from this Pose2d to another Pose2d
    */
   public Vec2d vectorTo(Pose2d other) {
     return other.vec().subtract(vec());

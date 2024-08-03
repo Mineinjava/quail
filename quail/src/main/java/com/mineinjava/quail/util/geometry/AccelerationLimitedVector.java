@@ -21,7 +21,9 @@
 package com.mineinjava.quail.util.geometry;
 
 /**
- * Represents a vector with input ramping to control acceleration Useful for joystick ramp limiting
+ * Represents a vector with input ramping to control acceleration.
+ *
+ * <p>Useful for joystick ramp limiting
  */
 public class AccelerationLimitedVector {
   Vec2d idealVector;
@@ -31,7 +33,7 @@ public class AccelerationLimitedVector {
   double lastTime = 0;
 
   /**
-   * Creates a new AccelerationLimitedVector
+   * Creates a new AccelerationLimitedVector.
    *
    * @param idealVector The vector to ramp to
    * @param currentVector The current vector
@@ -44,7 +46,7 @@ public class AccelerationLimitedVector {
   }
 
   /**
-   * Creates a new AccelerationLimitedVector
+   * Creates a new AccelerationLimitedVector.
    *
    * @param maxAcceleration The maximum acceleration
    */
@@ -55,7 +57,7 @@ public class AccelerationLimitedVector {
   }
 
   /**
-   * Gets the ideal vector
+   * Gets the ideal vector.
    *
    * @return current ideal vector
    */
@@ -64,9 +66,9 @@ public class AccelerationLimitedVector {
   }
 
   /**
-   * calculates a new output vector based on the time since the last update
+   * Calculates a new output vector based on the time since the last update.
    *
-   * @return
+   * @return new output vector
    */
   public Vec2d update() {
     if (this.lastTime == 0) {
@@ -83,11 +85,11 @@ public class AccelerationLimitedVector {
   }
 
   /**
-   * updates the ideal vector and calculates a new output vector based on the time since the last
-   * update
+   * Updates the ideal vector and calculates a new output vector based on the time since the last
+   * update.
    *
-   * @param newIdealVector The new ideal vector
-   * @return
+   * @param newIdealVector the new ideal vector
+   * @return new output vector
    */
   public Vec2d update(Vec2d newIdealVector) {
     this.idealVector = newIdealVector;

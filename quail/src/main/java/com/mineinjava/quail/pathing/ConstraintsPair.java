@@ -27,8 +27,9 @@ public class ConstraintsPair {
 
   /**
    * Represents a pair of constraints (max velocity and max acceleration) for use in the path
-   * follower Can be either translational or angular velocity. If angular velocity, units are in
-   * radians.
+   * follower.
+   *
+   * <p>Can be either translational or angular velocity. If angular velocity, units are in radians.
    *
    * @param maxVelocity your units/s
    * @param maxAcceleration your units/s^2
@@ -38,20 +39,12 @@ public class ConstraintsPair {
     this.acceleration = maxAcceleration;
   }
 
-  /**
-   * Returns the constraints' max velocity
-   *
-   * @return
-   */
+  /** Returns the constraints' max velocity. */
   public double getMaxVelocity() {
     return velocity;
   }
 
-  /**
-   * Returns the constraints' max acceleration
-   *
-   * @return
-   */
+  /** Returns the constraints' max acceleration. */
   public double getMaxAcceleration() {
     return acceleration;
   }

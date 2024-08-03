@@ -25,6 +25,13 @@ import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
 
+/**
+ * Localizer that uses a Kalman Filter.
+ *
+ * <p>
+ *
+ * @see https://astr0clad.github.io/quail_docs/localization/vision/
+ */
 public class KalmanFilterLocalizer implements Localizer {
   private Vec2d poseEstimate = new Vec2d(0, 0);
   private double looptime = 0;
@@ -38,8 +45,9 @@ public class KalmanFilterLocalizer implements Localizer {
   }
 
   /**
-   * Updates the pose estimate based on the current velocity and the time since the last vision
-   * update
+   * Updates the pose estimate.
+   *
+   * <p>Updates based on the current velocity and the time since the last vision update
    *
    * @param observedPose the current pose estimate (get this from vision usually)
    * @param velocity the current velocity
@@ -79,19 +87,35 @@ public class KalmanFilterLocalizer implements Localizer {
     return this.poseEstimate;
   }
 
+  /** Returns the current pose estimate */
   public Pose2d getPose() {
     return new Pose2d(poseEstimate.x, poseEstimate.y, this.heading);
   }
 
+  /**
+   * Sets the current position.
+   *
+   * <p>Completely overrides the old position
+   *
+   * @param pose new translational pose to use
+   */
   public void setPose(Pose2d pose) {
     this.poseEstimate = new Vec2d(pose.x, pose.y);
   }
 
+  /**
+   * Sets the current heading.
+   *
+   * <p>Call this on every frame with the robot's heading
+   *
+   * @param heading Robot heading
+   */
   public void setHeading(double heading) {
     this.heading = heading;
   }
 }
 
+/** Modified translational pose but it has a timestamp. */
 class KalmanPose2d extends Vec2d {
   public double timestamp = 0;
 
