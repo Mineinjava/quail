@@ -77,11 +77,10 @@ public class MathUtil {
 
   /**
    * Calculates the smallest angle between two angles.
-   * <p>Useful for determining how far and in which
-   * direction to rotate 
-   * 
-   * <p>Angle returned is in radians, counterclockwise from angle 1 to
-   * angle 2
+   *
+   * <p>Useful for determining how far and in which direction to rotate
+   *
+   * <p>Angle returned is in radians, counterclockwise from angle 1 to angle 2
    *
    * @param angle1
    * @param angle2
