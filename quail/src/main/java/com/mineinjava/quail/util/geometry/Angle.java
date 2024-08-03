@@ -43,7 +43,7 @@ public class Angle {
    * @param angleDelta angle delta in radians
    */
   public static double normDelta(double angleDelta) {
-    double modifiedAngleDelta = norm(angleDelta);
+    double modifiedAngleDelta = norm(angleDelta + TAU);
 
     if (modifiedAngleDelta > Math.PI) {
       modifiedAngleDelta -= TAU;

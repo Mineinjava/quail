@@ -24,7 +24,6 @@ import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.localization.Localizer;
 import com.mineinjava.quail.util.MathUtil;
 import com.mineinjava.quail.util.MiniPID;
-import com.mineinjava.quail.util.Util;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
@@ -153,7 +152,7 @@ public class PathFollower {
       return new RobotMovement(0, new Vec2d(0, 0)); // error?
     }
     double deltaAngle =
-        Util.deltaAngle(
+        MathUtil.deltaAngle(
             currentPose.heading, this.path.getCurrentPoint().heading); // angle we have to rotate
 
     if (this.path.getCurrentPoint() == null) {
@@ -209,7 +208,7 @@ public class PathFollower {
 
     double turnSpeed = turnController.getOutput(0, deltaAngle);
     turnSpeed /= this.path.distance_last_to_current_point();
-    turnSpeed = Util.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
+    turnSpeed = MathUtil.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
 
     this.lastRobotPose = currentPose;
     this.lastMovementVector = movementVector;

@@ -23,7 +23,7 @@ package com.mineinjava.quail.localization;
 import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.SwerveDrive;
 import com.mineinjava.quail.SwerveModuleBase;
-import com.mineinjava.quail.util.Util;
+import com.mineinjava.quail.util.MathUtil;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
@@ -203,7 +203,7 @@ public class SwerveOdometry implements Localizer {
    */
   public RobotMovement calculateOdometry(ArrayList<Vec2d> modules) {
     // to account for errors, we will take the average of all the module pairs
-    List<List<Vec2d>> modulePairs = Util.getPairs(modules.toArray(new Vec2d[0]));
+    List<List<Vec2d>> modulePairs = MathUtil.getPairs(modules.toArray(new Vec2d[0]));
     // lists to be averaged over
     List<Double> rotationValues = new ArrayList<>();
     List<Vec2d> movementVectors = new ArrayList<>();
