@@ -167,10 +167,6 @@ public class PathFollower {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
 
-    if (this.path.getCurrentPoint().isHit(this.precision, currentPose, this.lastRobotPose)) {
-      this.path.incrementCurrentPointIndex();
-    }
-
     Vec2d idealMovementVector =
         this.path.vectorToCurrentPoint(this.currentPose); // get the vector to the next point
 
@@ -221,6 +217,10 @@ public class PathFollower {
     double turnSpeed = turnController.getOutput(0, deltaAngle);
     turnSpeed /= this.path.distanceLastToCurrentPoint();
     turnSpeed = MathUtil.clamp(turnSpeed, -this.maxTurnSpeed, this.maxTurnSpeed);
+
+    if (this.path.getCurrentPoint().isHit(this.precision, currentPose, this.lastRobotPose)) {
+      this.path.incrementCurrentPointIndex();
+    }
 
     this.lastRobotPose = currentPose;
     this.lastMovementVector = movementVector;

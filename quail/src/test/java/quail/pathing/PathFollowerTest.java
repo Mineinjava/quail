@@ -20,6 +20,10 @@
 
 package quail.pathing;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.localization.KalmanFilterLocalizer;
 import com.mineinjava.quail.pathing.ConstraintsPair;
@@ -28,10 +32,6 @@ import com.mineinjava.quail.pathing.PathFollower;
 import com.mineinjava.quail.util.MiniPID;
 import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,9 +46,11 @@ public class PathFollowerTest {
   Pose2d poseEnd = new Pose2d(0, 2, 0);
 
   double simulatedtime;
+  double SIMLOOPTIME = 0.02;
 
   Path path;
   PathFollower pathFollower;
+
   @BeforeEach
   void setUp() {
     path =
@@ -63,16 +65,34 @@ public class PathFollowerTest {
               }
             });
     KalmanFilterLocalizer localizer = new KalmanFilterLocalizer(new Pose2d().vec(), 1d);
-    ConstraintsPair translationPair = new ConstraintsPair(1, 10);
+    ConstraintsPair translationPair = new ConstraintsPair(1, 1000); // needs
+    // super
+    // high
+    // accel
+    // because
+    // looptimes
+    // are
+    // so
+    // short (approx 10khz)
     ConstraintsPair rotationPair = new ConstraintsPair(2, 20);
 
     MiniPID turnController = new MiniPID(1, 0, 0);
-    double precision = 0.1;
-    double slowDownDistance = 0d;
+    double precision = 0.2;
+    double slowDownDistance = 0.25d;
     double kP = 1;
     double minVelocity = 0;
 
-pathFollower = new PathFollower(localizer, path, translationPair, rotationPair, turnController, precision, slowDownDistance, kP, minVelocity);
+    pathFollower =
+        new PathFollower(
+            localizer,
+            path,
+            translationPair,
+            rotationPair,
+            turnController,
+            precision,
+            slowDownDistance,
+            kP,
+            minVelocity);
 
     simulatedtime = 0d;
   }
@@ -91,15 +111,62 @@ pathFollower = new PathFollower(localizer, path, translationPair, rotationPair, 
   }
 
   @Test
-  void noMovementIfPathIsFinished(){
+  void noMovementIfPathIsFinished() {
     this.movePathIndexForward(5);
     assertEquals(new Vec2d(0), this.pathFollower.calculateNextDriveMovement().translation);
     assertEquals(0, this.pathFollower.calculateNextDriveMovement().rotation);
   }
-  
+
   @Test
-  void incrementPathIndexIfPointHit(){
-    
+  void incrementPathIndexIfPointHit() {
+    for (int i = 0; i < this.path.points.size(); i++) {
+      this.pathFollower
+          .getLocalizer()
+          .setPose(this.path.points.get(i)); // set the pose to the next pose
+      this.pathFollower.calculateNextDriveMovement(); // update
+
+      if (this.pathFollower.isFinished()) {
+        break; // path is finished, no use trying to keep going
+      } else {
+        assertEquals(i + 1, this.path.getCurrentPointIndex()); // ensure
+        // that the
+        // path
+        // updated
+        // after
+        // hit
+      }
+    }
+    assertTrue(this.pathFollower.isFinished());
   }
 
+  @Test
+  void doNotIncrementPathIndexIfNotHit() {
+    for (int i = 0; i < 10; i++) {
+      this.pathFollower.calculateNextDriveMovement(); // the pose
+      // never
+      // changes, so
+      // the current
+      // point should
+      // only change
+      // once
+    }
+    assertEquals(1, this.pathFollower.getPath().getCurrentPointIndex());
+  }
+
+  @Test
+  void driveMovementsConvergeToPathAndFinishPath() {
+
+    while (true) {
+      RobotMovement mvmt = this.pathFollower.calculateNextDriveMovement();
+      KalmanFilterLocalizer localizer = (KalmanFilterLocalizer) this.pathFollower.getLocalizer();
+      Pose2d newPose =
+          localizer.getPose().plus(new Pose2d(mvmt.translation.scale(this.SIMLOOPTIME)));
+      localizer.setPose(newPose);
+      this.simulatedtime += this.SIMLOOPTIME;
+      if (this.pathFollower.isFinished()) {
+        break;
+      }
+    }
+    assertTrue(this.pathFollower.isFinished());
+  }
 }

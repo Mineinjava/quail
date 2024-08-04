@@ -38,6 +38,10 @@ public class Pose2d {
     this(0.0, 0.0, 0.0);
   }
 
+  public Pose2d(Vec2d vec) {
+    this(vec.x, vec.y, 0);
+  }
+
   /**
    * @param x x position
    * @param y y position
