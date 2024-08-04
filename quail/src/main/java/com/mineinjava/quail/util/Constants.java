@@ -25,4 +25,7 @@ package com.mineinjava.quail.util;
  *
  * <p>Or, currently, constants **not** used throughout the program.
  */
-public class Constants {}
+public class Constants {
+  public static final double EPSILON = 1e-6; // adjust the epsilon as
+  // needed
+}
