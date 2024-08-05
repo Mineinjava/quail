@@ -65,15 +65,9 @@ public class PathFollowerTest {
               }
             });
     KalmanFilterLocalizer localizer = new KalmanFilterLocalizer(new Pose2d().vec(), 1d);
-    ConstraintsPair translationPair = new ConstraintsPair(1, 1000); // needs
-    // super
-    // high
-    // accel
-    // because
-    // looptimes
-    // are
-    // so
-    // short (approx 10khz)
+    ConstraintsPair translationPair =
+        new ConstraintsPair(
+            1, 1000); // needs super high accel because looptimes are so short (approx 10khz)
     ConstraintsPair rotationPair = new ConstraintsPair(2, 20);
 
     MiniPID turnController = new MiniPID(1, 0, 0);
@@ -128,12 +122,7 @@ public class PathFollowerTest {
       if (this.pathFollower.isFinished()) {
         break; // path is finished, no use trying to keep going
       } else {
-        assertEquals(i + 1, this.path.getCurrentPointIndex()); // ensure
-        // that the
-        // path
-        // updated
-        // after
-        // hit
+        assertEquals(i + 1, this.path.getCurrentPointIndex()); // ensure the path updated after hit
       }
     }
     assertTrue(this.pathFollower.isFinished());
@@ -142,13 +131,9 @@ public class PathFollowerTest {
   @Test
   void doNotIncrementPathIndexIfNotHit() {
     for (int i = 0; i < 10; i++) {
-      this.pathFollower.calculateNextDriveMovement(); // the pose
-      // never
-      // changes, so
-      // the current
-      // point should
-      // only change
-      // once
+      this.pathFollower
+          .calculateNextDriveMovement(); // the pose never changes, so the current point should only
+      // change once
     }
     assertEquals(1, this.pathFollower.getPath().getCurrentPointIndex());
   }
@@ -157,14 +142,14 @@ public class PathFollowerTest {
   void driveMovementsConvergeToPathAndFinishPath() {
 
     while (true) {
-      RobotMovement mvmt = this.pathFollower.calculateNextDriveMovement();
+      RobotMovement mvmt = this.pathFollower.calculateNextDriveMovement(); // calculate movement
       KalmanFilterLocalizer localizer = (KalmanFilterLocalizer) this.pathFollower.getLocalizer();
       Pose2d newPose =
-          localizer.getPose().plus(new Pose2d(mvmt.translation.scale(this.SIMLOOPTIME)));
+        localizer.getPose().plus(new Pose2d(mvmt.translation.scale(this.SIMLOOPTIME))); // update position
       localizer.setPose(newPose);
-      this.simulatedtime += this.SIMLOOPTIME;
+      this.simulatedtime += this.SIMLOOPTIME; // this does nothing (yet)
       if (this.pathFollower.isFinished()) {
-        break;
+        break; // only break that its finished, which has been tested working
       }
     }
     assertTrue(this.pathFollower.isFinished());
