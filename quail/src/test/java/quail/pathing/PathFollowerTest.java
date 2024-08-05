@@ -145,7 +145,9 @@ public class PathFollowerTest {
       RobotMovement mvmt = this.pathFollower.calculateNextDriveMovement(); // calculate movement
       KalmanFilterLocalizer localizer = (KalmanFilterLocalizer) this.pathFollower.getLocalizer();
       Pose2d newPose =
-        localizer.getPose().plus(new Pose2d(mvmt.translation.scale(this.SIMLOOPTIME))); // update position
+          localizer
+              .getPose()
+              .plus(new Pose2d(mvmt.translation.scale(this.SIMLOOPTIME))); // update position
       localizer.setPose(newPose);
       this.simulatedtime += this.SIMLOOPTIME; // this does nothing (yet)
       if (this.pathFollower.isFinished()) {
