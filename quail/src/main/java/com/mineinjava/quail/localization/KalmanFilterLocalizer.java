@@ -55,18 +55,6 @@ public class KalmanFilterLocalizer implements Localizer {
    * @param w how much weight to "trust" the vision estimate
    * @param timestampMillis the current system time in ms
    */
-
-  /**
-   * Updates the pose estimate.
-   *
-   * <p>Updates based on the current velocity and the time since the last vision update
-   *
-   * @param observedPose the current pose estimate (get this from vision usually)
-   * @param velocity the current velocity
-   * @param poseEstimateLatency the time since the last vision update
-   * @param w how much weight to "trust" the vision estimate
-   * @param timestampMillis the current system time in ms
-   */
   public Pose2d update(
       Pose2d observedPose,
       Pose2d velocity,
