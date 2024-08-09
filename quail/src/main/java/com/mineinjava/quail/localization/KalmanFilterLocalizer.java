@@ -33,13 +33,13 @@ import java.util.ArrayList;
  * @see https://astr0clad.github.io/quail_docs/localization/vision/
  */
 public class KalmanFilterLocalizer implements Localizer {
-  private Vec2d poseEstimate = new Vec2d(0, 0);
+  private Pose2d poseEstimate = new Pose2d();
   private double looptime = 0;
   private ArrayList<KalmanPose2d> velocities =
       new ArrayList<KalmanPose2d>(); // / list of velocities, most recent last
   public double heading = 0;
 
-  public KalmanFilterLocalizer(Vec2d initialPose, double looptime) {
+  public KalmanFilterLocalizer(Pose2d initialPose, double looptime) {
     poseEstimate = initialPose;
     this.looptime = looptime;
   }
@@ -55,11 +55,24 @@ public class KalmanFilterLocalizer implements Localizer {
    * @param w how much weight to "trust" the vision estimate
    * @param timestampMillis the current system time in ms
    */
-  public Vec2d update(
-      Vec2d observedPose,
-      Vec2d velocity,
+
+  /**
+   * Updates the pose estimate.
+   *
+   * <p>Updates based on the current velocity and the time since the last vision update
+   *
+   * @param observedPose the current pose estimate (get this from vision usually)
+   * @param velocity the current velocity
+   * @param poseEstimateLatency the time since the last vision update
+   * @param w how much weight to "trust" the vision estimate
+   * @param timestampMillis the current system time in ms
+   */
+  public Pose2d update(
+      Pose2d observedPose,
+      Pose2d velocity,
       double poseEstimateLatency,
       double w,
+      double hw,
       double timestampMillis) {
     KalmanPose2d currentVelocity = new KalmanPose2d(velocity, timestampMillis);
     velocities.add(currentVelocity); // add the current velocity to the list of velocities
@@ -69,23 +82,34 @@ public class KalmanFilterLocalizer implements Localizer {
       velocities.remove(0);
     }
     // distance traveled since the vision update
-    Vec2d deltaPosSinceVision = new Vec2d(0, 0);
+    Vec2d deltaTranslationSinceVision = new Vec2d(0, 0);
+    double deltaRotationSinceVision = 0d;
     for (KalmanPose2d vel : velocities) {
-      deltaPosSinceVision =
-          deltaPosSinceVision.add(
-              vel); // don't scale here, we'll do it later (distributive property)
+      deltaTranslationSinceVision =
+        deltaTranslationSinceVision.add(
+            vel.vec()); // don't scale here, we'll do it later (distributive property)
+      deltaRotationSinceVision += vel.heading;
     }
-    deltaPosSinceVision =
-        deltaPosSinceVision.scale(looptime); // scale by the looptime: distance = velocity * time
+
+    deltaTranslationSinceVision =
+      deltaTranslationSinceVision.scale(this.looptime); // scale by the looptime: distance = velocity * time
+    deltaRotationSinceVision = deltaRotationSinceVision * this.looptime;
+
     // update the vision pose estimate with the delta from velocity
-    Vec2d visionPoseEstimate = observedPose.add(deltaPosSinceVision);
+    Vec2d updatedPoseSinceVision = observedPose.vec().add(deltaTranslationSinceVision );
+    double updatedRotationSinceVision = observedPose.heading + deltaRotationSinceVision;
     // update the last pose estimate with the velocity
-    Vec2d kinematicsPoseEstimate = this.poseEstimate.add(velocity.scale(this.looptime));
+    Vec2d kinematicsTranslationEstimate = this.poseEstimate.vec().add(velocity.vec().scale(this.looptime));
+    double kinematicsRotationEstimate = this.poseEstimate.heading + (velocity.heading * this.looptime);
+
     // update the pose estimate with a weighted average of the vision and kinematics pose estimates
     w = MathUtil.clamp(w, 0, 1); // make sure w is between 0 and 1 (inclusive)
-    this.poseEstimate = ((visionPoseEstimate.scale(w)).add(kinematicsPoseEstimate.scale(1 - w)));
+
+    Vec2d translationEstimate = ((updatedPoseSinceVision.scale(w)).add(kinematicsTranslationEstimate.scale(1 - w)));
+    double rotationEstimate = (updatedRotationSinceVision*hw) + (kinematicsRotationEstimate * (1-hw));
+    this.poseEstimate = new Pose2d(translationEstimate, rotationEstimate);
     return this.poseEstimate;
-  }
+      }
 
   /** Returns the current pose estimate */
   public Pose2d getPose() {
@@ -100,7 +124,7 @@ public class KalmanFilterLocalizer implements Localizer {
    * @param pose new translational pose to use
    */
   public void setPose(Pose2d pose) {
-    this.poseEstimate = new Vec2d(pose.x, pose.y);
+    this.poseEstimate = pose;
   }
 
   /**
@@ -116,16 +140,16 @@ public class KalmanFilterLocalizer implements Localizer {
 }
 
 /** Modified translational pose but it has a timestamp. */
-class KalmanPose2d extends Vec2d {
+class KalmanPose2d extends Pose2d {
   public double timestamp = 0;
 
-  public KalmanPose2d(double x, double y, double timestamp) {
-    super(x, y);
+  public KalmanPose2d(double x, double y, double heading, double timestamp) {
+    super(x, y, heading);
     this.timestamp = timestamp;
   }
 
-  public KalmanPose2d(Vec2d vec, double timestamp) {
-    super(vec.x, vec.y);
+  public KalmanPose2d(Pose2d pos, double timestamp) {
+    super(pos.x, pos.y, pos.heading);
     this.timestamp = timestamp;
   }
 }
