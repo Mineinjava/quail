@@ -104,7 +104,7 @@ public class Pose2dTest {
     Pose2d oldRobotPose = new Pose2d(2, 2, 0);
     double radius = 1.5;
     boolean expected =
-        true; // Assume the circle is hit based on provided MathUtil.LineSegHitCircle behavior
+        true; // Assume the circle is hit based on provided MathUtil.lineSegHitCircle behavior
     boolean result = pose.isHit(radius, robotPose, oldRobotPose);
     assertEquals(expected, result);
   }

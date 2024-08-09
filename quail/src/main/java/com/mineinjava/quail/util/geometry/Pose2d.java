@@ -156,7 +156,7 @@ public class Pose2d {
     if (this.distanceTo(robotPose) < radius) {
       return true;
     } else {
-      return MathUtil.LineSegHitCircle(robotPose, oldRobotPose, this, radius);
+      return MathUtil.lineSegHitCircle(robotPose, oldRobotPose, this, radius);
     }
   }
 
