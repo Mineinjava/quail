@@ -74,30 +74,35 @@ public class KalmanFilterLocalizer implements Localizer {
     double deltaRotationSinceVision = 0d;
     for (KalmanPose2d vel : velocities) {
       deltaTranslationSinceVision =
-        deltaTranslationSinceVision.add(
-            vel.vec()); // don't scale here, we'll do it later (distributive property)
+          deltaTranslationSinceVision.add(
+              vel.vec()); // don't scale here, we'll do it later (distributive property)
       deltaRotationSinceVision += vel.heading;
     }
 
     deltaTranslationSinceVision =
-      deltaTranslationSinceVision.scale(this.looptime); // scale by the looptime: distance = velocity * time
+        deltaTranslationSinceVision.scale(
+            this.looptime); // scale by the looptime: distance = velocity * time
     deltaRotationSinceVision = deltaRotationSinceVision * this.looptime;
 
     // update the vision pose estimate with the delta from velocity
-    Vec2d updatedPoseSinceVision = observedPose.vec().add(deltaTranslationSinceVision );
+    Vec2d updatedPoseSinceVision = observedPose.vec().add(deltaTranslationSinceVision);
     double updatedRotationSinceVision = observedPose.heading + deltaRotationSinceVision;
     // update the last pose estimate with the velocity
-    Vec2d kinematicsTranslationEstimate = this.poseEstimate.vec().add(velocity.vec().scale(this.looptime));
-    double kinematicsRotationEstimate = this.poseEstimate.heading + (velocity.heading * this.looptime);
+    Vec2d kinematicsTranslationEstimate =
+        this.poseEstimate.vec().add(velocity.vec().scale(this.looptime));
+    double kinematicsRotationEstimate =
+        this.poseEstimate.heading + (velocity.heading * this.looptime);
 
     // update the pose estimate with a weighted average of the vision and kinematics pose estimates
     w = MathUtil.clamp(w, 0, 1); // make sure w is between 0 and 1 (inclusive)
 
-    Vec2d translationEstimate = ((updatedPoseSinceVision.scale(w)).add(kinematicsTranslationEstimate.scale(1 - w)));
-    double rotationEstimate = (updatedRotationSinceVision*hw) + (kinematicsRotationEstimate * (1-hw));
+    Vec2d translationEstimate =
+        ((updatedPoseSinceVision.scale(w)).add(kinematicsTranslationEstimate.scale(1 - w)));
+    double rotationEstimate =
+        (updatedRotationSinceVision * hw) + (kinematicsRotationEstimate * (1 - hw));
     this.poseEstimate = new Pose2d(translationEstimate, rotationEstimate);
     return this.poseEstimate;
-      }
+  }
 
   /** Returns the current pose estimate */
   public Pose2d getPose() {
