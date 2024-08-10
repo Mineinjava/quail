@@ -188,8 +188,6 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/mineinjava/quail/SwerveModuleBase.html#currentAngle" class="member-name-link">currentAngle</a> - Variable in class com.mineinjava.quail.<a href="com/mineinjava/quail/SwerveModuleBase.html" title="class in com.mineinjava.quail">SwerveModuleBase</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/mineinjava/quail/pathing/Path.html#currentPointIndex" class="member-name-link">currentPointIndex</a> - Variable in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="com/mineinjava/quail/pathing/PathSequenceFollower.html#currentSegment" class="member-name-link">currentSegment</a> - Variable in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/PathSequenceFollower.html" title="class in com.mineinjava.quail.pathing">PathSequenceFollower</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -207,7 +205,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/mineinjava/quail/DifferentialSwerveModuleBase.html#%3Cinit%3E(com.mineinjava.quail.util.geometry.Vec2d,double,double,boolean)" class="member-name-link">DifferentialSwerveModuleBase(Vec2d, double, double, boolean)</a> - Constructor for class com.mineinjava.quail.<a href="com/mineinjava/quail/DifferentialSwerveModuleBase.html" title="class in com.mineinjava.quail">DifferentialSwerveModuleBase</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="com/mineinjava/quail/pathing/Path.html#distance_last_to_current_point()" class="member-name-link">distance_last_to_current_point()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
+<dt><a href="com/mineinjava/quail/pathing/Path.html#distanceLastToCurrentPoint()" class="member-name-link">distanceLastToCurrentPoint()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
 <dd>
 <div class="block">Returns the distance from last point to current point.</div>
 </dd>
@@ -276,6 +274,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the current point in the path.</div>
 </dd>
+<dt><a href="com/mineinjava/quail/pathing/Path.html#getCurrentPointIndex()" class="member-name-link">getCurrentPointIndex()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
+<dd>
+<div class="block">Gets the index of the current point in the path.</div>
+</dd>
 <dt><a href="com/mineinjava/quail/pathing/PathSequenceFollower.html#getCurrentSegment()" class="member-name-link">getCurrentSegment()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/PathSequenceFollower.html" title="class in com.mineinjava.quail.pathing">PathSequenceFollower</a></dt>
 <dd>
 <div class="block">Returns the current segment</div>
@@ -338,7 +340,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/mineinjava/quail/pathing/Path.html#getNextPoint()" class="member-name-link">getNextPoint()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
 <dd>
-<div class="block">Returns the next point in the path.</div>
+<div class="block">Gets the next point in the path.</div>
 </dd>
 <dt><a href="com/mineinjava/quail/util/MiniPID.html#getOutput()" class="member-name-link">getOutput()</a> - Method in class com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a></dt>
 <dd>
@@ -362,7 +364,7 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/mineinjava/quail/pathing/Path.html#getPointRelativeToCurrent(int)" class="member-name-link">getPointRelativeToCurrent(int)</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
 <dd>
-<div class="block">Returns the point at the specified index relative to the current point.</div>
+<div class="block">Gets the point at the specified index relative to the current point.</div>
 </dd>
 <dt><a href="com/mineinjava/quail/localization/KalmanFilterLocalizer.html#getPose()" class="member-name-link">getPose()</a> - Method in class com.mineinjava.quail.localization.<a href="com/mineinjava/quail/localization/KalmanFilterLocalizer.html" title="class in com.mineinjava.quail.localization">KalmanFilterLocalizer</a></dt>
 <dd>
@@ -416,6 +418,12 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:I">I</h2>
 <dl class="index">
+<dt><a href="com/mineinjava/quail/pathing/Path.html#incrementCurrentPointIndex()" class="member-name-link">incrementCurrentPointIndex()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
+<dd>
+<div class="block">Increments the current point index.</div>
+</dd>
+<dt><a href="com/mineinjava/quail/pathing/Path.html#isFinished()" class="member-name-link">isFinished()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/mineinjava/quail/pathing/PathFollower.html#isFinished()" class="member-name-link">isFinished()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/PathFollower.html" title="class in com.mineinjava.quail.pathing">PathFollower</a></dt>
 <dd>
 <div class="block">returns true if the robot is finished following the path.</div>
@@ -449,7 +457,7 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="com/mineinjava/quail/pathing/Path.html#length()" class="member-name-link">length()</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
 <dd>
-<div class="block">Returns the overall length of the path assuming the robot paths on straight lines</div>
+<div class="block">Returns the overall length of the path assuming the robot paths on straight lines.</div>
 </dd>
 <dt><a href="com/mineinjava/quail/util/MathUtil.html#lerp(double,double,double)" class="member-name-link">lerp(double, double, double)</a> - Static method in class com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/MathUtil.html" title="class in com.mineinjava.quail.util">MathUtil</a></dt>
 <dd>
@@ -580,6 +588,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/mineinjava/quail/util/geometry/Pose2d.html#%3Cinit%3E(double,double,double)" class="member-name-link">Pose2d(double, double, double)</a> - Constructor for class com.mineinjava.quail.util.geometry.<a href="com/mineinjava/quail/util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="com/mineinjava/quail/util/geometry/Pose2d.html#%3Cinit%3E(com.mineinjava.quail.util.geometry.Vec2d)" class="member-name-link">Pose2d(Vec2d)</a> - Constructor for class com.mineinjava.quail.util.geometry.<a href="com/mineinjava/quail/util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="com/mineinjava/quail/util/geometry/Pose2d.html#%3Cinit%3E(com.mineinjava.quail.util.geometry.Vec2d,double)" class="member-name-link">Pose2d(Vec2d, double)</a> - Constructor for class com.mineinjava.quail.util.geometry.<a href="com/mineinjava/quail/util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></dt>
 <dd>
 <div class="block">Useful for conversion from vector.</div>
@@ -595,7 +605,8 @@ loadScripts(document, 'script');</script>
 </dd>
 <dt><a href="com/mineinjava/quail/pathing/Path.html#remainingLength(com.mineinjava.quail.util.geometry.Pose2d)" class="member-name-link">remainingLength(Pose2d)</a> - Method in class com.mineinjava.quail.pathing.<a href="com/mineinjava/quail/pathing/Path.html" title="class in com.mineinjava.quail.pathing">Path</a></dt>
 <dd>
-<div class="block">Returns the remaining length of the path.</div>
+<div class="block">* Given a position, calculate the distance from that position to the next point then the
+ remaining distance on the path</div>
 </dd>
 <dt><a href="com/mineinjava/quail/util/MiniPID.html#reset()" class="member-name-link">reset()</a> - Method in class com.mineinjava.quail.util.<a href="com/mineinjava/quail/util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a></dt>
 <dd>
