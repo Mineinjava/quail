@@ -20,20 +20,44 @@
 
 package com.mineinjava.quail;
 
+
+import com.mineinjava.quail.util.MiniPID;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
 /** A base class for differential swerve modules. */
 public class DifferentialSwerveModuleBase extends SwerveModuleBase {
+  Vec2d position;
+  double steeringRatio;
+  double driveRatio;
+  double ticksPerRev;
+  boolean optimized;
+  MiniPID pid;
+  
+  private double degrees = ticksPerRev / 360;
+  private double motor1Pos;
+  private double motor2Pos;
 
-  public DifferentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio) {
+  public DifferentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, double ticksPerRev, MiniPID pid) {
     super(position, steeringRatio, driveRatio);
+    this.position = position;
+    this.steeringRatio = steeringRatio;
+    this.driveRatio = driveRatio;
+    this.ticksPerRev = ticksPerRev;
+    this.pid = pid;
+    
   }
 
   public DifferentialSwerveModuleBase(
-      Vec2d position, double steeringRatio, double driveRatio, boolean optimized) {
+      Vec2d position, double steeringRatio, double driveRatio,double ticksPerRev,MiniPID pid, boolean optimized) {
     super(position, steeringRatio, driveRatio, optimized);
+    this.position = position;
+    this.steeringRatio = steeringRatio;
+    this.driveRatio = driveRatio;
+    this.ticksPerRev = ticksPerRev;
+    this.pid = pid;
+    this.optimized = optimized;
   }
-
+  @Deprecated
   /**
    * Calculates the motor speeds for a differential swerve module.
    *
@@ -53,10 +77,99 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
 
     return motorSpeeds;
   }
+  /**
+   * Calculates the motor speeds for a differential swerve module. 
+   * 
+   * @param speed the speed for the pod
+   * @param angle the angle the pod needs to point to
+   * @param motor1pos the encoder pose for motor1
+   * @param motor2pos the encoder pose for motor2
+   * @return motor speeds (array of length 2)
+   */
+  public double[]  calculateMotorSpeeds(double speed, double angle, double motor1pos, double motor2pos){
+    double[] motorSpeeds = new double[2];
+    double currentAngle = calculateModuleAngle(motor1pos,motor2pos);
+    double oppAngle = angleWrap(currentAngle + 180);
 
-  /** Calculates the module angle based on the positions of the two motors. */
-  public double calculateModuleAngle(double motor1pos, double motor2pos) {
-    double averageRotation = (motor1pos + motor2pos) / 2;
-    return averageRotation / steeringRatio;
+    double angleFromTarget = angleWrap(angle - currentAngle);
+    double oppAngleFromTarget = angleWrap(angle - oppAngle);
+
+    if(Math.abs(angleFromTarget) > Math.abs(oppAngleFromTarget)){
+        angle = oppAngleFromTarget;
+    }else{
+        angle = angleFromTarget;
+    }
+
+    if (Math.abs(oppAngleFromTarget) < 0.3){//margin of allowed error
+        speed = -speed;
+    }else if (Math.abs(angleFromTarget) > 0.3){
+        speed = 0;
+    }
+    //motorSpeeds[0] = (-speed * 1) + pid.getOutput(currentAngle, angle);
+    //motorSpeeds[1] = (speed * 1) + pid.getOutput(currentAngle, angle);
+    motorSpeeds[0] = speed;
+    motorSpeeds[1] = angle;
+    return motorSpeeds;
   }
+
+  public double calculateModuleAngle(double motor1pos, double motor2pos){
+        double angleTicks = (motor1pos + motor2pos) / 2;
+        double angle = ticksToDegrees(angleTicks);
+        angle = angleWrap(currentAngle);
+        return angle;
+  }
+
+/**
+   * Sets the raw speed of the module.
+   *
+   * <p>OVERRIDE ME!!! This is where you call your motor / pid controllers
+   *
+   * @param speed the speed to set the module to
+   */
+  public void setMotor1Power(double power){
+    return;
+  }
+  /**
+   * Sets the raw speed of the module.
+   *
+   * <p>OVERRIDE ME!!! This is where you call your motor / pid controllers
+   *
+   * @param speed the speed to set the module to
+   */
+  public void setMotor2Power(double power){
+    return;
+  }
+
+
+
+
+  public void setMotorPoses(double motor1Pos, double motor2Pos){
+    this.motor1Pos = motor1Pos;
+    this.motor2Pos = motor2Pos;
+  }
+  /**
+   * Sets the module's motion to the specified vector;
+   *
+   * @param vec the vector to set the module to
+   */
+  @Override
+  public void set(Vec2d vec){
+    double[] powers = calculateMotorSpeeds(vec.getLength(),vec.getAngle(),motor1Pos,motor2Pos);
+    setMotor1Power(powers[0]);
+    setMotor2Power(powers[1]);
+
+  }
+
+
+
+  private static double angleWrap(double angle) {
+    if (angle > 0)
+        return ((angle + Math.PI) % (Math.PI * 2)) - Math.PI;
+    else
+        return ((angle - Math.PI) % (Math.PI * 2)) + Math.PI;
+}
+  private double ticksToDegrees(double ticks){
+  return ticks * degrees;
+  }
+
 }
