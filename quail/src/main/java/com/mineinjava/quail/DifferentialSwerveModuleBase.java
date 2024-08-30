@@ -20,6 +20,7 @@
 
 package com.mineinjava.quail;
 
+
 import com.mineinjava.quail.util.MiniPID;
 import com.mineinjava.quail.util.geometry.Vec2d;
 
@@ -33,6 +34,8 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
   MiniPID pid;
   
   private double degrees = ticksPerRev / 360;
+  private double motor1Pos;
+  private double motor2Pos;
 
   public DifferentialSwerveModuleBase(Vec2d position, double steeringRatio, double driveRatio, double ticksPerRev, MiniPID pid) {
     super(position, steeringRatio, driveRatio);
@@ -81,7 +84,7 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
    * @param wheelSpeed the current speed of the wheel
    * @return motor speeds (array of length 2)
    */
-  public double[]  calculateeMotorSpeeds(double speed, double angle, double motor1pos, double motor2pos){
+  public double[]  calculateMotorSpeeds(double speed, double angle, double motor1pos, double motor2pos){
     double[] motorSpeeds = new double[2];
     double currentAngle = calculateModuleAngle(motor1pos,motor2pos);
     double oppAngle = angleWrap(currentAngle + 180);
@@ -100,8 +103,10 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
     }else if (Math.abs(angleFromTarget) > 0.3){
         speed = 0;
     }
-    motorSpeeds[0] = (-speed * 1) + pid.getOutput(currentAngle, angle);
-    motorSpeeds[1] = (speed * 1) + pid.getOutput(currentAngle, angle);
+    //motorSpeeds[0] = (-speed * 1) + pid.getOutput(currentAngle, angle);
+    //motorSpeeds[1] = (speed * 1) + pid.getOutput(currentAngle, angle);
+    motorSpeeds[0] = speed;
+    motorSpeeds[1] = angle;
     return motorSpeeds;
   }
 
@@ -110,6 +115,47 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
         double angle = ticksToDegrees(angleTicks);
         angle = angleWrap(currentAngle);
         return angle;
+  }
+
+/**
+   * Sets the raw speed of the module.
+   *
+   * <p>OVERRIDE ME!!! This is where you call your motor / pid controllers
+   *
+   * @param speed the speed to set the module to
+   */
+  private void setMotor1Power(double power){
+    return;
+  }
+  /**
+   * Sets the raw speed of the module.
+   *
+   * <p>OVERRIDE ME!!! This is where you call your motor / pid controllers
+   *
+   * @param speed the speed to set the module to
+   */
+  private void setMotor2Power(double power){
+    return;
+  }
+
+
+
+
+  public void setMotorPoses(double motor1Pos, double motor2Pos){
+    this.motor1Pos = motor1Pos;
+    this.motor2Pos = motor2Pos;
+  }
+  /**
+   * Sets the module's motion to the specified vector;
+   *
+   * @param vec the vector to set the module to
+   */
+  @Override
+  public void set(Vec2d vec){
+    double[] powers = calculateMotorSpeeds(vec.getLength(),vec.getAngle(),motor1Pos,motor2Pos);
+    setMotor1Power(powers[0]);
+    setMotor2Power(powers[1]);
+
   }
 
 
