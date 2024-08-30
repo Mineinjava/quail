@@ -57,7 +57,7 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
     this.pid = pid;
     this.optimized = optimized;
   }
-
+  @Deprecated
   /**
    * Calculates the motor speeds for a differential swerve module.
    *
@@ -80,8 +80,10 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
   /**
    * Calculates the motor speeds for a differential swerve module. 
    * 
-   * @param rotationSpeed the current rotation speed of the pod
-   * @param wheelSpeed the current speed of the wheel
+   * @param speed the speed for the pod
+   * @param angle the angle the pod needs to point to
+   * @param motor1pos the encoder pose for motor1
+   * @param motor2pos the encoder pose for motor2
    * @return motor speeds (array of length 2)
    */
   public double[]  calculateMotorSpeeds(double speed, double angle, double motor1pos, double motor2pos){
@@ -124,7 +126,7 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
    *
    * @param speed the speed to set the module to
    */
-  private void setMotor1Power(double power){
+  public void setMotor1Power(double power){
     return;
   }
   /**
@@ -134,7 +136,7 @@ public class DifferentialSwerveModuleBase extends SwerveModuleBase {
    *
    * @param speed the speed to set the module to
    */
-  private void setMotor2Power(double power){
+  public void setMotor2Power(double power){
     return;
   }
 
