@@ -47,9 +47,10 @@ import java.util.ArrayList;
  * </ul>
  */
 public class Path {
-  public ArrayList<Pose2d> points;
-  public int currentPointIndex = 0;
+  public final ArrayList<Pose2d> points;
+  private int currentPointIndex = 0;
   public int lastPointIndex = 0;
+  private boolean isFinished = false;
 
   /**
    * Creates a path with the specified points and final heading.
@@ -57,57 +58,130 @@ public class Path {
    * @param points a list of pose2ds that the robot will follow in order
    */
   public Path(ArrayList<Pose2d> points) {
+    // Require at least 1 point
+    if (points.isEmpty()) {
+      throw new IllegalArgumentException("Path must have at least 1 point.");
+    }
     this.points = points;
     lastPointIndex = points.size() - 1;
   }
 
-  /** Returns the next point in the path. */
+  public boolean isFinished() {
+    return isFinished;
+  }
+
+  /**
+   * Marks the path as finished, should only be internally by incrementCurrentPointIndex
+   *
+   * @throws IllegalStateException if the path is already finished
+   */
+  private void finishPath() {
+    if (isFinished) {
+      throw new IllegalStateException("Path is already marked as finished. Cannot finish again.");
+    }
+    isFinished = true;
+  }
+
+  /**
+   * Increments the current point index.
+   *
+   * @throws IllegalStateException if the path is already finished or if the current point index is
+   *     greater than the last point index
+   */
+  public void incrementCurrentPointIndex() {
+    // If we are finished, we should not be able to increment the current point index
+    if (isFinished) {
+      throw new IllegalStateException(
+          "Path is already marked as finished. Cannot increment current point index.");
+    }
+
+    // Check if we are at the last point, if so mark the path as finished
+    if (currentPointIndex == lastPointIndex) {
+      this.finishPath();
+      return;
+    } else if (currentPointIndex > lastPointIndex) {
+      throw new IllegalStateException(
+          "Path is already marked as finished. Cannot increment current point index.");
+    }
+
+    currentPointIndex++;
+  }
+
+  /**
+   * Gets the next point in the path.
+   *
+   * <p>If the path is finished, or if we are on the last point, returns null.
+   *
+   * @return the next point in the path, or null
+   */
   public Pose2d getNextPoint() {
-    if (currentPointIndex < lastPointIndex) {
-      return points.get(currentPointIndex + 1);
-    } else {
+    if (isFinished) {
       return null;
     }
+
+    if (currentPointIndex + 1 > lastPointIndex) {
+      return null;
+    }
+
+    return points.get(currentPointIndex + 1);
+  }
+
+  /**
+   * Gets the index of the current point in the path.
+   *
+   * <p>may be out of bounds
+   */
+  public int getCurrentPointIndex() {
+    return currentPointIndex;
   }
 
   /** Returns the current point in the path. */
   public Pose2d getCurrentPoint() {
+    if (isFinished) {
+      throw new IllegalStateException("Path is finished, there is no current point");
+    }
     if (currentPointIndex <= lastPointIndex) {
       return points.get(currentPointIndex);
-    } else {
-      return null;
     }
+    return null;
   }
 
-  /** Returns the point at the specified index relative to the current point. */
+  /**
+   * Gets the point at the specified index relative to the current point.
+   *
+   * <p>If the path is finished, returns null
+   *
+   * @throws IllegalArgumentException if the index is out of bounds
+   * @param index the offset from the current point
+   * @return the point at the specified index relative to the current point, or null if the path is
+   *     finished
+   */
   public Pose2d getPointRelativeToCurrent(int index) {
-    if (currentPointIndex + index < 0) {
+    if (isFinished) {
       return null;
     }
-    if (currentPointIndex + index > points.size()) {
-      return null;
+    int newIndex = currentPointIndex + index;
+    if (newIndex < 0 || newIndex > lastPointIndex) {
+      throw new IllegalArgumentException(
+          "Cannot get point at index " + index + " because it would be out of bounds.");
     }
-
-    return points.get(currentPointIndex + index);
+    return points.get(newIndex);
   }
 
   /** Returns a vector from the passed pose to the current point. */
   public Vec2d vectorToCurrentPoint(Pose2d point) {
-    Pose2d nextPoint = this.getCurrentPoint();
-    if (nextPoint == null) {
+    if (isFinished) {
       return null;
     }
-    return new Vec2d(nextPoint.x - point.x, nextPoint.y - point.y);
+    return point.vectorTo(this.getCurrentPoint());
   }
 
-  /** Returns the overall length of the path assuming the robot paths on straight lines */
+  /** Returns the overall length of the path assuming the robot paths on straight lines. */
   public double length() {
     double length = 0;
 
     for (int i = 0; i < points.size() - 1; i++) {
-      Pose2d p1 = points.get(i);
-      Pose2d p2 = points.get(i + 1);
-      length += Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+      length += points.get(i).distanceTo(points.get(i + 1));
     }
     return length;
   }
@@ -116,45 +190,47 @@ public class Path {
    * Returns the distance from the passed point to the next point.
    *
    * @param point the point to calculate the distance from
+   * @throws IllegalStateException if the path is finished
    * @return the distance from the current point to the next point
    */
   public double distanceToNextPoint(Pose2d point) {
-    Pose2d nextPoint = this.getNextPoint();
-    if (nextPoint == null) {
-      return 0;
+    if (isFinished) {
+      throw new IllegalStateException("Path is finished. There is no next point.");
     }
-    return Math.sqrt(Math.pow(point.x - nextPoint.x, 2) + Math.pow(point.y - nextPoint.y, 2));
+    return point.distanceTo(this.getNextPoint());
   }
 
   /**
    * Returns the distance from the passed point to the current point.
    *
    * @param point the point to calculate the distance from
+   * @throws IllegalStateException if the path is finished
    * @return the distance from the current point to the next point
    */
   public double distanceToCurrentPoint(Pose2d point) {
-    Pose2d currentPoint = this.getCurrentPoint();
-    if (currentPoint == null) {
-      return 0;
+    if (isFinished) {
+      throw new IllegalStateException("Path is finished. There is no current point");
     }
-    return Math.sqrt(Math.pow(point.x - currentPoint.x, 2) + Math.pow(point.y - currentPoint.y, 2));
+    return point.distanceTo(this.getCurrentPoint());
   }
 
-  /** Returns a vector from the last point to the current point. */
+  /**
+   * Returns a vector from the last point to the current point.
+   *
+   * @throws IllegalStateException if the path is finished
+   */
   public Vec2d vectorLastToCurrentPoint() {
-    Pose2d currentPoint = this.getCurrentPoint();
-    if (currentPoint == null) {
-      return new Vec2d(0, 0);
+    if (isFinished) {
+      throw new IllegalStateException("Path is finished. There is no current point");
     }
-    Pose2d lastPoint = this.getPointRelativeToCurrent(-1);
-    if (lastPoint == null) {
-      return new Vec2d(0, 0);
+    if (this.getCurrentPointIndex() == 0) {
+      return new Vec2d(0);
     }
-    return new Vec2d(currentPoint.x - lastPoint.x, currentPoint.y - lastPoint.y);
+    return this.getPointRelativeToCurrent(-1).vectorTo(this.getCurrentPoint());
   }
 
   /** Returns the distance from last point to current point. */
-  public double distance_last_to_current_point() {
+  public double distanceLastToCurrentPoint() {
     return vectorLastToCurrentPoint().getLength();
   }
 
@@ -164,15 +240,14 @@ public class Path {
    * @return a vector from the current point to the next point
    */
   public Vec2d nextMovementVector() {
-    Pose2d currentPoint = this.getCurrentPoint();
-    if (currentPoint == null) {
+    if (isFinished) {
       return null;
     }
-    Pose2d nextPoint = this.getNextPoint();
-    if (nextPoint == null) {
-      return null;
+    if (currentPointIndex >= lastPointIndex) {
+      return null; // TODO: make sure this doesn't break anything
+      // (ensure robot stops)
     }
-    return new Vec2d(nextPoint.x - currentPoint.x, nextPoint.y - currentPoint.y);
+    return this.getCurrentPoint().vectorTo(this.getNextPoint());
   }
 
   /**
@@ -208,18 +283,26 @@ public class Path {
    *
    * <p>The index of the nearest point must be greater than or equal to minIndex
    *
-   * @param point
-   * @param minIndex - the index of the nearest point must be greater than or equal to minIndex
-   * @return - the nearest point on the path
+   * <p>In case of a tie, the point that occurs earlier on the path is returned
+   *
+   * @param point the point relative to which you want to find the nearest point on the path
+   * @param minIndex the index of the nearest point must be greater than or equal to minIndex
+   * @throws IllegalArgumentException if there are no points between minIndex and the end of the
+   *     path.
+   * @return the nearest point on the path
+   * @bernstern I like this way of doing it better
    */
   public Pose2d nearestPoint(Pose2d point, int minIndex) {
+    if (minIndex >= lastPointIndex) {
+      throw new IllegalArgumentException("No points are left to search through");
+    }
+
     Pose2d nearestPoint = points.get(minIndex);
-    double nearestDistance =
-        Math.sqrt(Math.pow(point.x - nearestPoint.x, 2) + Math.pow(point.y - nearestPoint.y, 2));
+    double nearestDistance = point.distanceTo(nearestPoint);
 
     for (int i = minIndex; i < points.size(); i++) {
       Pose2d p = points.get(i);
-      double distance = Math.sqrt(Math.pow(point.x - point.x, 2) + Math.pow(point.y - point.y, 2));
+      double distance = point.distanceTo(p);
 
       if (distance < nearestDistance) {
         nearestPoint = p;
@@ -229,21 +312,31 @@ public class Path {
     return nearestPoint;
   }
 
-  /** Returns the remaining length of the path. */
+  /**
+   * * Given a position, calculate the distance from that position to the next point then the
+   * remaining distance on the path
+   *
+   * @param position where to calculate the distance to the currentPoint
+   * @return the total length remaining
+   */
   public double remainingLength(Pose2d position) {
     double length = 0;
 
-    for (int i = currentPointIndex; i < points.size() - 1; i++) {
-      Pose2d p1 = points.get(i);
-      Pose2d p2 = points.get(i + 1);
-      length += Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+    // If the path is complete, throw an illegal state
+    if (isFinished) {
+      throw new IllegalStateException(
+          "Path is marked is complete, remainingLength should not be called");
     }
 
-    if (currentPointIndex < points.size()) {
-      Pose2d firstPoint = points.get(currentPointIndex);
-      length +=
-          Math.sqrt(
-              Math.pow(position.x - firstPoint.x, 2) + Math.pow(position.y - firstPoint.y, 2));
+    // Calculate the distance from position to the first point left in the path
+    Pose2d firstPoint = points.get(currentPointIndex);
+    length += position.distanceTo(firstPoint);
+
+    // Go through the remainder of the path and calculate how much distance is left
+    for (int i = currentPointIndex; i < lastPointIndex; i++) {
+      Pose2d p1 = points.get(i);
+      Pose2d p2 = points.get(i + 1);
+      length += p1.distanceTo(p2);
     }
 
     return length;

@@ -24,7 +24,7 @@ I wish I knew Kotlin so I could make it purple. 💜
 
 Currently, Quail is stable. Not quite sure about the documentation--it seems to be a bit tempermental.
 
-Quail is designed for use and tested in FRC and FTC, but it should work in any java program.
+Quail is designed for use and tested in FRC and FTC, but it should work in any java robotics program.
 
 ---
 ### Features:
