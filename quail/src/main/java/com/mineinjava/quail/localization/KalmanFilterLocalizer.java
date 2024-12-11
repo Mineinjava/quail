@@ -49,10 +49,11 @@ public class KalmanFilterLocalizer implements Localizer {
    *
    * <p>Updates based on the current velocity and the time since the last vision update
    *
-   * @param observedPose the current pose estimate (get this from vision usually)
-   * @param velocity the current velocity
+   * @param observedPose the current pose estimate (get this from vision usually), include rotation
+   * @param velocity the current velocity, include rotation
    * @param poseEstimateLatency the time since the last vision update
-   * @param w how much weight to "trust" the vision estimate
+   * @param w how much weight to "trust" the vision estimate for position
+   * @param hw how much weight to "trust" the vision estimate for heading
    * @param timestampMillis the current system time in ms
    */
   public Pose2d update(
@@ -62,6 +63,7 @@ public class KalmanFilterLocalizer implements Localizer {
       double w,
       double hw,
       double timestampMillis) {
+
     KalmanPose2d currentVelocity = new KalmanPose2d(velocity, timestampMillis);
     velocities.add(currentVelocity); // add the current velocity to the list of velocities
     // trim the list of velocities to only include the relevant ones.
@@ -73,15 +75,13 @@ public class KalmanFilterLocalizer implements Localizer {
     Vec2d deltaTranslationSinceVision = new Vec2d(0, 0);
     double deltaRotationSinceVision = 0d;
     for (KalmanPose2d vel : velocities) {
-      deltaTranslationSinceVision =
-          deltaTranslationSinceVision.add(
-              vel.vec()); // don't scale here, we'll do it later (distributive property)
+      // don't scale here, we'll do it later (distributive property)
+      deltaTranslationSinceVision = deltaTranslationSinceVision.add(vel.vec());
       deltaRotationSinceVision += vel.heading;
     }
 
-    deltaTranslationSinceVision =
-        deltaTranslationSinceVision.scale(
-            this.looptime); // scale by the looptime: distance = velocity * time
+    // scale by the looptime: distance = velocity * time
+    deltaTranslationSinceVision = deltaTranslationSinceVision.scale(this.looptime);
     deltaRotationSinceVision = deltaRotationSinceVision * this.looptime;
 
     // update the vision pose estimate with the delta from velocity
@@ -94,10 +94,13 @@ public class KalmanFilterLocalizer implements Localizer {
         this.poseEstimate.heading + (velocity.heading * this.looptime);
 
     // update the pose estimate with a weighted average of the vision and kinematics pose estimates
-    w = MathUtil.clamp(w, 0, 1); // make sure w is between 0 and 1 (inclusive)
+    // make sure w is between 0 and 1 (inclusive)
+    w = MathUtil.clamp(w, 0, 1);
+    hw = MathUtil.clamp(hw, 0, 1);
 
     Vec2d translationEstimate =
         ((updatedPoseSinceVision.scale(w)).add(kinematicsTranslationEstimate.scale(1 - w)));
+
     double rotationEstimate =
         (updatedRotationSinceVision * hw) + (kinematicsRotationEstimate * (1 - hw));
     this.poseEstimate = new Pose2d(translationEstimate, rotationEstimate);
@@ -106,7 +109,7 @@ public class KalmanFilterLocalizer implements Localizer {
 
   /** Returns the current pose estimate */
   public Pose2d getPose() {
-    return new Pose2d(poseEstimate.x, poseEstimate.y, this.heading);
+    return new Pose2d(poseEstimate.x, poseEstimate.y, poseEstimate.heading);
   }
 
   /**
@@ -114,7 +117,7 @@ public class KalmanFilterLocalizer implements Localizer {
    *
    * <p>Completely overrides the old position
    *
-   * @param pose new translational pose to use
+   * @param pose new pose to use
    */
   public void setPose(Pose2d pose) {
     this.poseEstimate = pose;
@@ -123,8 +126,6 @@ public class KalmanFilterLocalizer implements Localizer {
   /**
    * Sets the current heading.
    *
-   * <p>Call this on every frame with the robot's heading
-   *
    * @param heading Robot heading
    */
   public void setHeading(double heading) {
@@ -132,7 +133,11 @@ public class KalmanFilterLocalizer implements Localizer {
   }
 }
 
-/** Modified translational pose but it has a timestamp. */
+/**
+ * Modified translational pose but it has a timestamp.
+ *
+ * @see Pose2d
+ */
 class KalmanPose2d extends Pose2d {
   public double timestamp = 0;
 
