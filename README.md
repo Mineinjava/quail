@@ -8,7 +8,7 @@ Bird-brained swerve drive utility.
 
 Looking to contribute to or use Quail? You may find value in joining the Discord server: https://discord.gg/ABznnnBB
 
-To use Quail, you need a few things. The first is swerve modules. More than one. I don't care where your swerve modules are. They could be 52 miles apart (i.e. [this](https://www.youtube.com/watch?v=Ui-ehJlGM1Q)) and in the shape of a pentagon and Quail would still work.
+To use Quail, you need a few things. The first is swerve modules. More than one. I don't care where your swerve modules are. They could be 52 miles apart (i.e. [this](https://www.youtube.com/watch?v=Ui-ehJlGM1Q) but with swerve) and in the shape of a pentagon and Quail would still work.
 
 The second thing you need is a little knowledge of Java. You should be able to:
  - use a PID controller
