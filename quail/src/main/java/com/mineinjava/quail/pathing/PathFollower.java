@@ -41,6 +41,7 @@ public class PathFollower {
   private double maxAcceleration;
   private MiniPID turnController;
   private double precision;
+  private double headingPrecision;
   private Localizer localizer;
   private double slowDownDistance;
 
@@ -64,6 +65,7 @@ public class PathFollower {
       double maxAcceleration,
       MiniPID turnController,
       double precision,
+      double headingPrecision,
       double slowDownDistance,
       double kP,
       double minVelocity) {
@@ -75,6 +77,7 @@ public class PathFollower {
     this.maxAcceleration = maxAcceleration;
     this.turnController = turnController;
     this.precision = precision;
+    this.headingPrecision = headingPrecision;
     this.slowDownDistance =
         slowDownDistance; // TODO: in the future add an option to calculate it based on max accel.
     this.kP = kP;
@@ -89,6 +92,7 @@ public class PathFollower {
       double maxAcceleration,
       MiniPID turnController,
       double precision,
+      double headingPrecision,
       double slowDownDistance,
       double kP,
       double minVelocity) {
@@ -101,6 +105,7 @@ public class PathFollower {
         maxAcceleration,
         turnController,
         precision,
+        headingPrecision,
         slowDownDistance,
         kP,
         minVelocity);
@@ -113,6 +118,7 @@ public class PathFollower {
       ConstraintsPair rotationPair,
       MiniPID turnController,
       double precision,
+      double headingPrecision,
       double slowDownDistance,
       double kP,
       double minVelocity) {
@@ -125,6 +131,7 @@ public class PathFollower {
         translationPair.getMaxAcceleration(),
         turnController,
         precision,
+        headingPrecision,
         slowDownDistance,
         kP,
         minVelocity);
@@ -229,6 +236,9 @@ public class PathFollower {
 
   /** returns true if the robot is finished following the path. */
   public Boolean isFinished() {
+    if (Math.abs(this.path.getCurrentPoint().heading - currentPose.heading) > this.headingPrecision) {
+      return false;
+    }
     return this.path.isFinished();
   }
 
