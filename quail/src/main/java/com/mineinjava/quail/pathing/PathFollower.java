@@ -28,10 +28,7 @@ import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
 
-/**
- * Class that helps you follow paths
- *
- */
+/** Class that helps you follow paths */
 public class PathFollower {
   private Path path;
   private double speed;
@@ -149,11 +146,12 @@ public class PathFollower {
           "localizer is null, ensure that you have instantiated the localizer object");
     }
 
+    this.currentPose = this.localizer.getPose(); // get the current pose of the robot
+
     if (this.isFinished()) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
 
-    this.currentPose = this.localizer.getPose();
     this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
     this.lastTime = System.currentTimeMillis();
 
@@ -235,10 +233,25 @@ public class PathFollower {
 
   /** returns true if the robot is finished following the path. */
   public Boolean isFinished() {
-    if (Math.abs(this.path.getCurrentPoint().heading - currentPose.heading) > this.headingPrecision) {
+    this.currentPose = this.localizer.getPose(); // ensure latest pose is updated
+
+    // Check if the path is finished
+    if (this.path.isFinished()) {
+      // Check if the heading difference is within the allowed precision for the last point
+      double headingDifference =
+          Math.abs(
+              this.path.points.get(this.path.points.size() - 1).heading - this.currentPose.heading);
+      return headingDifference <= this.headingPrecision;
+    }
+
+    // Check if the heading difference is within the allowed precision for the current point
+    double headingDifference =
+        Math.abs(this.path.points.get(this.path.lastPointIndex).heading - this.currentPose.heading);
+    if (headingDifference >= this.headingPrecision) {
       return false;
     }
-    return this.path.isFinished();
+
+    return false;
   }
 
   /**
