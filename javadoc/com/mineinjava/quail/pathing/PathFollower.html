@@ -77,9 +77,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">PathFollower</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Class that helps you follow paths
-
- <p>TODO: Don't treat point as reached if angle is outside angular precision</div>
+<div class="block">Class that helps you follow paths</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -91,18 +89,19 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.localization.Localizer,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double)" class="member-name-link">PathFollower</a><wbr>(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.localization.Localizer,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double,double)" class="member-name-link">PathFollower</a><wbr>(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  double&nbsp;speed,
  double&nbsp;maxTurnSpeed,
  double&nbsp;maxTurnAcceleration,
  double&nbsp;maxAcceleration,
  <a href="../util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a>&nbsp;turnController,
  double&nbsp;precision,
+ double&nbsp;headingPrecision,
  double&nbsp;slowDownDistance,
  double&nbsp;kP,
  double&nbsp;minVelocity)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double)" class="member-name-link">PathFollower</a><wbr>(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double,double)" class="member-name-link">PathFollower</a><wbr>(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  <a href="Path.html" title="class in com.mineinjava.quail.pathing">Path</a>&nbsp;path,
  double&nbsp;speed,
  double&nbsp;maxTurnSpeed,
@@ -110,16 +109,18 @@ loadScripts(document, 'script');</script>
  double&nbsp;maxAcceleration,
  <a href="../util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a>&nbsp;turnController,
  double&nbsp;precision,
+ double&nbsp;headingPrecision,
  double&nbsp;slowDownDistance,
  double&nbsp;kP,
  double&nbsp;minVelocity)</code></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.util.MiniPID,double,double,double,double)" class="member-name-link">PathFollower</a><wbr>(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.util.MiniPID,double,double,double,double,double)" class="member-name-link">PathFollower</a><wbr>(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  <a href="Path.html" title="class in com.mineinjava.quail.pathing">Path</a>&nbsp;path,
  <a href="ConstraintsPair.html" title="class in com.mineinjava.quail.pathing">ConstraintsPair</a>&nbsp;translationPair,
  <a href="ConstraintsPair.html" title="class in com.mineinjava.quail.pathing">ConstraintsPair</a>&nbsp;rotationPair,
  <a href="../util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a>&nbsp;turnController,
  double&nbsp;precision,
+ double&nbsp;headingPrecision,
  double&nbsp;slowDownDistance,
  double&nbsp;kP,
  double&nbsp;minVelocity)</code></div>
@@ -261,7 +262,7 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double)">
+<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double,double)">
 <h3>PathFollower</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PathFollower</span><wbr><span class="parameters">(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  <a href="Path.html" title="class in com.mineinjava.quail.pathing">Path</a>&nbsp;path,
@@ -271,13 +272,14 @@ loadScripts(document, 'script');</script>
  double&nbsp;maxAcceleration,
  <a href="../util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a>&nbsp;turnController,
  double&nbsp;precision,
+ double&nbsp;headingPrecision,
  double&nbsp;slowDownDistance,
  double&nbsp;kP,
  double&nbsp;minVelocity)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.localization.Localizer,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double)">
+<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.localization.Localizer,double,double,double,double,com.mineinjava.quail.util.MiniPID,double,double,double,double,double)">
 <h3>PathFollower</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PathFollower</span><wbr><span class="parameters">(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  double&nbsp;speed,
@@ -286,13 +288,14 @@ loadScripts(document, 'script');</script>
  double&nbsp;maxAcceleration,
  <a href="../util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a>&nbsp;turnController,
  double&nbsp;precision,
+ double&nbsp;headingPrecision,
  double&nbsp;slowDownDistance,
  double&nbsp;kP,
  double&nbsp;minVelocity)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.util.MiniPID,double,double,double,double)">
+<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.localization.Localizer,com.mineinjava.quail.pathing.Path,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.pathing.ConstraintsPair,com.mineinjava.quail.util.MiniPID,double,double,double,double,double)">
 <h3>PathFollower</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">PathFollower</span><wbr><span class="parameters">(<a href="../localization/Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a>&nbsp;localizer,
  <a href="Path.html" title="class in com.mineinjava.quail.pathing">Path</a>&nbsp;path,
@@ -300,6 +303,7 @@ loadScripts(document, 'script');</script>
  <a href="ConstraintsPair.html" title="class in com.mineinjava.quail.pathing">ConstraintsPair</a>&nbsp;rotationPair,
  <a href="../util/MiniPID.html" title="class in com.mineinjava.quail.util">MiniPID</a>&nbsp;turnController,
  double&nbsp;precision,
+ double&nbsp;headingPrecision,
  double&nbsp;slowDownDistance,
  double&nbsp;kP,
  double&nbsp;minVelocity)</span></div>
