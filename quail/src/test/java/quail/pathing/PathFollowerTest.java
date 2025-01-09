@@ -21,11 +21,13 @@
 package quail.pathing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.mineinjava.quail.RobotMovement;
 import com.mineinjava.quail.localization.KalmanFilterLocalizer;
+import com.mineinjava.quail.localization.SwerveOdometry;
 import com.mineinjava.quail.pathing.ConstraintsPair;
 import com.mineinjava.quail.pathing.Path;
 import com.mineinjava.quail.pathing.PathFollower;
@@ -72,6 +74,7 @@ public class PathFollowerTest {
 
     MiniPID turnController = new MiniPID(1, 0, 0);
     double precision = 0.2;
+    double headingPrecision = 0.1;
     double slowDownDistance = 0.25d;
     double kP = 1;
     double minVelocity = 0;
@@ -84,6 +87,7 @@ public class PathFollowerTest {
             rotationPair,
             turnController,
             precision,
+            headingPrecision,
             slowDownDistance,
             kP,
             minVelocity);
@@ -155,5 +159,63 @@ public class PathFollowerTest {
       }
     }
     assertTrue(this.pathFollower.isFinished());
+  }
+
+  @Test
+  void isFinishedWorksWithDifferentFinalHeading() {
+    // Modify the final point to have a different heading
+    Pose2d finalPoseWithDifferentHeading = new Pose2d(0, 2, Math.PI / 2); // 90 degrees
+    Path newPath =
+        new Path(
+            new ArrayList<Pose2d>() {
+              {
+                add(poseStart);
+                add(poseSecond);
+                add(poseThird);
+                add(poseFourth);
+                add(finalPoseWithDifferentHeading);
+              }
+            });
+
+    // Create a new PathFollower with a SwerveOdometry localizer (won't work with Kalman)
+    SwerveOdometry swerveOdometry =
+        new SwerveOdometry(
+            new ArrayList<Vec2d>() {
+              {
+                add(new Vec2d(1, 0));
+                add(new Vec2d(-1, 0));
+              }
+            });
+
+    // Set the new localizer and path
+    pathFollower.setLocalizer(swerveOdometry);
+    pathFollower.setPath(newPath);
+
+    // Simulate the robot moving along the path
+    for (int i = 0; i < path.points.size(); i++) {
+      pathFollower.getLocalizer().setPose(path.points.get(i)); // Set the pose to the next pose
+      pathFollower.calculateNextDriveMovement(); // Update
+
+      // Check if the path is finished
+      if (i < path.points.size() - 1) {
+        assertFalse(pathFollower.isFinished(), "Path should not be finished yet");
+      } else {
+        // Check if the path is finished on final point with incorrect heading, then correct heading
+        Pose2d finalPoseWithWrongHeading = new Pose2d(0, 2, Math.PI); // Outside heading precision
+        pathFollower.getLocalizer().setPose(finalPoseWithWrongHeading);
+        assertFalse(
+            pathFollower.isFinished(), "Path should not be finished due to incorrect heading");
+
+        Pose2d finalPoseWithCorrectHeading =
+            new Pose2d(0, 2, Math.PI / 2 - 0.05); // Within heading precision
+        pathFollower.getLocalizer().setPose(finalPoseWithCorrectHeading);
+        assertTrue(pathFollower.isFinished(), "Path should be finished, within heading precision");
+
+        pathFollower
+            .getLocalizer()
+            .setPose(finalPoseWithDifferentHeading); // Within heading precision
+        assertTrue(pathFollower.isFinished(), "Path should be finished, correct heading");
+      }
+    }
   }
 }

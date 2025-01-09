@@ -28,11 +28,7 @@ import com.mineinjava.quail.util.geometry.Pose2d;
 import com.mineinjava.quail.util.geometry.Vec2d;
 import java.util.ArrayList;
 
-/**
- * Class that helps you follow paths
- *
- * <p>TODO: Don't treat point as reached if angle is outside angular precision
- */
+/** Class that helps you follow paths */
 public class PathFollower {
   private Path path;
   private double speed;
@@ -41,6 +37,7 @@ public class PathFollower {
   private double maxAcceleration;
   private MiniPID turnController;
   private double precision;
+  private double headingPrecision;
   private Localizer localizer;
   private double slowDownDistance;
 
@@ -64,6 +61,7 @@ public class PathFollower {
       double maxAcceleration,
       MiniPID turnController,
       double precision,
+      double headingPrecision,
       double slowDownDistance,
       double kP,
       double minVelocity) {
@@ -75,6 +73,7 @@ public class PathFollower {
     this.maxAcceleration = maxAcceleration;
     this.turnController = turnController;
     this.precision = precision;
+    this.headingPrecision = headingPrecision;
     this.slowDownDistance =
         slowDownDistance; // TODO: in the future add an option to calculate it based on max accel.
     this.kP = kP;
@@ -89,6 +88,7 @@ public class PathFollower {
       double maxAcceleration,
       MiniPID turnController,
       double precision,
+      double headingPrecision,
       double slowDownDistance,
       double kP,
       double minVelocity) {
@@ -101,6 +101,7 @@ public class PathFollower {
         maxAcceleration,
         turnController,
         precision,
+        headingPrecision,
         slowDownDistance,
         kP,
         minVelocity);
@@ -113,6 +114,7 @@ public class PathFollower {
       ConstraintsPair rotationPair,
       MiniPID turnController,
       double precision,
+      double headingPrecision,
       double slowDownDistance,
       double kP,
       double minVelocity) {
@@ -125,6 +127,7 @@ public class PathFollower {
         translationPair.getMaxAcceleration(),
         turnController,
         precision,
+        headingPrecision,
         slowDownDistance,
         kP,
         minVelocity);
@@ -143,11 +146,12 @@ public class PathFollower {
           "localizer is null, ensure that you have instantiated the localizer object");
     }
 
+    this.currentPose = this.localizer.getPose(); // get the current pose of the robot
+
     if (this.isFinished()) {
       return new RobotMovement(0, new Vec2d(0, 0)); // the path is over
     }
 
-    this.currentPose = this.localizer.getPose();
     this.loopTime = (System.currentTimeMillis() - this.lastTime) / 1000.0;
     this.lastTime = System.currentTimeMillis();
 
@@ -229,7 +233,25 @@ public class PathFollower {
 
   /** returns true if the robot is finished following the path. */
   public Boolean isFinished() {
-    return this.path.isFinished();
+    this.currentPose = this.localizer.getPose(); // ensure latest pose is updated
+
+    // Check if the path is finished
+    if (this.path.isFinished()) {
+      // Check if the heading difference is within the allowed precision for the last point
+      double headingDifference =
+          Math.abs(
+              this.path.points.get(this.path.points.size() - 1).heading - this.currentPose.heading);
+      return headingDifference <= this.headingPrecision;
+    }
+
+    // Check if the heading difference is within the allowed precision for the current point
+    double headingDifference =
+        Math.abs(this.path.points.get(this.path.lastPointIndex).heading - this.currentPose.heading);
+    if (headingDifference >= this.headingPrecision) {
+      return false;
+    }
+
+    return false;
   }
 
   /**
