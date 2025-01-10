@@ -111,7 +111,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.util.geometry.Vec2d,double)" class="member-name-link">KalmanFilterLocalizer</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;initialPose,
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(com.mineinjava.quail.util.geometry.Pose2d,double)" class="member-name-link">KalmanFilterLocalizer</a><wbr>(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;initialPose,
  double&nbsp;looptime)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
@@ -143,11 +143,12 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Sets the current position.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(com.mineinjava.quail.util.geometry.Vec2d,com.mineinjava.quail.util.geometry.Vec2d,double,double,double)" class="member-name-link">update</a><wbr>(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;observedPose,
- <a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;velocity,
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#update(com.mineinjava.quail.util.geometry.Pose2d,com.mineinjava.quail.util.geometry.Pose2d,double,double,double,double)" class="member-name-link">update</a><wbr>(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;observedPose,
+ <a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;velocity,
  double&nbsp;poseEstimateLatency,
  double&nbsp;w,
+ double&nbsp;hw,
  double&nbsp;timestampMillis)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Updates the pose estimate.</div>
@@ -184,9 +185,9 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.util.geometry.Vec2d,double)">
+<section class="detail" id="&lt;init&gt;(com.mineinjava.quail.util.geometry.Pose2d,double)">
 <h3>KalmanFilterLocalizer</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">KalmanFilterLocalizer</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;initialPose,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">KalmanFilterLocalizer</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;initialPose,
  double&nbsp;looptime)</span></div>
 </section>
 </li>
@@ -199,22 +200,24 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="update(com.mineinjava.quail.util.geometry.Vec2d,com.mineinjava.quail.util.geometry.Vec2d,double,double,double)">
+<section class="detail" id="update(com.mineinjava.quail.util.geometry.Pose2d,com.mineinjava.quail.util.geometry.Pose2d,double,double,double,double)">
 <h3>update</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a></span>&nbsp;<span class="element-name">update</span><wbr><span class="parameters">(<a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;observedPose,
- <a href="../util/geometry/Vec2d.html" title="class in com.mineinjava.quail.util.geometry">Vec2d</a>&nbsp;velocity,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a></span>&nbsp;<span class="element-name">update</span><wbr><span class="parameters">(<a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;observedPose,
+ <a href="../util/geometry/Pose2d.html" title="class in com.mineinjava.quail.util.geometry">Pose2d</a>&nbsp;velocity,
  double&nbsp;poseEstimateLatency,
  double&nbsp;w,
+ double&nbsp;hw,
  double&nbsp;timestampMillis)</span></div>
 <div class="block">Updates the pose estimate.
 
  <p>Updates based on the current velocity and the time since the last vision update</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>observedPose</code> - the current pose estimate (get this from vision usually)</dd>
-<dd><code>velocity</code> - the current velocity</dd>
+<dd><code>observedPose</code> - the current pose estimate (get this from vision usually), include rotation</dd>
+<dd><code>velocity</code> - the current velocity, include rotation</dd>
 <dd><code>poseEstimateLatency</code> - the time since the last vision update</dd>
-<dd><code>w</code> - how much weight to "trust" the vision estimate</dd>
+<dd><code>w</code> - how much weight to "trust" the vision estimate for position</dd>
+<dd><code>hw</code> - how much weight to "trust" the vision estimate for heading</dd>
 <dd><code>timestampMillis</code> - the current system time in ms</dd>
 </dl>
 </section>
@@ -241,7 +244,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <dt>Specified by:</dt>
 <dd><code><a href="Localizer.html#setPose(com.mineinjava.quail.util.geometry.Pose2d)">setPose</a></code>&nbsp;in interface&nbsp;<code><a href="Localizer.html" title="interface in com.mineinjava.quail.localization">Localizer</a></code></dd>
 <dt>Parameters:</dt>
-<dd><code>pose</code> - new translational pose to use</dd>
+<dd><code>pose</code> - new pose to use</dd>
 </dl>
 </section>
 </li>
@@ -249,9 +252,7 @@ implements <a href="Localizer.html" title="interface in com.mineinjava.quail.loc
 <section class="detail" id="setHeading(double)">
 <h3>setHeading</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setHeading</span><wbr><span class="parameters">(double&nbsp;heading)</span></div>
-<div class="block">Sets the current heading.
-
- <p>Call this on every frame with the robot's heading</div>
+<div class="block">Sets the current heading.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>heading</code> - Robot heading</dd>
