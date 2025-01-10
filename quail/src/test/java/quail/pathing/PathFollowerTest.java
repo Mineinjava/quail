@@ -66,7 +66,7 @@ public class PathFollowerTest {
                 add(poseEnd);
               }
             });
-    KalmanFilterLocalizer localizer = new KalmanFilterLocalizer(new Pose2d().vec(), 1d);
+    KalmanFilterLocalizer localizer = new KalmanFilterLocalizer(new Pose2d(), 1d);
     ConstraintsPair translationPair =
         new ConstraintsPair(
             1, 1000); // needs super high accel because looptimes are so short (approx 10khz)
